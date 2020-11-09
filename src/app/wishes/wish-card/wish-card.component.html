@@ -1,0 +1,61 @@
+<div
+  class="wrapper mat-elevation-z4"
+  fxFlex
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+  [style.height.px]="height"
+  [class.star-5]="wish && wish.item.rankType === 5"
+  [class.star-4]="wish && wish.item.rankType === 4"
+>
+  <ng-container *ngIf="wish; else emptyCard">
+    <p class="list-index">{{ total - index }}</p>
+
+    <app-item-img [item]="wish.item"></app-item-img>
+
+    <div
+      class="infos"
+      fxFlex
+      fxLayout="row"
+      fxLayoutGap="10px"
+      fxLayoutAlign="start center"
+      fxLayout.lt-sm="column"
+      fxLayoutGap.lt-sm
+      fxLayoutAlign.lt-sm
+    >
+      <h3 [matTooltip]="wish.item | itemName" [matTooltipShowDelay]="1000">
+        {{ wish.item | itemName }}
+      </h3>
+
+      <span fxFlex></span>
+
+      <p
+        [class]="'stars color-star-' + wish.item.rankType"
+        ngStyle.lt-sm="text-align: left"
+      >
+        <span *ngFor="let one of getRankLoop(wish.item.rankType || 0)">★</span>
+      </p>
+
+      <span fxFlex="21px" fxHide.lt-sm></span>
+
+      <p
+        class="date"
+        [ngStyle.lt-sm]="{ 'text-align': 'left', width: 'auto' }"
+        [matTooltip]="(wish.time | date: 'short':'UTC') || ''"
+        [matTooltipShowDelay]="1000"
+      >
+        {{ wish.time | date: "short":"UTC" }}
+      </p>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #emptyCard>
+  <div fxFlex fxLayoutAlign="center">
+    <mat-progress-spinner
+      diameter="40"
+      mode="indeterminate"
+      color="accent"
+    ></mat-progress-spinner>
+  </div>
+</ng-template>

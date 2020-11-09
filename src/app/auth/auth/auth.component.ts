@@ -1,0 +1,55 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service';
+import { filter, tap } from 'rxjs/operators';
+import { User } from '../../api/genshin-wishes/user';
+import { combineLatest } from 'rxjs';
+
+@Component({
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss'],
+})
+export class AuthComponent implements OnInit {
+  loading = false;
+
+  constructor(
+    private _http: HttpClient,
+    private _router: Router,
+    private _auth: AuthService,
+    private _route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    combineLatest([this._route.params, this._route.queryParams])
+      .pipe(
+        filter(([p]) => p.registrationId),
+        tap(() => (this.loading = true))
+      )
+      .subscribe(([p, q]) => {
+        if (!!q.error) {
+          this._router.navigate(['/login']);
+          return;
+        }
+
+        this._http
+          .get<User>(`/api/login/oauth2/code/${p.registrationId}`, {
+            params: this._route.snapshot.queryParams,
+          })
+          .toPromise()
+          .then((user) => {
+            this._auth.register(user);
+
+            if (!!user.mihoyoUid) this._router.navigate(['/banners']);
+            else this._router.navigate(['/setup']);
+          });
+      });
+  }
+
+  loginWith(registrationId: 'google' | 'facebook' | 'discord') {
+    this.loading = true;
+
+    window.open(`/api/oauth2/authorization/${registrationId}`, '_self');
+  }
+}

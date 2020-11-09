@@ -1,0 +1,46 @@
+<div class="wrapper" fxLayout="column">
+  <div class="error-container">
+    <span
+      [class.text-warn]="!positiveFeedback"
+      [class.text-success]="positiveFeedback"
+    >
+      {{ feedback | translate }}
+    </span>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>
+      {{ "app.urlInput.pasteInput" | translate }}
+    </mat-label>
+    <input
+      matInput
+      autocomplete="off"
+      placeholder="https://webstatic-sea.mihoyo.com/ys/event/im-service/index.html?im_out=true&sign_type=2..."
+      [(ngModel)]="urlData.authUrl"
+      (ngModelChange)="
+        assertUrl(urlData.authUrl);
+        urlDataChange.next({
+          authUrl: $event,
+          persist: urlData.persist,
+          valid: positiveFeedback
+        })
+      "
+      name="url-input"
+    />
+  </mat-form-field>
+
+  <mat-checkbox
+    color="primary"
+    [gaClick]="'save_link_' + !urlData.persist"
+    [(ngModel)]="urlData.persist"
+    (ngModelChange)="
+      urlDataChange.next({
+        authUrl: urlData.authUrl,
+        persist: $event,
+        valid: positiveFeedback
+      })
+    "
+  >
+    {{ "app.persistLink" | translate }}
+  </mat-checkbox>
+</div>

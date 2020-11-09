@@ -1,0 +1,24 @@
+mat-toolbar.toggler {
+  cursor: pointer;
+}
+
+.mat-list-base {
+  padding-top: 0;
+}
+
+mat-sidenav-content,
+.mat-drawer-over {
+  width: 100%;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.avatar {
+  margin: 12px 0;
+}
+
+.content-wrapper {
+  overflow: auto;
+}

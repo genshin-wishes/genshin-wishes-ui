@@ -1,0 +1,39 @@
+.wrapper {
+  display: block;
+  overflow: hidden;
+
+  height: 55px;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+
+.infos {
+  overflow: hidden;
+}
+
+.list-index {
+  width: 31.5px;
+  text-align: center;
+}
+
+.stars {
+  width: 60px;
+  text-align: center;
+}
+
+.date {
+  width: 150px;
+  text-align: right;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+h3,
+.date {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>
+  {{ data.title | translate }}
+</h2>
+
+<mat-dialog-content class="mat-typography">
+  <p [innerHTML]="data.description | translate"></p>
+</mat-dialog-content>
+
+<mat-dialog-actions
+  align="center"
+  fxLayout="column"
+  fxLayout.gt-sm="row-reverse"
+  fxLayoutGap="16px"
+>
+  <button
+    mat-stroked-button
+    color="warn"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    {{ data.confirm || "generics.ok" | translate }}
+  </button>
+
+  <button mat-button mat-dialog-close>
+    {{ data.cancel || "generics.cancel" | translate }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,10 @@
+<img
+  [class]="'color-star-' + item.rankType"
+  [src]="
+    'https://genshinlist.com/assets/img/' +
+    item.itemType.toLowerCase() +
+    's/' +
+    (item.name | slugify) +
+    '.png'
+  "
+/>

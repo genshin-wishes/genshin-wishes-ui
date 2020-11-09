@@ -1,0 +1,150 @@
+<div
+  class="wrapper"
+  fxLayout="column"
+  fxLayoutGap="30px"
+  fxFlex
+  fxFlexOffset
+  fxFlex.gt-md="0 1 calc(10/12 * 100%)"
+  fxFlexOffset.gt-md="calc(1/12 * 100%)"
+  fxFlexOffset.gt-lg="calc(2/12 * 100%)"
+  fxFlex.gt-lg="0 1 calc(8/12 * 100%)"
+>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ "settings.authLink.title" | translate }}
+      </mat-card-title>
+      <mat-card-subtitle class="auth-link-subtitle">
+        {{ "settings.authLink.subTitle" | translate }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutGap="26px">
+        <app-url-input [(urlData)]="authUrlData"></app-url-input>
+
+        <ng-container *ngIf="!importing; else loadingButton">
+          <button
+            mat-raised-button
+            class="save-url-button"
+            color="accent"
+            [disabled]="!authUrlData?.valid"
+            gaClick="settings_save_url"
+            (click)="authUrlData && updateAuthUrl(authUrlData)"
+          >
+            {{ "settings.authLink.update" | translate }}
+          </button>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ "settings.lang.title" | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ "settings.lang.subTitle" | translate }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutGap="26px">
+        <mat-radio-group
+          fxLayout="column"
+          fxLayoutGap="16px"
+          [value]="userLang"
+          (change)="lang = $event.value"
+        >
+          <mat-radio-button name="en" value="en" gaClick="settings_lang_en">
+            {{ "lang.en" | translate }}
+          </mat-radio-button>
+
+          <mat-radio-button name="fr" value="fr" gaClick="settings_lang_fr">
+            {{ "lang.fr" | translate }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="!lang || lang == userLang"
+            gaClick="settings_lang_save"
+            (click)="updateLang(lang)"
+          >
+            {{ "settings.lang.action" | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ "settings.deleteAccount.title" | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ "settings.deleteAccount.subTitle" | translate }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content fxLayout="column">
+      <p
+        [innerHTML]="
+          'settings.deleteAccount.hint'
+            | translate
+              : {
+                  confirmation:
+                    ('settings.deleteAccount.confirmation' | translate)
+                }
+        "
+      ></p>
+
+      <mat-form-field appearance="outline" fxFlex color="warn">
+        <mat-label>
+          {{ "settings.deleteAccount.label" | translate }}
+        </mat-label>
+        <input
+          matInput
+          [(ngModel)]="deleteConfirmation"
+          [placeholder]="'settings.deleteAccount.confirmation' | translate"
+          (ngModelChange)="
+            deleteConfirmation = deleteConfirmation.toUpperCase()
+          "
+          (keydown.enter)="!deleteButton.disabled && deleteAccount()"
+          autocomplete="off"
+        />
+      </mat-form-field>
+
+      <div>
+        <button
+          mat-stroked-button
+          color="warn"
+          [disabled]="
+            deleteConfirmation !==
+            ('settings.deleteAccount.confirmation' | translate)
+          "
+          gaClick="settings_delete_action"
+          (click)="deleteAccount()"
+          #deleteButton
+        >
+          {{ "settings.deleteAccount.action" | translate }}
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loadingButton>
+  <a
+    mat-stroked-button
+    color="accent"
+    [disabled]="true"
+    class="save-url-button"
+  >
+    <fa-icon icon="circle-notch" [spin]="true"></fa-icon>
+  </a>
+</ng-template>

@@ -1,0 +1,24 @@
+<app-step
+  [stepTitle]="'app.urlSetup.step' | translate: { step: 3 }"
+  [stepSubtitle]="'app.urlSetup.steps$.3.title' | translate"
+  [actions]="step3Actions"
+  fxFlex
+>
+  <app-url-input [(urlData)]="mihoyoUrl" [feedback]="feedback"></app-url-input>
+</app-step>
+
+<ng-template #step3Actions>
+  <ng-container *ngTemplateOutlet="actions"></ng-container>
+
+  <button
+    [disabled]="!mihoyoUrl?.valid"
+    [gaClick]="'setup_finish'"
+    (click)="mihoyoUrl && finish.next(mihoyoUrl)"
+    mat-raised-button
+    class="finish-button"
+    color="accent"
+    fxFlex
+  >
+    {{ "app.urlSetup.finish" | translate }}
+  </button>
+</ng-template>

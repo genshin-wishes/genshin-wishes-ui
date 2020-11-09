@@ -1,0 +1,30 @@
+<app-step
+  [stepTitle]="
+    'app.urlSetup.steps$.4.title'
+      | translate: { username: mihoyoUser.mihoyoUsername }
+  "
+  [actions]="endActions"
+  fxFlex
+>
+  <div>
+    <p
+      [innerHTML]="
+        'app.urlSetup.steps$.4.wishesFound'
+          | translate: { wishes: importedWishes }
+      "
+    ></p>
+
+    <p [innerHTML]="'app.urlSetup.steps$.4.description' | translate"></p>
+  </div>
+</app-step>
+
+<ng-template #endActions>
+  <button
+    mat-raised-button
+    color="accent"
+    [routerLink]="['/']"
+    gaClick="see_wishes"
+  >
+    {{ "app.urlSetup.steps$.4.seeWishes" | translate }}
+  </button>
+</ng-template>

@@ -1,0 +1,51 @@
+<mat-nav-list fxLayout="column" fxFlex>
+  <a
+    mat-list-item
+    [routerLink]="['/banners']"
+    routerLinkActive="active"
+    gaClick="nav_banners"
+  >
+    <fa-icon matListIcon icon="th"></fa-icon>
+    <h3 mat-line>{{ "banners.label" | translate }}</h3>
+  </a>
+
+  <a mat-list-item [routerLink]="" gaClick="nav_stats">
+    <fa-icon matListIcon icon="chart-bar"></fa-icon>
+    <h3 mat-line fxLayout="row" fxLayoutGap="14px">
+      <span>{{ "stats.label" | translate }}</span>
+
+      <mat-chip-list>
+        <mat-chip
+          (click)="$event.preventDefault()"
+          color="soon"
+          [selected]="true"
+          [disableRipple]="true"
+        >
+          {{ "generics.soon" | translate }}
+        </mat-chip>
+      </mat-chip-list>
+    </h3>
+  </a>
+
+  <a
+    mat-list-item
+    [routerLink]="['/settings']"
+    routerLinkActive="active"
+    gaClick="nav_settings"
+  >
+    <fa-icon matListIcon icon="cog"></fa-icon>
+    <h3 mat-line>{{ "settings.label" | translate }}</h3>
+  </a>
+
+  <span fxFlex></span>
+
+  <a
+    mat-list-item
+    [routerLink]="['/logout']"
+    routerLinkActive="active"
+    gaClick="nav_logout"
+  >
+    <fa-icon matListIcon icon="power-off"></fa-icon>
+    <h3 mat-line>{{ "auth.logout.label" | translate }}</h3>
+  </a>
+</mat-nav-list>

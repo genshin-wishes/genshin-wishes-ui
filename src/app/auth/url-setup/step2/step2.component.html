@@ -1,0 +1,18 @@
+<app-step
+  [stepTitle]="'app.urlSetup.step' | translate: { step: 2 }"
+  [stepSubtitle]="'app.urlSetup.steps$.2.title' | translate"
+  [actions]="actions"
+  fxFlex
+>
+  <p [innerHTML]="'app.urlSetup.steps$.2.description' | translate"></p>
+
+  <div fxLayoutAlign="center">
+    <app-youtube-link
+      label="app.urlSetup.steps$.2.showVideo"
+    ></app-youtube-link>
+  </div>
+
+  <div step-actions fxFlex>
+    <ng-content></ng-content>
+  </div>
+</app-step>

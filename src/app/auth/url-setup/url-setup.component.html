@@ -1,0 +1,59 @@
+<app-landing [withLogout]="true">
+  <div [ngSwitch]="currentStep" fxLayoutAlign="center">
+    <ng-container *ngIf="!loading; else loader">
+      <app-step1 *ngSwitchCase="1" [actions]="actions" fxFlex> </app-step1>
+      <app-step2 *ngSwitchCase="2" [actions]="actions" fxFlex> </app-step2>
+      <app-step3
+        *ngSwitchCase="3"
+        [actions]="actions"
+        [feedback]="error"
+        (finish)="$event && finish($event)"
+        fxFlex
+      >
+      </app-step3>
+      <app-end
+        *ngSwitchCase="4"
+        [actions]="actions"
+        [mihoyoUser]="mihoyoUser!"
+        [importedWishes]="importedWishes"
+        fxFlex
+      >
+      </app-end>
+    </ng-container>
+  </div>
+
+  <ng-template #actions>
+    <button
+      mat-stroked-button
+      *ngIf="currentStep > 1"
+      [gaClick]="'setup_back_' + currentStep"
+      (click)="currentStep = currentStep - 1"
+    >
+      <fa-icon icon="chevron-left"></fa-icon>
+      &nbsp;
+      {{ "generics.previous" | translate }}
+    </button>
+
+    <button
+      *ngIf="currentStep < lastStep"
+      [gaClick]="'setup_next_' + currentStep"
+      (click)="currentStep = currentStep + 1"
+      mat-raised-button
+      color="accent"
+    >
+      {{ "generics.next" | translate }}
+      &nbsp;
+      <fa-icon icon="chevron-right"></fa-icon>
+    </button>
+  </ng-template>
+</app-landing>
+
+<ng-template #loader>
+  <div fxFlex fxLayoutAlign="center center">
+    <mat-progress-spinner
+      [diameter]="50"
+      color="primary"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  </div>
+</ng-template>

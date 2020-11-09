@@ -1,0 +1,62 @@
+<ng-container
+  *ngIf="{ itemSize: itemSize$ | async, count: count$ | async } as pageData"
+>
+  <div fxLayout="column" class="wrapper" fxFlex>
+    <app-banner-nav [dropdownMode]="true" fxHide fxShow.lt-sm></app-banner-nav>
+
+    <app-banner-nav fxHide.lt-sm></app-banner-nav>
+
+    <ng-container *ngIf="pageData.itemSize">
+      <ng-container *ngIf="pageData.count != undefined; else loadingState">
+        <cdk-virtual-scroll-viewport
+          [itemSize]="pageData.itemSize"
+          class="scroller"
+          fxFlex
+        >
+          <div
+            fxFlex.gt-md="0 1 calc(8/12 * 100%)"
+            fxFlexOffset.gt-md="calc(2/12 * 100%)"
+            fxFlexOffset="calc(1/12 * 100%)"
+            fxFlex="0 1 calc(10/12 * 100%)"
+            fxFlex.lt-sm
+            fxFlexOffset.lt-sm
+            class="list-wrapper"
+            fxLayout="column"
+            fxLayoutGap="10px"
+            *ngIf="wishes$ | async as wishes"
+          >
+            <ng-container *ngIf="pageData.count; else emptyState">
+              <app-wish-card
+                fxFlex
+                *cdkVirtualFor="let wish of wishes; let index = index"
+                [height]="pageData.itemSize"
+                [wish]="wish"
+                [index]="index"
+                [total]="pageData.count"
+              ></app-wish-card>
+            </ng-container>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #loadingState>
+  <div fxFill fxLayoutAlign="center center">
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate"
+      [diameter]="50"
+    ></mat-progress-spinner>
+  </div>
+</ng-template>
+
+<ng-template #emptyState>
+  <div fxFill fxLayoutAlign="center center">
+    <app-wish-empty
+      fxFlex
+      [ngStyle.gt-xs]="{ 'margin-top': '36px' }"
+    ></app-wish-empty>
+  </div>
+</ng-template>

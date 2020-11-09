@@ -1,0 +1,98 @@
+<mat-toolbar fxLayout="row" fxLayoutGap="12px" class="mat-elevation-z4">
+  <button
+    mat-icon-button
+    (click)="toggle()"
+    *ngIf="sidenavToggle"
+    class="hamburger-menu"
+  >
+    <fa-icon icon="bars"></fa-icon>
+  </button>
+
+  <a
+    mat-icon-button
+    [routerLink]="['/']"
+    [disableRipple]="true"
+    *ngIf="!sidenavToggle"
+  >
+    <app-logo></app-logo>
+  </a>
+
+  <span
+    class="title"
+    [matTooltip]="(title$ | async) || 'app.title' | translate"
+    [matTooltipShowDelay]="1000"
+    >{{ (title$ | async) || "app.title" | translate }}</span
+  >
+
+  <span fxFlex></span>
+
+  <ng-container *ngIf="withActions">
+    <ng-container *ngIf="!loading; else loadingButton">
+      <a
+        mat-icon-button
+        [matTooltip]="'wishes.update.label' | translate"
+        color="accent"
+        fxShow.lt-sm
+        fxHide
+        gaClick="import_wishes"
+        (click)="importWishes()"
+      >
+        <fa-icon icon="sync"></fa-icon>
+      </a>
+
+      <a
+        mat-stroked-button
+        color="accent"
+        fxHide.lt-sm
+        fxShow
+        (click)="importWishes()"
+      >
+        <fa-icon icon="sync"></fa-icon>
+        &nbsp;
+        {{ "wishes.update.label" | translate }}
+      </a>
+    </ng-container>
+
+    <ng-template #loadingButton>
+      <a mat-icon-button color="accent" fxShow.lt-sm fxHide [disabled]="true">
+        <fa-icon icon="circle-notch" [spin]="true"></fa-icon>
+      </a>
+
+      <a
+        mat-stroked-button
+        color="accent"
+        fxHide.lt-sm
+        fxShow
+        [disabled]="true"
+      >
+        <fa-icon icon="circle-notch" [spin]="true"></fa-icon>
+      </a>
+    </ng-template>
+  </ng-container>
+
+  <a
+    *ngIf="withLogout"
+    [routerLink]="['/logout']"
+    [matTooltip]="'auth.logout.label' | translate"
+    mat-icon-button
+    color="primary"
+    fxShow.lt-sm
+    fxHide
+  >
+    <fa-icon icon="power-off"></fa-icon>
+  </a>
+
+  <a
+    *ngIf="withLogout"
+    [routerLink]="['/logout']"
+    mat-stroked-button
+    color="primary"
+    gaClick="top_logout"
+    fxHide.lt-sm
+    fxShow
+  >
+    <fa-icon icon="power-off"></fa-icon>
+    &nbsp;
+    {{ "auth.logout.label" | translate }}
+  </a>
+</mat-toolbar>

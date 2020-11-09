@@ -1,0 +1,26 @@
+<div class="wrapper" fxLayout="row" fxLayoutGap="14px">
+  <div class="icon-wrapper" fxLayoutAlign="center center">
+    <fa-icon *ngIf="icon; else star" class="icon" [icon]="icon"></fa-icon>
+
+    <ng-template #star>
+      <img src="assets/star.svg" />
+    </ng-template>
+  </div>
+
+  <div class="text" fxFlexAlign="center" fxFlex>
+    {{ text | translate }}
+  </div>
+
+  <div *ngIf="soon" fxLayout="column" fxLayout="center center">
+    <mat-chip-list fxLayout="row">
+      <mat-chip
+        (click)="$event.preventDefault()"
+        color="soon"
+        [selected]="true"
+        [disableRipple]="true"
+      >
+        {{ "generics.soon" | translate }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</div>

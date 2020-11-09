@@ -1,0 +1,42 @@
+@import "~normalize.css";
+@import "~ngx-toastr/toastr.css";
+@import "theming";
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #303030;
+}
+
+markdown {
+  img {
+    max-width: 100%;
+  }
+}
+
+.toast-container {
+  top: 76px;
+}
+
+[hidden] {
+  display: none;
+}
+
+app-root {
+  .mat-list-base .mat-list-item .mat-list-icon,
+  .mat-list-base .mat-list-option .mat-list-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+}
+
+router-outlet + * {
+  flex: 1 0 auto;
+}

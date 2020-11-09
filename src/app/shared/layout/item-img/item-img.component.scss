@@ -1,0 +1,14 @@
+:host {
+  height: 40px;
+  width: 40px;
+}
+
+img {
+  border: 1px solid;
+  box-sizing: border-box;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}

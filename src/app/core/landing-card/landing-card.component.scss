@@ -1,0 +1,32 @@
+.row-image {
+  margin: -16px 32px -16px -16px !important;
+  object-fit: cover;
+
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+mat-card-content {
+  margin: 13px 0;
+
+  .welcome {
+    margin-bottom: 26px;
+  }
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  .elements-wrapper {
+    margin: -11px -10px;
+
+    & > * {
+      margin: 11px 10px;
+    }
+  }
+
+  .sign-in-button {
+    margin: 33px 0 17px;
+    width: 220px;
+  }
+}

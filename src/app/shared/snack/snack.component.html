@@ -1,0 +1,22 @@
+<div
+  fxLayout="column"
+  fxLayoutAlign="end"
+  fxLayoutGap="15px"
+  *ngFor="let one of data.messages"
+  [class]="'snack-wrapper mat-elevation-z4'"
+>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div *ngIf="data.emoji && (data.emoji | translate) as emoji" class="icon">
+      {{ emoji }}
+    </div>
+
+    <div>
+      <h3 *ngIf="one.title" [innerHTML]="one.title | translate"></h3>
+      <p [innerHTML]="one.message | translate"></p>
+    </div>
+  </div>
+
+  <button mat-button *ngIf="data.action" (click)="action()" fxFlexAlign="end">
+    {{ data.action | translate }}
+  </button>
+</div>

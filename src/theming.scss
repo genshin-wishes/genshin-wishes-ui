@@ -1,0 +1,543 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$star-colors: (
+  5: #ffb053,
+  4: #dbb2ff,
+  3: #49acf2,
+  1: #60aa3a,
+);
+
+$dark-primary-text: #fff;
+$light-primary-text: #000;
+
+$primary: (
+  50: #f2e7fe,
+  100: #dbb2ff,
+  200: #bb86fc,
+  300: #985eff,
+  400: #7f39fb,
+  500: #6200ee,
+  600: #5600e8,
+  700: #3700b3,
+  800: #23036a,
+  900: #26202e,
+  A100: #bb86fc,
+  A200: #7c4dff,
+  A400: #651fff,
+  A700: #6200ea,
+  contrast: (
+    50: $light-primary-text,
+    100: $light-primary-text,
+    200: $light-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $dark-primary-text,
+    900: $dark-primary-text,
+    A100: $light-primary-text,
+    A200: $light-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  ),
+);
+
+$accent: (
+  200: #ff8a00,
+  contrast: (
+    200: $light-primary-text,
+  ),
+);
+
+$warn: (
+  200: #cf6679,
+  contrast: (
+    200: $light-primary-text,
+  ),
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$genshin-wishes-primary: mat-palette($primary, 200, 100, 900, A100);
+$genshin-wishes-accent: mat-palette($accent, 200, 200, 200);
+$genshin-wishes-warn: mat-palette($warn, 200, 200, 200);
+
+$mat-dark-theme-foreground: map-merge(
+  $mat-dark-theme-foreground,
+  (
+    disabled-text: #979797,
+    success-text: #03dac5,
+    text: rgba(255, 255, 255, 0.87),
+    high-emphasis: rgba(255, 255, 255, 0.87),
+    medium-emphasis: rgba(255, 255, 255, 0.6),
+    low-emphasis: rgba(255, 255, 255, 0.38),
+  )
+);
+
+$mat-dark-theme-background: map-merge(
+  $mat-dark-theme-background,
+  (
+    footer: #161517,
+    background: #57525c,
+    card: mat-color($genshin-wishes-primary, 900),
+    dialog: #26202e,
+    raised-button: rgba(0, 0, 0, 0.74),
+    disabled-button: rgba(255, 255, 255, 0.38),
+    list: (
+      linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05)
+      ),
+      #121212,
+    ),
+    elevation: (
+      linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.11),
+        rgba(255, 255, 255, 0.11)
+      ),
+      #121212,
+    ),
+    app-bar: (
+      linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.09),
+        rgba(255, 255, 255, 0.09)
+      ),
+      #121212,
+    ),
+  )
+);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$genshin-wishes-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $genshin-wishes-primary,
+      accent: $genshin-wishes-accent,
+      warn: $genshin-wishes-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($genshin-wishes-theme);
+
+@mixin material-override-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+
+  .mat-tooltip-trigger {
+    touch-action: auto !important;
+  }
+
+  .mat-button-base {
+    text-transform: uppercase;
+  }
+
+  .mat-chip.mat-soon {
+    color: #03dac5;
+    background: transparent;
+    border: 1px solid #03dac5;
+
+    &:hover::after,
+    &:focus::after {
+      background: transparent;
+      opacity: 0;
+    }
+  }
+
+  .mat-toolbar.mat-primary {
+    background: mat-color($primary, 800, 0.3);
+    color: mat-color($foreground, high-emphasis);
+  }
+
+  .mat-stroked-button:not(.mat-button-disabled) {
+    border-color: inherit;
+  }
+
+  .mat-card {
+    .mat-card-title {
+      line-height: 24px;
+    }
+
+    .mat-card-subtitle {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.4px;
+
+      color: mat-color($foreground, text);
+    }
+  }
+}
+
+@mixin snack-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $warn: map-get($config, warn);
+
+  .mat-snack-bar-container {
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 60px;
+  }
+
+  .mat-snack-bar-container.mat-primary .snack-wrapper {
+    background: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+  }
+
+  .mat-snack-bar-container.mat-accent .snack-wrapper {
+    background: mat-color($accent);
+    color: mat-color($accent, default-contrast);
+  }
+
+  .mat-snack-bar-container.mat-warn .snack-wrapper {
+    background: mat-color($warn);
+    color: mat-color($warn, default-contrast);
+  }
+
+  app-snack {
+    .snack-wrapper {
+      border-radius: 4px;
+      box-sizing: border-box;
+      display: block;
+      margin: 12px 24px 12px 24px;
+      padding: 14px 16px;
+      max-width: 100%;
+      min-height: 48px;
+      transform-origin: center;
+    }
+  }
+}
+
+@mixin cookie-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  .mat-typography app-cookie-consent {
+    .wrapper {
+      background: mat-color($background, card);
+    }
+
+    h3,
+    p {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    h3 {
+      color: mat-color($accent);
+    }
+
+    p {
+      color: mat-color($primary);
+    }
+  }
+}
+
+@mixin landing-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+
+  app-landing-card-element {
+    .wrapper {
+      background: mat-color($primary, 0.08);
+    }
+
+    .icon-wrapper {
+      background: mat-color($primary, 0.12);
+    }
+
+    .icon {
+      color: mat-color($primary);
+    }
+
+    .text {
+      line-height: 24px;
+    }
+  }
+}
+
+@mixin settings-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  app-settings {
+    .mat-card {
+      .mat-card-title {
+        color: mat-color($primary);
+      }
+
+      .mat-card-subtitle {
+        color: mat-color($accent);
+      }
+    }
+  }
+}
+
+@mixin wishes-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+  $foreground: map-get($config, foreground);
+
+  app-wish-empty {
+    h2 {
+      color: mat-color($foreground, high-emphasis);
+      font-size: 20px;
+    }
+    p {
+      color: mat-color($foreground, low-emphasis);
+      font-size: 12px;
+    }
+  }
+
+  app-wish-card {
+    img {
+      border-color: mat-color($background, divider);
+    }
+
+    h3 {
+      color: mat-color($foreground, high-emphasis);
+    }
+
+    .list-index,
+    .date,
+    .stars:not(.color-star-5):not(.color-star-4) {
+      color: mat-color($foreground, medium-emphasis);
+    }
+
+    .wrapper {
+      background: mat-color($background, list);
+
+      &.star-5 {
+        background: radial-gradient(
+          175% 175% at 20.18% 100%,
+          #f4a242 0.52%,
+          #c86e05 9.9%,
+          #794303 30.21%,
+          #1e1e1e 100%,
+          #1e1e1e 100%
+        );
+      }
+
+      &.star-4 {
+        background: radial-gradient(
+          207.89% 207.89% at 20.54% 100%,
+          #b171ff 0.52%,
+          #6109cc 9.9%,
+          #33056b 30.21%,
+          #1e1e1e 100%,
+          #1e1e1e 100%
+        );
+      }
+    }
+  }
+}
+
+@mixin banner-theme($config-or-theme) {
+  app-banner-card {
+    $config: mat-get-color-config($config-or-theme);
+    $background: map-get($config, background);
+    $foreground: map-get($config, foreground);
+    $primary: map-get($config, primary);
+
+    .mat-card-actions {
+      background: #121212;
+    }
+
+    .pity-row {
+      background: mat-color($primary, 0.08);
+    }
+
+    .value {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+
+      &.none {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+
+        color: mat-color($foreground, disabled-text);
+      }
+    }
+
+    .key {
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 16px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@mixin app-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $warn: map-get($config, warn);
+
+  a {
+    color: mat-color($primary);
+    text-decoration: none;
+  }
+
+  .text-emoji {
+    color: #000;
+  }
+
+  .text-primary {
+    color: mat-color($primary);
+  }
+  .text-success {
+    color: mat-color($foreground, success-text);
+  }
+  .text-accent {
+    color: mat-color($accent);
+  }
+  .text-warn {
+    color: mat-color($warn);
+  }
+}
+
+@mixin base-theme($config-or-theme) {
+  app-base {
+    $config: mat-get-color-config($config-or-theme);
+    $foreground: map-get($config, foreground);
+    $background: map-get($config, background);
+    $primary: map-get($config, primary);
+
+    .hamburger-menu {
+      color: mat-color($foreground, medium-emphasis);
+    }
+
+    .avatar.mat-list-base .mat-list-item {
+      h3 {
+        color: mat-color($foreground, high-emphasis);
+        font-size: 20px;
+      }
+      p {
+        color: mat-color($foreground, low-emphasis);
+      }
+    }
+
+    .mat-list-base .mat-list-item {
+      color: mat-color($foreground, medium-emphasis);
+      font-weight: 500;
+    }
+
+    .mat-list-option:not(.mat-list-single-selected-option):not(.mat-list-item-disabled),
+    .mat-nav-list .mat-list-item:not(.mat-list-item-disabled),
+    .mat-action-list .mat-list-item:not(.mat-list-item-disabled) {
+      &.active,
+      &.active:hover {
+        color: mat-color($primary);
+        background-color: mat-color($primary, 0.08);
+      }
+    }
+  }
+}
+
+@mixin url-setup-theme($config-or-theme) {
+  app-url-setup {
+    $config: mat-get-color-config($config-or-theme);
+    $background: map-get($config, background);
+    $foreground: map-get($config, foreground);
+    $primary: map-get($config, primary);
+    $accent: map-get($config, accent);
+
+    .mat-card {
+      .mat-card-title {
+        color: mat-color($primary);
+      }
+
+      .mat-card-subtitle {
+        color: mat-color($accent);
+      }
+    }
+  }
+}
+
+@mixin footer-theme($config-or-theme) {
+  app-footer {
+    $config: mat-get-color-config($config-or-theme);
+    $background: map-get($config, background);
+    $foreground: map-get($config, foreground);
+
+    p {
+      color: mat-color($foreground, low-emphasis);
+    }
+
+    .disclaimer {
+      font-weight: bold;
+    }
+
+    .wrapper {
+      background-color: mat-color($background, footer);
+    }
+  }
+}
+
+@include material-override-theme($genshin-wishes-theme);
+@include app-theme($genshin-wishes-theme);
+@include base-theme($genshin-wishes-theme);
+@include snack-theme($genshin-wishes-theme);
+@include cookie-theme($genshin-wishes-theme);
+@include wishes-theme($genshin-wishes-theme);
+@include banner-theme($genshin-wishes-theme);
+@include settings-theme($genshin-wishes-theme);
+@include landing-theme($genshin-wishes-theme);
+@include url-setup-theme($genshin-wishes-theme);
+@include footer-theme($genshin-wishes-theme);
+
+@for $i from 1 through 5 {
+  .color-star-#{$i} {
+    color: map-get($star-colors, $i);
+  }
+
+  .bg-star-#{$i} {
+    background-color: map-get($star-colors, $i);
+  }
+}

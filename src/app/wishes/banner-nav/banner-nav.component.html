@@ -1,0 +1,44 @@
+<nav
+  mat-tab-nav-bar
+  backgroundColor="primary"
+  *ngIf="!dropdownMode; else dropdownTemplate"
+>
+  <a
+    mat-tab-link
+    *ngFor="let banner of banners"
+    [gaClick]="'see_wishes_tab_' + banner"
+    [routerLink]="['/banners', banner | slugify]"
+    routerLinkActive
+    [active]="rla.isActive"
+    #rla="routerLinkActive"
+  >
+    {{ "wishes.banners$." + banner + ".title" | translate }}
+  </a>
+</nav>
+
+<ng-template #dropdownTemplate>
+  <mat-toolbar color="primary">
+    <span fxFlex></span>
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu"
+      #menuTrigger="matMenuTrigger"
+      gaClick="see_wishes_nav_dropdown"
+    >
+      {{ "wishes.bannersNav" | translate }}
+      &nbsp;
+      <fa-icon icon="chevron-down"></fa-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <a
+        mat-menu-item
+        [gaClick]="'see_wishes_dropdown_' + banner"
+        [routerLink]="['/banners', banner | slugify]"
+        *ngFor="let banner of banners"
+      >
+        {{ "wishes.banners$." + banner + ".title" | translate }}
+      </a>
+    </mat-menu>
+  </mat-toolbar>
+</ng-template>

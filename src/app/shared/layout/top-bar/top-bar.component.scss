@@ -1,0 +1,19 @@
+mat-toolbar {
+  position: relative;
+  z-index: 10;
+}
+
+app-logo {
+  width: 36px;
+  height: 36px;
+}
+
+.mat-stroked-button.mat-button-disabled {
+  width: 136.75px;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,16 @@
+<div fxFill fxLayout="column" class="wrapper">
+  <app-top-bar
+    [sidenavToggle]="false"
+    [withActions]="false"
+    [withLogout]="withLogout"
+  >
+  </app-top-bar>
+
+  <div fxLayout="column" fxFlex class="content-wrapper">
+    <div class="content" fxFlex>
+      <ng-content></ng-content>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ banner.title | translate }}</mat-card-title>
+    <mat-card-subtitle>
+      {{
+        count > 0
+          ? ("banners.wishes" | translate: { count: count })
+          : ("banners.noWishes" | translate)
+      }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <img
+    mat-card-image
+    class="mat-elevation-z24"
+    [src]="'assets/banners/' + banner.key + '.png'"
+    [ngStyle]="{ height: '145px' }"
+    [ngStyle.gt-sm]="{ height: '164px' }"
+    [ngStyle.gt-md]="{ height: '267px' }"
+  />
+
+  <mat-card-content>
+    <div
+      fxLayout="row"
+      class="pity-row"
+      fxLayoutGap="20px"
+      fxLayoutAlign="center center"
+    >
+      <ng-container *ngIf="banner.key !== 'NOVICE'">
+        <span
+          fxLayout="column"
+          class="banner-info"
+          fxFlex="50%"
+          fxLayoutAlign="center center"
+        >
+          <span fxLayout="column">
+            <span class="key"> {{ "banners.pity5" | translate }} </span>
+            <span class="color-star-5 value">
+              {{ "banners.wishes" | translate: { count: banner.pity5 } }}
+            </span>
+          </span>
+        </span>
+
+        <span
+          fxLayout="column"
+          class="banner-info"
+          fxFlex="50%"
+          fxLayoutAlign="center center"
+        >
+          <span fxLayout="column">
+            <span class="key">{{ "banners.pity4" | translate }}</span>
+            <span class="color-star-4 value">
+              {{ "banners.wishes" | translate: { count: banner.pity4 } }}
+            </span>
+          </span>
+        </span>
+      </ng-container>
+    </div>
+
+    <div fxLayout="column" class="last-row" fxLayoutGap="25px">
+      <span fxLayout="column" class="banner-info">
+        <span class="key">{{ "banners.last5" | translate }}</span>
+
+        <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <app-item-img
+            *ngIf="banner.last5"
+            [item]="banner.last5"
+          ></app-item-img>
+          <span class="value color-star-5" [class.none]="!banner.last5">
+            {{ (banner.last5 | itemName) || ("banners.none" | translate) }}
+          </span>
+        </span>
+      </span>
+
+      <span fxLayout="column" class="banner-info">
+        <span class="key">{{ "banners.last4" | translate }}</span>
+
+        <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+          <app-item-img
+            *ngIf="banner.last4"
+            [item]="banner.last4"
+          ></app-item-img>
+          <span class="value color-star-4" [class.none]="!banner.last4">
+            {{ (banner.last4 | itemName) || ("banners.none" | translate) }}
+          </span>
+        </span>
+      </span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions fxLayoutAlign="center">
+    <a
+      mat-button
+      color="primary"
+      [gaClick]="'see_wishes_' + banner.key"
+      [routerLink]="['/banners', banner.key.replace('_', '-').toLowerCase()]"
+    >
+      <fa-icon icon="search"></fa-icon>
+      &nbsp;
+      {{ "banners.seeWishes" | translate }}
+    </a>
+  </mat-card-actions>
+</mat-card>

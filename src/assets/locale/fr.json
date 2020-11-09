@@ -1,0 +1,199 @@
+{
+  "generics": {
+    "cancel": "Annuler",
+    "ok": "OK",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "retry": "Réessayer",
+    "soon": "Bientôt",
+    "save": "Sauvegarder",
+    "error$": {
+      "emoji": "\uD83D\uDE31",
+      "title": "",
+      "message": "Une erreur est survenue, merci de réessayer."
+    },
+    "mihoyoError$": {
+      "emoji": "⚠",
+      "title": "",
+      "message": "Impossible de se connecter au serveur de Genshin."
+    }
+  },
+  "app": {
+    "title": "Genshin Wishes",
+    "titleWithPage": "Genshin Wishes - {{ page }}",
+    "menu": "Menu",
+    "persistLink": "Sauvegarder pendant 24h",
+    "user": {
+      "uid": "UID {{ uid }}"
+    },
+    "urlInput": {
+      "dialog": {
+        "title": "Votre lien a expiré",
+        "message": "⚠ Votre lien d'authentification n'est pas valide. Mettez le à jour SVP. <a href=\"https://www.youtube.com/watch?v=uObSZ6Dz2Hw\" target=\"_blank\"> Comment ?</a>",
+        "showVideo": "Comment ?",
+        "ok": "Mettre à jour le lien"
+      },
+      "pasteInput": "Collez votre lien ici",
+      "correctLink": "\uD83D\uDE0E Tout a l'air OK",
+      "incorrectLink": "\uD83D\uDE31 Mauvais lien, réessayez s'il-vous-plaît !"
+    },
+    "urlSetup": {
+      "title": "Configuration du compte",
+      "finish": "Terminer",
+      "step": "Étape {{ step }}",
+      "steps$": {
+        "1": {
+          "title": "Informations",
+          "description": "Pour récupérer vos vœux, il nous faut un <b>lien d'authentification</b> du jeu.\n\nCe lien nous permet uniquement de récupérer des données de votre historique de vœux.\n<span class=\"text-accent\">Nous n'aurons jamais accès à votre compte Genshin Impact.</span>\n\nLe lien d'authentification n'est accessible qu'à partir du <b>client Genshin Impact sur Windows</b>."
+        },
+        "2": {
+          "title": "Récupérez votre lien",
+          "description": "1. <b>Sur Windows</b>, ouvrez le jeu et connectez vous à votre compte\n\n2. Appuyez sur <b>Échap</b> pour afficher le menu de Paimon\n\n3. Cliquez sur le dernier menu <b>Commentaires</b>\n\n4. Dans la fenêtre de navigateur qui vient de s'ouvrir, <b>copiez le lien de la barre de navigation</b>",
+          "showVideo": "Voir en vidéo"
+        },
+        "3": {
+          "title": "Lier votre compte avec Genshin Wishes"
+        },
+        "4": {
+          "title": "Bravo {{ username }} \uD83D\uDC4F",
+          "description": "Vous aurez besoin de <span class=\"text-accent\"><b>répéter ces étapes chaque jour</b></span> où vous voudrez synchroniser vos vœux.",
+          "wishesFound": "<b>Nous avons trouvé <span class=\"text-primary\">{{ wishes }}</span> vœux !</b>",
+          "seeWishes": "Voir les vœux"
+        }
+      }
+    },
+    "signIn": "Se connecter"
+  },
+  "auth": {
+    "google.label": "Se connecter avec Google",
+    "facebook.label": "Se connecter avec Facebook",
+    "discord.label": "Se connecter avec Discord",
+    "logout.label": "Se déconnecter"
+  },
+  "banners": {
+    "label": "Bannières",
+    "seeWishes": "Voir les vœux",
+    "noWishes": "Aucun vœux",
+    "wishes": "{{ count }} vœux",
+    "pity5": "Pity 5★",
+    "pity4": "Pity 4★",
+    "last5": "Dernier 5★",
+    "last4": "Dernier 4★",
+    "none": "Aucun"
+  },
+  "cookie": {
+    "title": "Hey ! Paimon nous a laissé des cookies. \uD83D\uDE0B",
+    "message": "En utilisant ce site, vous acceptez l'utilisation de cookies pour l'analyse du trafic.",
+    "ok": "Ok, j'aime les cookies !"
+  },
+  "landing": {
+    "welcome": {
+      "titleDotless": "Bienvenue sur Genshin Wishes",
+      "title": "Bienvenue sur Genshin Wishes.",
+      "description": "Cet outils va vous aider à suivre vos vœux de personnages et d'armes sur <b>Genshin Impact</b>."
+    },
+    "elements": {
+      "pity": "Calculez votre pity sur chaque bannière",
+      "browse": "Regardez facilement vos vœux",
+      "stats": "Regardez vos statistiques",
+      "archive": "Archivez vos vœux plus d'un mois"
+    }
+  },
+  "lang": {
+    "en": "English",
+    "fr": "Français"
+  },
+  "settings": {
+    "label": "Paramètres",
+    "authLink": {
+      "title": "Lien d'authentification",
+      "subTitle": "Modifier votre lien d'authentification",
+      "update": "Sauvegarder et màj les vœux"
+    },
+    "lang": {
+      "title": "Langue",
+      "subTitle": "Changer la langue du site et des objets",
+      "success$": {
+        "emoji": "",
+        "title": "",
+        "message": "Votre langue a bien été mise à jour."
+      },
+      "action": "Sauvegarder la langue"
+    },
+    "deleteAccount": {
+      "title": "Supprimer votre compte",
+      "subTitle": "Supprimer toutes vos données sur Genshin Wishes",
+      "hint": "Tapez <b>{{ confirmation }}</b> avant de cliquer sur le bouton de suppression.",
+      "label": "Tapez ici",
+      "confirmation": "SUPPRIMER MON COMPTE",
+      "action": "Supprimer mon compte"
+    },
+    "deleteAccountConfirm": {
+      "title": "Êtes-vous sûr(e) de vouloir supprimer votre compte ?",
+      "message": "Cette action est irréversible."
+    }
+  },
+  "stats": {
+    "label": "Statistiques"
+  },
+  "wishes": {
+    "label": "Vœux",
+    "noWishes": "Il n'y a aucun vœu dans cette bannière",
+    "backToList": "Retour aux bannières",
+    "playWithAmber": "Vous pouvez toujours jouer avec Amber <span class=\"text-emoji\">\uD83D\uDE05</span>",
+    "bannersNav": "Naviguer vers une autre bannière",
+    "update": {
+      "label": "Màj des vœux"
+    },
+    "deletion": {
+      "title": "Suppression des anciens vœux",
+      "description": "Voulez-vous vraiment supprimer tous les anciens vœux ?\n\nToute suppression est irréversible.",
+      "ok": "❌ Oui, supprimer tous mes vœux"
+    },
+    "differentUidDialog": {
+      "title": "Différence de compte",
+      "description": "⚠ Les vœux que vous allez ajouter ne sont pas liés au même compte Genshin.\n\nQue souhaitez-vous faire ?",
+      "delete": "Supprimer les anciens voeux"
+    },
+    "import": {
+      "success$": {
+        "emoji": "\uD83E\uDD29",
+        "title": "",
+        "message": "<b>{{ wishes }}</b> nouveaux vœux trouvés sur la bannière {{ banner }} !"
+      },
+      "noData$": {
+        "emoji": "\uD83D\uDE27",
+        "title": "Désolé nous n'avons pas trouvé de nouveaux vœux",
+        "message": "Les vœux faits il y a moins d'une heure ne peuvent pas encore être ajoutés."
+      },
+      "invalidAuthkey$": {
+        "emoji": "⚠",
+        "title": "",
+        "message": "Impossible de vous authentifier."
+      }
+    },
+    "banners$": {
+      "NOVICE": {
+        "title": "Bannière débutant",
+        "titleWithCount": "Bannière débutant ({{ wishes }} vœux)"
+      },
+      "PERMANENT": {
+        "title": "Bannière permanente",
+        "titleWithCount": "Bannière permanente ({{ wishes }} vœux)"
+      },
+      "CHARACTER_EVENT": {
+        "title": "Bannière d'évènement",
+        "titleWithCount": "Bannière d'évènement ({{ wishes }} vœux)"
+      },
+      "WEAPON_EVENT": {
+        "title": "Bannière d'armes",
+        "titleWithCount": "Bannière d'armes ({{ wishes }} vœux)"
+      }
+    }
+  },
+  "footer": {
+    "disclaimer": "Genshin Impact et miHoYo sont des marques commerciales ou marques déposées de miHoYo. Genshin Impact © miHoYo.",
+    "claim": "Pour toute demande, veuillez nous <a href=\"mailto:contact.genshin.wishes@gmail.com\">contacter</a>",
+    "genshinlistCredits": "Images de <a href=\"https://genshinlist.com/\" target=\"_blank\">GenshinList.com</a>"
+  }
+}

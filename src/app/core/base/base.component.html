@@ -1,0 +1,72 @@
+<div fxFill fxLayout="column" class="wrapper">
+  <app-top-bar [sidenavToggle]="false" *ngIf="sidenav.mode == 'side'">
+  </app-top-bar>
+
+  <mat-sidenav-container>
+    <mat-sidenav
+      mode="over"
+      fxFlex="320px"
+      fxFlex.lt-sm="100%"
+      [fixedTopGap]="sidenav.mode == 'side' ? 64 : undefined"
+    >
+      <div fxLayout="column" fxFlex>
+        <mat-toolbar
+          *ngIf="sidenav.mode != 'side'"
+          class="toggler"
+          matRipple
+          matr
+          (click)="sidenav.toggle()"
+        >
+          <fa-icon icon="times"></fa-icon>
+          &nbsp;
+          {{ "app.menu" | translate }}
+        </mat-toolbar>
+
+        <mat-list class="avatar">
+          <mat-list-item *ngIf="user$ | async as user">
+            <img
+              *ngIf="randomItem$ | async as randomItem"
+              matListAvatar
+              [matTooltip]="randomItem | itemName"
+              [src]="
+                'https://genshinlist.com/assets/img/characters/' +
+                (randomItem.name | slugify) +
+                '.png'
+              "
+            />
+            <h3 matLine>
+              {{ user.mihoyoUsername || "-" }}
+            </h3>
+            <p matLine>
+              {{ "app.user.uid" | translate: { uid: user.mihoyoUid || "-" } }}
+            </p>
+          </mat-list-item>
+        </mat-list>
+
+        <div fxFlex>
+          <mat-divider></mat-divider>
+
+          <app-nav
+            fxFlex
+            (click)="sidenav.mode !== 'side' && sidenav.close()"
+          ></app-nav>
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div fxFill fxLayout="column" class="wrapper">
+        <app-top-bar [sidenavToggle]="true" *ngIf="sidenav.mode != 'side'">
+        </app-top-bar>
+
+        <div class="content-wrapper" fxLayout="column" fxFlex>
+          <div class="content" fxLayout="column" fxFlex="1 0 auto">
+            <router-outlet></router-outlet>
+          </div>
+
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

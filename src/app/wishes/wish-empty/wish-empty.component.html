@@ -1,0 +1,41 @@
+<mat-card
+  [ngStyle.gt-xs]="{ height: '368px', 'text-align': 'left' }"
+  fxLayoutAlign="center center"
+>
+  <mat-card-content
+    fxLayout="column"
+    fxLayout.gt-xs="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="32px"
+  >
+    <img
+      [ngStyle.gt-xs]="{ width: '220px', height: '220px' }"
+      src="assets/status/sad.svg"
+    />
+
+    <div fxLayout="column" fxLayoutGap="32px">
+      <div>
+        <h3
+          class="text-primary"
+          [ngStyle.gt-xs]="{ 'font-size': '34px', 'line-height': '34px' }"
+        >
+          {{ "wishes.noWishes" | translate }}
+        </h3>
+        <p [innerHTML]="'wishes.playWithAmber' | translate"></p>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign.lt-sm="center center">
+        <a
+          mat-stroked-button
+          color="accent"
+          [routerLink]="['/banners']"
+          gaClick="wishes_empty_back"
+        >
+          <fa-icon icon="th"></fa-icon>
+          &nbsp;
+          {{ "wishes.backToList" | translate }}
+        </a>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

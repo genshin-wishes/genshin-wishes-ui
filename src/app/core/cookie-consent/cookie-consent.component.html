@@ -1,0 +1,20 @@
+<div
+  *ngIf="!consented"
+  class="wrapper mat-elevation-z4"
+  fxLayout="column"
+  fxLayoutGap="20px"
+  fxFlex.lt-sm="100%"
+  [ngStyle.lt-sm]="{ bottom: 0, right: 0, 'border-radius': 0 }"
+>
+  <div>
+    <h3>{{ "cookie.title" | translate }}</h3>
+
+    <p>{{ "cookie.message" | translate }}</p>
+  </div>
+
+  <div fxLayoutAlign="center">
+    <button mat-raised-button color="primary" (click)="consent()">
+      {{ "cookie.ok" | translate }}
+    </button>
+  </div>
+</div>
