@@ -2,14 +2,29 @@ mat-toolbar {
   z-index: 10;
 }
 
-.list-wrapper {
-  padding: 20px;
-  max-width: 100vw;
+.wrapper,
+.list-wrapper,
+.infinite-scroll,
+app-wish-empty {
   overflow: hidden;
 }
 
-.list-index {
-  position: absolute;
-  left: 0;
-  top: calc(50% - 10px);
+app-wish-list {
+  margin: -20px;
+}
+
+app-banner-nav {
+  position: sticky;
+  top: 0;
+}
+
+.list-wrapper {
+  padding: 20px;
+}
+
+.filters-card {
+  padding: 30px;
+  width: 400px;
+
+  box-sizing: border-box;
 }

@@ -35,6 +35,16 @@ import { CookieService } from 'ngx-cookie-service';
 
 import '@angular/common/locales/global/fr';
 import { LangService } from './shared/lang.service';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(
@@ -43,6 +53,18 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     '.json?v=' + Date.now()
   );
 }
+
+export const APP_DATE_FORMATS = {
+  parse: {
+    dateInput: 'L',
+  },
+  display: {
+    dateInput: 'L',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'L',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   imports: [
@@ -89,6 +111,17 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       useFactory: (lang: LangService) => lang.getCurrentLang(),
       deps: [LangService],
     },
+    {
+      provide: MAT_DATE_LOCALE,
+      useFactory: (lang: LangService) => lang.getCurrentLang(),
+      deps: [LangService],
+    },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
     CookieService,
   ],
   declarations: [

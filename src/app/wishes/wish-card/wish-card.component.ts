@@ -9,14 +9,6 @@ import { Wish } from '../../api/genshin-wishes/wish';
 export class WishCardComponent {
   @Input()
   wish!: Wish;
-  @Input()
-  index!: number;
-  @Input()
-  height!: number;
-  @Input()
-  total!: number;
-
-  constructor() {}
 
   getRankLoop(rank: number) {
     return new Array(rank);

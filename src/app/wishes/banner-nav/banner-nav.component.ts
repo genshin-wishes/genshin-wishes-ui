@@ -1,4 +1,10 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
 import { BannerTypes } from '../../api/genshin-wishes/genshin-wishes.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 
@@ -10,6 +16,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
 export class BannerNavComponent {
   @ViewChild(MatMenuTrigger)
   menuTrigger!: MatMenuTrigger;
+
+  @Output()
+  filter = new EventEmitter<void>();
 
   @Input()
   dropdownMode = false;

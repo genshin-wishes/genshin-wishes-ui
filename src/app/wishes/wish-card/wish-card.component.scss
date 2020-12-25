@@ -1,10 +1,8 @@
 .wrapper {
-  display: block;
   overflow: hidden;
 
-  height: 55px;
   border-radius: 4px;
-  padding: 0 10px;
+  padding: 8px;
 }
 
 .infos {
@@ -18,11 +16,13 @@
 
 .stars {
   width: 60px;
+  min-width: 60px;
   text-align: center;
 }
 
 .date {
-  width: 150px;
+  width: 140px;
+  min-width: 140px;
   text-align: right;
 }
 

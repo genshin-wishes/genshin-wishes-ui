@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
 import { AuthService } from '../../auth/auth.service';
 import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
+import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-base',
@@ -15,6 +16,8 @@ import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.se
 export class BaseComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatSidenav, { static: true })
   sidenav!: MatSidenav;
+  @ViewChild(CdkScrollable, { static: true })
+  scrollable!: CdkScrollable;
 
   destroy = new Subject();
 
@@ -29,10 +32,13 @@ export class BaseComponent implements AfterViewInit, OnDestroy {
     private _sidenav: SidenavService,
     private _gw: GenshinWishesService,
     private _auth: AuthService,
-    private _mediaObserver: MediaObserver
+    private _mediaObserver: MediaObserver,
+    private _scroll: ScrollDispatcher
   ) {}
 
   ngAfterViewInit(): void {
+    this._scroll.register(this.scrollable);
+
     this._sidenav.toggle$
       .pipe(takeUntil(this.destroy))
       .subscribe(() => this.sidenav && this.sidenav.toggle());

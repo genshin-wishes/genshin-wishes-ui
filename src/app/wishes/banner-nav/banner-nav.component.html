@@ -8,6 +8,7 @@
     *ngFor="let banner of banners"
     [gaClick]="'see_wishes_tab_' + banner"
     [routerLink]="['/banners', banner | slugify]"
+    queryParamsHandling="merge"
     routerLinkActive
     [active]="rla.isActive"
     #rla="routerLinkActive"
@@ -18,6 +19,9 @@
 
 <ng-template #dropdownTemplate>
   <mat-toolbar color="primary">
+    <button mat-icon-button (click)="filter.emit()">
+      <fa-icon icon="filter"></fa-icon>
+    </button>
     <span fxFlex></span>
     <button
       mat-button
@@ -35,6 +39,7 @@
         mat-menu-item
         [gaClick]="'see_wishes_dropdown_' + banner"
         [routerLink]="['/banners', banner | slugify]"
+        queryParamsHandling="merge"
         *ngFor="let banner of banners"
       >
         {{ "wishes.banners$." + banner + ".title" | translate }}

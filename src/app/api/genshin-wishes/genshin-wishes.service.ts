@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { from, Observable, Subject } from 'rxjs';
 import { User } from './user';
 import { ImportResponse } from './import-response';
@@ -17,6 +21,7 @@ import {
   ConfirmDialogData,
 } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { AuthService } from '../../auth/auth.service';
+import { WishFilters } from '../../wishes/wish-filters/wish-filters.component';
 
 export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
@@ -101,10 +106,10 @@ export class GenshinWishesService {
               }
 
               const fiveStarIndex = records[type].findIndex(
-                (wish) => wish.item.rankType === 5
+                (wish) => wish.item?.rankType === 5
               );
               const fourStarIndex = records[type].findIndex(
-                (wish) => wish.item.rankType === 4
+                (wish) => wish.item?.rankType === 4
               );
 
               return {
@@ -129,12 +134,14 @@ export class GenshinWishesService {
     );
   }
 
-  getWishes(banner: string, page?: number): Observable<Wish[]> {
+  getWishes(
+    banner: string,
+    page: number,
+    filters: WishFilters
+  ): Observable<Wish[]> {
     return this._http
       .get<Wish[]>(`/api/wishes/${banner}`, {
-        params: {
-          page: (page || 0) + '',
-        },
+        params: this.buildParams(page, filters),
       })
       .pipe(
         map((wishes) =>
@@ -152,10 +159,14 @@ export class GenshinWishesService {
     );
   }
 
-  countWishes(bannerType: string): Observable<number> {
+  countWishes(bannerType: string, filters: WishFilters): Observable<number> {
     return this.onWishesUpdate$.pipe(
       startWith(null),
-      switchMap(() => this._http.get<number>(`/api/wishes/${bannerType}/count`))
+      switchMap(() =>
+        this._http.get<number>(`/api/wishes/${bannerType}/count`, {
+          params: this.buildParams(undefined, filters),
+        })
+      )
     );
   }
 
@@ -325,6 +336,28 @@ export class GenshinWishesService {
           .pipe(exhaustMap(() => from(this.deleteAccount())))
           .toPromise();
       });
+  }
+
+  private buildParams(page?: number, filters?: WishFilters) {
+    const params: { [p: string]: string | string[] } = {};
+
+    if (page !== undefined) params.page = page + '';
+
+    if (filters?.freeText) params.freeText = filters.freeText;
+
+    if (filters?.ranks) params.rank = filters.ranks + '';
+
+    if (filters?.itemType) params.itemType = filters.itemType;
+
+    if (filters?.startDate)
+      params.startDate = filters.startDate.toDate().toUTCString() + '';
+
+    if (filters?.endDate)
+      params.endDate = filters.endDate.toDate().toUTCString() + '';
+
+    if (filters?.fr) params.fr = 'true';
+
+    return params;
   }
 
   private deleteAndImport(

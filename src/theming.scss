@@ -412,6 +412,40 @@ $genshin-wishes-theme: mat-dark-theme(
   }
 }
 
+@mixin wish-filters-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $warn: map-get($config, warn);
+
+  app-wish-filters {
+    .input-wrapper {
+      border-color: mat-color($foreground, medium-emphasis);
+
+      input {
+        color: mat-color($foreground, medium-emphasis);
+      }
+    }
+
+    .filter-category {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: mat-color($primary, 100);
+    }
+
+    .mat-chip.mat-standard-chip {
+      border: 1px solid mat-color($primary);
+      color: mat-color($primary);
+      background: transparent;
+    }
+  }
+}
+
 @mixin app-theme($config-or-theme) {
   $config: mat-get-color-config($config-or-theme);
   $foreground: map-get($config, foreground);
@@ -527,6 +561,7 @@ $genshin-wishes-theme: mat-dark-theme(
 @include cookie-theme($genshin-wishes-theme);
 @include wishes-theme($genshin-wishes-theme);
 @include banner-theme($genshin-wishes-theme);
+@include wish-filters-theme($genshin-wishes-theme);
 @include settings-theme($genshin-wishes-theme);
 @include landing-theme($genshin-wishes-theme);
 @include url-setup-theme($genshin-wishes-theme);

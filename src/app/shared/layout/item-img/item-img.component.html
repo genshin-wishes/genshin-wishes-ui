@@ -1,10 +1,12 @@
 <img
   [class]="'color-star-' + item.rankType"
+  [matTooltip]="item | itemName"
   [src]="
-    'https://genshinlist.com/assets/img/' +
-    item.itemType.toLowerCase() +
-    's/' +
-    (item.name | slugify) +
+    'https://rerollcdn.com/GENSHIN/' +
+    item.itemType.charAt(0) +
+    item.itemType.toLowerCase().slice(1) +
+    (item.itemType === 'Character' ? 's/' : '/NEW/') +
+    item.name.split(' ').join('_') +
     '.png'
   "
 />

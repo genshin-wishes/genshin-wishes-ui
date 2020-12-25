@@ -90,7 +90,7 @@
     "welcome": {
       "titleDotless": "Bienvenue sur Genshin Wishes",
       "title": "Bienvenue sur Genshin Wishes.",
-      "description": "Cet outils va vous aider à suivre vos vœux de personnages et d'armes sur <b>Genshin Impact</b>."
+      "description": "Cet outil va vous aider à suivre vos vœux de personnages et d'armes sur <b>Genshin Impact</b>."
     },
     "elements": {
       "pity": "Calculez votre pity sur chaque bannière",
@@ -141,7 +141,21 @@
     "noWishes": "Il n'y a aucun vœu dans cette bannière",
     "backToList": "Retour aux bannières",
     "playWithAmber": "Vous pouvez toujours jouer avec Amber <span class=\"text-emoji\">\uD83D\uDE05</span>",
-    "bannersNav": "Naviguer vers une autre bannière",
+    "bannersNav": "Bannières",
+    "itemNotFound": "Objet non trouvé, nous mettrons à jour notre base au plus vite !",
+    "itemType$": {
+      "Character": "Personnage",
+      "Weapon": "Arme"
+    },
+    "filters": {
+      "freeText": "Filtrer par nom",
+      "itemType": "Filtrer par type",
+      "rank": "Filtrer par rank",
+      "date": "Filtrer par date",
+      "startDate": "Date de départ",
+      "endDate": "Date de fin",
+      "reset": "Enlever tous les filtres"
+    },
     "update": {
       "label": "Màj des vœux"
     },
@@ -194,6 +208,6 @@
   "footer": {
     "disclaimer": "Genshin Impact et miHoYo sont des marques commerciales ou marques déposées de miHoYo. Genshin Impact © miHoYo.",
     "claim": "Pour toute demande, veuillez nous <a href=\"mailto:contact.genshin.wishes@gmail.com\">contacter</a>",
-    "genshinlistCredits": "Images de <a href=\"https://genshinlist.com/\" target=\"_blank\">GenshinList.com</a>"
+    "imagesCredits": "Images de <a href=\"https://genshin.gg/\" target=\"_blank\">genshin.gg</a>"
   }
 }

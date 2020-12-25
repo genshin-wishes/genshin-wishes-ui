@@ -1,0 +1,146 @@
+<div fxLayout="column" fxLayoutGap="30px" fxFlexFill>
+  <div>
+    <div class="filter-category">
+      {{ "wishes.filters.freeText" | translate }}
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="14px">
+      <div
+        class="input-wrapper"
+        fxFlex
+        fxLayoutAlign="start center"
+        (click)="freeText.focus()"
+      >
+        <input
+          [cdkTrapFocus]="false"
+          [cdkTrapFocusAutoCapture]="true"
+          [(ngModel)]="filters.freeText"
+          [placeholder]="'wishes.filters.freeText' | translate"
+          (keydown.escape)="filters.freeText = ''; filtersChange.emit(filters)"
+          (keydown.enter)="
+            filters.freeText = filters.freeText?.trim();
+            filtersChange.emit(filters)
+          "
+          (blur)="filters.freeText = filters.freeText?.trim()"
+          #freeText
+        />
+
+        <button
+          mat-icon-button
+          *ngIf="!!filters.freeText"
+          (click)="filters.freeText = ''; filtersChange.emit(filters)"
+        >
+          <fa-icon icon="times-circle"></fa-icon>
+        </button>
+      </div>
+
+      <button
+        mat-stroked-button
+        [disableRipple]="true"
+        color="primary"
+        (click)="filtersChange.emit(filters)"
+      >
+        <fa-icon icon="search"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="filter-category">
+      {{ "wishes.filters.itemType" | translate }}
+    </div>
+
+    <mat-chip-list
+      (change)="filters.itemType = $event.value; filtersChange.emit(filters)"
+    >
+      <mat-chip
+        *ngFor="let type of itemTypes"
+        color="primary"
+        [selected]="filters.itemType === type"
+        [value]="type"
+        (click)="
+          filters.itemType === type
+            ? (filters.itemType = undefined)
+            : (filters.itemType = type);
+          filtersChange.emit(filters)
+        "
+      >
+        <ng-container *ngIf="filters.itemType === type">
+          <fa-icon icon="times"></fa-icon>
+          &nbsp;
+        </ng-container>
+        {{ "wishes.itemType$." + type | translate }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <div>
+    <div class="filter-category">
+      {{ "wishes.filters.rank" | translate }}
+    </div>
+
+    <mat-chip-list
+      (change)="filters.ranks = $event.value; filtersChange.emit(filters)"
+      fxLayoutGap="10px"
+      [multiple]="true"
+    >
+      <mat-chip
+        *ngFor="let rank of ranks"
+        color="primary"
+        [selected]="filters.ranks.includes(rank.length)"
+        [value]="rank.length"
+        (click)="
+          filters.ranks.includes(rank.length)
+            ? filters.ranks.splice(filters.ranks.indexOf(rank.length), 1)
+            : filters.ranks.push(rank.length);
+          filtersChange.emit(filters)
+        "
+      >
+        <ng-container *ngIf="filters.ranks.includes(rank.length)">
+          <fa-icon icon="times"></fa-icon>
+          &nbsp;
+        </ng-container>
+        <ng-container *ngFor="let _ of rank">★</ng-container>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ "wishes.filters.date" | translate }}</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input
+        fxFlex
+        matStartDate
+        [placeholder]="'wishes.filters.startDate' | translate"
+        [(ngModel)]="filters.startDate"
+        (ngModelChange)="filtersChange.emit(filters)"
+      />
+      <input
+        fxFlex
+        matEndDate
+        [placeholder]="'wishes.filters.endDate' | translate"
+        [(ngModel)]="filters.endDate"
+        (ngModelChange)="filtersChange.emit(filters)"
+      />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="accent"
+    [disabled]="
+      !filters.freeText &&
+      !filters.ranks.length &&
+      !filters.itemType &&
+      !filters.startDate &&
+      !filters.endDate
+    "
+    (click)="filters = { ranks: [] }; filtersChange.emit(filters)"
+  >
+    <fa-icon icon="times"></fa-icon>
+    &nbsp;
+    {{ "wishes.filters.reset" | translate }}
+  </button>
+</div>

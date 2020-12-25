@@ -1,0 +1,23 @@
+.filter-category {
+  margin-bottom: 10px;
+}
+
+mat-form-field {
+  margin: 0;
+  padding: 0;
+}
+
+.input-wrapper {
+  border: 1px solid;
+  border-radius: 4px;
+  padding-left: 15px;
+  height: 42px;
+}
+
+input {
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}

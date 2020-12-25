@@ -21,8 +21,9 @@
     class="title"
     [matTooltip]="(title$ | async) || 'app.title' | translate"
     [matTooltipShowDelay]="1000"
-    >{{ (title$ | async) || "app.title" | translate }}</span
   >
+    {{ (title$ | async) || "app.title" | translate }}
+  </span>
 
   <span fxFlex></span>
 

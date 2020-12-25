@@ -141,7 +141,21 @@
     "noWishes": "No wish found for this banner",
     "backToList": "Back to banners",
     "playWithAmber": "You can still play with Amber <span class=\"text-emoji\">\uD83D\uDE05</span>",
-    "bannersNav": "Navigate to another banner",
+    "bannersNav": "Banners",
+    "itemNotFound": "Item not found, we will update our database as soon as possible!",
+    "itemType$": {
+      "Character": "Character",
+      "Weapon": "Weapon"
+    },
+    "filters": {
+      "freeText": "Filter by name",
+      "itemType": "Filter by type",
+      "rank": "Filter by rank",
+      "date": "Filter by date",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "reset": "Reset all filters"
+    },
     "update": {
       "label": "Update wishes"
     },
@@ -194,6 +208,6 @@
   "footer": {
     "disclaimer": "Genshin Impact and miHoYo are trademarks or registered trademarks of miHoYo. Genshin Impact © miHoYo.",
     "claim": "For any claim, please <a href=\"mailto:contact.genshin.wishes@gmail.com\">contact us</a>",
-    "genshinlistCredits": "Images by <a href=\"https://genshinlist.com/\" target=\"_blank\">GenshinList.com</a>"
+    "imagesCredits": "Images by <a href=\"https://genshin.gg/\" target=\"_blank\">GenshinList.gg</a>"
   }
 }

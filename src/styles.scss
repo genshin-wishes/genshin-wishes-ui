@@ -35,6 +35,11 @@ app-root {
     height: 18px;
     font-size: 18px;
   }
+
+  // Fix x overflow in cdk virtual scroll
+  .cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper {
+    width: 100%;
+  }
 }
 
 router-outlet + * {

@@ -1,0 +1,33 @@
+<ng-container *ngIf="itemSize$ | async as itemSize">
+  <cdk-virtual-scroll-viewport
+    *ngIf="count || count === 0; else loadingState"
+    fxFlex="1 1 auto"
+    [itemSize]="itemSize"
+  >
+    <div fxLayout="column" fxLayoutGap="10px" class="wishes-wrapper">
+      <ng-container *ngIf="count > 0; else emptyState">
+        <app-wish-card
+          *cdkVirtualFor="let wish of wishes$ | async"
+          [wish]="wish"
+          [ngStyle]="{ height: itemSize - 10 + 'px' }"
+        ></app-wish-card>
+      </ng-container>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <ng-template #loadingState>
+    <div fxFlex="1 1 auto" fxLayoutAlign="center center">
+      <mat-progress-spinner
+        color="primary"
+        mode="indeterminate"
+        [diameter]="50"
+      ></mat-progress-spinner>
+    </div>
+  </ng-template>
+
+  <ng-template #emptyState>
+    <div fxFlex="1 1 auto" fxLayoutAlign="center">
+      <app-wish-empty fxFlexFill></app-wish-empty>
+    </div>
+  </ng-template>
+</ng-container>

@@ -3,8 +3,7 @@ import {
   DataSource,
   ListRange,
 } from '@angular/cdk/collections';
-import { BehaviorSubject, concat, Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
   public _cachedData = Array.from<T>({ length: this._count });
@@ -26,12 +25,9 @@ export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
   connect(collectionViewer: CollectionViewer): Observable<(T | undefined)[]> {
     this._subscription.add(
       collectionViewer.viewChange.subscribe((range) => {
+        console.log(range);
         this._currentRange = range;
-        const startPage = this._getPageForIndex(range.start);
-        const endPage = this._getPageForIndex(range.end - 1);
-        for (let i = startPage; i <= endPage; i++) {
-          this._fetchPage(i);
-        }
+        this.fetchCurrentRange();
       })
     );
     return this._dataStream;

@@ -24,16 +24,12 @@
 
         <mat-list class="avatar">
           <mat-list-item *ngIf="user$ | async as user">
-            <img
-              *ngIf="randomItem$ | async as randomItem"
+            <app-item-img
               matListAvatar
-              [matTooltip]="randomItem | itemName"
-              [src]="
-                'https://genshinlist.com/assets/img/characters/' +
-                (randomItem.name | slugify) +
-                '.png'
-              "
-            />
+              *ngIf="randomItem$ | async as randomItem"
+              [item]="randomItem"
+            ></app-item-img>
+
             <h3 matLine>
               {{ user.mihoyoUsername || "-" }}
             </h3>
@@ -59,7 +55,7 @@
         <app-top-bar [sidenavToggle]="true" *ngIf="sidenav.mode != 'side'">
         </app-top-bar>
 
-        <div class="content-wrapper" fxLayout="column" fxFlex>
+        <div class="content-wrapper" fxLayout="column" fxFlex cdkScrollable>
           <div class="content" fxLayout="column" fxFlex="1 0 auto">
             <router-outlet></router-outlet>
           </div>
