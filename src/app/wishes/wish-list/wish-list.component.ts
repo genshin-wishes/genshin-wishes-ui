@@ -12,11 +12,13 @@ import { Observable } from 'rxjs';
 })
 export class WishListComponent {
   @Output()
-  scrolled = new EventEmitter<void>();
+  removeFilters = new EventEmitter<void>();
   @Input()
   count!: number | undefined | null;
   @Input()
-  wishes$!: Observable<VirtualScrollDatasource<Wish>>;
+  wishes$!: Observable<VirtualScrollDatasource<Wish>>; // Observable otherwise the DS does not refresh well
+  @Input()
+  filtering = false;
 
   itemSize$ = this._mediaObserver
     .asObservable()

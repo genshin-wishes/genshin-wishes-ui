@@ -8,10 +8,13 @@
 
     <div fxLayout="column" fxLayoutGap="32px">
       <div>
-        <h3 class="text-primary">
-          {{ "wishes.noWishes" | translate }}
+        <h3
+          class="text-primary"
+          [ngStyle.gt-xs]="{ 'font-size': '34px', 'line-height': '36px' }"
+        >
+          {{ "wishes.noWishes.title" | translate }}
         </h3>
-        <p [innerHTML]="'wishes.playWithAmber' | translate"></p>
+        <p [innerHTML]="'wishes.noWishes.message' | translate"></p>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center center">

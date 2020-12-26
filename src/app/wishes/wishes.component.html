@@ -23,6 +23,14 @@
           fxFlex="1 1 auto"
           [count]="count.count"
           [wishes$]="wishes$"
+          (removeFilters)="filters$.next({ ranks: [] })"
+          [filtering]="
+            filters$.value.ranks.length > 0 ||
+            !!filters$.value.freeText ||
+            !!filters$.value.itemType ||
+            !!filters$.value.startDate ||
+            !!filters$.value.endDate
+          "
         ></app-wish-list>
       </ng-container>
 
@@ -37,7 +45,7 @@
           <mat-card-content>
             <app-wish-filters
               [filters]="initialFilters"
-              (filtersChange)="filters$.next($event)"
+              (filtersChange)="filterChange($event)"
             ></app-wish-filters>
           </mat-card-content>
         </mat-card>

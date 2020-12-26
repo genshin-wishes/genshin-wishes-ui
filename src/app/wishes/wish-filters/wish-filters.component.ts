@@ -3,14 +3,13 @@ import {
   EventEmitter,
   Inject,
   Input,
-  OnDestroy,
   Optional,
   Output,
 } from '@angular/core';
 import { Moment } from 'moment/moment';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { skip, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, skip } from 'rxjs/operators';
 
 export interface WishFilters {
   freeText?: string;
@@ -32,8 +31,13 @@ export interface WishFiltersDialogData {
   styleUrls: ['./wish-filters.component.scss'],
 })
 export class WishFiltersComponent {
+  private _filtersChange = new EventEmitter<WishFilters>();
+
   @Output()
-  filtersChange = new EventEmitter<WishFilters>();
+  filtersChange = this._filtersChange.pipe(
+    debounceTime(400),
+    map((filters) => filters)
+  );
   @Input()
   filters: WishFilters = {
     ranks: [],
@@ -48,10 +52,13 @@ export class WishFiltersComponent {
     if (data) {
       this.filters = data.filters;
       this.filtersChange
-        .asObservable()
         .pipe(skip(4)) // 3 change in template + this one
         .subscribe(data.filtersChange);
     }
+  }
+
+  onChange() {
+    this._filtersChange.emit({ ...this.filters });
   }
 }
 

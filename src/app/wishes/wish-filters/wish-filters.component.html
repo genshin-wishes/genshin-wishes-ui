@@ -4,7 +4,7 @@
       {{ "wishes.filters.freeText" | translate }}
     </div>
 
-    <div fxLayout="row" fxLayoutGap="14px">
+    <div>
       <div
         class="input-wrapper"
         fxFlex
@@ -15,11 +15,11 @@
           [cdkTrapFocus]="false"
           [cdkTrapFocusAutoCapture]="true"
           [(ngModel)]="filters.freeText"
+          (ngModelChange)="onChange()"
           [placeholder]="'wishes.filters.freeText' | translate"
-          (keydown.escape)="filters.freeText = ''; filtersChange.emit(filters)"
+          (keydown.escape)="filters.freeText = ''; onChange()"
           (keydown.enter)="
-            filters.freeText = filters.freeText?.trim();
-            filtersChange.emit(filters)
+            filters.freeText = filters.freeText?.trim(); onChange()
           "
           (blur)="filters.freeText = filters.freeText?.trim()"
           #freeText
@@ -28,20 +28,11 @@
         <button
           mat-icon-button
           *ngIf="!!filters.freeText"
-          (click)="filters.freeText = ''; filtersChange.emit(filters)"
+          (click)="filters.freeText = ''; onChange()"
         >
           <fa-icon icon="times-circle"></fa-icon>
         </button>
       </div>
-
-      <button
-        mat-stroked-button
-        [disableRipple]="true"
-        color="primary"
-        (click)="filtersChange.emit(filters)"
-      >
-        <fa-icon icon="search"></fa-icon>
-      </button>
     </div>
   </div>
 
@@ -50,9 +41,7 @@
       {{ "wishes.filters.itemType" | translate }}
     </div>
 
-    <mat-chip-list
-      (change)="filters.itemType = $event.value; filtersChange.emit(filters)"
-    >
+    <mat-chip-list (change)="filters.itemType = $event.value; onChange()">
       <mat-chip
         *ngFor="let type of itemTypes"
         color="primary"
@@ -62,7 +51,7 @@
           filters.itemType === type
             ? (filters.itemType = undefined)
             : (filters.itemType = type);
-          filtersChange.emit(filters)
+          onChange()
         "
       >
         <ng-container *ngIf="filters.itemType === type">
@@ -80,7 +69,7 @@
     </div>
 
     <mat-chip-list
-      (change)="filters.ranks = $event.value; filtersChange.emit(filters)"
+      (change)="filters.ranks = $event.value; onChange()"
       fxLayoutGap="10px"
       [multiple]="true"
     >
@@ -93,7 +82,7 @@
           filters.ranks.includes(rank.length)
             ? filters.ranks.splice(filters.ranks.indexOf(rank.length), 1)
             : filters.ranks.push(rank.length);
-          filtersChange.emit(filters)
+          onChange()
         "
       >
         <ng-container *ngIf="filters.ranks.includes(rank.length)">
@@ -113,18 +102,18 @@
         matStartDate
         [placeholder]="'wishes.filters.startDate' | translate"
         [(ngModel)]="filters.startDate"
-        (ngModelChange)="filtersChange.emit(filters)"
+        (ngModelChange)="onChange()"
       />
       <input
         fxFlex
         matEndDate
         [placeholder]="'wishes.filters.endDate' | translate"
         [(ngModel)]="filters.endDate"
-        (ngModelChange)="filtersChange.emit(filters)"
+        (ngModelChange)="onChange()"
       />
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
+    <mat-date-range-picker color="primary" #picker></mat-date-range-picker>
   </mat-form-field>
 
   <button
@@ -137,7 +126,7 @@
       !filters.startDate &&
       !filters.endDate
     "
-    (click)="filters = { ranks: [] }; filtersChange.emit(filters)"
+    (click)="filters = { ranks: [] }; onChange()"
   >
     <fa-icon icon="times"></fa-icon>
     &nbsp;

@@ -27,7 +27,17 @@
 
   <ng-template #emptyState>
     <div fxFlex="1 1 auto" fxLayoutAlign="center">
-      <app-wish-empty fxFlexFill></app-wish-empty>
+      <app-wish-empty
+        *ngIf="!filtering; else noResultState"
+        fxFlexFill
+      ></app-wish-empty>
+
+      <ng-template #noResultState>
+        <app-wish-no-result
+          fxFlexFill
+          (removeFilters)="removeFilters.emit()"
+        ></app-wish-no-result>
+      </ng-template>
     </div>
   </ng-template>
 </ng-container>

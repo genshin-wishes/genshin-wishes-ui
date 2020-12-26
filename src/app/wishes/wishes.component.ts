@@ -10,8 +10,15 @@ import {
   switchMap,
   takeUntil,
   tap,
+  throttleTime,
 } from 'rxjs/operators';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  concat,
+  Observable,
+  Subject,
+} from 'rxjs';
 import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import { MediaObserver } from '@angular/flex-layout';
 import { Wish } from '../api/genshin-wishes/wish';
@@ -44,10 +51,7 @@ export class WishesComponent implements OnDestroy {
     ranks: [],
   });
 
-  count$ = combineLatest([
-    this.getBannerType(),
-    this.filters$.pipe(debounceTime(300)),
-  ]).pipe(
+  count$ = combineLatest([this.getBannerType(), this.filters$]).pipe(
     tap(() => {
       this._lastCount = undefined;
       this._datasource && this._datasource.reset();
@@ -70,10 +74,8 @@ export class WishesComponent implements OnDestroy {
               'wishes.banners$.' + bannerType + '.title'
             );
 
-            if (this._lastCount) {
-              this._datasource != undefined &&
-                this._lastCount != undefined &&
-                this._datasource.insertNew(count - this._lastCount);
+            if (this._lastCount && this._datasource != undefined) {
+              this._datasource.insertNew(count - this._lastCount);
             } else if (this._datasource) {
               this._datasource.update(count);
             }
@@ -159,6 +161,10 @@ export class WishesComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
+  }
+
+  filterChange($event: WishFilters): void {
+    this.filters$.next($event);
   }
 
   openFilters(): void {

@@ -318,13 +318,25 @@ $genshin-wishes-theme: mat-dark-theme(
   $foreground: map-get($config, foreground);
 
   app-wish-empty {
-    h2 {
-      color: mat-color($foreground, high-emphasis);
+    h3 {
       font-size: 20px;
     }
     p {
       color: mat-color($foreground, low-emphasis);
       font-size: 12px;
+    }
+  }
+
+  app-wish-no-result {
+    .title {
+      color: mat-color($foreground, text);
+      font-size: 24px;
+      line-height: 24px;
+    }
+    p {
+      color: mat-color($foreground, medium-emphasis);
+      font-size: 20px;
+      line-height: 24px;
     }
   }
 

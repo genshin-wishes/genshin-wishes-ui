@@ -345,7 +345,8 @@ export class GenshinWishesService {
 
     if (filters?.freeText) params.freeText = filters.freeText;
 
-    if (filters?.ranks) params.rank = filters.ranks.map((one) => one + '');
+    if (filters?.ranks.length)
+      params.rank = filters.ranks.map((one) => one + '');
 
     if (filters?.itemType) params.itemType = filters.itemType;
 

@@ -138,9 +138,15 @@
   },
   "wishes": {
     "label": "Wishes",
-    "noWishes": "No wish found for this banner",
+    "noWishes": {
+      "title": "No wish found for this banner",
+      "message": "You can still play with Amber <span class=\"text-emoji\">\uD83D\uDE05</span>"
+    },
+    "noResult": {
+      "title": "Wow! There is nothing like this!",
+      "message": "You should edit your filters"
+    },
     "backToList": "Back to banners",
-    "playWithAmber": "You can still play with Amber <span class=\"text-emoji\">\uD83D\uDE05</span>",
     "bannersNav": "Banners",
     "itemNotFound": "Item not found, we will update our database as soon as possible!",
     "itemType$": {
@@ -173,7 +179,7 @@
       "success$": {
         "emoji": "\uD83E\uDD29",
         "title": "",
-        "message": "<b>{{ wishes }}</b> new wishes found in banner {{ banner }} !"
+        "message": "<b>{{ wishes }}</b> new wishes found in {{ banner }} !"
       },
       "noData$": {
         "emoji": "\uD83D\uDE27",

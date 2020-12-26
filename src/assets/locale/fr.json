@@ -138,9 +138,15 @@
   },
   "wishes": {
     "label": "Vœux",
-    "noWishes": "Il n'y a aucun vœu dans cette bannière",
+    "noWishes": {
+      "title": "Il n'y a aucun vœu dans cette bannière",
+      "message": "Vous pouvez toujours jouer avec Amber <span class=\"text-emoji\">\uD83D\uDE05</span>"
+    },
+    "noResult": {
+      "title": "Wow ! Il n'y a rien qui correspond !",
+      "message": "Vous devriez changer vos filtres"
+    },
     "backToList": "Retour aux bannières",
-    "playWithAmber": "Vous pouvez toujours jouer avec Amber <span class=\"text-emoji\">\uD83D\uDE05</span>",
     "bannersNav": "Bannières",
     "itemNotFound": "Objet non trouvé, nous mettrons à jour notre base au plus vite !",
     "itemType$": {
@@ -150,7 +156,7 @@
     "filters": {
       "freeText": "Filtrer par nom",
       "itemType": "Filtrer par type",
-      "rank": "Filtrer par rank",
+      "rank": "Filtrer par rang",
       "date": "Filtrer par date",
       "startDate": "Date de départ",
       "endDate": "Date de fin",
@@ -173,7 +179,7 @@
       "success$": {
         "emoji": "\uD83E\uDD29",
         "title": "",
-        "message": "<b>{{ wishes }}</b> nouveaux vœux trouvés sur la bannière {{ banner }} !"
+        "message": "<b>{{ wishes }}</b> nouveaux vœux trouvés sur la {{ banner }} !"
       },
       "noData$": {
         "emoji": "\uD83D\uDE27",
