@@ -107,16 +107,6 @@ export const APP_DATE_FORMATS = {
       multi: true,
     },
     {
-      provide: LOCALE_ID,
-      useFactory: (lang: LangService) => lang.getCurrentLang(),
-      deps: [LangService],
-    },
-    {
-      provide: MAT_DATE_LOCALE,
-      useFactory: (lang: LangService) => lang.getCurrentLang(),
-      deps: [LangService],
-    },
-    {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],

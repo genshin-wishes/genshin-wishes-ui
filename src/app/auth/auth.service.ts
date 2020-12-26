@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, defer, Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { User } from '../api/genshin-wishes/user';
-import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
-import { catchError, exhaustMap, startWith } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Lang } from '../shared/lang.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +35,11 @@ export class AuthService {
 
   logout(): void {
     this.register(null);
+  }
+
+  setLang(lang: Lang): void {
+    if (this._currentUser) {
+      this.register({ ...this._currentUser, lang });
+    }
   }
 }

@@ -1,6 +1,8 @@
+import { Lang } from '../../shared/lang.service';
+
 export interface User {
   email: string;
-  lang: 'fr' | 'en';
+  lang: Lang;
   mihoyoUid: string;
   mihoyoUsername: string;
 }

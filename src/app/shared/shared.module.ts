@@ -12,6 +12,7 @@ import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogModule } from './confirm-dialog/confirm-dialog.module';
 import { SnackModule } from './snack/snack.module';
+import { GwDatePipe } from './gw-date.pipe';
 
 @NgModule({
   exports: [
@@ -30,6 +31,9 @@ import { SnackModule } from './snack/snack.module';
     ConfirmDialogModule,
     LayoutModule,
     SnackModule,
+    // Declarations
+    GwDatePipe,
   ],
+  declarations: [GwDatePipe],
 })
 export class SharedModule {}

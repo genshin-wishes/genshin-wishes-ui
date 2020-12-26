@@ -25,7 +25,6 @@ export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
   connect(collectionViewer: CollectionViewer): Observable<(T | undefined)[]> {
     this._subscription.add(
       collectionViewer.viewChange.subscribe((range) => {
-        console.log(range);
         this._currentRange = range;
         this.fetchCurrentRange();
       })

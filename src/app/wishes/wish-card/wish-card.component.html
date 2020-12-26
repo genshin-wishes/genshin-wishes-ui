@@ -43,10 +43,10 @@
         <p
           class="date"
           [ngStyle.lt-sm]="{ 'text-align': 'left', width: 'auto' }"
-          [matTooltip]="(wish.time | date: 'short':'UTC') || ''"
+          [matTooltip]="(wish.time | gwDate: 'short':'UTC') || ''"
           [matTooltipShowDelay]="1000"
         >
-          {{ wish.time | date: "short":"UTC" }}
+          {{ wish.time | gwDate: "short":"UTC" }}
         </p>
       </div>
     </ng-container>

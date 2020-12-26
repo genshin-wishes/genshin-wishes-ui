@@ -132,8 +132,8 @@ export class WishesComponent implements OnDestroy {
             .concat(params.rank ? params.rank : [])
             .map((one: string) => +one),
           itemType: params.itemType,
-          startDate: params.startDate && moment(+params.startDate),
-          endDate: params.endDate && moment(+params.endDate),
+          startDate: params.startDate && moment(params.startDate, 'L'),
+          endDate: params.endDate && moment(params.endDate, 'L'),
         };
         this.filters$.next(this.initialFilters);
       }
@@ -142,15 +142,13 @@ export class WishesComponent implements OnDestroy {
         .asObservable()
         .pipe(skip(skipCount), takeUntil(this.destroy))
         .subscribe((filters) => {
-          this.initialFilters = filters;
-
           this._router.navigate(['.'], {
             queryParams: {
               freeText: filters.freeText,
-              rank: filters.ranks,
+              rank: filters.ranks.length ? filters.ranks : undefined,
               itemType: filters.itemType,
-              startDate: filters.startDate?.toDate().getTime(),
-              endDate: filters.endDate?.toDate().getTime(),
+              startDate: filters.startDate?.format('L'),
+              endDate: filters.endDate?.format('L'),
             },
             relativeTo: this._route,
           });
