@@ -139,6 +139,7 @@ $genshin-wishes-theme: mat-dark-theme(
 
 @mixin material-override-theme($config-or-theme) {
   $config: mat-get-color-config($config-or-theme);
+  $background: map-get($config, background);
   $foreground: map-get($config, foreground);
   $primary: map-get($config, primary);
 
@@ -184,6 +185,24 @@ $genshin-wishes-theme: mat-dark-theme(
       letter-spacing: 0.4px;
 
       color: mat-color($foreground, text);
+    }
+  }
+
+  cdk-virtual-scroll-viewport {
+    &::-webkit-scrollbar-track {
+      margin: 20px 0;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background: mat-color($background, app-bar);
     }
   }
 }
@@ -316,6 +335,20 @@ $genshin-wishes-theme: mat-dark-theme(
   $config: mat-get-color-config($config-or-theme);
   $background: map-get($config, background);
   $foreground: map-get($config, foreground);
+
+  h3.banner-title {
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: mat-color($foreground, medium-emphasis);
+  }
+
+  h2.date-title {
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: mat-color($foreground, high-emphasis);
+  }
 
   app-wish-empty {
     h3 {

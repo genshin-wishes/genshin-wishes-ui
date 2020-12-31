@@ -1,5 +1,6 @@
 {
   "generics": {
+    "filter": "Filtrer",
     "cancel": "Annuler",
     "ok": "OK",
     "previous": "Précédent",
@@ -193,6 +194,10 @@
       }
     },
     "banners$": {
+      "ALL": {
+        "title": "Tous les vœux",
+        "titleWithCount": "Tous les vœux ({{ wishes }})"
+      },
       "NOVICE": {
         "title": "Bannière débutant",
         "titleWithCount": "Bannière débutant ({{ wishes }} vœux)"

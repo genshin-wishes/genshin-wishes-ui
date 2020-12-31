@@ -2,18 +2,16 @@
   margin: 20px;
 }
 
-cdk-virtual-scroll-viewport {
-  &::-webkit-scrollbar-track {
-    margin: 20px 0;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
+.date-title {
+  text-transform: capitalize;
+  margin-top: 30px;
+  margin-bottom: 0;
 
-  &::-webkit-scrollbar {
-    width: 6px;
-    background-color: transparent;
+  &:first-child {
+    margin-top: 15px;
   }
+}
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #000000;
-  }
+.banner-title {
+  margin-top: 10px;
 }

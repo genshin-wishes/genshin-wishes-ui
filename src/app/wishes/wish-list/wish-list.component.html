@@ -6,11 +6,47 @@
   >
     <div fxLayout="column" fxLayoutGap="10px" class="wishes-wrapper">
       <ng-container *ngIf="count > 0; else emptyState">
-        <app-wish-card
-          *cdkVirtualFor="let wish of wishes$ | async"
-          [wish]="wish"
-          [ngStyle]="{ height: itemSize - 10 + 'px' }"
-        ></app-wish-card>
+        <ng-container *ngIf="wishes$ | async as wishes">
+          <ng-container *cdkVirtualFor="let wish of wishes; let index = index">
+            <ng-container
+              *ngLet="
+                wish &&
+                (index === 0 ||
+                  (wishes._cachedData[index - 1] &&
+                    (wish.time | gwDate: 'dd/MM/yyyy':'UTC') !==
+                      (wishes._cachedData[index - 1].time
+                        | gwDate: 'dd/MM/yyyy':'UTC'))) as differentDate
+              "
+            >
+              <h2 class="date-title" *ngIf="differentDate">
+                {{ wish.time | gwDate: "fullDate":"UTC" }}
+              </h2>
+
+              <h3
+                class="banner-title"
+                *ngIf="
+                  showBannerTitle &&
+                  wish &&
+                  (differentDate ||
+                    index === 0 ||
+                    (wishes._cachedData[index - 1] &&
+                      wish.gachaType !==
+                        wishes._cachedData[index - 1].gachaType))
+                "
+              >
+                {{
+                  "wishes.banners$." + IdToBanner[wish.gachaType] + ".title"
+                    | translate
+                }}
+              </h3>
+            </ng-container>
+
+            <app-wish-card
+              [wish]="wish"
+              [ngStyle]="{ height: itemSize - 10 + 'px' }"
+            ></app-wish-card>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </div>
   </cdk-virtual-scroll-viewport>

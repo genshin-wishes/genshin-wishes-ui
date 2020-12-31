@@ -4,6 +4,7 @@ import { VirtualScrollDatasource } from '../virtual-scroll-datasource';
 import { map } from 'rxjs/operators';
 import { MediaObserver } from '@angular/flex-layout';
 import { Observable } from 'rxjs';
+import { IdToBanner } from '../../api/genshin-wishes/genshin-wishes.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -19,10 +20,14 @@ export class WishListComponent {
   wishes$!: Observable<VirtualScrollDatasource<Wish>>; // Observable otherwise the DS does not refresh well
   @Input()
   filtering = false;
+  @Input()
+  showBannerTitle = false;
 
   itemSize$ = this._mediaObserver
     .asObservable()
     .pipe(map(() => (this._mediaObserver.isActive('lt-sm') ? 86 : 65)));
+
+  IdToBanner = IdToBanner;
 
   constructor(private _mediaObserver: MediaObserver) {}
 }

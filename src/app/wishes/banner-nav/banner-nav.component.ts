@@ -23,5 +23,5 @@ export class BannerNavComponent {
   @Input()
   dropdownMode = false;
 
-  banners = BannerTypes;
+  banners = [...BannerTypes, 'ALL'];
 }

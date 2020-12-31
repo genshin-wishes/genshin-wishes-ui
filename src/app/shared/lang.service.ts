@@ -3,7 +3,6 @@ import { AuthService } from '../auth/auth.service';
 import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../api/genshin-wishes/user';
-import { DateAdapter } from '@angular/material/core';
 
 export type Lang = 'fr' | 'en';
 
@@ -15,12 +14,10 @@ export class LangService {
 
   constructor(
     private _auth: AuthService,
-    private _dateAdapter: DateAdapter<unknown>,
     private _translate: TranslateService
   ) {
     this.lang$.subscribe((lang) => {
       this._translate.use(lang);
-      this._dateAdapter.setLocale(lang);
     });
   }
 

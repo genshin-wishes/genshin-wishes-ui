@@ -1,5 +1,6 @@
 {
   "generics": {
+    "filter": "Filter",
     "cancel": "Cancel",
     "ok": "OK",
     "previous": "Back",
@@ -193,6 +194,10 @@
       }
     },
     "banners$": {
+      "ALL": {
+        "title": "All wishes",
+        "titleWithCount": "All wishes ({{ wishes }})"
+      },
       "NOVICE": {
         "title": "Novice banner",
         "titleWithCount": "Novice banner ({{ wishes }} wishes)"
@@ -214,6 +219,6 @@
   "footer": {
     "disclaimer": "Genshin Impact and miHoYo are trademarks or registered trademarks of miHoYo. Genshin Impact © miHoYo.",
     "claim": "For any claim, please <a href=\"mailto:contact.genshin.wishes@gmail.com\">contact us</a>",
-    "imagesCredits": "Images by <a href=\"https://genshin.gg/\" target=\"_blank\">GenshinList.gg</a>"
+    "imagesCredits": "Images by <a href=\"https://genshin.gg/\" target=\"_blank\">genshin.gg</a>"
   }
 }

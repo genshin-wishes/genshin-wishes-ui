@@ -18,9 +18,6 @@
           (ngModelChange)="onChange()"
           [placeholder]="'wishes.filters.freeText' | translate"
           (keydown.escape)="filters.freeText = ''; onChange()"
-          (keydown.enter)="
-            filters.freeText = filters.freeText?.trim(); onChange()
-          "
           (blur)="filters.freeText = filters.freeText?.trim()"
           #freeText
         />
@@ -94,42 +91,16 @@
     </mat-chip-list>
   </div>
 
-  <mat-form-field appearance="outline">
-    <mat-label>{{ "wishes.filters.date" | translate }}</mat-label>
-    <mat-date-range-input [rangePicker]="picker">
-      <input
-        fxFlex
-        matStartDate
-        [placeholder]="'wishes.filters.startDate' | translate"
-        [(ngModel)]="filters.startDate"
-        (ngModelChange)="onChange()"
-      />
-      <input
-        fxFlex
-        matEndDate
-        [placeholder]="'wishes.filters.endDate' | translate"
-        [(ngModel)]="filters.endDate"
-        (ngModelChange)="onChange()"
-      />
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker color="primary" #picker></mat-date-range-picker>
-  </mat-form-field>
-
-  <button
-    mat-raised-button
-    color="accent"
-    [disabled]="
-      !filters.freeText &&
-      !filters.ranks.length &&
-      !filters.itemType &&
-      !filters.startDate &&
-      !filters.endDate
-    "
-    (click)="filters = { ranks: [] }; onChange()"
-  >
-    <fa-icon icon="times"></fa-icon>
-    &nbsp;
-    {{ "wishes.filters.reset" | translate }}
-  </button>
+  <div fxLayoutAlign="center">
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="filters.isEmpty()"
+      (click)="filters.reset(); onChange()"
+    >
+      <fa-icon icon="times"></fa-icon>
+      &nbsp;
+      {{ "wishes.filters.reset" | translate }}
+    </button>
+  </div>
 </div>

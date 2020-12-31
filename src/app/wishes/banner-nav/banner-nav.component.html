@@ -19,10 +19,14 @@
 
 <ng-template #dropdownTemplate>
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="filter.emit()">
+    <button mat-button (click)="filter.emit()">
       <fa-icon icon="filter"></fa-icon>
+      &nbsp;
+      {{ "generics.filter" | translate }}
     </button>
+
     <span fxFlex></span>
+
     <button
       mat-button
       [matMenuTriggerFor]="menu"

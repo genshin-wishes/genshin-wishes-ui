@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { LangService } from './shared/lang.service';
 import { AuthService } from './auth/auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +14,6 @@ export class AppComponent {
   constructor(
     private _auth: AuthService, // included to initialize user
     private _lang: LangService, // included to initialize lang
-    private _cookie: CookieService,
-    private _adapter: DateAdapter<any>
+    private _cookie: CookieService
   ) {}
-
-  adaptFr() {
-    this._adapter.setLocale('fr');
-  }
-
-  adaptEn() {
-    this._adapter.setLocale('en');
-  }
 }

@@ -39,16 +39,15 @@
         </p>
 
         <span fxFlex="21px" fxHide.lt-sm></span>
-
-        <p
-          class="date"
-          [ngStyle.lt-sm]="{ 'text-align': 'left', width: 'auto' }"
-          [matTooltip]="(wish.time | gwDate: 'short':'UTC') || ''"
-          [matTooltipShowDelay]="1000"
-        >
-          {{ wish.time | gwDate: "short":"UTC" }}
-        </p>
       </div>
+
+      <p
+        class="date"
+        [matTooltip]="(wish.time | gwDate: 'shortTime':'UTC') || ''"
+        [matTooltipShowDelay]="1000"
+      >
+        {{ wish.time | gwDate: "shortTime":"UTC" }}
+      </p>
     </ng-container>
   </ng-container>
 </div>

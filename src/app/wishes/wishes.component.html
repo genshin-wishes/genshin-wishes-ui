@@ -22,8 +22,9 @@
         <app-wish-list
           fxFlex="1 1 auto"
           [count]="count.count"
+          [showBannerTitle]="(bannerType$ | async) === 'ALL'"
           [wishes$]="wishes$"
-          (removeFilters)="filters$.next({ ranks: [] })"
+          (removeFilters)="filtersComponent.resetFilters()"
           [filtering]="
             filters$.value.ranks.length > 0 ||
             !!filters$.value.freeText ||
@@ -44,8 +45,8 @@
         <mat-card class="filters-card">
           <mat-card-content>
             <app-wish-filters
+              #filtersComponent
               [filters]="initialFilters"
-              (filtersChange)="filterChange($event)"
             ></app-wish-filters>
           </mat-card-content>
         </mat-card>

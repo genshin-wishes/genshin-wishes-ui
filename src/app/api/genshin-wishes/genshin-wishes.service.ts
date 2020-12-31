@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { from, Observable, Subject } from 'rxjs';
 import { User } from './user';
 import { ImportResponse } from './import-response';
@@ -21,7 +17,9 @@ import {
   ConfirmDialogData,
 } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { AuthService } from '../../auth/auth.service';
-import { WishFilters } from '../../wishes/wish-filters/wish-filters.component';
+import { Params } from '@angular/router';
+import { WishFilters } from '../../wishes/wish-filters/wish-filters';
+import { LangService } from '../../shared/lang.service';
 
 export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
@@ -35,6 +33,13 @@ export enum BannerType {
   CHARACTER_EVENT = 'CHARACTER_EVENT',
   WEAPON_EVENT = 'WEAPON_EVENT',
 }
+
+export const IdToBanner: Record<number, string> = {
+  301: BannerType.CHARACTER_EVENT,
+  200: BannerType.PERMANENT,
+  302: BannerType.WEAPON_EVENT,
+  100: BannerType.NOVICE,
+};
 
 export const BannerTypes = [
   BannerType.CHARACTER_EVENT,
@@ -65,7 +70,8 @@ export class GenshinWishesService {
     private _mihoyo: MihoyoService,
     private _auth: AuthService,
     private _translate: TranslateService,
-    private _snack: SnackService
+    private _snack: SnackService,
+    private _lang: LangService
   ) {}
 
   linkMihoyoUser(): Promise<User> {
@@ -338,25 +344,14 @@ export class GenshinWishesService {
       });
   }
 
-  private buildParams(page?: number, filters?: WishFilters) {
-    const params: { [p: string]: string | string[] } = {};
+  private buildParams(page?: number, filters?: WishFilters): Params {
+    const params: Params = {};
 
     if (page !== undefined) params.page = page + '';
 
-    if (filters?.freeText) params.freeText = filters.freeText;
+    if (filters !== undefined) filters.addToParams(params);
 
-    if (filters?.ranks.length)
-      params.rank = filters.ranks.map((one) => one + '');
-
-    if (filters?.itemType) params.itemType = filters.itemType;
-
-    if (filters?.startDate)
-      params.startDate = filters.startDate.toDate().toUTCString() + '';
-
-    if (filters?.endDate)
-      params.endDate = filters.endDate.toDate().toUTCString() + '';
-
-    if (filters?.fr) params.fr = 'true';
+    if (this._lang.getCurrentLang() === 'fr') params.fr = 'true';
 
     return params;
   }

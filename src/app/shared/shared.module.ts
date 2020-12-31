@@ -13,6 +13,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogModule } from './confirm-dialog/confirm-dialog.module';
 import { SnackModule } from './snack/snack.module';
 import { GwDatePipe } from './gw-date.pipe';
+import { NgLetDirective } from './ng-let.directive';
+import { StarIconComponent } from './star-icon/star-icon.component';
 
 @NgModule({
   exports: [
@@ -33,7 +35,9 @@ import { GwDatePipe } from './gw-date.pipe';
     SnackModule,
     // Declarations
     GwDatePipe,
+    NgLetDirective,
+    StarIconComponent,
   ],
-  declarations: [GwDatePipe],
+  declarations: [GwDatePipe, NgLetDirective, StarIconComponent],
 })
 export class SharedModule {}

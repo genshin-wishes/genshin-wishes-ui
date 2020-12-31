@@ -6,7 +6,7 @@ import {
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
-  public _cachedData = Array.from<T>({ length: this._count });
+  public _cachedData: T[] = Array.from<T>({ length: this._count });
   private _fetchedPages = new Set<number>();
   private _dataStream = new BehaviorSubject<(T | undefined)[]>(
     this._cachedData

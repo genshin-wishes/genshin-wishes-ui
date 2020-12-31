@@ -2,11 +2,22 @@
   <a
     mat-list-item
     [routerLink]="['/banners']"
+    [routerLinkActiveOptions]="{ exact: true }"
     routerLinkActive="active"
     gaClick="nav_banners"
   >
     <fa-icon matListIcon icon="th"></fa-icon>
     <h3 mat-line>{{ "banners.label" | translate }}</h3>
+  </a>
+
+  <a
+    mat-list-item
+    [routerLink]="['/banners', 'all']"
+    routerLinkActive="active"
+    gaClick="nav_banners_all"
+  >
+    <app-star-icon matListIcon></app-star-icon>
+    <h3 mat-line>{{ "wishes.banners$.ALL.title" | translate }}</h3>
   </a>
 
   <a mat-list-item [routerLink]="" gaClick="nav_stats">

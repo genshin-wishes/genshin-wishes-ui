@@ -1,24 +1,14 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  debounceTime,
   first,
   map,
   shareReplay,
-  skip,
   startWith,
   switchMap,
-  takeUntil,
   tap,
-  throttleTime,
 } from 'rxjs/operators';
-import {
-  BehaviorSubject,
-  combineLatest,
-  concat,
-  Observable,
-  Subject,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import { MediaObserver } from '@angular/flex-layout';
 import { Wish } from '../api/genshin-wishes/wish';
@@ -26,15 +16,13 @@ import { TopService } from '../shared/layout/top.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {
-  WishFilters,
   WishFiltersComponent,
   WishFiltersDialogData,
 } from './wish-filters/wish-filters.component';
 import { LangService } from '../shared/lang.service';
 import { MatDialog } from '@angular/material/dialog';
-
-import * as moment from 'moment';
 import { VirtualScrollDatasource } from './virtual-scroll-datasource';
+import { WishFilters } from './wish-filters/wish-filters';
 
 @Component({
   selector: 'app-wishes',
@@ -47,52 +35,49 @@ export class WishesComponent implements OnDestroy {
 
   private destroy = new Subject();
 
-  filters$ = new BehaviorSubject<WishFilters>({
-    ranks: [],
-  });
+  filters$ = new BehaviorSubject<WishFilters>(new WishFilters());
 
-  count$ = combineLatest([this.getBannerType(), this.filters$]).pipe(
-    tap(() => {
+  bannerType$ = this._route.params.pipe(
+    map((params) => params.banner.replace('-', '_').toUpperCase()),
+    shareReplay(1)
+  );
+
+  count$ = combineLatest([this.bannerType$, this.filters$]).pipe(
+    tap((args) => {
+      console.log(args);
       this._lastCount = undefined;
       this._datasource && this._datasource.reset();
     }),
     switchMap(([bannerType, filters]) =>
-      this._gw
-        .countWishes(bannerType, {
-          ...filters,
-          fr: this._lang.getCurrentLang() === 'fr',
-        })
-        .pipe(
-          tap((count) => {
-            this._top.setTitle(
-              count > 0
-                ? this._translate.instant(
-                    'wishes.banners$.' + bannerType + '.titleWithCount',
-                    { wishes: count }
-                  )
-                : 'wishes.banners$.' + bannerType + '.title',
-              'wishes.banners$.' + bannerType + '.title'
-            );
+      this._gw.countWishes(bannerType, filters).pipe(
+        tap((count) => {
+          this._top.setTitle(
+            count > 0
+              ? this._translate.instant(
+                  'wishes.banners$.' + bannerType + '.titleWithCount',
+                  { wishes: count }
+                )
+              : 'wishes.banners$.' + bannerType + '.title',
+            'wishes.banners$.' + bannerType + '.title'
+          );
 
-            if (this._lastCount && this._datasource != undefined) {
-              this._datasource.insertNew(count - this._lastCount);
-            } else if (this._datasource) {
-              this._datasource.update(count);
-            }
+          if (this._lastCount && this._datasource != undefined) {
+            this._datasource.insertNew(count - this._lastCount);
+          } else if (this._datasource) {
+            this._datasource.update(count);
+          }
 
-            this._lastCount = count;
-          }),
-          startWith(undefined)
-        )
+          this._lastCount = count;
+        }),
+        startWith(undefined)
+      )
     ),
     shareReplay(1)
   );
 
   private _lastCount: number | undefined;
 
-  initialFilters: WishFilters = {
-    ranks: [],
-  };
+  initialFilters: WishFilters = new WishFilters();
 
   private _datasource: VirtualScrollDatasource<Wish> | undefined;
 
@@ -118,53 +103,16 @@ export class WishesComponent implements OnDestroy {
     private _mediaObserver: MediaObserver,
     private _dialog: MatDialog
   ) {
-    this._route.queryParams.pipe(first()).subscribe((params) => {
-      let skipCount = 0;
-      if (
-        params.freeText !== undefined ||
-        params.rank !== undefined ||
-        params.itemType !== undefined ||
-        params.startDate !== undefined ||
-        params.endDate !== undefined
-      ) {
-        skipCount = 1;
-        this.initialFilters = {
-          freeText: params.freeText,
-          ranks: []
-            .concat(params.rank ? params.rank : [])
-            .map((one: string) => +one),
-          itemType: params.itemType,
-          startDate: params.startDate && moment(params.startDate, 'L'),
-          endDate: params.endDate && moment(params.endDate, 'L'),
-        };
-        this.filters$.next(this.initialFilters);
-      }
+    this._route.queryParams.subscribe((params) => {
+      this.initialFilters = new WishFilters(params);
 
-      this.filters$
-        .asObservable()
-        .pipe(skip(skipCount), takeUntil(this.destroy))
-        .subscribe((filters) => {
-          this._router.navigate(['.'], {
-            queryParams: {
-              freeText: filters.freeText,
-              rank: filters.ranks.length ? filters.ranks : undefined,
-              itemType: filters.itemType,
-              startDate: filters.startDate?.format('L'),
-              endDate: filters.endDate?.format('L'),
-            },
-            relativeTo: this._route,
-          });
-        });
+      this.filters$.next(this.initialFilters);
     });
   }
 
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
-  }
-
-  filterChange($event: WishFilters): void {
-    this.filters$.next($event);
   }
 
   openFilters(): void {
@@ -177,20 +125,11 @@ export class WishesComponent implements OnDestroy {
     });
   }
 
-  private getBannerType(): Observable<string> {
-    return this._route.params.pipe(
-      map((params) => params.banner.replace('-', '_').toUpperCase())
-    );
-  }
-
   private fetchPage(page: number): Observable<Wish[]> {
-    return this.getBannerType().pipe(
+    return this.bannerType$.pipe(
       first(),
       switchMap((bannerType) =>
-        this._gw.getWishes(bannerType, page, {
-          ...this.filters$.value,
-          fr: this._lang.getCurrentLang() === 'fr',
-        })
+        this._gw.getWishes(bannerType, page, this.filters$.value)
       )
     );
   }
