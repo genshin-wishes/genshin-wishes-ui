@@ -18,6 +18,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { A11yModule } from '@angular/cdk/a11y';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   exports: [
@@ -39,6 +40,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatRadioModule,
     MatCheckboxModule,
     A11yModule,
+    MatSelectModule,
     ScrollingModule,
   ],
 })

@@ -1,34 +1,68 @@
 <div fxLayout="column" fxLayoutGap="30px" fxFlexFill>
-  <div>
-    <div class="filter-category">
-      {{ "wishes.filters.freeText" | translate }}
+  <div class="freetext-banner">
+    <div>
+      <div class="filter-category">
+        {{ "wishes.filters.freeText" | translate }}
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label> {{ "wishes.filters.freeText" | translate }}</mat-label>
+          <input
+            matInput
+            [cdkTrapFocus]="false"
+            [cdkTrapFocusAutoCapture]="true"
+            [(ngModel)]="filters.freeText"
+            (ngModelChange)="onChange()"
+            (keydown.escape)="filters.freeText = ''; onChange()"
+            (blur)="filters.freeText = filters.freeText?.trim()"
+          />
+
+          <button
+            matSuffix
+            mat-icon-button
+            *ngIf="!!filters.freeText"
+            (click)="filters.freeText = ''; onChange()"
+          >
+            <fa-icon icon="times-circle"></fa-icon>
+          </button>
+        </mat-form-field>
+      </div>
     </div>
 
     <div>
-      <div
-        class="input-wrapper"
-        fxFlex
-        fxLayoutAlign="start center"
-        (click)="freeText.focus()"
-      >
-        <input
-          [cdkTrapFocus]="false"
-          [cdkTrapFocusAutoCapture]="true"
-          [(ngModel)]="filters.freeText"
-          (ngModelChange)="onChange()"
-          [placeholder]="'wishes.filters.freeText' | translate"
-          (keydown.escape)="filters.freeText = ''; onChange()"
-          (blur)="filters.freeText = filters.freeText?.trim()"
-          #freeText
-        />
+      <div class="filter-category">
+        {{ "wishes.filters.event" | translate }}
+      </div>
 
-        <button
-          mat-icon-button
-          *ngIf="!!filters.freeText"
-          (click)="filters.freeText = ''; onChange()"
-        >
-          <fa-icon icon="times-circle"></fa-icon>
-        </button>
+      <div>
+        <mat-form-field appearance="outline" fxFlex class="banner-select">
+          <mat-label>
+            {{ "wishes.filters.selectEvent" | translate }}
+          </mat-label>
+          <mat-select
+            [multiple]="true"
+            [(ngModel)]="filters.events"
+            (ngModelChange)="onChange()"
+          >
+            <mat-option
+              *ngFor="let event of events$ | async"
+              [value]="event.id"
+            >
+              <div
+                class="event-option"
+                fxLayoutAlign="start center"
+                fxLayoutGap="10px"
+              >
+                <app-item-img [item]="event.item" size="32px"></app-item-img>
+                <span>
+                  {{ event.item | itemName }} ({{ event.startDate | gwDate }} -
+                  {{ event.endDate | gwDate }})
+                </span>
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
   </div>

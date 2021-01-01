@@ -25,13 +25,7 @@
           [showBannerTitle]="(bannerType$ | async) === 'ALL'"
           [wishes$]="wishes$"
           (removeFilters)="filtersComponent.resetFilters()"
-          [filtering]="
-            filters$.value.ranks.length > 0 ||
-            !!filters$.value.freeText ||
-            !!filters$.value.itemType ||
-            !!filters$.value.startDate ||
-            !!filters$.value.endDate
-          "
+          [filtering]="!filters$.value.isEmpty()"
         ></app-wish-list>
       </ng-container>
 

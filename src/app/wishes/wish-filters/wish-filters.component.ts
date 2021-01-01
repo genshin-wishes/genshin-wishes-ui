@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, map, skip } from 'rxjs/operators';
 import { WishFilters } from './wish-filters';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 
 export interface WishFiltersDialogData {
   filters: WishFilters;
@@ -29,7 +30,10 @@ export class WishFiltersComponent {
   ranks = [Array(3).fill(0), Array(4).fill(0), Array(5).fill(0)];
   itemTypes: ['Character', 'Weapon'] = ['Character', 'Weapon'];
 
+  events$ = this._gw.getEvents();
+
   constructor(
+    private _gw: GenshinWishesService,
     private _router: Router,
     private _route: ActivatedRoute,
     @Optional() @Inject(MAT_DIALOG_DATA) data: WishFiltersDialogData

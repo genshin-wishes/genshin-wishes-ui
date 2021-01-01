@@ -158,9 +158,8 @@
       "freeText": "Filter by name",
       "itemType": "Filter by type",
       "rank": "Filter by rank",
-      "date": "Filter by date",
-      "startDate": "Start date",
-      "endDate": "End date",
+      "event": "Filter by event",
+      "selectEvent": "Select events",
       "reset": "Reset all filters"
     },
     "update": {

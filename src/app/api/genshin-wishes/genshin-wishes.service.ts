@@ -20,6 +20,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Params } from '@angular/router';
 import { WishFilters } from '../../wishes/wish-filters/wish-filters';
 import { LangService } from '../../shared/lang.service';
+import { Event } from '../event';
 
 export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
@@ -178,6 +179,10 @@ export class GenshinWishesService {
 
   getItems(): Observable<Item[]> {
     return this._http.get<Item[]>('/api/items');
+  }
+
+  getEvents(): Observable<Event[]> {
+    return this._http.get<Event[]>('/api/events');
   }
 
   updateLang(lang: string): Promise<string> {
