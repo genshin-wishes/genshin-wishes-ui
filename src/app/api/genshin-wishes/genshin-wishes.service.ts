@@ -185,6 +185,10 @@ export class GenshinWishesService {
     return this._http.get<Event[]>('/api/events');
   }
 
+  getLatestEvent(): Observable<Event> {
+    return this._http.get<Event>('/api/events/latest');
+  }
+
   updateLang(lang: string): Promise<string> {
     return this._http
       .patch(`/api/user/lang`, undefined, {

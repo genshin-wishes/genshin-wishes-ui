@@ -13,16 +13,21 @@
     fxFlexOffset.gt-lg="calc(1/12 * 100%)"
     *ngIf="counts$ | async as counts"
   >
-    <ng-container *ngIf="banners$ | async as banners; else loader">
-      <app-banner-card
-        *ngFor="let banner of banners"
-        [count]="counts[banner.key]"
-        [banner]="banner"
-        fxFlex="100%"
-        fxFlex.gt-sm="calc(50% - 20px)"
-        fxFlex.gt-md="calc(50% - 20px)"
-      ></app-banner-card
-    ></ng-container>
+    <ng-container
+      *ngIf="{ banners: banners$ | async, event: event$ | async } as data"
+    >
+      <ng-container *ngIf="data.banners && data.event; else loader">
+        <app-banner-card
+          *ngFor="let banner of data.banners"
+          [count]="counts[banner.key]"
+          [banner]="banner"
+          [event]="data.event"
+          fxFlex="100%"
+          fxFlex.gt-sm="calc(50% - 20px)"
+          fxFlex.gt-md="calc(50% - 20px)"
+        ></app-banner-card
+      ></ng-container>
+    </ng-container>
   </div>
 
   <ng-template #loader>

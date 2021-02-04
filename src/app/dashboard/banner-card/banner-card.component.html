@@ -13,7 +13,14 @@
   <img
     mat-card-image
     class="mat-elevation-z24"
-    [src]="'assets/banners/' + banner.key + '.jpg'"
+    [src]="
+      !banner.key.endsWith('_EVENT')
+        ? 'assets/banners/' + banner.key + '.jpg'
+        : 'data:image/png;base64,' +
+          (banner.key === 'CHARACTER_EVENT'
+            ? event.characterBanner
+            : event.weaponBanner)
+    "
     [ngStyle]="{ height: '145px' }"
     [ngStyle.gt-sm]="{ height: '164px' }"
     [ngStyle.gt-md]="{ height: '267px' }"

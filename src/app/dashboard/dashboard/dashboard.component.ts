@@ -12,6 +12,7 @@ import { TopService } from '../../shared/layout/top.service';
 export class DashboardComponent {
   counts$ = this._gw.countAll();
   banners$ = this._gw.getBanners();
+  event$ = this._gw.getLatestEvent();
 
   constructor(private _gw: GenshinWishesService, private _top: TopService) {
     this._top.setTitle('banners.label');

@@ -5,4 +5,6 @@ export interface Event {
   item: Item;
   startDate: Date;
   endDate: Date;
+  characterBanner: Blob;
+  weaponBanner: Blob;
 }
