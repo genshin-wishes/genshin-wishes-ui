@@ -1,0 +1,24 @@
+<div
+  *ngIf="stats$ | async as stats"
+  class="wrapper"
+  fxLayout="row"
+  fxLayoutGap="20px"
+>
+  <div fxLayout="column" fxLayoutGap="20px" class="number-cards">
+    <app-stat-card
+      *ngFor="let banner of Object.getOwnPropertyNames(stats.countByBanner)"
+      [cardTitle]="'wishes.banners$.' + banner + '.title' | translate"
+      [statsPerBanner]="stats.countByBanner[banner]"
+    ></app-stat-card>
+  </div>
+
+  <mat-card fxFlex>
+    <google-chart
+      *ngIf="chartData$ | async as chartData"
+      [type]="ChartType.BarChart"
+      [data]="chartData"
+      [columns]="columns"
+      [height]="800"
+    ></google-chart>
+  </mat-card>
+</div>

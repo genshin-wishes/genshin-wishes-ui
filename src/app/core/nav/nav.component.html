@@ -20,21 +20,15 @@
     <h3 mat-line>{{ "wishes.banners$.ALL.title" | translate }}</h3>
   </a>
 
-  <a mat-list-item [routerLink]="" gaClick="nav_stats">
+  <a
+    mat-list-item
+    [routerLink]="['/stats']"
+    routerLinkActive="active"
+    gaClick="nav_stats"
+  >
     <fa-icon matListIcon icon="chart-bar"></fa-icon>
     <h3 mat-line fxLayout="row" fxLayoutGap="14px">
       <span>{{ "stats.label" | translate }}</span>
-
-      <mat-chip-list>
-        <mat-chip
-          (click)="$event.preventDefault()"
-          color="soon"
-          [selected]="true"
-          [disableRipple]="true"
-        >
-          {{ "generics.soon" | translate }}
-        </mat-chip>
-      </mat-chip-list>
     </h3>
   </a>
 

@@ -11,6 +11,7 @@ import { UrlSetupComponent } from './auth/url-setup/url-setup.component';
 import { MihoyoLinkGuard } from './auth/mihoyo-link.guard';
 import { WishesComponent } from './wishes/wishes.component';
 import { SettingsComponent } from './settings/settings.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'banners/:banner',
         component: WishesComponent,
+      },
+      {
+        path: 'stats',
+        component: StatsComponent,
       },
       {
         path: 'settings',

@@ -135,7 +135,13 @@
     }
   },
   "stats": {
-    "label": "Statistiques"
+    "label": "Statistiques",
+    "numberOfWishes": "Nombre de vœux",
+    "numberOf4Stars": "Nombre de vœux 4★",
+    "numberOf5Stars": "Nombre de vœux 5★",
+    "gap4Stars": "Écart moyen entre 4★",
+    "gap5Stars": "Écart moyen entre 5★",
+    "na": "N/A"
   },
   "wishes": {
     "label": "Vœux",

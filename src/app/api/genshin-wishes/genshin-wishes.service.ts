@@ -21,6 +21,8 @@ import { Params } from '@angular/router';
 import { WishFilters } from '../../wishes/wish-filters/wish-filters';
 import { LangService } from '../../shared/lang.service';
 import { Event } from '../event';
+import { Stats } from './stats';
+import { B } from '@angular/cdk/keycodes';
 
 export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
@@ -313,6 +315,12 @@ export class GenshinWishesService {
 
         return null;
       });
+  }
+
+  getStats(filters: WishFilters): Observable<Stats> {
+    return this._http.get<Stats>('/api/stats', {
+      params: this.buildParams(undefined, filters),
+    });
   }
 
   logout(): Promise<void> {

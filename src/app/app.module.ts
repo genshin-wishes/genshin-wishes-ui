@@ -34,6 +34,7 @@ import { CookieConsentComponent } from './core/cookie-consent/cookie-consent.com
 import { CookieService } from 'ngx-cookie-service';
 
 import '@angular/common/locales/global/fr';
+import { StatsModule } from './stats/stats.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DashboardModule,
     LandingModule,
     WishesModule,
+    StatsModule,
     SettingsModule,
     AppRoutingModule,
   ],

@@ -1,0 +1,63 @@
+<mat-card class="stat-card" fxLayoutGap="24px" fxLayout="column">
+  <mat-card-header>
+    <mat-card-title>{{ cardTitle }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="number" fxFlex fxLayout="column">
+    <ul fxLayout="column" fxLayoutGap="12px">
+      <li>
+        <span class="label">{{ "stats.numberOfWishes" | translate }}</span>
+
+        <span fxFlex></span>
+
+        <span class="value">{{ statsPerBanner.count }}</span>
+      </li>
+
+      <li class="color-star-4">
+        <span class="label">{{ "stats.numberOf4Stars" | translate }}</span>
+
+        <span fxFlex></span>
+
+        <span class="value">{{ statsPerBanner.count4Stars }}</span>
+      </li>
+
+      <li class="color-star-4">
+        <span class="label">{{ "stats.gap4Stars" | translate }}</span>
+
+        <span fxFlex></span>
+
+        <span class="value">
+          {{
+            statsPerBanner.count4Stars
+              ? (statsPerBanner.last4Stars / statsPerBanner.count4Stars
+                | number)
+              : ("stats.na" | translate)
+          }}
+        </span>
+      </li>
+
+      <li class="color-star-5">
+        <span class="label">{{ "stats.numberOf5Stars" | translate }}</span>
+
+        <span fxFlex></span>
+
+        <span class="value">{{ statsPerBanner.count5Stars }}</span>
+      </li>
+
+      <li class="color-star-5">
+        <span class="label">{{ "stats.gap5Stars" | translate }}</span>
+
+        <span fxFlex></span>
+
+        <span class="value">
+          {{
+            statsPerBanner.count5Stars
+              ? (statsPerBanner.last5Stars / statsPerBanner.count5Stars
+                | number)
+              : ("stats.na" | translate)
+          }}
+        </span>
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card>

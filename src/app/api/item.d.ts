@@ -3,5 +3,5 @@ export interface Item {
   name: string;
   nameFr: string;
   itemType: 'Character' | 'Weapon';
-  rankType: number;
+  rankType: 1 | 2 | 3 | 4 | 5;
 }
