@@ -158,7 +158,8 @@
       "freeText": "Filtrer par nom",
       "itemType": "Filtrer par type",
       "rank": "Filtrer par rang",
-      "event": "Filtrer par évènement",
+      "characterEvent": "Filtrer par évènement de personnage",
+      "weaponEvent": "Filtrer par évènement d'arme",
       "selectEvent": "Sélectionnez des évènements",
       "reset": "Enlever tous les filtres"
     },

@@ -39,12 +39,16 @@ export class WishesComponent implements OnDestroy {
 
   bannerType$ = this._route.params.pipe(
     map((params) => params.banner.replace('-', '_').toUpperCase()),
+    tap(() => {
+      this.initialFilters = new WishFilters();
+
+      this.filters$.next(this.initialFilters);
+    }),
     shareReplay(1)
   );
 
   count$ = combineLatest([this.bannerType$, this.filters$]).pipe(
-    tap((args) => {
-      console.log(args);
+    tap(() => {
       this._lastCount = undefined;
       this._datasource && this._datasource.reset();
     }),

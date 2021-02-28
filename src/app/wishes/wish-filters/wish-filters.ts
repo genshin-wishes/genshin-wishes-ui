@@ -4,7 +4,8 @@ export class WishFilters {
   freeText?: string;
   ranks: number[] = [];
   itemType?: 'Character' | 'Weapon';
-  events: number[] = [];
+  characterEvents: number[] = [];
+  weaponEvents: number[] = [];
 
   constructor(params?: Params | WishFilters) {
     if (!params) {
@@ -15,8 +16,11 @@ export class WishFilters {
     this.ranks = []
       .concat(params.ranks ? params.ranks : [])
       .map((one: string) => +one);
-    this.events = []
-      .concat(params.events ? params.events : [])
+    this.characterEvents = []
+      .concat(params.characterEvents ? params.characterEvents : [])
+      .map((one: string) => +one);
+    this.weaponEvents = []
+      .concat(params.weaponEvents ? params.weaponEvents : [])
       .map((one: string) => +one);
     this.itemType = params.itemType;
   }
@@ -26,14 +30,16 @@ export class WishFilters {
       !this.freeText &&
       !this.ranks.length &&
       !this.itemType &&
-      !this.events.length
+      !this.characterEvents.length &&
+      !this.weaponEvents.length
     );
   }
 
   reset(): void {
     this.freeText = '';
     this.ranks = [];
-    this.events = [];
+    this.characterEvents = [];
+    this.weaponEvents = [];
     this.itemType = undefined;
   }
 
@@ -42,7 +48,11 @@ export class WishFilters {
 
     if (this.ranks.length) params.ranks = this.ranks.map((one) => one + '');
 
-    if (this.events.length) params.events = this.events.map((one) => one + '');
+    if (this.characterEvents.length)
+      params.characterEvents = this.characterEvents.map((one) => one + '');
+
+    if (this.weaponEvents.length)
+      params.weaponEvents = this.weaponEvents.map((one) => one + '');
 
     if (this.itemType) params.itemType = this.itemType;
 

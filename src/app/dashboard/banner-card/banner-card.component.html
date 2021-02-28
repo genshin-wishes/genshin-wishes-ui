@@ -16,10 +16,7 @@
     [src]="
       !banner.key.endsWith('_EVENT')
         ? 'assets/banners/' + banner.key + '.jpg'
-        : 'data:image/png;base64,' +
-          (banner.key === 'CHARACTER_EVENT'
-            ? event.characterBanner
-            : event.weaponBanner)
+        : 'data:image/png;base64,' + event.bannerImage
     "
     [ngStyle]="{ height: '145px' }"
     [ngStyle.gt-sm]="{ height: '164px' }"

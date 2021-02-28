@@ -40,6 +40,7 @@
           <mat-card-content>
             <app-wish-filters
               #filtersComponent
+              [banner]="bannerType$ | async"
               [filters]="initialFilters"
             ></app-wish-filters>
           </mat-card-content>

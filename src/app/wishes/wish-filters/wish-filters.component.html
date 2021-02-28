@@ -1,38 +1,40 @@
-<div fxLayout="column" fxLayoutGap="30px" fxFlexFill>
+<div fxLayout="column" fxFlexFill>
   <div class="freetext-banner">
-    <div>
-      <div class="filter-category">
-        {{ "wishes.filters.freeText" | translate }}
-      </div>
-
-      <div>
-        <mat-form-field appearance="outline" fxFlex>
-          <mat-label> {{ "wishes.filters.freeText" | translate }}</mat-label>
-          <input
-            matInput
-            [cdkTrapFocus]="false"
-            [cdkTrapFocusAutoCapture]="true"
-            [(ngModel)]="filters.freeText"
-            (ngModelChange)="onChange()"
-            (keydown.escape)="filters.freeText = ''; onChange()"
-            (blur)="filters.freeText = filters.freeText?.trim()"
-          />
-
-          <button
-            matSuffix
-            mat-icon-button
-            *ngIf="!!filters.freeText"
-            (click)="filters.freeText = ''; onChange()"
-          >
-            <fa-icon icon="times-circle"></fa-icon>
-          </button>
-        </mat-form-field>
-      </div>
+    <div class="filter-category">
+      {{ "wishes.filters.freeText" | translate }}
     </div>
 
     <div>
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label> {{ "wishes.filters.freeText" | translate }}</mat-label>
+        <input
+          matInput
+          [cdkTrapFocus]="false"
+          [cdkTrapFocusAutoCapture]="true"
+          [(ngModel)]="filters.freeText"
+          (ngModelChange)="onChange()"
+          (keydown.escape)="filters.freeText = ''; onChange()"
+          (blur)="filters.freeText = filters.freeText?.trim()"
+        />
+
+        <button
+          matSuffix
+          mat-icon-button
+          *ngIf="!!filters.freeText"
+          (click)="filters.freeText = ''; onChange()"
+        >
+          <fa-icon icon="times-circle"></fa-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutGap="30px">
+    <div
+      *ngIf="banner === BannerType.CHARACTER_EVENT || banner === BannerType.ALL"
+    >
       <div class="filter-category">
-        {{ "wishes.filters.event" | translate }}
+        {{ "wishes.filters.characterEvent" | translate }}
       </div>
 
       <div>
@@ -40,13 +42,14 @@
           <mat-label>
             {{ "wishes.filters.selectEvent" | translate }}
           </mat-label>
+
           <mat-select
             [multiple]="true"
-            [(ngModel)]="filters.events"
+            [(ngModel)]="filters.characterEvents"
             (ngModelChange)="onChange()"
           >
             <mat-option
-              *ngFor="let event of events$ | async"
+              *ngFor="let event of characterEvents$ | async"
               [value]="event.id"
             >
               <div
@@ -65,76 +68,115 @@
         </mat-form-field>
       </div>
     </div>
-  </div>
 
-  <div>
-    <div class="filter-category">
-      {{ "wishes.filters.itemType" | translate }}
+    <div
+      *ngIf="banner === BannerType.WEAPON_EVENT || banner === BannerType.ALL"
+    >
+      <div class="filter-category">
+        {{ "wishes.filters.weaponEvent" | translate }}
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" fxFlex class="banner-select">
+          <mat-label>
+            {{ "wishes.filters.selectEvent" | translate }}
+          </mat-label>
+
+          <mat-select
+            [multiple]="true"
+            [(ngModel)]="filters.weaponEvents"
+            (ngModelChange)="onChange()"
+          >
+            <mat-option
+              *ngFor="let event of weaponEvents$ | async"
+              [value]="event.id"
+            >
+              <div
+                class="event-option"
+                fxLayoutAlign="start center"
+                fxLayoutGap="10px"
+              >
+                <app-item-img [item]="event.item" size="32px"></app-item-img>
+                <span>
+                  {{ event.item | itemName }} ({{ event.startDate | gwDate }} -
+                  {{ event.endDate | gwDate }})
+                </span>
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
-    <mat-chip-list (change)="filters.itemType = $event.value; onChange()">
-      <mat-chip
-        *ngFor="let type of itemTypes"
-        color="primary"
-        [selected]="filters.itemType === type"
-        [value]="type"
-        (click)="
-          filters.itemType === type
-            ? (filters.itemType = undefined)
-            : (filters.itemType = type);
-          onChange()
-        "
-      >
-        <ng-container *ngIf="filters.itemType === type">
-          <fa-icon icon="times"></fa-icon>
-          &nbsp;
-        </ng-container>
-        {{ "wishes.itemType$." + type | translate }}
-      </mat-chip>
-    </mat-chip-list>
-  </div>
+    <div>
+      <div class="filter-category">
+        {{ "wishes.filters.itemType" | translate }}
+      </div>
 
-  <div>
-    <div class="filter-category">
-      {{ "wishes.filters.rank" | translate }}
+      <mat-chip-list (change)="filters.itemType = $event.value; onChange()">
+        <mat-chip
+          *ngFor="let type of itemTypes"
+          color="primary"
+          [selected]="filters.itemType === type"
+          [value]="type"
+          (click)="
+            filters.itemType === type
+              ? (filters.itemType = undefined)
+              : (filters.itemType = type);
+            onChange()
+          "
+        >
+          <ng-container *ngIf="filters.itemType === type">
+            <fa-icon icon="times"></fa-icon>
+            &nbsp;
+          </ng-container>
+          {{ "wishes.itemType$." + type | translate }}
+        </mat-chip>
+      </mat-chip-list>
     </div>
 
-    <mat-chip-list
-      (change)="filters.ranks = $event.value; onChange()"
-      fxLayoutGap="10px"
-      [multiple]="true"
-    >
-      <mat-chip
-        *ngFor="let rank of ranks"
-        color="primary"
-        [selected]="filters.ranks.includes(rank.length)"
-        [value]="rank.length"
-        (click)="
-          filters.ranks.includes(rank.length)
-            ? filters.ranks.splice(filters.ranks.indexOf(rank.length), 1)
-            : filters.ranks.push(rank.length);
-          onChange()
-        "
-      >
-        <ng-container *ngIf="filters.ranks.includes(rank.length)">
-          <fa-icon icon="times"></fa-icon>
-          &nbsp;
-        </ng-container>
-        <ng-container *ngFor="let _ of rank">★</ng-container>
-      </mat-chip>
-    </mat-chip-list>
-  </div>
+    <div>
+      <div class="filter-category">
+        {{ "wishes.filters.rank" | translate }}
+      </div>
 
-  <div fxLayoutAlign="center">
-    <button
-      mat-raised-button
-      color="accent"
-      [disabled]="filters.isEmpty()"
-      (click)="filters.reset(); onChange()"
-    >
-      <fa-icon icon="times"></fa-icon>
-      &nbsp;
-      {{ "wishes.filters.reset" | translate }}
-    </button>
+      <mat-chip-list
+        (change)="filters.ranks = $event.value; onChange()"
+        fxLayoutGap="10px"
+        [multiple]="true"
+      >
+        <mat-chip
+          *ngFor="let rank of ranks"
+          color="primary"
+          [selected]="filters.ranks.includes(rank.length)"
+          [value]="rank.length"
+          (click)="
+            filters.ranks.includes(rank.length)
+              ? filters.ranks.splice(filters.ranks.indexOf(rank.length), 1)
+              : filters.ranks.push(rank.length);
+            onChange()
+          "
+        >
+          <ng-container *ngIf="filters.ranks.includes(rank.length)">
+            <fa-icon icon="times"></fa-icon>
+            &nbsp;
+          </ng-container>
+          <ng-container *ngFor="let _ of rank">★</ng-container>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <div fxLayoutAlign="center">
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="filters.isEmpty()"
+        (click)="filters.reset(); onChange()"
+      >
+        <fa-icon icon="times"></fa-icon>
+        &nbsp;
+        {{ "wishes.filters.reset" | translate }}
+      </button>
+    </div>
   </div>
 </div>

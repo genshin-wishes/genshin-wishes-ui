@@ -29,6 +29,7 @@ export enum ApiErrors {
 }
 
 export enum BannerType {
+  ALL = 'ALL',
   NOVICE = 'NOVICE',
   PERMANENT = 'PERMANENT',
   CHARACTER_EVENT = 'CHARACTER_EVENT',
@@ -36,10 +37,19 @@ export enum BannerType {
 }
 
 export const IdToBanner: Record<number, string> = {
+  '-1': BannerType.ALL,
   301: BannerType.CHARACTER_EVENT,
   200: BannerType.PERMANENT,
   302: BannerType.WEAPON_EVENT,
   100: BannerType.NOVICE,
+};
+
+export const BannerToId: Record<string, number> = {
+  ALL: -1,
+  CHARACTER_EVENT: 301,
+  PERMANENT: 200,
+  WEAPON_EVENT: 302,
+  NOVICE: 100,
 };
 
 export const BannerTypes = [
@@ -50,6 +60,7 @@ export const BannerTypes = [
 ];
 
 const PITY_5_BY_TYPE = {
+  ALL: -1,
   NOVICE: 90,
   PERMANENT: 90,
   CHARACTER_EVENT: 90,
@@ -181,12 +192,16 @@ export class GenshinWishesService {
     return this._http.get<Item[]>('/api/items');
   }
 
-  getEvents(): Observable<Event[]> {
-    return this._http.get<Event[]>('/api/events');
+  getCharacterEvents(): Observable<Event[]> {
+    return this._http.get<Event[]>('/api/events/character');
   }
 
-  getLatestEvent(): Observable<Event> {
-    return this._http.get<Event>('/api/events/latest');
+  getWeaponEvents(): Observable<Event[]> {
+    return this._http.get<Event[]>('/api/events/weapon');
+  }
+
+  getLatestEvent(): Observable<{ [key: number]: Event }> {
+    return this._http.get<{ [key: number]: Event }>('/api/events/latest');
   }
 
   updateLang(lang: string): Promise<string> {

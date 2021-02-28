@@ -158,7 +158,8 @@
       "freeText": "Filter by name",
       "itemType": "Filter by type",
       "rank": "Filter by rank",
-      "event": "Filter by event",
+      "characterEvent": "Filter by character event",
+      "weaponEvent": "Filter by weapon event",
       "selectEvent": "Select events",
       "reset": "Reset all filters"
     },

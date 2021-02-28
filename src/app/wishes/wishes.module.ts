@@ -19,5 +19,6 @@ import { WishNoResultComponent } from './wish-no-result/wish-no-result.component
     WishNoResultComponent,
   ],
   imports: [SharedModule],
+  exports: [WishFiltersComponent],
 })
 export class WishesModule {}
