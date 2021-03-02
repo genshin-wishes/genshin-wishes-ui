@@ -15,6 +15,14 @@ body {
 }
 
 markdown {
+  h1:first-child {
+    margin-top: 0 !important;
+  }
+
+  h1 {
+    margin-top: 50px !important;
+  }
+
   img {
     max-width: 100%;
   }

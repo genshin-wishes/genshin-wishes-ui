@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   exports: [
@@ -41,6 +42,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCheckboxModule,
     A11yModule,
     MatSelectModule,
+    MatProgressBarModule,
     ScrollingModule,
   ],
 })

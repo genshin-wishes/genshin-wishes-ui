@@ -7,7 +7,9 @@ export interface Banner {
   image: string;
   wishes: number;
   pity5: number;
+  since5: number;
   pity4: number;
+  since4: number;
   last5?: Item;
   last4?: Item;
 }

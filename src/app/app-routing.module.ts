@@ -11,17 +11,25 @@ import { UrlSetupComponent } from './auth/url-setup/url-setup.component';
 import { MihoyoLinkGuard } from './auth/mihoyo-link.guard';
 import { WishesComponent } from './wishes/wishes.component';
 import { SettingsComponent } from './settings/settings.component';
+import { FaqComponent } from './faq/faq.component';
+import { LandingComponent } from './core/landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [NotAuthGuard],
-    component: LandingCardComponent,
-  },
-  {
-    path: 'login',
-    canActivate: [NotAuthGuard],
-    component: AuthComponent,
+    canActivateChild: [NotAuthGuard],
+    component: LandingComponent,
+    children: [
+      {
+        path: 'login',
+        component: AuthComponent,
+      },
+      {
+        path: '',
+        component: LandingCardComponent,
+      },
+    ],
   },
   {
     path: 'setup',
@@ -46,6 +54,10 @@ const routes: Routes = [
       {
         path: 'banners/:banner',
         component: WishesComponent,
+      },
+      {
+        path: 'faq',
+        component: FaqComponent,
       },
       {
         path: 'settings',

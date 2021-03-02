@@ -132,12 +132,12 @@ export class GenshinWishesService {
 
               return {
                 key: type,
-                pity5:
-                  PITY_5_BY_TYPE[type] -
-                  (fiveStarIndex !== -1 ? fiveStarIndex : records[type].length),
-                pity4:
-                  PITY_4 -
-                  (fourStarIndex !== -1 ? fourStarIndex : records[type].length),
+                pity5: PITY_5_BY_TYPE[type],
+                since5:
+                  fiveStarIndex !== -1 ? fiveStarIndex : records[type].length,
+                pity4: PITY_4,
+                since4:
+                  fourStarIndex !== -1 ? fourStarIndex : records[type].length,
                 last5:
                   fiveStarIndex !== -1 && records[type][fiveStarIndex].item,
                 last4:

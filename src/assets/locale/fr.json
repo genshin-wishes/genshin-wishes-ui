@@ -8,6 +8,7 @@
     "retry": "Réessayer",
     "soon": "Bientôt",
     "save": "Sauvegarder",
+    "goBack": "Retourner en arrière",
     "error$": {
       "emoji": "\uD83D\uDE31",
       "title": "",
@@ -86,6 +87,9 @@
     "title": "Hey ! Paimon nous a laissé des cookies. \uD83D\uDE0B",
     "message": "En utilisant ce site, vous acceptez l'utilisation de cookies pour l'analyse du trafic.",
     "ok": "Ok, j'aime les cookies !"
+  },
+  "faq": {
+    "title": "FAQ"
   },
   "landing": {
     "welcome": {

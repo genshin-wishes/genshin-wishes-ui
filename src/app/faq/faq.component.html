@@ -1,0 +1,21 @@
+<div
+  class="wrapper"
+  fxLayoutAlign="center center"
+  *ngIf="file$ | async as file"
+>
+  <mat-card
+    fxFlex="100%"
+    fxFlex.gt-md="83%"
+    fxFlex.gt-lg="66%"
+    [hidden]="!ready"
+    fxFlex
+    fxLayoutAlign="center center"
+  >
+    <mat-card-content
+      [ngStyle.gt-sm]="{ padding: '24px 20%' }"
+      [ngStyle]="{ padding: '24px 0' }"
+    >
+      <markdown [src]="file" (ready)="ready = true"></markdown>
+    </mat-card-content>
+  </mat-card>
+</div>

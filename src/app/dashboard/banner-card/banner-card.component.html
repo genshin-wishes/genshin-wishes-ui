@@ -40,7 +40,10 @@
           <span fxLayout="column">
             <span class="key"> {{ "banners.pity5" | translate }} </span>
             <span class="color-star-5 value">
-              {{ "banners.wishes" | translate: { count: banner.pity5 } }}
+              {{
+                "banners.wishes"
+                  | translate: { count: banner.since5 + " / " + banner.pity5 }
+              }}
             </span>
           </span>
         </span>
@@ -54,7 +57,10 @@
           <span fxLayout="column">
             <span class="key">{{ "banners.pity4" | translate }}</span>
             <span class="color-star-4 value">
-              {{ "banners.wishes" | translate: { count: banner.pity4 } }}
+              {{
+                "banners.wishes"
+                  | translate: { count: banner.since4 + " / " + banner.pity4 }
+              }}
             </span>
           </span>
         </span>

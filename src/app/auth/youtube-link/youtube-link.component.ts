@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { LangService } from '../../shared/lang.service';
-
-const YOUTUBE_FR = 'https://www.youtube.com/watch?v=uObSZ6Dz2Hw';
-const YOUTUBE_EN = 'https://www.youtube.com/watch?v=a16X0R_rSZc';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-youtube-link',
@@ -15,7 +13,7 @@ export class YoutubeLinkComponent {
   label!: string;
 
   youtubeUrl$ = this._lang.lang$.pipe(
-    map((lang) => (lang === 'fr' ? YOUTUBE_FR : YOUTUBE_EN))
+    map((lang) => (lang === 'fr' ? environment.howTo.fr : environment.howTo.en))
   );
 
   constructor(private _lang: LangService) {}

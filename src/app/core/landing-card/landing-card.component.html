@@ -1,85 +1,105 @@
-<app-landing>
-  <div
-    fxFlexFill
-    fxLayoutAlign="center start"
-    fxLayoutAlign.gt-md="center center"
-  >
-    <mat-card
-      fxFlex="100%"
-      fxFlex.gt-md="83%"
-      fxFlex.gt-lg="66%"
-      fxLayout="column"
-      fxLayout.gt-md="row"
-      [ngStyle.gt-md]="{ height: '541px' }"
-      [ngStyle.gt-lg]="{ height: '718px' }"
-    >
-      <img
-        *ngIf="(gtMd$ | async) === 'gt-md'; else landscapeImage"
-        fxFlex.gt-md="0 1 398px"
-        fxFlex.gt-lg="0 1 556px"
-        src="assets/landing-portrait.jpg"
-        class="row-image"
-      />
+<div
+  fxFlexFill
+  fxLayoutAlign="center start"
+  fxLayoutAlign.gt-md="center center"
+>
+  <div fxLayout="column" fxLayoutGap="24px">
+    <div fxLayoutAlign="center center">
+      <mat-card
+        fxFlex="100%"
+        fxFlex.gt-md="83%"
+        fxFlex.gt-lg="66%"
+        fxLayout="column"
+        fxLayout.gt-md="row"
+        [ngStyle.gt-md]="{ 'min-height': '541px' }"
+        [ngStyle.gt-lg]="{ 'min-height': '718px' }"
+      >
+        <img
+          *ngIf="(gtMd$ | async) === 'gt-md'; else landscapeImage"
+          fxFlex.gt-md="0 1 398px"
+          fxFlex.gt-lg="0 1 556px"
+          src="assets/landing-portrait.jpg"
+          class="row-image"
+        />
 
-      <mat-card-content fxFlex fxLayoutAlign="center center">
-        <div>
-          <div class="welcome">
-            <h3 class="text-accent">
-              {{ "landing.welcome.title" | translate }}
-            </h3>
-            <p [innerHTML]="'landing.welcome.description' | translate"></p>
-          </div>
+        <mat-card-content fxFlex fxLayoutAlign="center center">
+          <div fxLayout="column" fxLayoutGap="26px">
+            <div class="welcome">
+              <h3 class="text-accent">
+                {{ "landing.welcome.title" | translate }}
+              </h3>
+              <p [innerHTML]="'landing.welcome.description' | translate"></p>
+            </div>
 
-          <div
-            fxLayout.lt-sm="column"
-            fxLayout="row wrap"
-            class="elements-wrapper"
-          >
-            <app-landing-card-element
-              text="landing.elements.pity"
-              fxFlex.lt-sm
-              fxFlex="calc(50% - 20px)"
-            ></app-landing-card-element>
-
-            <app-landing-card-element
-              icon="search"
-              text="landing.elements.browse"
-              fxFlex.lt-sm
-              fxFlex="calc(50% - 20px)"
-            ></app-landing-card-element>
-
-            <app-landing-card-element
-              icon="chart-bar"
-              text="landing.elements.stats"
-              fxFlex.lt-sm
-              fxFlex="calc(50% - 20px)"
-              [soon]="true"
-            ></app-landing-card-element>
-
-            <app-landing-card-element
-              icon="archive"
-              text="landing.elements.archive"
-              fxFlex.lt-sm
-              fxFlex="calc(50% - 20px)"
-            ></app-landing-card-element>
-          </div>
-
-          <div fxLayoutAlign="center">
-            <a
-              mat-raised-button
-              color="accent"
-              class="sign-in-button"
-              gaClick="sign_in"
-              [routerLink]="['/login']"
+            <div
+              *ngIf="youtubeLink$ | async as youtubeLink"
+              class="video-wrapper"
+              fxLayoutAlign="center center"
             >
-              {{ "app.signIn" | translate }}
-            </a>
+              <iframe
+                [src]="youtubeLink"
+                width="100%"
+                height="100%"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div
+              fxLayout.lt-sm="column"
+              fxLayout="row wrap"
+              class="elements-wrapper"
+            >
+              <app-landing-card-element
+                text="landing.elements.pity"
+                fxFlex.lt-sm
+                fxFlex="calc(50% - 20px)"
+              ></app-landing-card-element>
+
+              <app-landing-card-element
+                icon="search"
+                text="landing.elements.browse"
+                fxFlex.lt-sm
+                fxFlex="calc(50% - 20px)"
+              ></app-landing-card-element>
+
+              <app-landing-card-element
+                icon="chart-bar"
+                text="landing.elements.stats"
+                fxFlex.lt-sm
+                fxFlex="calc(50% - 20px)"
+                [soon]="true"
+              ></app-landing-card-element>
+
+              <app-landing-card-element
+                icon="archive"
+                text="landing.elements.archive"
+                fxFlex.lt-sm
+                fxFlex="calc(50% - 20px)"
+              ></app-landing-card-element>
+            </div>
+
+            <div fxLayoutAlign="center" class="button-wrapper">
+              <div fxLayout="column" fxLayoutGap="12px">
+                <a
+                  mat-raised-button
+                  color="accent"
+                  gaClick="sign_in"
+                  [routerLink]="['/login']"
+                >
+                  {{ "app.signIn" | translate }}
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <app-faq></app-faq>
   </div>
-</app-landing>
+</div>
 
 <ng-template #landscapeImage>
   <img mat-card-image src="assets/landing-landscape.jpg" />

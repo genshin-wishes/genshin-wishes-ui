@@ -1,61 +1,59 @@
-<app-landing>
-  <div
-    fxFlexFill
-    fxLayoutAlign="center start"
-    fxLayoutAlign.gt-md="center center"
-  >
-    <div fxLayout="column">
-      <div fxFlex fxLayoutAlign="center">
-        <mat-card
-          *ngIf="!loading; else spinner"
-          fxFlex
-          fxFlex.gt-sm="600px"
-          fxLayoutAlign="center center"
-        >
-          <mat-card-content fxLayout="column" fxLayoutGap="24px">
-            <div fxLayoutAlign="center">
-              <app-logo></app-logo>
-            </div>
+<div
+  fxFlexFill
+  fxLayoutAlign="center start"
+  fxLayoutAlign.gt-md="center center"
+>
+  <div fxLayout="column">
+    <div fxFlex fxLayoutAlign="center">
+      <mat-card
+        *ngIf="!loading; else spinner"
+        fxFlex
+        fxFlex.gt-sm="600px"
+        fxLayoutAlign="center center"
+      >
+        <mat-card-content fxLayout="column" fxLayoutGap="24px">
+          <div fxLayoutAlign="center">
+            <app-logo></app-logo>
+          </div>
 
-            <h3 class="title">
-              {{ "landing.welcome.titleDotless" | translate }}
-            </h3>
+          <h3 class="title">
+            {{ "landing.welcome.titleDotless" | translate }}
+          </h3>
 
-            <button
-              mat-raised-button
-              (click)="loginWith('google')"
-              gaClick="google"
-            >
-              <fa-icon [icon]="['fab', 'google']"></fa-icon>
-              &nbsp;
-              {{ "auth.google.label" | translate }}
-            </button>
+          <button
+            mat-raised-button
+            (click)="loginWith('google')"
+            gaClick="google"
+          >
+            <fa-icon [icon]="['fab', 'google']"></fa-icon>
+            &nbsp;
+            {{ "auth.google.label" | translate }}
+          </button>
 
-            <button
-              mat-raised-button
-              (click)="loginWith('facebook')"
-              gaClick="facebook"
-            >
-              <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
-              &nbsp;
-              {{ "auth.facebook.label" | translate }}
-            </button>
+          <button
+            mat-raised-button
+            (click)="loginWith('facebook')"
+            gaClick="facebook"
+          >
+            <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
+            &nbsp;
+            {{ "auth.facebook.label" | translate }}
+          </button>
 
-            <button
-              mat-raised-button
-              (click)="loginWith('discord')"
-              gaClick="discord"
-            >
-              <fa-icon [icon]="['fab', 'discord']"></fa-icon>
-              &nbsp;
-              {{ "auth.discord.label" | translate }}
-            </button>
-          </mat-card-content>
-        </mat-card>
-      </div>
+          <button
+            mat-raised-button
+            (click)="loginWith('discord')"
+            gaClick="discord"
+          >
+            <fa-icon [icon]="['fab', 'discord']"></fa-icon>
+            &nbsp;
+            {{ "auth.discord.label" | translate }}
+          </button>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
-</app-landing>
+</div>
 
 <ng-template #spinner>
   <div fxFlex fxFlex.gt-sm="600px" fxLayoutAlign="center center">

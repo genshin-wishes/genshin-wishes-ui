@@ -40,6 +40,16 @@
 
   <a
     mat-list-item
+    [routerLink]="['/faq']"
+    routerLinkActive="active"
+    gaClick="nav_faq"
+  >
+    <fa-icon matListIcon icon="question-circle"></fa-icon>
+    <h3 mat-line>{{ "faq.title" | translate }}</h3>
+  </a>
+
+  <a
+    mat-list-item
     [routerLink]="['/settings']"
     routerLinkActive="active"
     gaClick="nav_settings"

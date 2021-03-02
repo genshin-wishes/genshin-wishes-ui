@@ -4,6 +4,7 @@ import { LandingComponent } from './landing.component';
 import { LandingCardComponent } from '../landing-card/landing-card.component';
 import { LandingCardElementComponent } from '../landing-card-element/landing-card-element.component';
 import { SharedModule } from '../../shared/shared.module';
+import { FaqModule } from '../../faq/faq.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
     LandingCardComponent,
     LandingCardElementComponent,
   ],
-  imports: [SharedModule],
+  imports: [SharedModule, FaqModule],
   exports: [LandingComponent],
 })
 export class LandingModule {}

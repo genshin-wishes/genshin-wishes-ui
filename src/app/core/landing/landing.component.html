@@ -7,8 +7,9 @@
   </app-top-bar>
 
   <div fxLayout="column" fxFlex class="content-wrapper">
-    <div class="content" fxFlex>
+    <div class="content" fxLayout="column" fxLayoutGap="24px" fxFlex>
       <ng-content></ng-content>
+      <router-outlet></router-outlet>
     </div>
 
     <app-footer></app-footer>

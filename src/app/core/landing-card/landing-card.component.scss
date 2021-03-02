@@ -1,3 +1,7 @@
+app-faq {
+  margin: -20px;
+}
+
 .row-image {
   margin: -16px 32px -16px -16px !important;
   object-fit: cover;
@@ -8,10 +12,6 @@
 
 mat-card-content {
   margin: 13px 0;
-
-  .welcome {
-    margin-bottom: 26px;
-  }
 
   h3 {
     margin-bottom: 0;
@@ -25,8 +25,25 @@ mat-card-content {
     }
   }
 
-  .sign-in-button {
+  .button-wrapper {
     margin: 33px 0 17px;
-    width: 220px;
+
+    a,
+    button {
+      width: 220px;
+    }
   }
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9, for an aspect ratio of 1:1 change to this value to 100% */
+}
+
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

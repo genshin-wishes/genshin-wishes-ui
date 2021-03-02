@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import {
+  CanActivate,
+  CanActivateChild,
+  Router,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
@@ -8,7 +13,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class NotAuthGuard implements CanActivate {
+export class NotAuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private _gw: GenshinWishesService,
     private _auth: AuthService,
@@ -19,7 +24,11 @@ export class NotAuthGuard implements CanActivate {
     return this.getActivate();
   }
 
-  private getActivate() {
+  canActivateChild(): Observable<boolean | UrlTree> {
+    return this.getActivate();
+  }
+
+  private getActivate(): Observable<UrlTree | boolean> {
     return this._auth.user$.pipe(
       map((user) => {
         if (!!user)

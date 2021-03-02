@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,7 @@ import { CookieConsentComponent } from './core/cookie-consent/cookie-consent.com
 import { CookieService } from 'ngx-cookie-service';
 
 import '@angular/common/locales/global/fr';
+import { FaqModule } from './faq/faq.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(
@@ -55,7 +56,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       useColumnBasisZero: false,
       addFlexToParent: true,
     }),
-    MarkdownModule.forRoot(),
+    MarkdownModule.forRoot({ sanitize: SecurityContext.STYLE }),
     ToastrModule.forRoot({ newestOnTop: false, enableHtml: true }),
     TranslateModule.forRoot({
       defaultLanguage: 'fr',
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     DashboardModule,
     LandingModule,
     WishesModule,
+    FaqModule,
     SettingsModule,
     AppRoutingModule,
   ],
