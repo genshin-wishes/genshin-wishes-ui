@@ -2,11 +2,13 @@
   [class]="'color-star-' + item.rankType"
   [matTooltip]="item | itemName"
   [src]="
-    'https://rerollcdn.com/GENSHIN/' +
-    item.itemType.charAt(0) +
-    item.itemType.toLowerCase().slice(1) +
-    (item.itemType === 'Character' ? 's/' : '/NEW/') +
-    item.name.split(' ').join('_') +
-    '.png'
+    item.itemType === 'Character'
+      ? 'assets/characters/' + item.name + '.png'
+      : 'https://rerollcdn.com/GENSHIN/' +
+        item.itemType.charAt(0) +
+        item.itemType.toLowerCase().slice(1) +
+        '/NEW/' +
+        item.name.split(' ').join('_') +
+        '.png'
   "
 />
