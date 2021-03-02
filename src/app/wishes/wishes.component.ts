@@ -37,7 +37,7 @@ export class WishesComponent implements OnDestroy {
 
   filters$ = new BehaviorSubject<WishFilters>(new WishFilters());
 
-  bannerType$ = this._route.params.pipe(
+  bannerType$ = this.route.params.pipe(
     map((params) => params.banner.replace('-', '_').toUpperCase()),
     tap(() => {
       this.initialFilters = new WishFilters();
@@ -99,7 +99,7 @@ export class WishesComponent implements OnDestroy {
 
   constructor(
     private _router: Router,
-    private _route: ActivatedRoute,
+    public readonly route: ActivatedRoute,
     private _translate: TranslateService,
     private _top: TopService,
     private _lang: LangService,
@@ -107,7 +107,7 @@ export class WishesComponent implements OnDestroy {
     private _mediaObserver: MediaObserver,
     private _dialog: MatDialog
   ) {
-    this._route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe((params) => {
       this.initialFilters = new WishFilters(params);
 
       this.filters$.next(this.initialFilters);
@@ -123,6 +123,7 @@ export class WishesComponent implements OnDestroy {
     this._dialog.open(WishFiltersComponent, {
       width: '400px',
       data: {
+        route: this.route,
         filters: this.filters$.value,
         filtersChange: this.filters$,
       } as WishFiltersDialogData,

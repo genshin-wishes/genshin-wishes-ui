@@ -9,6 +9,7 @@ import {
 } from '../../api/genshin-wishes/genshin-wishes.service';
 
 export interface WishFiltersDialogData {
+  route: ActivatedRoute;
   filters: WishFilters;
   filtersChange: Subject<WishFilters>;
 }
@@ -25,6 +26,9 @@ export class WishFiltersComponent {
   @Input()
   banner!: BannerType;
 
+  @Input()
+  route!: ActivatedRoute;
+
   ranks = [Array(3).fill(0), Array(4).fill(0), Array(5).fill(0)];
   itemTypes: ['Character', 'Weapon'] = ['Character', 'Weapon'];
 
@@ -36,16 +40,16 @@ export class WishFiltersComponent {
   constructor(
     private _gw: GenshinWishesService,
     private _router: Router,
-    private _route: ActivatedRoute,
     @Optional() @Inject(MAT_DIALOG_DATA) data: WishFiltersDialogData
   ) {
     if (data) this.filters = data.filters;
+    if (data) this.route = data.route;
   }
 
   onChange(): void {
     this._router.navigate(['.'], {
       queryParams: this.filters.addToParams({}),
-      relativeTo: this._route,
+      relativeTo: this.route,
     });
   }
 
