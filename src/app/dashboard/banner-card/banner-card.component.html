@@ -42,7 +42,8 @@
             <span class="color-star-5 value">
               {{
                 "banners.wishes"
-                  | translate: { count: banner.since5 + " / " + banner.pity5 }
+                  | translate
+                    : { count: (banner.since5 || 0) + " / " + banner.pity5 }
               }}
             </span>
           </span>
@@ -59,7 +60,8 @@
             <span class="color-star-4 value">
               {{
                 "banners.wishes"
-                  | translate: { count: banner.since4 + " / " + banner.pity4 }
+                  | translate
+                    : { count: (banner.since4 || 0) + " / " + banner.pity4 }
               }}
             </span>
           </span>
