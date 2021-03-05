@@ -1,8 +1,8 @@
 <div class="wrapper" fxLayout="column">
   <div class="error-container">
     <span
-      [class.text-warn]="!positiveFeedback"
-      [class.text-success]="positiveFeedback"
+      [class.text-warn]="feedback !== positiveFeedback"
+      [class.text-success]="feedback === positiveFeedback"
     >
       {{ feedback | translate }}
     </span>
@@ -22,7 +22,7 @@
         urlDataChange.next({
           authUrl: $event,
           persist: urlData.persist,
-          valid: positiveFeedback
+          valid: feedback === positiveFeedback
         })
       "
       name="url-input"
@@ -37,7 +37,7 @@
       urlDataChange.next({
         authUrl: urlData.authUrl,
         persist: $event,
-        valid: positiveFeedback
+        valid: feedback === positiveFeedback
       })
     "
   >

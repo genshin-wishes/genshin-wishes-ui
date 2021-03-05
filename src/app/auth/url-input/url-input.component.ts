@@ -25,7 +25,7 @@ export class UrlInputComponent implements OnInit {
     persist: true,
     valid: false,
   };
-  positiveFeedback = false;
+  positiveFeedback = 'app.urlInput.correctLink';
 
   ngOnInit(): void {
     this.urlData = this.urlDataIn || this.urlData;
@@ -34,19 +34,12 @@ export class UrlInputComponent implements OnInit {
   assertUrl(mihoyoUrl: string): void {
     if (!mihoyoUrl) {
       this.feedback = '';
-      this.positiveFeedback = false;
     }
 
-    if (
-      !mihoyoUrl.startsWith(
-        'https://webstatic-sea.mihoyo.com/ys/event/im-service/index.html'
-      )
-    ) {
+    if (!mihoyoUrl.includes('authkey=') || mihoyoUrl === 'authkey=') {
       this.feedback = 'app.urlInput.incorrectLink';
-      this.positiveFeedback = false;
     } else {
-      this.feedback = 'app.urlInput.correctLink';
-      this.positiveFeedback = true;
+      this.feedback = this.positiveFeedback;
     }
   }
 }
