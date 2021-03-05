@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { LangService } from '../shared/lang.service';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { TopService } from '../shared/layout/top.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-faq',
@@ -13,5 +15,14 @@ export class FaqComponent {
 
   ready = false;
 
-  constructor(private _lang: LangService) {}
+  constructor(
+    private _lang: LangService,
+    private _auth: AuthService,
+    private _top: TopService
+  ) {
+    // Component also exists in stand-alone mode for landing page (not logged in user)
+    this._auth.user$.subscribe(
+      (user) => !!user && this._top.setTitle('faq.title')
+    );
+  }
 }
