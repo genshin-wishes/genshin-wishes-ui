@@ -20,7 +20,7 @@
     }
   },
   "app": {
-    "title": "Genshin Wishes",
+    "title": "Genshin Wishes - Backup your wishes history easily",
     "titleWithPage": "Genshin Wishes - {{ page }}",
     "menu": "Menu",
     "persistLink": "Save link for 24h",

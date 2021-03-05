@@ -18,10 +18,13 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     indexFileFrPath,
     data
       .replace(/@@LANG@@/g, "fr")
-      .replace(/@@TITLE@@/g, "Genshin Wishes — Calculez votre pity")
+      .replace(
+        /@@TITLE@@/g,
+        "Genshin Wishes — Sauvegardez votre historique de vœux facilement"
+      )
       .replace(
         /@@DESCRIPTION@@/g,
-        "Calculez votre pity sur chaque bannière et consultez vos vœux Genshin Impact simplement."
+        "Sauvegardez vos vœux Genshin Impact rapidement et conservez les autant de temps que vous le souhaitez. Consultez vos statistiques de vœux, calculez votre pity pour chaque bannière et parcourez vos anciens vœux en toute simplicité."
       ),
     function (err) {
       if (err) return console.log(err);
@@ -33,10 +36,10 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     indexFileEnPath,
     data
       .replace(/@@LANG@@/g, "en")
-      .replace(/@@TITLE@@/g, "Genshin Wishes - Calculate your pity")
+      .replace(/@@TITLE@@/g, "Genshin Wishes - Backup your wish history easily")
       .replace(
         /@@DESCRIPTION@@/g,
-        "Calculate your pity on each banner and view your Genshin Impact wishes easily."
+        "Backup your Genshin Impact wishes quickly and keep them for as long as you want. Check your wish statistics, calculate your pity for each banner and browse your old wishes easily."
       ),
     function (err) {
       if (err) return console.log(err);
