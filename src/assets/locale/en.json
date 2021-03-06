@@ -216,7 +216,7 @@
       },
       "WEAPON_EVENT": {
         "title": "Weapon banner",
-        "titleWithCount": "Weapon banner ({{ wishes }} vœux)"
+        "titleWithCount": "Weapon banner ({{ wishes }} wishes)"
       }
     }
   },
