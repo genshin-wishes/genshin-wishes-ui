@@ -8,7 +8,11 @@ import { DatePipe } from '@angular/common';
 export class GwDatePipe implements PipeTransform {
   constructor(private _lang: LangService) {}
 
-  transform(value: unknown, format?: string, timezone?: string): string | null {
+  transform(
+    value: string | number | Date,
+    format?: string,
+    timezone?: string
+  ): string | null {
     const datePipe = new DatePipe(
       this._lang.getCurrentLang() === 'fr' ? 'fr-FR' : 'en-US'
     );
