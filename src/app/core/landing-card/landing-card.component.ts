@@ -21,9 +21,7 @@ export class LandingCardComponent {
   youtubeLink$ = this._lang.lang$.pipe(
     map((lang) =>
       this._sanitizer.bypassSecurityTrustResourceUrl(
-        environment.demo +
-          '&autoplay=1&controls=0&modestbranding=1&loop=1&origin=' +
-          environment.websiteUrl
+        environment.demo + '&autoplay=1&controls=0&modestbranding=1&loop=1'
       )
     )
   );

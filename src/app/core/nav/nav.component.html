@@ -58,6 +58,25 @@
     <h3 mat-line>{{ "settings.label" | translate }}</h3>
   </a>
 
+  <mat-divider></mat-divider>
+
+  <div mat-subheader>{{ "nav.helpUs.label" | translate }}</div>
+
+  <a mat-list-item [href]="typeformUrl" target="_blank" gaClick="nav_request">
+    <fa-icon matListIcon icon="flag"></fa-icon>
+    <h3 mat-line>{{ "nav.request.label" | translate }}</h3>
+  </a>
+
+  <a mat-list-item [href]="discordUrl" target="_blank" gaClick="nav_discord">
+    <fa-icon matListIcon [icon]="['fab', 'discord']"></fa-icon>
+    <h3 mat-line>{{ "discord.label" | translate }}</h3>
+  </a>
+
+  <a mat-list-item [href]="coffeeUrl" target="_blank" gaClick="nav_request">
+    <fa-icon matListIcon icon="heart"></fa-icon>
+    <h3 mat-line>{{ "nav.coffee.label" | translate }}</h3>
+  </a>
+
   <span fxFlex></span>
 
   <a

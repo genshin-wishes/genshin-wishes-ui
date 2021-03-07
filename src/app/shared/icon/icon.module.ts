@@ -25,8 +25,9 @@ import { faFrown } from '@fortawesome/free-solid-svg-icons/faFrown';
 import { faTh } from '@fortawesome/free-solid-svg-icons/faTh';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons/faExternalLinkAlt';
+import { faFlag } from '@fortawesome/free-solid-svg-icons/faFlag';
+import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 
 @NgModule({
   exports: [FontAwesomeModule],
@@ -56,6 +57,8 @@ export class IconModule {
       faFacebook,
       faDiscord,
       faExternalLinkAlt,
+      faFlag,
+      faHeart,
       faTimesCircle
     );
   }

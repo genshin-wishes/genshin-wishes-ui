@@ -43,6 +43,10 @@
       "title": "Configuration du compte",
       "finish": "Terminer",
       "step": "Étape {{ step }}",
+      "loading": {
+        "title": "Chargement de vos vœux...",
+        "subtitle": "Accrochez-vous! Cela peut prendre plusieurs minutes."
+      },
       "steps$": {
         "1": {
           "title": "Informations",
@@ -66,10 +70,8 @@
     },
     "signIn": "Se connecter"
   },
+  "discord.label": "Discord",
   "auth": {
-    "google.label": "Se connecter avec Google",
-    "facebook.label": "Se connecter avec Facebook",
-    "discord.label": "Se connecter avec Discord",
     "logout.label": "Se déconnecter"
   },
   "banners": {
@@ -137,6 +139,11 @@
       "title": "Êtes-vous sûr(e) de vouloir supprimer votre compte ?",
       "message": "Cette action est irréversible."
     }
+  },
+  "nav": {
+    "helpUs.label": "Vous souhaitez nous aider ?",
+    "request.label": "Rapport de bugs & propositions",
+    "coffee.label": "Soutenez notre travail"
   },
   "stats": {
     "label": "Statistiques"

@@ -43,6 +43,10 @@
       "title": "Setup your account",
       "finish": "Finish",
       "step": "Step {{ step }}",
+      "loading": {
+        "title": "Loading your wishes...",
+        "subtitle": "Hold on! This could take few minutes."
+      },
       "steps$": {
         "1": {
           "title": "Informations",
@@ -66,10 +70,8 @@
     },
     "signIn": "Sign-in"
   },
+  "discord.label": "Discord",
   "auth": {
-    "google.label": "Sign in-with Google",
-    "facebook.label": "Sign-in with Facebook",
-    "discord.label": "Sign-in with Discord",
     "logout.label": "Logout"
   },
   "banners": {
@@ -140,6 +142,11 @@
   },
   "stats": {
     "label": "Stats"
+  },
+  "nav": {
+    "helpUs.label": "Want to help us?",
+    "request.label": "Bug report & feedback",
+    "coffee.label": "Support our work"
   },
   "wishes": {
     "label": "Wishes",

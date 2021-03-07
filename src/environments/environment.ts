@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   ga: 'G-4YDYEGPQ7G',
-  websiteUrl: 'https://genshin-wishes.com',
+  discord: 'https://discord.gg/6WmvutCPYA',
+  typeform: 'https://form.typeform.com/to/EnUdbLpV',
+  coffee: 'https://ko-fi.com/genshinwishes',
   howTo: {
     pc: {
       fr: 'https://www.youtube.com/watch?v=uObSZ6Dz2Hw',
