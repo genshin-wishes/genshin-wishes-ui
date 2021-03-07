@@ -55,7 +55,6 @@ export class IconModule {
       faGoogle,
       faFacebook,
       faDiscord,
-      faQuestionCircle,
       faExternalLinkAlt,
       faTimesCircle
     );
