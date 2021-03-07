@@ -4,13 +4,35 @@
   [actions]="actions"
   fxFlex
 >
-  <p [innerHTML]="'app.urlSetup.steps$.2.description' | translate"></p>
+  <mat-accordion>
+    <mat-expansion-panel
+      *ngFor="let device of devices"
+      [expanded]="device.expanded"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ device.title }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-  <div fxLayoutAlign="center">
-    <app-youtube-link
-      label="app.urlSetup.steps$.2.showVideo"
-    ></app-youtube-link>
-  </div>
+      <markdown
+        *ngIf="device.mdFile$ | async as mdFile"
+        [src]="mdFile"
+      ></markdown>
+
+      <div>
+        <a
+          mat-button
+          color="primary"
+          [href]="device.videoUrl$ | async"
+          target="_blank"
+          gaClick="see_video"
+        >
+          {{ "app.urlSetup.steps$.2.showVideo" | translate }}
+        </a>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 
   <div step-actions fxFlex>
     <ng-content></ng-content>

@@ -151,6 +151,10 @@ $genshin-wishes-theme: mat-dark-theme(
     text-transform: uppercase;
   }
 
+  .mat-expansion-panel {
+    background: mat-color($primary, 0.08);
+  }
+
   .mat-chip.mat-soon {
     color: #03dac5;
     background: transparent;
@@ -559,6 +563,22 @@ $genshin-wishes-theme: mat-dark-theme(
   }
 }
 
+@mixin markdown-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  markdown {
+    h2 {
+      color: mat-color($primary);
+    }
+
+    h3 {
+      color: mat-color($accent);
+    }
+  }
+}
+
 @mixin url-setup-theme($config-or-theme) {
   app-url-setup {
     $config: mat-get-color-config($config-or-theme);
@@ -602,6 +622,7 @@ $genshin-wishes-theme: mat-dark-theme(
 @include material-override-theme($genshin-wishes-theme);
 @include app-theme($genshin-wishes-theme);
 @include base-theme($genshin-wishes-theme);
+@include markdown-theme($genshin-wishes-theme);
 @include snack-theme($genshin-wishes-theme);
 @include cookie-theme($genshin-wishes-theme);
 @include wishes-theme($genshin-wishes-theme);

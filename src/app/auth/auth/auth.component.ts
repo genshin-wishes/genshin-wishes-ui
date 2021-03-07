@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { filter, tap } from 'rxjs/operators';
 import { User } from '../../api/genshin-wishes/user';
 import { combineLatest } from 'rxjs';
+import { TopService } from '../../shared/layout/top.service';
 
 @Component({
   selector: 'app-auth',
@@ -15,13 +16,16 @@ export class AuthComponent implements OnInit {
   loading = false;
 
   constructor(
+    private _top: TopService,
     private _http: HttpClient,
     private _router: Router,
     private _auth: AuthService,
     private _route: ActivatedRoute
-  ) {}
+  ) {
+    this._top.setTitle('app.signIn');
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     combineLatest([this._route.params, this._route.queryParams])
       .pipe(
         filter(([p]) => p.registrationId),

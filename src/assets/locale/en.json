@@ -46,7 +46,7 @@
       "steps$": {
         "1": {
           "title": "Informations",
-          "description": "To get your wishes we need an <b>authentication link</b> from the game.\n\nThis link only allow us to fetch data from the wishes history.\n<span class=\"text-accent\">We will never have access to your Genshin Impact account.</span>\n\nThe authentication link is only available from the <b>Windows game client</b>."
+          "description": "To get your wishes we need a temporary link from the game.\n\nThis link only allows us to fetch data from the wish history.\n<span class=\"text-accent\">We will never have access to your Genshin Impact account</span>.\nGo to the next step to know how to get your link.\n\nUnfortunately at the moment this link is <span class=\"text-accent\">not available for console players</span>."
         },
         "2": {
           "title": "Get your link",
@@ -54,7 +54,7 @@
           "showVideo": "Show me a video"
         },
         "3": {
-          "title": "Link your account to Genshin Wishes"
+          "title": "Setup your first import"
         },
         "4": {
           "title": "Well done {{ username }} \uD83D\uDC4F",
@@ -64,12 +64,12 @@
         }
       }
     },
-    "signIn": "Sign in"
+    "signIn": "Sign-in"
   },
   "auth": {
-    "google.label": "Sign in with Google",
-    "facebook.label": "Sign in with Facebook",
-    "discord.label": "Sign in with Discord",
+    "google.label": "Sign in-with Google",
+    "facebook.label": "Sign-in with Facebook",
+    "discord.label": "Sign-in with Discord",
     "logout.label": "Logout"
   },
   "banners": {
@@ -92,10 +92,10 @@
     "title": "FAQ"
   },
   "landing": {
+    "signInMethod": "Choose a sign-in method",
     "welcome": {
-      "titleDotless": "Welcome on Genshin Wishes",
       "title": "Welcome on Genshin Wishes.",
-      "description": "This tool will help you to track your characters and weapons wishes on <b>Genshin Impact</b>."
+      "description": "We help you track and backup your wish history from Genshin Impact. We can keep track of your pity counter too!"
     },
     "elements": {
       "pity": "Compute your pity on each banner",

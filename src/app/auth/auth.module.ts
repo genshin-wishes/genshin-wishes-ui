@@ -13,7 +13,6 @@ import { EndComponent } from './url-setup/end/end.component';
 import { StepComponent } from './url-setup/step/step.component';
 import { UrlInputComponent } from './url-input/url-input.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { YoutubeLinkComponent } from './youtube-link/youtube-link.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { YoutubeLinkComponent } from './youtube-link/youtube-link.component';
     EndComponent,
     StepComponent,
     UrlInputComponent,
-    YoutubeLinkComponent,
   ],
   imports: [SharedModule, TranslateModule, LandingModule],
   exports: [UrlInputComponent],

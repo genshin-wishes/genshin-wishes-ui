@@ -9,8 +9,4 @@ import { TopService } from '../../shared/layout/top.service';
 export class LandingComponent {
   @Input()
   withLogout!: boolean;
-
-  constructor(private _top: TopService) {
-    this._top.setTitle(null);
-  }
 }

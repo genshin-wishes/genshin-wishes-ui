@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   exports: [
@@ -43,6 +44,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     A11yModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatExpansionModule,
     ScrollingModule,
   ],
 })

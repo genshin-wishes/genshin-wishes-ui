@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { LangService } from '../../shared/lang.service';
 import { environment } from '../../../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TopService } from '../../shared/layout/top.service';
 
 @Component({
   selector: 'app-landing-card',
@@ -30,6 +31,9 @@ export class LandingCardComponent {
   constructor(
     private _mediaObserver: MediaObserver,
     private _sanitizer: DomSanitizer,
-    private _lang: LangService
-  ) {}
+    private _lang: LangService,
+    private _top: TopService
+  ) {
+    this._top.setTitle(null);
+  }
 }
