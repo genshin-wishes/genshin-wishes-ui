@@ -137,6 +137,11 @@
     "deleteAccountConfirm": {
       "title": "Êtes-vous sûr(e) de vouloir supprimer votre compte ?",
       "message": "Cette action est irréversible."
+    },
+    "export": {
+      "title": "Exporter vos vœux",
+      "subTitle": "Exporter tous vos vœux stockés sur Genshin Wishes",
+      "action": "Exporter mes vœux"
     }
   },
   "nav": {
@@ -202,6 +207,11 @@
         "emoji": "⚠",
         "title": "",
         "message": "Impossible de vous authentifier."
+      },
+      "newWishesDuringImport$": {
+        "emoji": "⚠",
+        "title": "",
+        "message": "Désolé, votre historique de vœux à évolué durant l'importation. Merci de réessayer."
       }
     },
     "banners$": {

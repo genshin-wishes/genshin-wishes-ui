@@ -8,6 +8,8 @@ import { MihoyoService } from '../api/mihoyo/mihoyo.service';
 import { Router } from '@angular/router';
 import { AuthUrlAndPersistInfo } from '../auth/url-input/url-input.component';
 import { AuthService } from '../auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ExportWishesDialogComponent } from './export-wishes-dialog/export-wishes-dialog.component';
 
 @Component({
   selector: 'app-settings',
@@ -26,6 +28,7 @@ export class SettingsComponent {
     private _lang: LangService,
     private _gw: GenshinWishesService,
     private _mihoyo: MihoyoService,
+    private _dialog: MatDialog,
     private _auth: AuthService,
     private _translate: TranslateService,
     private _top: TopService,
@@ -62,5 +65,9 @@ export class SettingsComponent {
       .deleteAccount()
       .then(() => this._router.navigate(['/logout']))
       .catch(() => {});
+  }
+
+  exportWishes(): void {
+    this._dialog.open(ExportWishesDialogComponent);
   }
 }

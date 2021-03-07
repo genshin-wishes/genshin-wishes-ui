@@ -84,6 +84,30 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
+        {{ "settings.export.title" | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ "settings.export.subTitle" | translate }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content fxLayout="column">
+      <div>
+        <a
+          mat-raised-button
+          color="accent"
+          gaClick="settings_export_action"
+          (click)="exportWishes()"
+        >
+          {{ "settings.export.action" | translate }}
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
         {{ "settings.deleteAccount.title" | translate }}
       </mat-card-title>
       <mat-card-subtitle>

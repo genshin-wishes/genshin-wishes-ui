@@ -26,6 +26,7 @@ export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
   MIHOYO_UID_DIFFERENT = 'MIHOYO_UID_DIFFERENT',
   MIHOYO_UNREACHABLE = 'MIHOYO_UNREACHABLE',
+  NEW_WISHES_DURING_IMPORT = 'NEW_WISHES_DURING_IMPORT',
 }
 
 export enum BannerType {
@@ -306,12 +307,7 @@ export class GenshinWishesService {
             );
         }
 
-        const errorKey =
-          error.error === ApiErrors.AUTHKEY_INVALID
-            ? 'wishes.import.invalidAuthkey$'
-            : error.error === ApiErrors.MIHOYO_UNREACHABLE
-            ? 'generics.mihoyoError$'
-            : 'generics.error$';
+        const errorKey = this.getTranslationKeyFromError(error.error);
 
         if (!hideToasts) {
           return this._snack
@@ -328,6 +324,19 @@ export class GenshinWishesService {
 
         return null;
       });
+  }
+
+  private getTranslationKeyFromError(error: string): string {
+    switch (error) {
+      case ApiErrors.AUTHKEY_INVALID:
+        return 'wishes.import.invalidAuthkey$';
+      case ApiErrors.MIHOYO_UNREACHABLE:
+        return 'generics.mihoyoError$';
+      case ApiErrors.NEW_WISHES_DURING_IMPORT:
+        return 'wishes.import.newWishesDuringImport$';
+      default:
+        return 'generics.mihoyoError$';
+    }
   }
 
   logout(): Promise<void> {

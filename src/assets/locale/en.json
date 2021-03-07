@@ -137,6 +137,11 @@
     "deleteAccountConfirm": {
       "title": "Are you sure that you want to delete your account?",
       "message": "This action is irreversible."
+    },
+    "export": {
+      "title": "Export your wishes",
+      "subTitle": "Export all your wishes stored on Genshin Wishes",
+      "action": "Export my wishes"
     }
   },
   "stats": {
@@ -202,6 +207,11 @@
         "emoji": "⚠",
         "title": "",
         "message": "Could not authenticate you."
+      },
+      "newWishesDuringImport$": {
+        "emoji": "⚠",
+        "title": "",
+        "message": "Sorry, your wish history changed during the import. Please try again."
       }
     },
     "banners$": {
