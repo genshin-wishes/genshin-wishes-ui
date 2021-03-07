@@ -50,10 +50,17 @@
 
 <ng-template #loader>
   <div fxFlex fxLayoutAlign="center center">
-    <mat-progress-spinner
-      [diameter]="50"
-      color="primary"
-      mode="indeterminate"
-    ></mat-progress-spinner>
+    <app-step
+      [stepTitle]="'app.urlSetup.loading.title' | translate"
+      [stepSubtitle]="'app.urlSetup.loading.subtitle' | translate"
+    >
+      <div fxLayoutAlign="center center">
+        <mat-progress-spinner
+          [diameter]="50"
+          color="primary"
+          mode="indeterminate"
+        ></mat-progress-spinner>
+      </div>
+    </app-step>
   </div>
 </ng-template>
