@@ -70,7 +70,6 @@
     },
     "signIn": "Sign-in"
   },
-  "discord.label": "Discord",
   "auth": {
     "logout.label": "Logout"
   },
@@ -146,6 +145,7 @@
   "nav": {
     "helpUs.label": "Want to help us?",
     "request.label": "Bug report & feedback",
+    "discord.label": "Join us on Discord",
     "coffee.label": "Support our work"
   },
   "wishes": {
