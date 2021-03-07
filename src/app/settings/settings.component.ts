@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 import { AuthUrlAndPersistInfo } from '../auth/url-input/url-input.component';
 import { AuthService } from '../auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ExportWishesDialogComponent } from './export-wishes-dialog/export-wishes-dialog.component';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogData,
+} from '../shared/confirm-dialog/confirm-dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
@@ -27,6 +31,7 @@ export class SettingsComponent {
   constructor(
     private _lang: LangService,
     private _gw: GenshinWishesService,
+    private _location: Location,
     private _mihoyo: MihoyoService,
     private _dialog: MatDialog,
     private _auth: AuthService,
@@ -68,6 +73,17 @@ export class SettingsComponent {
   }
 
   exportWishes(): void {
-    this._dialog.open(ExportWishesDialogComponent);
+    this._dialog
+      .open(ConfirmDialogComponent, {
+        data: {
+          title: 'settings.export.confirm.title',
+          description: 'settings.export.confirm.description',
+          confirm: 'settings.export.action',
+          color: 'accent',
+        } as ConfirmDialogData,
+      })
+      .afterClosed()
+      .toPromise()
+      .then((res) => !!res && window.open('/api/wishes/export'));
   }
 }

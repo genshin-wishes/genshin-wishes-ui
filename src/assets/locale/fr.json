@@ -141,6 +141,10 @@
     "export": {
       "title": "Exporter vos vœux",
       "subTitle": "Exporter tous vos vœux stockés sur Genshin Wishes",
+      "confirm": {
+        "title": "Êtes-vous sûr(e) ?",
+        "description": "Ne vous inquiétez pas ils resteront aussi sur votre compte."
+      },
       "action": "Exporter mes vœux"
     }
   },

@@ -141,6 +141,10 @@
     "export": {
       "title": "Export your wishes",
       "subTitle": "Export all your wishes stored on Genshin Wishes",
+      "confirm": {
+        "title": "Are you sure?",
+        "description": "Don’t worry they will also remain on your account."
+      },
       "action": "Export my wishes"
     }
   },
