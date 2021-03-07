@@ -1,12 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { SidenavService } from '../sidenav.service';
 import { MatSidenav } from '@angular/material/sidenav';
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
 import { AuthService } from '../../auth/auth.service';
 import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
+import { WishesComponent } from '../../wishes/wishes.component';
 
 @Component({
   selector: 'app-base',
@@ -23,6 +25,13 @@ export class BaseComponent implements AfterViewInit, OnDestroy {
 
   user$ = this._auth.user$;
 
+  // little hack to hide footer on wishes pages because it behaves badly with virtual scrolling
+  notOnWishes$ = this._router.events.pipe(
+    startWith(new NavigationEnd(0, '', '')), // first NavigationEnd is not caught...
+    filter((event) => event instanceof NavigationEnd),
+    map(() => this._route.firstChild?.component !== WishesComponent)
+  );
+
   randomItem$ = this._gw.getItems().pipe(
     map((items) => items.filter((item) => item.itemType === 'Character')),
     map((items) => items[Math.floor(Math.random() * items.length)])
@@ -32,6 +41,8 @@ export class BaseComponent implements AfterViewInit, OnDestroy {
     private _sidenav: SidenavService,
     private _gw: GenshinWishesService,
     private _auth: AuthService,
+    private _router: Router,
+    private _route: ActivatedRoute,
     private _mediaObserver: MediaObserver,
     private _scroll: ScrollDispatcher
   ) {}
