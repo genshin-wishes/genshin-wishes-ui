@@ -17,38 +17,44 @@
           </div>
 
           <h3 class="title">
-            {{ "landing.welcome.titleDotless" | translate }}
+            {{ "landing.signInMethod" | translate }}
           </h3>
 
-          <button
-            mat-raised-button
-            (click)="loginWith('google')"
-            gaClick="google"
+          <div
+            fxLayout="column"
+            fxLayoutGap="10px"
+            fxLayoutAlign="center center"
           >
-            <fa-icon [icon]="['fab', 'google']"></fa-icon>
-            &nbsp;
-            {{ "auth.google.label" | translate }}
-          </button>
+            <a
+              class="auth-button"
+              mat-stroked-button
+              color="primary"
+              href="/api/oauth2/authorization/google"
+              gaClick="google"
+            >
+              <fa-icon [icon]="['fab', 'google']" size="lg"></fa-icon>
+            </a>
 
-          <button
-            mat-raised-button
-            (click)="loginWith('facebook')"
-            gaClick="facebook"
-          >
-            <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
-            &nbsp;
-            {{ "auth.facebook.label" | translate }}
-          </button>
+            <a
+              class="auth-button"
+              mat-stroked-button
+              color="primary"
+              href="/api/oauth2/authorization/discord"
+              gaClick="discord"
+            >
+              <fa-icon [icon]="['fab', 'discord']" size="lg"></fa-icon>
+            </a>
 
-          <button
-            mat-raised-button
-            (click)="loginWith('discord')"
-            gaClick="discord"
-          >
-            <fa-icon [icon]="['fab', 'discord']"></fa-icon>
-            &nbsp;
-            {{ "auth.discord.label" | translate }}
-          </button>
+            <a
+              class="auth-button"
+              mat-stroked-button
+              color="primary"
+              href="/api/oauth2/authorization/facebook"
+              gaClick="facebook"
+            >
+              <fa-icon [icon]="['fab', 'facebook']" size="lg"></fa-icon>
+            </a>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

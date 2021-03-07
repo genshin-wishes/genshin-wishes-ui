@@ -50,10 +50,4 @@ export class AuthComponent implements OnInit {
           });
       });
   }
-
-  loginWith(registrationId: 'google' | 'facebook' | 'discord') {
-    this.loading = true;
-
-    window.open(`/api/oauth2/authorization/${registrationId}`, '_self');
-  }
 }
