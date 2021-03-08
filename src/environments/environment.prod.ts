@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   ga: 'G-4YDYEGPQ7G',
-  discord: 'https://discord.gg/6WmvutCPYA',
+  discord: 'https://discord.gg/fCnypTYxkf',
   typeform: {
     fr: 'https://form.typeform.com/to/TxT8FPlC',
     en: 'https://form.typeform.com/to/EnUdbLpV',

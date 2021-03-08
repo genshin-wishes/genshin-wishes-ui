@@ -45,7 +45,7 @@ Oui. En tant que joueurs de Genshin Impact, nous sommes aussi préoccupés par l
 - Cette clé ne nous permet pas de nous connecter à votre compte de toute façon
 - Vous avez l'option de supprimer toutes les données que nous stockons quand vous voulez (vœux inclus)
 - Nous utilisons le cryptage SSL
->
+
 ## Y-a-t'il un risque de se faire bannir en utilisant ce site ?
 Absolument pas. Nous utilisons les mêmes requêtes que le jeu pour récupérer vos vœux (avec l'API publique de Mihoyo) donc il n'y a aucun risque d'être banni. Nous l'avons utilisé sur nos propres comptes pendant des mois. Mihoyo a fait [un article sur les outils tiers](https://genshin.mihoyo.com/en/news/detail/5763), et le notre ne pose pas de soucis.
 
