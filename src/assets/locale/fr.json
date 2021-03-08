@@ -32,8 +32,7 @@
     "urlInput": {
       "dialog": {
         "title": "Votre lien a expiré",
-        "message": "⚠ Votre lien d'authentification n'est pas valide. Mettez le à jour SVP. <a href=\"https://www.youtube.com/watch?v=uObSZ6Dz2Hw\" target=\"_blank\"> Comment ?</a>",
-        "showVideo": "Comment ?",
+        "message": "⚠ Votre lien d'authentification n'est pas valide. Mettez le à jour SVP. <a href=\"/faq\" target=\"_blank\"> Comment ?</a>",
         "ok": "Mettre à jour le lien"
       },
       "pasteInput": "Collez votre lien ici",
