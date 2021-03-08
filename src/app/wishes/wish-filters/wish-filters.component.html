@@ -12,8 +12,8 @@
           [cdkTrapFocus]="false"
           [cdkTrapFocusAutoCapture]="true"
           [(ngModel)]="filters.freeText"
-          (ngModelChange)="onChange()"
-          (keydown.escape)="filters.freeText = ''; onChange()"
+          (ngModelChange)="changes.next()"
+          (keydown.escape)="filters.freeText = ''; changes.next()"
           (blur)="filters.freeText = filters.freeText?.trim()"
           name="free-text-filter"
           autocomplete="off"
@@ -23,7 +23,7 @@
           matSuffix
           mat-icon-button
           *ngIf="!!filters.freeText"
-          (click)="filters.freeText = ''; onChange()"
+          (click)="filters.freeText = ''; changes.next()"
         >
           <fa-icon icon="times-circle"></fa-icon>
         </button>
@@ -48,7 +48,7 @@
           <mat-select
             [multiple]="true"
             [(ngModel)]="filters.characterEvents"
-            (ngModelChange)="onChange()"
+            (ngModelChange)="changes.next()"
           >
             <mat-option
               *ngFor="let event of characterEvents$ | async"
@@ -87,7 +87,7 @@
           <mat-select
             [multiple]="true"
             [(ngModel)]="filters.weaponEvents"
-            (ngModelChange)="onChange()"
+            (ngModelChange)="changes.next()"
           >
             <mat-option
               *ngFor="let event of weaponEvents$ | async"
@@ -115,7 +115,7 @@
         {{ "wishes.filters.itemType" | translate }}
       </div>
 
-      <mat-chip-list (change)="filters.itemType = $event.value; onChange()">
+      <mat-chip-list (change)="filters.itemType = $event.value; changes.next()">
         <mat-chip
           *ngFor="let type of itemTypes"
           color="primary"
@@ -125,7 +125,7 @@
             filters.itemType === type
               ? (filters.itemType = undefined)
               : (filters.itemType = type);
-            onChange()
+            changes.next()
           "
         >
           <ng-container *ngIf="filters.itemType === type">
@@ -143,7 +143,7 @@
       </div>
 
       <mat-chip-list
-        (change)="filters.ranks = $event.value; onChange()"
+        (change)="filters.ranks = $event.value; changes.next()"
         fxLayoutGap="10px"
         [multiple]="true"
       >
@@ -156,7 +156,7 @@
             filters.ranks.includes(rank.length)
               ? filters.ranks.splice(filters.ranks.indexOf(rank.length), 1)
               : filters.ranks.push(rank.length);
-            onChange()
+            changes.next()
           "
         >
           <ng-container *ngIf="filters.ranks.includes(rank.length)">
@@ -168,12 +168,22 @@
       </mat-chip-list>
     </div>
 
-    <div fxLayoutAlign="center">
+    <div fxLayoutAlign="center" fxLayoutGap="24px">
+      <button
+        *ngIf="!!data"
+        mat-stroked-button
+        [cdkTrapFocus]="false"
+        [cdkTrapFocusAutoCapture]="true"
+        mat-dialog-close
+      >
+        {{ "generics.close" | translate }}
+      </button>
+
       <button
         mat-raised-button
         color="accent"
         [disabled]="filters.isEmpty()"
-        (click)="filters.reset(); onChange()"
+        (click)="filters.reset(); changes.next()"
       >
         <fa-icon icon="times"></fa-icon>
         &nbsp;

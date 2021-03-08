@@ -1,4 +1,4 @@
-import { Component, Inject, Input, Optional } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { WishFilters } from './wish-filters';
@@ -7,6 +7,7 @@ import {
   BannerType,
   GenshinWishesService,
 } from '../../api/genshin-wishes/genshin-wishes.service';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 export interface WishFiltersDialogData {
   route: ActivatedRoute;
@@ -19,7 +20,7 @@ export interface WishFiltersDialogData {
   templateUrl: './wish-filters.component.html',
   styleUrls: ['./wish-filters.component.scss'],
 })
-export class WishFiltersComponent {
+export class WishFiltersComponent implements OnDestroy {
   @Input()
   filters: WishFilters = new WishFilters();
 
@@ -37,24 +38,35 @@ export class WishFiltersComponent {
 
   BannerType = BannerType;
 
+  private destroy = new Subject();
+
+  changes = new Subject();
+
   constructor(
     private _gw: GenshinWishesService,
     private _router: Router,
-    @Optional() @Inject(MAT_DIALOG_DATA) data: WishFiltersDialogData
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: WishFiltersDialogData
   ) {
     if (data) this.filters = data.filters;
     if (data) this.route = data.route;
-  }
 
-  onChange(): void {
-    this._router.navigate(['.'], {
-      queryParams: this.filters.addToParams({}),
-      relativeTo: this.route,
-    });
+    this.changes
+      .pipe(debounceTime(400), takeUntil(this.destroy))
+      .subscribe(() => {
+        this._router.navigate(['.'], {
+          queryParams: this.filters.addToParams({}),
+          relativeTo: this.route,
+        });
+      });
   }
 
   resetFilters(): void {
     this.filters.reset();
-    this.onChange();
+    this.changes.next();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
   }
 }

@@ -19,14 +19,6 @@
 
 <ng-template #dropdownTemplate>
   <mat-toolbar color="primary">
-    <button mat-button (click)="filter.emit()">
-      <fa-icon icon="filter"></fa-icon>
-      &nbsp;
-      {{ "generics.filter" | translate }}
-    </button>
-
-    <span fxFlex></span>
-
     <button
       mat-button
       [matMenuTriggerFor]="menu"
@@ -36,6 +28,14 @@
       {{ "wishes.bannersNav" | translate }}
       &nbsp;
       <fa-icon icon="chevron-down"></fa-icon>
+    </button>
+
+    <span fxFlex></span>
+
+    <button mat-button (click)="filter.emit()">
+      <fa-icon icon="filter"></fa-icon>
+      &nbsp;
+      {{ "generics.filter" | translate }}
     </button>
 
     <mat-menu #menu="matMenu">
