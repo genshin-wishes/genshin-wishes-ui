@@ -43,7 +43,10 @@
         <div fxFlex>
           <mat-divider></mat-divider>
 
-          <app-nav fxFlex></app-nav>
+          <app-nav
+            fxFlex
+            (nav)="sidenav.mode !== 'side' && sidenav.close()"
+          ></app-nav>
         </div>
       </div>
     </mat-sidenav>

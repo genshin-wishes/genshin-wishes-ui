@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { LangService } from '../../shared/lang.service';
 import { map } from 'rxjs/operators';
@@ -9,6 +9,9 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
+  @Output()
+  nav = new EventEmitter();
+
   discordUrl = environment.discord;
   typeformUrl$ = this._lang.lang$.pipe(
     map((lang) =>
