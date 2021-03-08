@@ -64,18 +64,14 @@ export class MihoyoService {
   }
 
   private _persistKey(key: string, persist: boolean): void {
+    const user = this._auth.getCurrentUser();
+
+    if (!user || !user.mihoyoUid) return;
+
     if (persist) {
-      this._cookie.set(
-        this._auth.getCurrentUser()?.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY,
-        key,
-        1,
-        '/'
-      );
+      this._cookie.set(user.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY, key, 1, '/');
     } else {
-      this._cookie.delete(
-        this._auth.getCurrentUser()?.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY,
-        '/'
-      );
+      this._cookie.delete(user.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY, '/');
     }
   }
 

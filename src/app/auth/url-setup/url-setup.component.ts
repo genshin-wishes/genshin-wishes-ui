@@ -43,18 +43,19 @@ export class UrlSetupComponent {
     if (this._mihoyo.auth(data)) {
       this.loading = true;
 
-      this.callLinkMihoyoUser();
+      this.callLinkMihoyoUser(data);
     } else {
       this.error = 'app.urlInput.incorrectLink';
     }
   }
 
-  private callLinkMihoyoUser(): Promise<void> {
+  private callLinkMihoyoUser(data: AuthUrlAndPersistInfo): Promise<void> {
     return this._gw
       .linkMihoyoUser()
       .then((user) => {
         this.mihoyoUser = user;
         this._auth.register(user);
+        this._mihoyo.auth(data); // updates mihoyoUid in cookie if revelant
         this._gw.importWishes(true).then((res) => {
           this.loading = false;
 
@@ -83,7 +84,7 @@ export class UrlSetupComponent {
             .onAction()
             .pipe(
               tap(() => (this.loading = true)),
-              exhaustMap(() => from(this.callLinkMihoyoUser()))
+              exhaustMap(() => from(this.callLinkMihoyoUser(data)))
             )
             .toPromise();
 
