@@ -62,7 +62,12 @@
 
   <div mat-subheader>{{ "nav.helpUs.label" | translate }}</div>
 
-  <a mat-list-item [href]="typeformUrl" target="_blank" gaClick="nav_request">
+  <a
+    mat-list-item
+    [href]="typeformUrl$ | async"
+    target="_blank"
+    gaClick="nav_request"
+  >
     <fa-icon matListIcon icon="flag"></fa-icon>
     <h3 mat-line>{{ "nav.request.label" | translate }}</h3>
   </a>

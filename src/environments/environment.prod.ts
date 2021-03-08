@@ -2,7 +2,10 @@ export const environment = {
   production: true,
   ga: 'G-4YDYEGPQ7G',
   discord: 'https://discord.gg/6WmvutCPYA',
-  typeform: 'https://form.typeform.com/to/EnUdbLpV',
+  typeform: {
+    fr: 'https://form.typeform.com/to/TxT8FPlC',
+    en: 'https://form.typeform.com/to/EnUdbLpV',
+  },
   coffee: 'https://ko-fi.com/genshinwishes',
   howTo: {
     pc: {

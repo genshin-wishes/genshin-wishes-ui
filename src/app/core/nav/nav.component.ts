@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { LangService } from '../../shared/lang.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -8,6 +10,12 @@ import { environment } from '../../../environments/environment';
 })
 export class NavComponent {
   discordUrl = environment.discord;
-  typeformUrl = environment.typeform;
+  typeformUrl$ = this._lang.lang$.pipe(
+    map((lang) =>
+      lang === 'fr' ? environment.typeform.fr : environment.typeform.en
+    )
+  );
   coffeeUrl = environment.coffee;
+
+  constructor(private _lang: LangService) {}
 }
