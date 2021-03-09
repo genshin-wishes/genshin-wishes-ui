@@ -335,7 +335,7 @@ export class GenshinWishesService {
       case ApiErrors.NEW_WISHES_DURING_IMPORT:
         return 'wishes.import.newWishesDuringImport$';
       default:
-        return 'generics.mihoyoError$';
+        return 'generics.error$';
     }
   }
 
