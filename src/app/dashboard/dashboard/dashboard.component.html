@@ -15,16 +15,16 @@
   >
     <ng-container
       *ngIf="{
-        banners: banners$ | async,
+        bannersData: bannersData$ | async,
         latestEvents: latestEvents$ | async
       } as data"
     >
-      <ng-container *ngIf="data.banners && data.latestEvents; else loader">
+      <ng-container *ngIf="data.bannersData && data.latestEvents; else loader">
         <app-banner-card
-          *ngFor="let banner of data.banners"
-          [count]="counts[banner.key]"
-          [banner]="banner"
-          [event]="data.latestEvents[BannerToId[banner.key]]"
+          *ngFor="let bannerData of data.bannersData"
+          [count]="counts[bannerData.key]"
+          [bannerData]="bannerData"
+          [banner]="data.latestEvents[BannerToId[bannerData.key]]"
           fxFlex="100%"
           fxFlex.gt-sm="calc(50% - 20px)"
           fxFlex.gt-md="calc(50% - 20px)"

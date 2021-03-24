@@ -59,10 +59,13 @@
                 fxLayoutAlign="start center"
                 fxLayoutGap="10px"
               >
-                <app-item-img [item]="event.item" size="32px"></app-item-img>
+                <app-item-img
+                  [item]="event.items[0]"
+                  size="32px"
+                ></app-item-img>
                 <span>
-                  {{ event.item | itemName }} ({{ event.startDate | gwDate }} -
-                  {{ event.endDate | gwDate }})
+                  {{ event.items[0] | itemName }} ({{ event.start | gwDate }} -
+                  {{ event.end | gwDate }})
                 </span>
               </div>
             </mat-option>
@@ -98,10 +101,13 @@
                 fxLayoutAlign="start center"
                 fxLayoutGap="10px"
               >
-                <app-item-img [item]="event.item" size="32px"></app-item-img>
+                <app-item-img
+                  [item]="event.items[0]"
+                  size="32px"
+                ></app-item-img>
                 <span>
-                  {{ event.item | itemName }} ({{ event.startDate | gwDate }} -
-                  {{ event.endDate | gwDate }})
+                  {{ event.items[0] | itemName }} ({{ event.start | gwDate }} -
+                  {{ event.end | gwDate }})
                 </span>
               </div>
             </mat-option>

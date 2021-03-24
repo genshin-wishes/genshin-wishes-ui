@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Banner } from '../../api/genshin-wishes/banner';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import {
   BannerToId,
   GenshinWishesService,
@@ -14,7 +12,7 @@ import { TopService } from '../../shared/layout/top.service';
 })
 export class DashboardComponent {
   counts$ = this._gw.countAll();
-  banners$ = this._gw.getBanners();
+  bannersData$ = this._gw.getBannersData();
   latestEvents$ = this._gw.getLatestEvent();
 
   BannerToId = BannerToId;

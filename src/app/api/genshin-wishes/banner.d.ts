@@ -1,7 +1,7 @@
 import { Item } from '../item';
 import { BannerType } from './genshin-wishes.service';
 
-export interface Banner {
+export interface BannerData {
   key: BannerType;
   title: string;
   image: string;

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ banner.title | translate }}</mat-card-title>
+    <mat-card-title>{{ bannerData.title | translate }}</mat-card-title>
     <mat-card-subtitle>
       {{
         count > 0
@@ -13,11 +13,7 @@
   <img
     mat-card-image
     class="mat-elevation-z24"
-    [src]="
-      !banner.key.endsWith('_EVENT')
-        ? 'assets/banners/' + banner.key + '.jpg'
-        : 'data:image/png;base64,' + event.bannerImage
-    "
+    [src]="'https://genshin-wishes.com/content' + banner.image.url"
     [ngStyle]="{ height: '145px' }"
     [ngStyle.gt-sm]="{ height: '164px' }"
     [ngStyle.gt-md]="{ height: '267px' }"
@@ -30,7 +26,7 @@
       fxLayoutGap="20px"
       fxLayoutAlign="center center"
     >
-      <ng-container *ngIf="banner.key !== 'NOVICE'">
+      <ng-container *ngIf="bannerData.key !== 'NOVICE'">
         <span
           fxLayout="column"
           class="banner-info"
@@ -43,7 +39,10 @@
               {{
                 "banners.wishes"
                   | translate
-                    : { count: (banner.since5 || 0) + " / " + banner.pity5 }
+                    : {
+                        count:
+                          (bannerData.since5 || 0) + " / " + bannerData.pity5
+                      }
               }}
             </span>
           </span>
@@ -61,7 +60,10 @@
               {{
                 "banners.wishes"
                   | translate
-                    : { count: (banner.since4 || 0) + " / " + banner.pity4 }
+                    : {
+                        count:
+                          (bannerData.since4 || 0) + " / " + bannerData.pity4
+                      }
               }}
             </span>
           </span>
@@ -75,11 +77,11 @@
 
         <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <app-item-img
-            *ngIf="banner.last5"
-            [item]="banner.last5"
+            *ngIf="bannerData.last5"
+            [item]="bannerData.last5"
           ></app-item-img>
-          <span class="value color-star-5" [class.none]="!banner.last5">
-            {{ (banner.last5 | itemName) || ("banners.none" | translate) }}
+          <span class="value color-star-5" [class.none]="!bannerData.last5">
+            {{ (bannerData.last5 | itemName) || ("banners.none" | translate) }}
           </span>
         </span>
       </span>
@@ -89,11 +91,11 @@
 
         <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
           <app-item-img
-            *ngIf="banner.last4"
-            [item]="banner.last4"
+            *ngIf="bannerData.last4"
+            [item]="bannerData.last4"
           ></app-item-img>
-          <span class="value color-star-4" [class.none]="!banner.last4">
-            {{ (banner.last4 | itemName) || ("banners.none" | translate) }}
+          <span class="value color-star-4" [class.none]="!bannerData.last4">
+            {{ (bannerData.last4 | itemName) || ("banners.none" | translate) }}
           </span>
         </span>
       </span>
@@ -104,8 +106,11 @@
     <a
       mat-button
       color="primary"
-      [gaClick]="'see_wishes_' + banner.key"
-      [routerLink]="['/banners', banner.key.replace('_', '-').toLowerCase()]"
+      [gaClick]="'see_wishes_' + bannerData.key"
+      [routerLink]="[
+        '/banners',
+        bannerData.key.replace('_', '-').toLowerCase()
+      ]"
     >
       <fa-icon icon="search"></fa-icon>
       &nbsp;

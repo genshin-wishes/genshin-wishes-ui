@@ -4,8 +4,7 @@ import { from, Observable, Subject } from 'rxjs';
 import { User } from './user';
 import { ImportResponse } from './import-response';
 import { MihoyoService } from '../mihoyo/mihoyo.service';
-import { Banner } from './banner';
-import { Item } from '../item';
+import { BannerData } from './banner';
 import { Wish } from './wish';
 import { exhaustMap, map, startWith, switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +19,8 @@ import { AuthService } from '../../auth/auth.service';
 import { Params } from '@angular/router';
 import { WishFilters } from '../../wishes/wish-filters/wish-filters';
 import { LangService } from '../../shared/lang.service';
-import { Event } from '../event';
+import { Item } from '../item';
+import { Banner } from '../banner';
 
 export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
@@ -108,7 +108,7 @@ export class GenshinWishesService {
       });
   }
 
-  getBanners(): Observable<Banner[]> {
+  getBannersData(): Observable<BannerData[]> {
     return this.onWishesUpdate$.pipe(
       startWith(null),
       switchMap(() =>
@@ -121,7 +121,7 @@ export class GenshinWishesService {
                   title: 'wishes.banners$.' + type + '.title',
                   pity5: PITY_5_BY_TYPE[type],
                   pity4: PITY_4,
-                } as Banner;
+                } as BannerData;
               }
 
               const fiveStarIndex = records[type].findIndex(
@@ -145,7 +145,7 @@ export class GenshinWishesService {
                   fourStarIndex !== -1 && records[type][fourStarIndex].item,
                 title: 'wishes.banners$.' + type + '.title',
                 wishes: records[type].length,
-              } as Banner;
+              } as BannerData;
             })
           )
         )
@@ -193,16 +193,16 @@ export class GenshinWishesService {
     return this._http.get<Item[]>('/api/items');
   }
 
-  getCharacterEvents(): Observable<Event[]> {
-    return this._http.get<Event[]>('/api/events/character');
+  getCharacterEvents(): Observable<Banner[]> {
+    return this._http.get<Banner[]>('/api/events/character');
   }
 
-  getWeaponEvents(): Observable<Event[]> {
-    return this._http.get<Event[]>('/api/events/weapon');
+  getWeaponEvents(): Observable<Banner[]> {
+    return this._http.get<Banner[]>('/api/events/weapon');
   }
 
-  getLatestEvent(): Observable<{ [key: number]: Event }> {
-    return this._http.get<{ [key: number]: Event }>('/api/events/latest');
+  getLatestEvent(): Observable<{ [key: number]: Banner }> {
+    return this._http.get<{ [key: number]: Banner }>('/api/events/latest');
   }
 
   updateLang(lang: string): Promise<string> {

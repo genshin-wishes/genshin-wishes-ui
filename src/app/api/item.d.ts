@@ -3,5 +3,8 @@ export interface Item {
   name: string;
   nameFr: string;
   itemType: 'Character' | 'Weapon';
+  image: {
+    url: string;
+  };
   rankType: number;
 }

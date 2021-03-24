@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Banner } from '../../api/genshin-wishes/banner';
-import { Event } from '../../api/event';
+import { BannerData } from '../../api/genshin-wishes/banner';
+import { Banner } from '../../api/banner';
 
 @Component({
   selector: 'app-banner-card',
@@ -11,9 +11,9 @@ export class BannerCardComponent {
   @Input()
   count!: number;
   @Input()
-  banner!: Banner;
+  bannerData!: BannerData;
   @Input()
-  event!: Event;
+  banner!: Banner;
 
   constructor() {}
 }

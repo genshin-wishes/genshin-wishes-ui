@@ -1,14 +1,5 @@
 <img
   [class]="'color-star-' + item.rankType"
   [matTooltip]="item | itemName"
-  [src]="
-    item.itemType === 'Character'
-      ? 'assets/characters/' + item.name + '.png'
-      : 'https://rerollcdn.com/GENSHIN/' +
-        item.itemType.charAt(0) +
-        item.itemType.toLowerCase().slice(1) +
-        '/NEW/' +
-        item.name.split(' ').join('_') +
-        '.png'
-  "
+  [src]="'https://genshin-wishes.com/content' + item.image.url"
 />
