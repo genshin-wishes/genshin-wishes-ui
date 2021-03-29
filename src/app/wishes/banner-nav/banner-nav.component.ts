@@ -4,6 +4,7 @@ import {
   Output,
   ViewChild,
   EventEmitter,
+  OnInit,
 } from '@angular/core';
 import { BannerTypes } from '../../api/genshin-wishes/genshin-wishes.service';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -13,7 +14,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
   templateUrl: './banner-nav.component.html',
   styleUrls: ['./banner-nav.component.scss'],
 })
-export class BannerNavComponent {
+export class BannerNavComponent implements OnInit {
   @ViewChild(MatMenuTrigger)
   menuTrigger!: MatMenuTrigger;
 
@@ -21,7 +22,15 @@ export class BannerNavComponent {
   filter = new EventEmitter<void>();
 
   @Input()
-  dropdownMode = false;
+  allFirst = false;
+  @Input()
+  withFilters = true;
 
-  banners = [...BannerTypes, 'ALL'];
+  banners: string[] = [];
+
+  ngOnInit(): void {
+    this.banners = this.allFirst
+      ? ['ALL', ...BannerTypes]
+      : [...BannerTypes, 'ALL'];
+  }
 }

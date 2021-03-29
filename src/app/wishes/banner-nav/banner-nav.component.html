@@ -1,13 +1,9 @@
-<nav
-  mat-tab-nav-bar
-  backgroundColor="primary"
-  *ngIf="!dropdownMode; else dropdownTemplate"
->
+<nav mat-tab-nav-bar backgroundColor="primary" fxShow fxHide.lt-md>
   <a
     mat-tab-link
     *ngFor="let banner of banners"
     [gaClick]="'see_wishes_tab_' + banner"
-    [routerLink]="['/banners', banner | slugify]"
+    [routerLink]="['../', banner | slugify]"
     queryParamsHandling="merge"
     routerLinkActive
     [active]="rla.isActive"
@@ -17,37 +13,35 @@
   </a>
 </nav>
 
-<ng-template #dropdownTemplate>
-  <mat-toolbar color="primary">
-    <button
-      mat-button
-      [matMenuTriggerFor]="menu"
-      #menuTrigger="matMenuTrigger"
-      gaClick="see_wishes_nav_dropdown"
+<mat-toolbar color="primary" fxHide fxShow.lt-md>
+  <button
+    mat-button
+    [matMenuTriggerFor]="menu"
+    #menuTrigger="matMenuTrigger"
+    gaClick="see_wishes_nav_dropdown"
+  >
+    {{ "wishes.bannersNav" | translate }}
+    &nbsp;
+    <fa-icon icon="chevron-down"></fa-icon>
+  </button>
+
+  <span fxFlex></span>
+
+  <button mat-button (click)="filter.emit()" *ngIf="withFilters">
+    <fa-icon icon="filter"></fa-icon>
+    &nbsp;
+    {{ "generics.filter" | translate }}
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <a
+      mat-menu-item
+      [gaClick]="'see_wishes_dropdown_' + banner"
+      [routerLink]="['../', banner | slugify]"
+      queryParamsHandling="merge"
+      *ngFor="let banner of banners"
     >
-      {{ "wishes.bannersNav" | translate }}
-      &nbsp;
-      <fa-icon icon="chevron-down"></fa-icon>
-    </button>
-
-    <span fxFlex></span>
-
-    <button mat-button (click)="filter.emit()">
-      <fa-icon icon="filter"></fa-icon>
-      &nbsp;
-      {{ "generics.filter" | translate }}
-    </button>
-
-    <mat-menu #menu="matMenu">
-      <a
-        mat-menu-item
-        [gaClick]="'see_wishes_dropdown_' + banner"
-        [routerLink]="['/banners', banner | slugify]"
-        queryParamsHandling="merge"
-        *ngFor="let banner of banners"
-      >
-        {{ "wishes.banners$." + banner + ".title" | translate }}
-      </a>
-    </mat-menu>
-  </mat-toolbar>
-</ng-template>
+      {{ "wishes.banners$." + banner + ".title" | translate }}
+    </a>
+  </mat-menu>
+</mat-toolbar>

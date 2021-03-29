@@ -1,12 +1,5 @@
 <div fxLayout="column" class="wrapper" fxFlex>
-  <app-banner-nav
-    [dropdownMode]="true"
-    fxHide
-    fxShow.lt-md
-    (filter)="openFilters()"
-  ></app-banner-nav>
-
-  <app-banner-nav fxShow fxHide.lt-md></app-banner-nav>
+  <app-banner-nav (filter)="openFilters()"></app-banner-nav>
 
   <div fxLayout="row" fxFlex>
     <div

@@ -9,7 +9,10 @@ import {
   tap,
 } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
+import {
+  BannerType,
+  GenshinWishesService,
+} from '../api/genshin-wishes/genshin-wishes.service';
 import { MediaObserver } from '@angular/flex-layout';
 import { Wish } from '../api/genshin-wishes/wish';
 import { TopService } from '../shared/layout/top.service';
@@ -38,7 +41,9 @@ export class WishesComponent implements OnDestroy {
   filters$ = new BehaviorSubject<WishFilters>(new WishFilters());
 
   bannerType$ = this.route.params.pipe(
-    map((params) => params.banner.replace('-', '_').toUpperCase()),
+    map(
+      (params) => params.banner.replace('-', '_').toUpperCase() as BannerType
+    ),
     tap(() => {
       this.initialFilters = new WishFilters();
 
@@ -50,7 +55,7 @@ export class WishesComponent implements OnDestroy {
   count$ = combineLatest([this.bannerType$, this.filters$]).pipe(
     tap(() => {
       this._lastCount = undefined;
-      this._datasource && this._datasource.reset();
+      if (this._datasource) this._datasource.reset();
     }),
     switchMap(([bannerType, filters]) =>
       this._gw.countWishes(bannerType, filters).pipe(
@@ -65,6 +70,7 @@ export class WishesComponent implements OnDestroy {
             'wishes.banners$.' + bannerType + '.title'
           );
 
+          // tslint:disable-next-line:triple-equals double equals for null & undefined
           if (this._lastCount && this._datasource != undefined) {
             this._datasource.insertNew(count - this._lastCount);
           } else if (this._datasource) {
@@ -121,7 +127,12 @@ export class WishesComponent implements OnDestroy {
 
   openFilters(): void {
     this._dialog.open(WishFiltersComponent, {
-      width: '400px',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      width: '100%',
+      position: {
+        top: '0',
+      },
       data: {
         route: this.route,
         filters: this.filters$.value,

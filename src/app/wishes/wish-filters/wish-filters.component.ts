@@ -41,6 +41,7 @@ export class WishFiltersComponent implements OnDestroy {
   private destroy = new Subject();
 
   changes = new Subject();
+  freeTextChanges = new Subject();
 
   constructor(
     private _gw: GenshinWishesService,
@@ -50,14 +51,16 @@ export class WishFiltersComponent implements OnDestroy {
     if (data) this.filters = data.filters;
     if (data) this.route = data.route;
 
-    this.changes
+    this.freeTextChanges
       .pipe(debounceTime(400), takeUntil(this.destroy))
-      .subscribe(() => {
-        this._router.navigate(['.'], {
-          queryParams: this.filters.addToParams({}),
-          relativeTo: this.route,
-        });
+      .subscribe(this.changes);
+
+    this.changes.pipe(takeUntil(this.destroy)).subscribe(() => {
+      this._router.navigate(['.'], {
+        queryParams: this.filters.addToParams({}),
+        relativeTo: this.route,
       });
+    });
   }
 
   resetFilters(): void {

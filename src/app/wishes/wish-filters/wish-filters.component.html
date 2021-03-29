@@ -12,7 +12,7 @@
           [cdkTrapFocus]="false"
           [cdkTrapFocusAutoCapture]="true"
           [(ngModel)]="filters.freeText"
-          (ngModelChange)="changes.next()"
+          (ngModelChange)="freeTextChanges.next()"
           (keydown.escape)="filters.freeText = ''; changes.next()"
           (blur)="filters.freeText = filters.freeText?.trim()"
           name="free-text-filter"
