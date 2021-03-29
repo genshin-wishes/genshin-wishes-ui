@@ -1,0 +1,15 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{ "stats.fourStarsDetails.title" | translate }}
+  </mat-card-title>
+
+  <div fxFlex>
+    <canvas
+      baseChart
+      chartType="bar"
+      [labels]="fourStarsDetails.labels"
+      [datasets]="fourStarsDetails.datasets"
+      [options]="options"
+    ></canvas>
+  </div>
+</mat-card>

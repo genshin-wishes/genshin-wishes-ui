@@ -1,0 +1,61 @@
+app-item-img {
+  z-index: 2;
+}
+
+.exclusive-icon {
+  height: 14px;
+  line-height: 14px;
+}
+
+ol {
+  padding: 0;
+}
+
+li {
+  white-space: nowrap;
+
+  height: 30px;
+  line-height: 30px;
+
+  border-radius: 4px;
+}
+
+li:first-child {
+  .bullet:before {
+    height: 24px;
+    top: -26px;
+  }
+}
+
+.bullet {
+  margin-left: 10px;
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+
+  &:before {
+    z-index: 0;
+    content: "";
+    display: block;
+    border-left: 1px solid;
+    height: 29px;
+    position: relative;
+    top: -31px;
+    left: 3px;
+  }
+}
+
+.wishes-counter {
+  border-radius: 50px;
+  padding: 0 4px;
+  height: 14px;
+  font-size: 9px;
+  line-height: 14px;
+  text-align: center;
+}
+
+.row {
+  height: 30px;
+  padding: 4px;
+  border-radius: 4px;
+}

@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>
+    {{ "stats.fourStarsList.title" | translate }}
+  </mat-card-title>
+
+  <mat-card-content fxLayout="column" fxLayoutGap="10px">
+    <ng-container *ngIf="fourStarsList.length; else emptyTemplate">
+      <app-four-stars-history
+        *ngFor="let fourStar of fourStarsList.slice(0, max)"
+        [detail]="fourStar"
+      >
+      </app-four-stars-history>
+
+      <div fxLayoutAlign="center">
+        <button
+          mat-stroked-button
+          *ngIf="max < fourStarsList.length"
+          color="primary"
+          (click)="loadMore()"
+        >
+          {{ "generics.moreOf" | translate: { content: "4★" } }}
+        </button>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #emptyTemplate>
+  <app-empty></app-empty>
+</ng-template>

@@ -35,6 +35,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import '@angular/common/locales/global/fr';
 import { FaqModule } from './faq/faq.module';
+import { StatsModule } from './stats/stats.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(
@@ -76,6 +77,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     LandingModule,
     WishesModule,
     FaqModule,
+    StatsModule,
     SettingsModule,
     AppRoutingModule,
   ],

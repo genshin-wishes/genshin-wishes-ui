@@ -1,4 +1,9 @@
-<div fxLayout="column" class="wrapper" fxFlex>
+<div
+  fxLayout="column"
+  class="wrapper"
+  fxFlex
+  *ngIf="bannerType$ | async as bannerType"
+>
   <app-banner-nav (filter)="openFilters()"></app-banner-nav>
 
   <div fxLayout="row" fxFlex>
@@ -34,7 +39,7 @@
             <app-wish-filters
               #filtersComponent
               [route]="route"
-              [banner]="bannerType$ | async"
+              [banner]="bannerType"
               [filters]="initialFilters"
             ></app-wish-filters>
           </mat-card-content>

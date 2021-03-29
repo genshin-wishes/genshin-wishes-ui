@@ -9,8 +9,8 @@
 @include mat-core();
 
 $star-colors: (
-  5: #ffb053,
-  4: #dbb2ff,
+  5: #ff8a00,
+  4: #bb86fc,
   3: #49acf2,
   1: #60aa3a,
 );
@@ -28,6 +28,7 @@ $primary: (
   600: #5600e8,
   700: #3700b3,
   800: #23036a,
+  850: #3c2f4d,
   900: #26202e,
   A100: #bb86fc,
   A200: #7c4dff,
@@ -77,7 +78,7 @@ $mat-dark-theme-foreground: map-merge(
   (
     disabled-text: #979797,
     success-text: #03dac5,
-    text: rgba(255, 255, 255, 0.87),
+    text: rgba(255, 255, 255, 1),
     high-emphasis: rgba(255, 255, 255, 0.87),
     medium-emphasis: rgba(255, 255, 255, 0.6),
     low-emphasis: rgba(255, 255, 255, 0.38),
@@ -142,6 +143,7 @@ $genshin-wishes-theme: mat-dark-theme(
   $background: map-get($config, background);
   $foreground: map-get($config, foreground);
   $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
 
   .mat-tooltip-trigger {
     touch-action: auto !important;
@@ -155,7 +157,31 @@ $genshin-wishes-theme: mat-dark-theme(
     background: mat-color($primary, 0.08);
   }
 
+  .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+    background: transparent;
+    color: mat-color($accent);
+    border: 1px solid mat-color($accent);
+
+    &:hover::after,
+    &:focus::after {
+      background: transparent;
+      opacity: 0;
+    }
+  }
+
   .mat-chip.mat-soon {
+    color: #03dac5;
+    background: transparent;
+    border: 1px solid #03dac5;
+
+    &:hover::after,
+    &:focus::after {
+      background: transparent;
+      opacity: 0;
+    }
+  }
+
+  .mat-chip.mat-beta {
     color: #03dac5;
     background: transparent;
     border: 1px solid #03dac5;
@@ -192,7 +218,8 @@ $genshin-wishes-theme: mat-dark-theme(
     }
   }
 
-  cdk-virtual-scroll-viewport {
+  cdk-virtual-scroll-viewport,
+  .mat-card-content {
     &::-webkit-scrollbar-track {
       margin: 20px 0;
       border-radius: 4px;
@@ -273,8 +300,6 @@ $genshin-wishes-theme: mat-dark-theme(
 
     h3,
     p {
-      font-family: Roboto;
-      font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
@@ -339,6 +364,7 @@ $genshin-wishes-theme: mat-dark-theme(
   $config: mat-get-color-config($config-or-theme);
   $background: map-get($config, background);
   $foreground: map-get($config, foreground);
+  $accent: map-get($config, accent);
 
   h3.banner-title {
     font-size: 10px;
@@ -478,8 +504,6 @@ $genshin-wishes-theme: mat-dark-theme(
     }
 
     .filter-category {
-      font-family: Roboto;
-      font-style: normal;
       font-weight: 500;
       font-size: 10px;
       line-height: 16px;
@@ -522,6 +546,10 @@ $genshin-wishes-theme: mat-dark-theme(
   }
   .text-warn {
     color: mat-color($warn);
+  }
+
+  .beta-badge:before {
+    background: mat-color($accent);
   }
 }
 
@@ -619,6 +647,170 @@ $genshin-wishes-theme: mat-dark-theme(
   }
 }
 
+@mixin stats-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  app-stats {
+    .banner-count {
+      font-size: 28px;
+    }
+
+    .mat-card-title {
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 16px;
+    }
+
+    .mat-card {
+      padding: 12px;
+    }
+  }
+
+  app-stats-header {
+    .filter-title {
+      color: #03dac5;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+
+      color: mat-color($primary);
+    }
+
+    .banner-title {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.15px;
+    }
+
+    .main-card-under {
+      background: mat-color($primary, 200, 0.3);
+    }
+
+    .main-card {
+      background: mat-color($primary, 900);
+    }
+
+    .sub-card {
+      background: mat-color($primary, 900);
+    }
+  }
+
+  app-stat-card {
+    .divider {
+      &.primary {
+        background: mat-color($primary, 200, 0.3);
+      }
+
+      &.accent {
+        background: mat-color($accent, 200, 0.3);
+      }
+    }
+
+    .stars {
+      font-size: 18px;
+    }
+
+    .count {
+      font-size: 28px;
+    }
+
+    .average-label {
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 16px;
+      letter-spacing: 1.5px;
+      text-align: center;
+    }
+
+    .average {
+      font-size: 18px;
+    }
+  }
+
+  app-focus-chip {
+    font-size: 12px;
+    letter-spacing: 0.25px;
+    color: mat-color($foreground, disabled-text);
+
+    .focused {
+      color: mat-color($foreground, text);
+    }
+  }
+
+  app-pity-chip {
+    font-size: 12px;
+    letter-spacing: 0.25px;
+
+    .hard {
+      border-color: #e54715 !important;
+      background: #e5471530;
+    }
+
+    .soft {
+      border-color: mat-color($accent) !important;
+      background: mat-color($accent, 0.3);
+    }
+
+    .lucky {
+      border-color: #03dac5 !important;
+      background: #03dac533;
+    }
+
+    .early {
+      border-color: #43f88b !important;
+      background: #43f88b30;
+    }
+  }
+
+  app-empty {
+    .wrapper {
+      background: mat-color($primary, 850);
+    }
+  }
+
+  app-five-stars-history {
+    .wishes-counter {
+      background: mat-color($accent, 0.3);
+    }
+
+    .row {
+      background: mat-color($primary, 850);
+      font-size: 12px;
+      letter-spacing: 0.25px;
+    }
+
+    .bullet {
+      background: mat-color($accent);
+      &:before {
+        border-color: mat-color($accent) !important;
+      }
+    }
+  }
+
+  app-four-stars-history {
+    .wrapper {
+      background: mat-color($primary, 850);
+    }
+
+    .wishes-counter {
+      background: mat-color($primary, 200, 0.3);
+    }
+  }
+}
+
 @include material-override-theme($genshin-wishes-theme);
 @include app-theme($genshin-wishes-theme);
 @include base-theme($genshin-wishes-theme);
@@ -632,6 +824,7 @@ $genshin-wishes-theme: mat-dark-theme(
 @include landing-theme($genshin-wishes-theme);
 @include url-setup-theme($genshin-wishes-theme);
 @include footer-theme($genshin-wishes-theme);
+@include stats-theme($genshin-wishes-theme);
 
 @for $i from 1 through 5 {
   .color-star-#{$i} {

@@ -1,0 +1,15 @@
+<div
+  class="wrapper"
+  *ngIf="detail.item"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="8px"
+>
+  <app-item-img [item]="detail.item" size="28px"></app-item-img>
+
+  <span>{{ detail.item | itemName }}</span>
+
+  <span fxFlex></span>
+
+  <span class="wishes-counter">{{ detail.wishes.length }}</span>
+</div>

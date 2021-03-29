@@ -26,6 +26,7 @@ import { Params } from '@angular/router';
 import { WishFilters } from '../../wishes/wish-filters/wish-filters';
 import { LangService } from '../../shared/lang.service';
 import { Item } from '../item';
+import { Stats } from './stats';
 import { Banner } from '../banner';
 
 export enum ApiErrors {
@@ -61,8 +62,8 @@ export const BannerToId: Record<string, number> = {
 
 export const BannerTypes = [
   BannerType.CHARACTER_EVENT,
-  BannerType.PERMANENT,
   BannerType.WEAPON_EVENT,
+  BannerType.PERMANENT,
   BannerType.NOVICE,
 ];
 
@@ -366,6 +367,71 @@ export class GenshinWishesService {
 
         return null;
       });
+  }
+
+  getStats(banner: BannerType, filters: WishFilters): Observable<Stats> {
+    return combineLatest([
+      this.items$,
+      this.banners$,
+      this._http.get<Stats>('/api/stats/' + banner, {
+        params: this.buildParams(undefined, filters),
+      }),
+    ]).pipe(
+      map(([items, banners, stats]) => {
+        const updatedStats = {
+          ...stats,
+          wishes: stats.wishes.map((w) => ({
+            ...w,
+            item: w.itemId
+              ? items.find((i) => i.itemId === w.itemId)
+              : undefined,
+            banner: w.bannerId
+              ? banners.find((b) => b.id === w.bannerId)
+              : undefined,
+          })),
+        };
+
+        let lastGachaType: number | undefined;
+        let lastIndexOf: { [key: number]: number } = {};
+
+        updatedStats.wishes = updatedStats.wishes.map((w) => {
+          if (!w.item) return w;
+
+          if (w.gachaType !== lastGachaType) {
+            lastIndexOf = {};
+            lastGachaType = w.gachaType;
+          }
+
+          const delta =
+            (w.item.rankType === 5 ? stats.indexOfLast5 : stats.indexOfLast4) ||
+            0;
+          const wish = {
+            ...w,
+            pity: w.index - (lastIndexOf[w.item.rankType] || 0) - delta,
+          };
+
+          lastIndexOf[w.item.rankType] = w.index - delta;
+
+          return wish;
+        });
+
+        updatedStats.gap4Stars = this.calculateGapFor(updatedStats.wishes, 4);
+        updatedStats.gap5Stars = this.calculateGapFor(updatedStats.wishes, 5);
+
+        return updatedStats;
+      })
+    );
+  }
+
+  private calculateGapFor(
+    wishes: (Wish & { pity: number })[],
+    rankType: 4 | 5
+  ): number {
+    const wishesOfRank = wishes.filter((w) => w.item?.rankType === rankType);
+
+    return (
+      wishesOfRank.reduce((total, w) => total + w.pity, 0) / wishesOfRank.length
+    );
   }
 
   logout(): Promise<void> {

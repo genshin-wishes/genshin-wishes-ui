@@ -8,8 +8,10 @@
     "next": "Next",
     "retry": "Retry",
     "soon": "Soon",
+    "beta": "Beta",
     "save": "Save",
     "goBack": "Go back",
+    "moreOf": "More {{ content }}",
     "error$": {
       "emoji": "\uD83D\uDE31",
       "title": "",
@@ -149,7 +151,26 @@
     }
   },
   "stats": {
-    "label": "Stats"
+    "label": "Stats",
+    "averageGap": "Average gap",
+    "c6Mark": "C6 Mark",
+    "numberOfWishes": "Number of wishes",
+    "numberOf4Stars": "Number of 4★",
+    "numberOf5Stars": "Number of 5★",
+    "na": "N/A",
+    "wishesTotalCount": "Wishes total count",
+    "empty": "Sorry, we could not find anything...",
+    "rankDistribution.title": "Wish ranks",
+    "focusDistribution.title": "5★ exclusivity",
+    "fourStarsDetails.title": "4★ types",
+    "fiveStarsList.title": "5★ list",
+    "fourStarsList.title": "4★ list",
+    "bannerActivity.title": "Wishes over time",
+    "filters": {
+      "filterByEvent": "Filter by event",
+      "selectEvent": "Select an event",
+      "allEvents": "All events"
+    }
   },
   "nav": {
     "helpUs.label": "Want to help us?",
@@ -159,6 +180,8 @@
   },
   "wishes": {
     "label": "Wishes",
+    "exclusive": "Exclusive",
+    "notExclusive": "Not exclusive",
     "noWishes": {
       "title": "No wish found for this banner",
       "message": "You can still play with Amber <span class=\"text-emoji\">\uD83D\uDE05</span>"
@@ -181,7 +204,7 @@
       "characterEvent": "Filter by character event",
       "weaponEvent": "Filter by weapon event",
       "selectEvent": "Select events",
-      "reset": "Reset all filters"
+      "reset": "Reset all"
     },
     "update": {
       "label": "Update wishes"
@@ -243,7 +266,6 @@
   },
   "footer": {
     "disclaimer": "Genshin Impact and miHoYo are trademarks or registered trademarks of miHoYo. Genshin Impact © miHoYo.",
-    "claim": "For any claim, please <a href=\"mailto:contact.genshin.wishes@gmail.com\">contact us</a>",
-    "imagesCredits": "Images by <a href=\"https://genshin.gg/\" target=\"_blank\">genshin.gg</a>"
+    "claim": "For any claim, please <a href=\"mailto:contact.genshin.wishes@gmail.com\">contact us</a>"
   }
 }

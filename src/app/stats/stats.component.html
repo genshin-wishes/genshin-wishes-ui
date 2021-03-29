@@ -1,0 +1,132 @@
+<div fxLayout="column" fxFlex class="container">
+  <app-banner-nav [allFirst]="true" [withFilters]="false"></app-banner-nav>
+
+  <ng-container
+    *ngIf="{
+      loading: loading$ | async,
+      stats: stats$ | async,
+      banner: banner$ | async,
+      filters: filters$ | async,
+      characterEvents: characterEvents$ | async,
+      weaponEvents: weaponEvents$ | async,
+      rankDistribution: rankDistribution$ | async,
+      focusDistribution: focusDistribution$ | async,
+      fourStarsDetails: fourStarsDetails$ | async,
+      fiveStarsList: fiveStarsList$ | async,
+      fourStarsList: fourStarsList$ | async,
+      bannerActivity: bannerActivity$ | async
+    } as data"
+  >
+    <div *ngIf="!data.loading; else loadingTemplate">
+      <div class="wrapper container" fxLayout="row" fxLayoutAlign="center">
+        <div
+          fxFlex
+          fxFlex.gt-md="83%"
+          fxFlex.gt-lg="66%"
+          class="container"
+          fxLayout="column"
+          fxLayoutGap="16px"
+        >
+          <ng-container
+            *ngIf="
+              data.stats &&
+              data.banner &&
+              data.filters &&
+              data.characterEvents &&
+              data.weaponEvents &&
+              data.rankDistribution &&
+              data.focusDistribution &&
+              data.fourStarsDetails &&
+              data.fiveStarsList &&
+              data.fourStarsList &&
+              data.bannerActivity
+            "
+          >
+            <app-stats-header
+              fxFlex
+              [events]="
+                data.banner === BannerType.CHARACTER_EVENT
+                  ? data.characterEvents
+                  : data.banner === BannerType.WEAPON_EVENT
+                  ? data.weaponEvents
+                  : []
+              "
+              [banner]="data.banner"
+              [stats]="data.stats"
+              [filters]="data.filters"
+              (bannerFilter)="filters$.next($event)"
+            ></app-stats-header>
+
+            <ng-container *ngIf="data.stats.count; else emptyTemplate">
+              <div
+                fxLayout="column"
+                fxLayout.gt-xs="row"
+                fxLayoutGap="16px"
+                class="container"
+              >
+                <div fxLayout="column" fxLayoutGap="16px" class="container">
+                  <div fxLayout="row" fxLayoutGap="16px" class="container">
+                    <app-stat-card
+                      fxFlex
+                      [fiveStar]="true"
+                      [count]="data.stats.count5Stars"
+                      [average]="data.stats.gap5Stars"
+                    ></app-stat-card>
+
+                    <app-stat-card
+                      fxFlex
+                      [fiveStar]="false"
+                      [count]="data.stats.count4Stars"
+                      [average]="data.stats.gap4Stars"
+                    ></app-stat-card>
+                  </div>
+
+                  <app-rank-distribution
+                    [rankDistribution]="data.rankDistribution"
+                  ></app-rank-distribution>
+
+                  <app-focus-distribution
+                    *ngIf="
+                      data.banner !== BannerType.NOVICE &&
+                      data.banner !== BannerType.PERMANENT
+                    "
+                    [focusDistribution]="data.focusDistribution"
+                  ></app-focus-distribution>
+
+                  <app-four-stars-details
+                    [fourStarsDetails]="data.fourStarsDetails"
+                  ></app-four-stars-details>
+                </div>
+
+                <div fxLayout="column" fxLayoutGap="16px" fxFlex>
+                  <app-banner-activity
+                    *ngIf="data.bannerActivity.labels.length > 1"
+                    [bannerActivity]="data.bannerActivity"
+                  ></app-banner-activity>
+
+                  <app-five-stars-list
+                    [fiveStarsList]="data.fiveStarsList"
+                  ></app-five-stars-list>
+
+                  <app-four-stars-list
+                    [fourStarsList]="data.fourStarsList"
+                  ></app-four-stars-list>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #emptyTemplate>
+  <app-wish-no-result (removeFilters)="resetFilters()"></app-wish-no-result>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div fxLayoutAlign="center center" fxFlex>
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

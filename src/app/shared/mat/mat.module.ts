@@ -21,6 +21,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   exports: [
@@ -45,6 +46,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSelectModule,
     MatProgressBarModule,
     MatExpansionModule,
+    MatBadgeModule,
     ScrollingModule,
   ],
 })

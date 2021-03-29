@@ -1,0 +1,15 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{ "stats.rankDistribution.title" | translate }}
+  </mat-card-title>
+
+  <div fxFlex>
+    <canvas
+      baseChart
+      chartType="doughnut"
+      [labels]="rankDistribution.labels"
+      [datasets]="rankDistribution.datasets"
+      [options]="options"
+    ></canvas>
+  </div>
+</mat-card>

@@ -8,8 +8,10 @@
     "next": "Suivant",
     "retry": "Réessayer",
     "soon": "Bientôt",
+    "beta": "Beta",
     "save": "Sauvegarder",
     "goBack": "Retourner en arrière",
+    "moreOf": "Plus de {{ content }}",
     "error$": {
       "emoji": "\uD83D\uDE31",
       "title": "",
@@ -155,10 +157,31 @@
     "coffee.label": "Soutenez notre travail"
   },
   "stats": {
-    "label": "Statistiques"
+    "label": "Statistiques",
+    "averageGap": "Écart moyen",
+    "c6Mark": "Repère C6",
+    "numberOfWishes": "Nombre de vœux",
+    "numberOf4Stars": "Nombre de 4★",
+    "numberOf5Stars": "Nombre de 5★",
+    "na": "N/A",
+    "wishesTotalCount": "Compte total des vœux",
+    "empty": "Désolé, nous n'avons rien trouvé...",
+    "rankDistribution.title": "Vœux par rang",
+    "focusDistribution.title": "Exclusivité des 5★",
+    "fourStarsDetails.title": "Type des 4★",
+    "fiveStarsList.title": "Liste des 5★",
+    "fourStarsList.title": "Liste des 4★",
+    "bannerActivity.title": "Vœux au fil du temps",
+    "filters": {
+      "filterByEvent": "Filtrer par événement",
+      "selectEvent": "Sélectionner un événement",
+      "allEvents": "Tous les événements"
+    }
   },
   "wishes": {
     "label": "Vœux",
+    "exclusive": "Exclusif",
+    "notExclusive": "Non-exclusif",
     "noWishes": {
       "title": "Il n'y a aucun vœu dans cette bannière",
       "message": "Vous pouvez toujours jouer avec Amber <span class=\"text-emoji\">\uD83D\uDE05</span>"
@@ -181,7 +204,7 @@
       "characterEvent": "Filtrer par évènement de personnage",
       "weaponEvent": "Filtrer par évènement d'arme",
       "selectEvent": "Sélectionnez des évènements",
-      "reset": "Enlever tous les filtres"
+      "reset": "Tout enlever"
     },
     "update": {
       "label": "Màj des vœux"
@@ -243,7 +266,6 @@
   },
   "footer": {
     "disclaimer": "Genshin Impact et miHoYo sont des marques commerciales ou marques déposées de miHoYo. Genshin Impact © miHoYo.",
-    "claim": "Pour toute demande, veuillez nous <a href=\"mailto:contact.genshin.wishes@gmail.com\">contacter</a>",
-    "imagesCredits": "Images de <a href=\"https://genshin.gg/\" target=\"_blank\">genshin.gg</a>"
+    "claim": "Pour toute demande, veuillez nous <a href=\"mailto:contact.genshin.wishes@gmail.com\">contacter</a>"
   }
 }

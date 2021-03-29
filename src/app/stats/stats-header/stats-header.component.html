@@ -1,0 +1,64 @@
+<div class="wrapper" fxLayout="column" fxLayout.gt-sm="row">
+  <div class="main-card mat-elevation-z4" fxFlex>
+    <div class="main-card-under" fxLayoutAlign="start center">
+      <div fxLayout="column">
+        <span class="title">{{ "stats.wishesTotalCount" | translate }}</span>
+
+        <span class="banner-title">
+          {{ "wishes.banners$." + banner + ".title" | translate }}
+        </span>
+      </div>
+
+      <span fxFlex></span>
+
+      <span class="banner-count">
+        {{ stats.count }}
+      </span>
+    </div>
+  </div>
+
+  <div
+    *ngIf="events?.length"
+    class="sub-card mat-elevation-z2"
+    fxFlex
+    fxLayout="column"
+    [ngStyle]="{ 'margin-top': '-4px', 'padding-top': '12px' }"
+    [ngStyle.gt-sm]="{ 'margin-left': '-4px', 'padding-left': '12px' }"
+  >
+    <div class="filter-title">
+      {{ "stats.filters.filterByEvent" | translate }}
+    </div>
+
+    <mat-form-field appearance="outline" fxFlex class="banner-select">
+      <mat-label>
+        {{ "stats.filters.selectEvent" | translate }}
+      </mat-label>
+
+      <mat-select
+        [ngModel]="filters.characterEvents[0]"
+        (ngModelChange)="
+          filters.characterEvents = $event ? [$event] : [];
+          bannerFilter.next(filters)
+        "
+      >
+        <mat-option [value]="null">
+          {{ "stats.filters.allEvents" | translate }}
+        </mat-option>
+
+        <mat-option *ngFor="let event of events" [value]="event.id">
+          <div
+            class="event-option"
+            fxLayoutAlign="start center"
+            fxLayoutGap="10px"
+          >
+            <app-item-img [item]="event.items[0]" size="32px"></app-item-img>
+            <span>
+              {{ event.items[0] | itemName }} ({{ event.start | gwDate }} -
+              {{ event.end | gwDate }})
+            </span>
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

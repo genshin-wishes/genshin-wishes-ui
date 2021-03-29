@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>
+    {{ "stats.fiveStarsList.title" | translate }}
+  </mat-card-title>
+
+  <mat-card-content fxLayout="column" fxLayoutGap="8px">
+    <ng-container *ngIf="fiveStarsList.length; else emptyTemplate">
+      <app-five-stars-history
+        *ngFor="let fiveStar of fiveStarsList.slice(0, max)"
+        [detail]="fiveStar"
+      >
+      </app-five-stars-history>
+
+      <div fxLayoutAlign="center">
+        <button
+          *ngIf="max < fiveStarsList.length"
+          mat-stroked-button
+          color="primary"
+          (click)="loadMore()"
+        >
+          {{ "generics.moreOf" | translate: { content: "5★" } }}
+        </button>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #emptyTemplate>
+  <app-empty></app-empty>
+</ng-template>

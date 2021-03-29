@@ -12,5 +12,5 @@ export class LandingCardElementComponent {
   @Input()
   text!: string;
   @Input()
-  soon = false;
+  beta = false;
 }

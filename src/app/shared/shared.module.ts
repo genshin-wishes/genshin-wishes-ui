@@ -15,8 +15,11 @@ import { SnackModule } from './snack/snack.module';
 import { GwDatePipe } from './gw-date.pipe';
 import { NgLetDirective } from './ng-let.directive';
 import { StarIconComponent } from './star-icon/star-icon.component';
+import { PityChipComponent } from './pity-chip/pity-chip.component';
+import { FocusChipComponent } from './focus-chip/focus-chip.component';
 
 @NgModule({
+  imports: [TranslateModule],
   exports: [
     // Angular & 3rd party
     CommonModule,
@@ -37,7 +40,15 @@ import { StarIconComponent } from './star-icon/star-icon.component';
     GwDatePipe,
     NgLetDirective,
     StarIconComponent,
+    PityChipComponent,
+    FocusChipComponent,
   ],
-  declarations: [GwDatePipe, NgLetDirective, StarIconComponent],
+  declarations: [
+    GwDatePipe,
+    NgLetDirective,
+    StarIconComponent,
+    PityChipComponent,
+    FocusChipComponent,
+  ],
 })
 export class SharedModule {}

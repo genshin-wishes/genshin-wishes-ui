@@ -4,6 +4,12 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+// Fix so the main content as it's correct width from start
+// Some components resize badly otherwise
+.mat-drawer-transition .mat-drawer-content {
+  transition-duration: 0s !important;
+}
+
 html,
 body {
   height: 100%;

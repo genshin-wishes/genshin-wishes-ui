@@ -1,0 +1,33 @@
+<mat-card
+  class="stat-card"
+  fxLayoutGap="24px"
+  fxLayout="column"
+  [class.text-primary]="!fiveStar"
+  [class.text-accent]="fiveStar"
+>
+  <mat-card-content
+    class="number"
+    fxFlex
+    fxLayout="column"
+    fxLayoutGap="8px"
+    fxLayoutAlign="center center"
+  >
+    <span class="stars">
+      {{ fiveStar ? "★★★★★" : "★★★★" }}
+    </span>
+
+    <span class="count">{{ count }}</span>
+
+    <span
+      class="divider"
+      [class.primary]="!fiveStar"
+      [class.accent]="fiveStar"
+    ></span>
+
+    <span class="average-label">{{ "stats.averageGap" | translate }}</span>
+
+    <span class="average">
+      {{ !!average ? (average | number: "1.2-2") : ("stats.na" | translate) }}
+    </span>
+  </mat-card-content>
+</mat-card>

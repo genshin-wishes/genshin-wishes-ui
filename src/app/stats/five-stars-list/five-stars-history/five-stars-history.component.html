@@ -1,0 +1,32 @@
+<div *ngIf="detail.item">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+    <app-item-img [item]="detail.item" size="28px"></app-item-img>
+
+    <div>
+      {{ detail.item | itemName }}
+    </div>
+
+    <div class="wishes-counter">
+      {{ detail.wishes.length }}
+    </div>
+  </div>
+
+  <ol fxLayout="column" fxLayoutGap="10px">
+    <li
+      *ngFor="let wish of detail.wishes"
+      fxLayout="row"
+      fxLayoutGap="8px"
+      fxLayoutAlign="start center"
+    >
+      <div class="bullet"></div>
+
+      <div class="row" fxFlex fxLayoutGap="8px" fxLayoutAlign="start center">
+        <span fxFlex="65px">{{ wish.time | gwDate: "YYYY-MM-dd" }}</span>
+
+        <app-pity-chip [pity]="wish.pity"></app-pity-chip>
+
+        <app-focus-chip [focused]="isFocused(wish)"></app-focus-chip>
+      </div>
+    </li>
+  </ol>
+</div>

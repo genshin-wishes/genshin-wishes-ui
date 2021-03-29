@@ -1,7 +1,7 @@
 {
   "name": "genshin-wishes",
   "private": true,
-  "version": "1.5.1",
+  "version": "1.6.0-beta",
   "scripts": {
     "ng": "ng",
     "start:local": "ng serve --proxy-config proxy/proxy.conf.js",
@@ -37,9 +37,12 @@
     "@fortawesome/free-solid-svg-icons": "5.15.2",
     "@ngx-translate/core": "13.0.0",
     "@ngx-translate/http-loader": "6.0.0",
+    "chart.js": "^2.9.4",
+    "chartjs-plugin-labels": "^1.1.0",
     "http-status-codes": "2.1.4",
     "masonry-layout": "4.2.2",
     "moment": "^2.29.1",
+    "ng2-charts": "^2.4.2",
     "ngx-cookie-service": "11.0.2",
     "ngx-google-analytics": "11.2.0",
     "ngx-markdown": "11.1.1",

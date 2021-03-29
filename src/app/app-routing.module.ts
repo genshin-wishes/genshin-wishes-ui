@@ -13,6 +13,7 @@ import { WishesComponent } from './wishes/wishes.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FaqComponent } from './faq/faq.component';
 import { LandingComponent } from './core/landing/landing.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,20 @@ const routes: Routes = [
         component: FaqComponent,
       },
       {
+        path: 'stats',
+        children: [
+          {
+            path: ':banner',
+            component: StatsComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'all',
+            pathMatch: 'full',
+          },
+        ],
+      },
+      {
         path: 'settings',
         component: SettingsComponent,
       },
@@ -76,7 +91,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: false, relativeLinkResolution: 'legacy' })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      enableTracing: false,
+      relativeLinkResolution: 'legacy',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,0 +1,15 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{ "stats.bannerActivity.title" | translate }}
+  </mat-card-title>
+
+  <div fxFlex>
+    <canvas
+      baseChart
+      chartType="line"
+      [labels]="bannerActivity.labels"
+      [datasets]="bannerActivity.datasets"
+      [options]="options"
+    ></canvas>
+  </div>
+</mat-card>

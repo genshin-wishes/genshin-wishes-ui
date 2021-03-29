@@ -1,0 +1,19 @@
+.wrapper {
+  padding: 16px;
+  height: 100%;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.charts {
+  overflow: hidden;
+  height: 100%;
+}
+
+app-rank-distribution,
+app-focus-distribution,
+app-four-stars-details {
+  height: 280px;
+}
