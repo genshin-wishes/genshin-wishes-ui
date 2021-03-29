@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LangService } from './lang.service';
+import { LangService } from '../lang.service';
 import { DatePipe } from '@angular/common';
 
 @Pipe({

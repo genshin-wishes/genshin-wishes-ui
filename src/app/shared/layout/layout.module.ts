@@ -12,6 +12,9 @@ import { ItemImgComponent } from './item-img/item-img.component';
 import { SlugifyPipe } from './slugify.pipe';
 import { GaClickDirective } from './ga-click.directive';
 import { ItemNamePipe } from './item-name.pipe';
+import { BannerSelectComponent } from './banner-select/banner-select.component';
+import { GwDatePipe } from './gw-date.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,13 @@ import { ItemNamePipe } from './item-name.pipe';
     ItemImgComponent,
     SlugifyPipe,
     ItemNamePipe,
+    GwDatePipe,
     GaClickDirective,
+    BannerSelectComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     MatModule,
     TranslateModule,
@@ -38,7 +44,9 @@ import { ItemNamePipe } from './item-name.pipe';
     ItemImgComponent,
     SlugifyPipe,
     ItemNamePipe,
+    GwDatePipe,
     GaClickDirective,
+    BannerSelectComponent,
   ],
   providers: [SlugifyPipe],
 })

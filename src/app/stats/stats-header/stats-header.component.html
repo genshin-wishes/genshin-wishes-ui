@@ -29,36 +29,10 @@
       {{ "stats.filters.filterByEvent" | translate }}
     </div>
 
-    <mat-form-field appearance="outline" fxFlex class="banner-select">
-      <mat-label>
-        {{ "stats.filters.selectEvent" | translate }}
-      </mat-label>
-
-      <mat-select
-        [ngModel]="filters.characterEvents[0]"
-        (ngModelChange)="
-          filters.characterEvents = $event ? [$event] : [];
-          bannerFilter.next(filters)
-        "
-      >
-        <mat-option [value]="null">
-          {{ "stats.filters.allEvents" | translate }}
-        </mat-option>
-
-        <mat-option *ngFor="let event of events" [value]="event.id">
-          <div
-            class="event-option"
-            fxLayoutAlign="start center"
-            fxLayoutGap="10px"
-          >
-            <app-item-img [item]="event.items[0]" size="32px"></app-item-img>
-            <span>
-              {{ event.items[0] | itemName }} ({{ event.start | gwDate }} -
-              {{ event.end | gwDate }})
-            </span>
-          </div>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <app-banner-select
+      [banners]="events"
+      [(selectedBanners)]="filters.characterEvents"
+      (selectedBannersChange)="bannerFilter.next(filters)"
+    ></app-banner-select>
   </div>
 </div>

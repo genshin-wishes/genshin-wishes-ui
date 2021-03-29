@@ -1,0 +1,30 @@
+<mat-form-field appearance="outline" fxFlex class="banner-select">
+  <mat-label>
+    {{ "stats.filters.selectEvent" | translate }}
+  </mat-label>
+
+  <mat-select
+    [ngModel]="multiple ? selectedBanners : selectedBanners[0]"
+    (ngModelChange)="
+      selectedBannersChange.next(multiple ? $event : $event ? [$event] : [])
+    "
+    [multiple]="multiple"
+  >
+    <mat-option [value]="null" *ngIf="!multiple">
+      {{ "stats.filters.allEvents" | translate }}
+    </mat-option>
+
+    <mat-option
+      *ngFor="let banner of banners; let i = index"
+      [value]="banner.id"
+    >
+      <div class="event-option" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <app-item-img [item]="banner.items[0]" size="32px"></app-item-img>
+        <span>
+          {{ banner.items[0] | itemName }} ({{ banner.start | gwDate }} -
+          {{ banner.end | gwDate }})
+        </span>
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

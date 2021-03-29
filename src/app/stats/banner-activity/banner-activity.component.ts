@@ -32,6 +32,9 @@ export class BannerActivityComponent implements OnChanges {
     this.options = {
       responsive: true,
       maintainAspectRatio: false,
+      tooltips: {
+        mode: 'index',
+      },
       scales: {
         xAxes: [
           {

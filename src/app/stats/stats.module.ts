@@ -5,7 +5,6 @@ import { WishesModule } from '../wishes/wishes.module';
 import { ItemNamePipe } from '../shared/layout/item-name.pipe';
 import { StatCardComponent } from './stat-card/stat-card.component';
 import { WishesRepartitionComponent } from './wishes-repartition/wishes-repartition.component';
-import { WishesPerItemComponent } from './wishes-per-item/wishes-per-item.component';
 import { WishDistributionComponent } from './wish-distribution/wish-distribution.component';
 import { RankDistributionComponent } from './rank-distribution/rank-distribution.component';
 import { ChartsModule } from 'ng2-charts';
@@ -25,7 +24,6 @@ import { EmptyComponent } from './empty/empty.component';
     StatsComponent,
     StatCardComponent,
     WishesRepartitionComponent,
-    WishesPerItemComponent,
     WishDistributionComponent,
     RankDistributionComponent,
     FocusDistributionComponent,

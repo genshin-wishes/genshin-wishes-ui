@@ -92,7 +92,7 @@ export class GenshinWishesService {
   ) {}
   private items$ = this._http.get<Item[]>('/api/items').pipe(shareReplay(1));
   private banners$ = this._http
-    .get<Banner[]>('/api/events')
+    .get<Banner[]>('/api/banners')
     .pipe(shareReplay(1));
 
   private _updateWishes = new Subject();
@@ -235,15 +235,15 @@ export class GenshinWishesService {
   }
 
   getCharacterEvents(): Observable<Banner[]> {
-    return this._http.get<Banner[]>('/api/events/character');
+    return this._http.get<Banner[]>('/api/banners/character');
   }
 
   getWeaponEvents(): Observable<Banner[]> {
-    return this._http.get<Banner[]>('/api/events/weapon');
+    return this._http.get<Banner[]>('/api/banners/weapon');
   }
 
   getLatestEvent(): Observable<{ [key: number]: Banner }> {
-    return this._http.get<{ [key: number]: Banner }>('/api/events/latest');
+    return this._http.get<{ [key: number]: Banner }>('/api/banners/latest');
   }
 
   updateLang(lang: string): Promise<string> {
@@ -385,9 +385,11 @@ export class GenshinWishesService {
             item: w.itemId
               ? items.find((i) => i.itemId === w.itemId)
               : undefined,
-            banner: w.bannerId
-              ? banners.find((b) => b.id === w.bannerId)
-              : undefined,
+            banner: banners.find(
+              (b) =>
+                BannerToId[b.gachaType] === w.gachaType &&
+                ((!b.start && !b.end) || (b.start <= w.time && w.time) <= b.end)
+            ),
           })),
         };
 

@@ -12,7 +12,6 @@ import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogModule } from './confirm-dialog/confirm-dialog.module';
 import { SnackModule } from './snack/snack.module';
-import { GwDatePipe } from './gw-date.pipe';
 import { NgLetDirective } from './ng-let.directive';
 import { StarIconComponent } from './star-icon/star-icon.component';
 import { PityChipComponent } from './pity-chip/pity-chip.component';
@@ -37,14 +36,12 @@ import { FocusChipComponent } from './focus-chip/focus-chip.component';
     LayoutModule,
     SnackModule,
     // Declarations
-    GwDatePipe,
     NgLetDirective,
     StarIconComponent,
     PityChipComponent,
     FocusChipComponent,
   ],
   declarations: [
-    GwDatePipe,
     NgLetDirective,
     StarIconComponent,
     PityChipComponent,
