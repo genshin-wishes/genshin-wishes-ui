@@ -1,9 +1,9 @@
-<div class="wrapper">
+<div class="wrapper" fxLayout="column" fxLayout.gt-lg="row" fxLayoutGap="8px">
   <p class="disclaimer">
     {{ "footer.disclaimer" | translate }}
   </p>
 
-  <p class="contact" [innerHTML]="'footer.claim' | translate"></p>
+  <span fxFlex></span>
 
-  <p [innerHTML]="'footer.imagesCredits' | translate"></p>
+  <p [innerHTML]="'footer.claim' | translate"></p>
 </div>

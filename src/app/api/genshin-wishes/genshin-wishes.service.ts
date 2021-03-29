@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { from, Observable, Subject } from 'rxjs';
+import { combineLatest, from, Observable, Subject } from 'rxjs';
 import { User } from './user';
 import { ImportResponse } from './import-response';
 import { MihoyoService } from '../mihoyo/mihoyo.service';
 import { BannerData } from './banner';
 import { Wish } from './wish';
-import { exhaustMap, map, startWith, switchMap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+} from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { DifferentUidDialogComponent } from '../../auth/different-uid-dialog/different-uid-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -37,7 +43,7 @@ export enum BannerType {
   WEAPON_EVENT = 'WEAPON_EVENT',
 }
 
-export const IdToBanner: Record<number, string> = {
+export const IdToBanner: Record<number, BannerType> = {
   '-1': BannerType.ALL,
   301: BannerType.CHARACTER_EVENT,
   200: BannerType.PERMANENT,
@@ -74,9 +80,6 @@ const PITY_4 = 10;
   providedIn: 'root',
 })
 export class GenshinWishesService {
-  private _updateWishes = new Subject();
-  readonly onWishesUpdate$ = this._updateWishes.asObservable();
-
   constructor(
     private _http: HttpClient,
     private _dialog: MatDialog,
@@ -86,6 +89,26 @@ export class GenshinWishesService {
     private _snack: SnackService,
     private _lang: LangService
   ) {}
+  private items$ = this._http.get<Item[]>('/api/items').pipe(shareReplay(1));
+  private banners$ = this._http
+    .get<Banner[]>('/api/events')
+    .pipe(shareReplay(1));
+
+  private _updateWishes = new Subject();
+  readonly onWishesUpdate$ = this._updateWishes.asObservable();
+
+  private static getTranslationKeyFromError(error: string): string {
+    switch (error) {
+      case ApiErrors.AUTHKEY_INVALID:
+        return 'wishes.import.invalidAuthkey$';
+      case ApiErrors.MIHOYO_UNREACHABLE:
+        return 'generics.mihoyoError$';
+      case ApiErrors.NEW_WISHES_DURING_IMPORT:
+        return 'wishes.import.newWishesDuringImport$';
+      default:
+        return 'generics.error$';
+    }
+  }
 
   linkMihoyoUser(): Promise<User> {
     return this._mihoyo
@@ -112,8 +135,11 @@ export class GenshinWishesService {
     return this.onWishesUpdate$.pipe(
       startWith(null),
       switchMap(() =>
-        this._http.get<Record<BannerType, Wish[]>>('/api/wishes/banners').pipe(
-          map((records) =>
+        combineLatest([
+          this.items$,
+          this._http.get<Record<BannerType, Wish[]>>('/api/wishes/banners'),
+        ]).pipe(
+          map(([items, records]) =>
             BannerTypes.map((type) => {
               if (!records[type]) {
                 return {
@@ -123,6 +149,13 @@ export class GenshinWishesService {
                   pity4: PITY_4,
                 } as BannerData;
               }
+
+              records[type] = records[type].map((wish) => ({
+                ...wish,
+                item: wish.itemId
+                  ? items.find((i) => i.itemId === wish.itemId)
+                  : undefined,
+              }));
 
               const fiveStarIndex = records[type].findIndex(
                 (wish) => wish.item?.rankType === 5
@@ -158,15 +191,22 @@ export class GenshinWishesService {
     page: number,
     filters: WishFilters
   ): Observable<Wish[]> {
-    return this._http
-      .get<Wish[]>(`/api/wishes/${banner}`, {
+    return combineLatest([
+      this.items$,
+      this._http.get<Wish[]>(`/api/wishes/${banner}`, {
         params: this.buildParams(page, filters),
-      })
-      .pipe(
-        map((wishes) =>
-          wishes.map((wish) => ({ ...wish, time: new Date(wish.time) }))
-        )
-      );
+      }),
+    ]).pipe(
+      map(([items, wishes]) =>
+        wishes.map((wish) => ({
+          ...wish,
+          item: wish.itemId
+            ? items.find((i) => i.itemId === wish.itemId)
+            : undefined,
+          time: new Date(wish.time),
+        }))
+      )
+    );
   }
 
   countAll(): Observable<Record<BannerType, number>> {
@@ -190,7 +230,7 @@ export class GenshinWishesService {
   }
 
   getItems(): Observable<Item[]> {
-    return this._http.get<Item[]>('/api/items');
+    return this.items$;
   }
 
   getCharacterEvents(): Observable<Banner[]> {
@@ -307,7 +347,9 @@ export class GenshinWishesService {
             );
         }
 
-        const errorKey = this.getTranslationKeyFromError(error.error);
+        const errorKey = GenshinWishesService.getTranslationKeyFromError(
+          error.error
+        );
 
         if (!hideToasts) {
           return this._snack
@@ -324,19 +366,6 @@ export class GenshinWishesService {
 
         return null;
       });
-  }
-
-  private getTranslationKeyFromError(error: string): string {
-    switch (error) {
-      case ApiErrors.AUTHKEY_INVALID:
-        return 'wishes.import.invalidAuthkey$';
-      case ApiErrors.MIHOYO_UNREACHABLE:
-        return 'generics.mihoyoError$';
-      case ApiErrors.NEW_WISHES_DURING_IMPORT:
-        return 'wishes.import.newWishesDuringImport$';
-      default:
-        return 'generics.error$';
-    }
   }
 
   logout(): Promise<void> {

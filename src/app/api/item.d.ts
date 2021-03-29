@@ -6,5 +6,5 @@ export interface Item {
   image: {
     url: string;
   };
-  rankType: number;
+  rankType: 3 | 4 | 5;
 }
