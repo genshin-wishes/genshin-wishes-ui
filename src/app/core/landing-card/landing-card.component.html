@@ -90,6 +90,18 @@
                 >
                   {{ "app.signIn" | translate }}
                 </a>
+
+                <a
+                  mat-button
+                  color="primary"
+                  [href]="discordUrl"
+                  target="_blank"
+                  gaClick="discord_discord"
+                >
+                  <fa-icon [icon]="['fab', 'discord']"></fa-icon>
+                  &nbsp;
+                  {{ "nav.discord.label" | translate }}
+                </a>
               </div>
             </div>
           </div>

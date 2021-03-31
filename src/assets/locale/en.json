@@ -52,7 +52,7 @@
       "steps$": {
         "1": {
           "title": "Informations",
-          "description": "To get your wishes we need a temporary link from the game.\n\nThis link only allows us to fetch data from the wish history.\n<span class=\"text-accent\">We will never have access to your Genshin Impact account</span>.\nGo to the next step to know how to get your link.\n\nUnfortunately at the moment this link is <span class=\"text-accent\">not available for console players</span>."
+          "description": "To get your wishes we need a temporary link from the game.\n\nThis link only allows us to fetch data from the wish history.\n<span class=\"text-accent\">We will never have access to your Genshin Impact account</span>.\nGo to the next step to know how to get your link."
         },
         "2": {
           "title": "Get your link",

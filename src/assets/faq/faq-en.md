@@ -34,7 +34,10 @@ Take a look to the [video](https://www.youtube.com/watch?v=HW8nywx9Tio) guide or
    Important: This URL does NOT allow us to change your password.
 
 ### Consoles
-We could not test how to find the URL for consoles. If you find a way, please [contact us](mailto:contact.genshin.wishes@gmail.com) so we can share it with others!
+1) Open your mail in-game during an event
+2) Open the event related mail
+3) There should be a QR code, scan it with your phone
+4) Copy the URL and paste it on Genshin Wishes.
 
 ## Is it safe to use?
 Yes. As Genshin Impact players we are very concerned about account security.

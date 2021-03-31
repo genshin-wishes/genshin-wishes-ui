@@ -20,11 +20,11 @@
         [src]="mdFile"
       ></markdown>
 
-      <div>
+      <div *ngIf="device.videoUrl$ | async as videoUrl">
         <a
           mat-button
           color="primary"
-          [href]="device.videoUrl$ | async"
+          [href]="videoUrl"
           target="_blank"
           gaClick="see_video"
         >

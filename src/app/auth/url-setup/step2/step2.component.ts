@@ -58,6 +58,12 @@ export class Step2Component {
         )
       ),
     },
+    {
+      title: 'Console',
+      mdFile$: this._lang.lang$.pipe(
+        map((lang) => 'assets/faq/link/console-' + lang + '.md')
+      ),
+    },
   ];
 
   constructor(public platform: Platform, private _lang: LangService) {}

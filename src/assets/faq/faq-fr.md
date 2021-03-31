@@ -34,7 +34,10 @@ Consultez notre guide [vidéo](https://www.youtube.com/watch?v=GkA_ZTqkzDk) ou s
    Important : Cette URL ne nous permet PAS de modifier votre mot de passe.
 
 ### Consoles
-Nous n'avons pas encore pu tester la récupération de cette URL sur console. Si vous trouvez un moyen de la récupérer, merci de [nous contacter](mailto:contact.genshin.wishes@gmail.com) pour en faire part aux autres utilisateurs!
+1) Ouvrez vos messages dans le jeu pendant un événement
+2) Ouvrez le message de l'événement
+3) Il devrait y avoir un code QR, scannez le avec votre téléphone
+4) Copiez l'URL et collez la dans Genshin Wishes.
 
 ## Est-ce sécurisé ?
 Oui. En tant que joueurs de Genshin Impact, nous sommes aussi préoccupés par la sécurité de nos comptes.

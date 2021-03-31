@@ -52,7 +52,7 @@
       "steps$": {
         "1": {
           "title": "Informations",
-          "description": "Pour récupérer vos vœux, il nous faut un lien temporaire du jeu.\n\nCe lien nous permet uniquement de récupérer des données de votre historique de vœux.\n<span class=\"text-accent\">Nous n'aurons jamais accès à votre compte Genshin Impact</span>.\nAllez à l'étape suivante pour voir comment obtenir votre lien.\n\nMalheureusement, à l'heure actuelle ce lien n'est <span class=\"text-accent\">pas disponible pour les joueurs sur console</span>."
+          "description": "Pour récupérer vos vœux, il nous faut un lien temporaire du jeu.\n\nCe lien nous permet uniquement de récupérer des données de votre historique de vœux.\n<span class=\"text-accent\">Nous n'aurons jamais accès à votre compte Genshin Impact</span>.\nAllez à l'étape suivante pour voir comment obtenir votre lien."
         },
         "2": {
           "title": "Récupérez votre lien",

@@ -26,6 +26,8 @@ export class LandingCardComponent {
     )
   );
 
+  discordUrl = environment.discord;
+
   constructor(
     private _mediaObserver: MediaObserver,
     private _sanitizer: DomSanitizer,
