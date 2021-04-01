@@ -1,6 +1,12 @@
 import { Wish } from './wish';
 import { BannerType } from './constants';
 
+export interface CountPerDay {
+  date: string;
+  rankType: number;
+  count: number;
+}
+
 export interface Stats {
   bannerType: BannerType;
 
@@ -11,9 +17,7 @@ export interface Stats {
   gap4Stars: number;
   gap5Stars: number;
 
-  countPerDay: { date: string; rankType: number; count: number }[];
+  countPerDay: CountPerDay[];
 
-  indexOfLast4?: number;
-  indexOfLast5?: number;
-  wishes: (Wish & { pity: number })[];
+  wishes: Wish[];
 }

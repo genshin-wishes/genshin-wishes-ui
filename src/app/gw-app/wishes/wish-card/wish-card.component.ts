@@ -10,7 +10,7 @@ export class WishCardComponent {
   @Input()
   wish!: Wish;
 
-  getRankLoop(rank: number) {
+  getRankLoop(rank: number): number[] {
     return new Array(rank);
   }
 }

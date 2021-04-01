@@ -8,5 +8,6 @@ export interface Wish {
   banner?: Banner;
   itemId?: number; // nullable if database is not up to date
   item?: Item;
+  pity: number;
   time: Date;
 }

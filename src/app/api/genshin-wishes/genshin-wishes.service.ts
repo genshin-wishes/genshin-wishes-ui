@@ -257,7 +257,7 @@ export class GenshinWishesService {
           }),
         ]).pipe(
           map(([items, banners, stats]) => {
-            const updatedStats = {
+            const updatedStats: Stats = {
               ...stats,
               wishes: stats.wishes.map((w) => ({
                 ...w,
@@ -272,31 +272,6 @@ export class GenshinWishesService {
                 ),
               })),
             };
-
-            let lastGachaType: number | undefined;
-            let lastIndexOf: { [key: number]: number } = {};
-
-            updatedStats.wishes = updatedStats.wishes.map((w) => {
-              if (!w.item) return w;
-
-              if (w.gachaType !== lastGachaType) {
-                lastIndexOf = {};
-                lastGachaType = w.gachaType;
-              }
-
-              const delta =
-                (w.item.rankType === 5
-                  ? stats.indexOfLast5
-                  : stats.indexOfLast4) || 0;
-              const wish = {
-                ...w,
-                pity: w.index - (lastIndexOf[w.item.rankType] || 0) - delta,
-              };
-
-              lastIndexOf[w.item.rankType] = w.index - delta;
-
-              return wish;
-            });
 
             updatedStats.gap4Stars = this.calculateGapFor(
               updatedStats.wishes,

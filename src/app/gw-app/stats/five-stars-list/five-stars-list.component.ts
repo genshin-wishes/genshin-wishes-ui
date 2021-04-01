@@ -4,7 +4,7 @@ import { Item } from '../../../api/item';
 
 export type FiveStarDetail = {
   item: Item;
-  wishes: (Wish & { pity: number })[];
+  wishes: Wish[];
 };
 
 const MAX_STEP = 2;

@@ -27,6 +27,12 @@
           {{ wish.item | itemName }}
         </h3>
 
+        <app-pity-chip
+          *ngIf="wish.item?.rankType != 3"
+          [pity]="wish.pity"
+          [rankType]="wish.item.rankType"
+        ></app-pity-chip>
+
         <span fxFlex></span>
 
         <p

@@ -1,9 +1,15 @@
 <div
   class="chip"
-  [class.lucky]="harmonizedPity < 45"
-  [class.early]="harmonizedPity >= 45 && harmonizedPity < 74"
-  [class.soft]="harmonizedPity >= 74 && harmonizedPity < 82"
-  [class.hard]="harmonizedPity >= 82"
+  [class.lucky]="harmonizedPity < thresholds[rankType].lucky"
+  [class.early]="
+    harmonizedPity >= thresholds[rankType].lucky &&
+    harmonizedPity < thresholds[rankType].soft
+  "
+  [class.soft]="
+    harmonizedPity >= thresholds[rankType].soft &&
+    harmonizedPity < thresholds[rankType].hard
+  "
+  [class.hard]="harmonizedPity >= thresholds[rankType].hard"
 >
   {{ "banners.wishes" | translate: { count: pity } }}
 </div>
