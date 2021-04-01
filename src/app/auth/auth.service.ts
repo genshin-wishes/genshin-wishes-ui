@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { User } from '../api/genshin-wishes/user';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Lang } from '../shared/lang.service';
 
@@ -21,7 +21,9 @@ export class AuthService {
   }
 
   public getUser(): Observable<User> {
-    return this._http.get<User>('/api/user');
+    return this._http
+      .get<User>('/api/user')
+      .pipe(tap((user) => this.register(user)));
   }
 
   getCurrentUser(): User | null {

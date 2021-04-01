@@ -42,12 +42,13 @@ export class AuthComponent implements OnInit {
             params: this._route.snapshot.queryParams,
           })
           .toPromise()
-          .then((user) => {
-            this._auth.register(user);
+          .then(async () => {
+            const user = await this._auth.getUser().toPromise();
 
             if (!!user.mihoyoUid) this._router.navigate(['/banners']);
             else this._router.navigate(['/setup']);
-          });
+          })
+          .catch(() => this._router.navigate(['/login']));
       });
   }
 }
