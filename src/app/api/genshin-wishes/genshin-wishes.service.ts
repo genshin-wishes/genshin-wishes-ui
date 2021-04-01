@@ -370,58 +370,71 @@ export class GenshinWishesService {
   }
 
   getStats(banner: BannerType, filters: WishFilters): Observable<Stats> {
-    return combineLatest([
-      this.items$,
-      this.banners$,
-      this._http.get<Stats>('/api/stats/' + banner, {
-        params: this.buildParams(undefined, filters),
-      }),
-    ]).pipe(
-      map(([items, banners, stats]) => {
-        const updatedStats = {
-          ...stats,
-          wishes: stats.wishes.map((w) => ({
-            ...w,
-            item: w.itemId
-              ? items.find((i) => i.itemId === w.itemId)
-              : undefined,
-            banner: banners.find(
-              (b) =>
-                BannerToId[b.gachaType] === w.gachaType &&
-                ((!b.start && !b.end) || (b.start <= w.time && w.time) <= b.end)
-            ),
-          })),
-        };
+    return this.onWishesUpdate$.pipe(
+      startWith(null),
+      switchMap(() =>
+        combineLatest([
+          this.items$,
+          this.banners$,
+          this._http.get<Stats>('/api/stats/' + banner, {
+            params: this.buildParams(undefined, filters),
+          }),
+        ]).pipe(
+          map(([items, banners, stats]) => {
+            const updatedStats = {
+              ...stats,
+              wishes: stats.wishes.map((w) => ({
+                ...w,
+                item: w.itemId
+                  ? items.find((i) => i.itemId === w.itemId)
+                  : undefined,
+                banner: banners.find(
+                  (b) =>
+                    BannerToId[b.gachaType] === w.gachaType &&
+                    ((!b.start && !b.end) ||
+                      (b.start <= w.time && w.time) <= b.end)
+                ),
+              })),
+            };
 
-        let lastGachaType: number | undefined;
-        let lastIndexOf: { [key: number]: number } = {};
+            let lastGachaType: number | undefined;
+            let lastIndexOf: { [key: number]: number } = {};
 
-        updatedStats.wishes = updatedStats.wishes.map((w) => {
-          if (!w.item) return w;
+            updatedStats.wishes = updatedStats.wishes.map((w) => {
+              if (!w.item) return w;
 
-          if (w.gachaType !== lastGachaType) {
-            lastIndexOf = {};
-            lastGachaType = w.gachaType;
-          }
+              if (w.gachaType !== lastGachaType) {
+                lastIndexOf = {};
+                lastGachaType = w.gachaType;
+              }
 
-          const delta =
-            (w.item.rankType === 5 ? stats.indexOfLast5 : stats.indexOfLast4) ||
-            0;
-          const wish = {
-            ...w,
-            pity: w.index - (lastIndexOf[w.item.rankType] || 0) - delta,
-          };
+              const delta =
+                (w.item.rankType === 5
+                  ? stats.indexOfLast5
+                  : stats.indexOfLast4) || 0;
+              const wish = {
+                ...w,
+                pity: w.index - (lastIndexOf[w.item.rankType] || 0) - delta,
+              };
 
-          lastIndexOf[w.item.rankType] = w.index - delta;
+              lastIndexOf[w.item.rankType] = w.index - delta;
 
-          return wish;
-        });
+              return wish;
+            });
 
-        updatedStats.gap4Stars = this.calculateGapFor(updatedStats.wishes, 4);
-        updatedStats.gap5Stars = this.calculateGapFor(updatedStats.wishes, 5);
+            updatedStats.gap4Stars = this.calculateGapFor(
+              updatedStats.wishes,
+              4
+            );
+            updatedStats.gap5Stars = this.calculateGapFor(
+              updatedStats.wishes,
+              5
+            );
 
-        return updatedStats;
-      })
+            return updatedStats;
+          })
+        )
+      )
     );
   }
 
