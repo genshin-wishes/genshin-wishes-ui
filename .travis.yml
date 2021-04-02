@@ -1,0 +1,24 @@
+language: node_js
+sudo: true
+dist: trusty
+node_js:
+  - 14
+
+services:
+  - docker
+
+before_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - VERSION=$(node -p "require('./package.json').version")
+
+script:
+  - npm run build
+  - docker build -t genshinwishes/genshin-wishes-ui:$VERSION  .
+  - docker push genshinwishes/genshin-wishes-ui:$VERSION
+
+before_deploy:
+  - git tag $VERSION
+
+deploy:
+  provider: releases
+  skip_cleanup: true
