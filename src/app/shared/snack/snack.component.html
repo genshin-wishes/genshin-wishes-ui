@@ -12,7 +12,9 @@
 
     <div>
       <h3
-        *ngIf="one.title"
+        *ngIf="
+          one.title && (one.translated ? one.title : (one.title | translate))
+        "
         [innerHTML]="one.translated ? one.title : (one.title | translate)"
       ></h3>
       <p

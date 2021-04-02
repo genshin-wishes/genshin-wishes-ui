@@ -1,15 +1,25 @@
 <div
   class="chip"
-  [class.lucky]="harmonizedPity < thresholds[rankType].lucky"
+  [class.lucky]="
+    wish.pity + (wish.gachaType === 302 ? 10 : 0) <
+    thresholds[wish.item?.rankType || 3].lucky
+  "
   [class.early]="
-    harmonizedPity >= thresholds[rankType].lucky &&
-    harmonizedPity < thresholds[rankType].soft
+    wish.pity + (wish.gachaType === 302 ? 10 : 0) >=
+      thresholds[wish.item?.rankType || 3].lucky &&
+    wish.pity + (wish.gachaType === 302 ? 10 : 0) <
+      thresholds[wish.item?.rankType || 3].soft
   "
   [class.soft]="
-    harmonizedPity >= thresholds[rankType].soft &&
-    harmonizedPity < thresholds[rankType].hard
+    wish.pity + (wish.gachaType === 302 ? 10 : 0) >=
+      thresholds[wish.item?.rankType || 3].soft &&
+    wish.pity + (wish.gachaType === 302 ? 10 : 0) <
+      thresholds[wish.item?.rankType || 3].hard
   "
-  [class.hard]="harmonizedPity >= thresholds[rankType].hard"
+  [class.hard]="
+    wish.pity + (wish.gachaType === 302 ? 10 : 0) >=
+    thresholds[wish.item?.rankType || 3].hard
+  "
 >
-  {{ "banners.wishes" | translate: { count: pity } }}
+  {{ "banners.wishes" | translate: { count: wish.pity } }}
 </div>

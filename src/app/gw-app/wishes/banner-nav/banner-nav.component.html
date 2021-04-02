@@ -4,7 +4,6 @@
     *ngFor="let banner of banners"
     [gaClick]="'see_wishes_tab_' + banner"
     [routerLink]="['../', banner | slugify]"
-    queryParamsHandling="merge"
     routerLinkActive
     [active]="rla.isActive"
     #rla="routerLinkActive"

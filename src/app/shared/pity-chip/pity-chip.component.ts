@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Wish } from '../../api/genshin-wishes/wish';
 
 @Component({
   selector: 'app-pity-chip',
@@ -7,9 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PityChipComponent {
   @Input()
-  harmonizedPity!: number;
-  @Input()
-  pity!: number;
+  wish!: Wish;
   @Input()
   rankType!: 3 | 4 | 5;
 

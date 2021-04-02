@@ -433,6 +433,7 @@ $genshin-wishes-theme: mat-dark-theme(
       background: mat-color($background, list);
 
       &.star-5 {
+        color: mat-color($foreground, text);
         background: radial-gradient(
           175% 175% at 20.18% 100%,
           #f4a242 0.52%,
@@ -444,6 +445,7 @@ $genshin-wishes-theme: mat-dark-theme(
       }
 
       &.star-4 {
+        color: mat-color($foreground, high-emphasis);
         background: radial-gradient(
           207.89% 207.89% at 20.54% 100%,
           #b171ff 0.52%,
@@ -784,13 +786,14 @@ $genshin-wishes-theme: mat-dark-theme(
     }
   }
 
-  app-focus-chip {
+  app-focus-chip .chip {
     font-size: 12px;
     letter-spacing: 0.25px;
+    background: mat-color($mat-grey, 900, 0.59);
     color: mat-color($foreground, disabled-text);
     overflow: hidden;
 
-    .focused {
+    &.focused {
       color: mat-color($foreground, text);
     }
   }

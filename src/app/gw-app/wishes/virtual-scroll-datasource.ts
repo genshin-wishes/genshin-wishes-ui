@@ -3,7 +3,8 @@ import {
   DataSource,
   ListRange,
 } from '@angular/cdk/collections';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
   public _cachedData: T[] = Array.from<T>({ length: this._count });
@@ -11,8 +12,11 @@ export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
   private _dataStream = new BehaviorSubject<(T | undefined)[]>(
     this._cachedData
   );
-  private _subscription = new Subscription();
+  private _subscriptions = [];
   private _currentRange!: ListRange;
+
+  private _fetchRange = new Subject();
+  private _destroy = new Subject();
 
   constructor(
     private _count: number,
@@ -23,31 +27,43 @@ export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
   }
 
   connect(collectionViewer: CollectionViewer): Observable<(T | undefined)[]> {
-    this._subscription.add(
-      collectionViewer.viewChange.subscribe((range) => {
+    collectionViewer.viewChange
+      .pipe(takeUntil(this._destroy))
+      .subscribe((range) => {
         this._currentRange = range;
         this.fetchCurrentRange();
-      })
-    );
+      });
+
+    this._fetchRange
+      .pipe(takeUntil(this._destroy), debounceTime(50))
+      .subscribe(() => {
+        const startPage = this._getPageForIndex(this._currentRange.start);
+        const endPage = this._getPageForIndex(this._currentRange.end - 1);
+        for (let i = startPage; i <= endPage; i++) {
+          this._fetchPage(i);
+        }
+      });
+
     return this._dataStream;
   }
 
   disconnect(): void {
-    this._subscription.unsubscribe();
+    this._destroy.next();
+    this._destroy.complete();
   }
 
-  update(count: number) {
+  update(count: number): void {
     this._fetchedPages = new Set<number>();
     this._cachedData = Array.from<T>({ length: count });
     this._dataStream.next(this._cachedData);
   }
 
-  reset() {
+  reset(): void {
     this._fetchedPages = new Set<number>();
     this._dataStream.next([]);
   }
 
-  insertNew(count: number) {
+  insertNew(count: number): void {
     const newPages = Math.ceil(count / this._pageSize);
     const oldPages = this._fetchedPages;
     this._cachedData.splice(
@@ -64,19 +80,15 @@ export class VirtualScrollDatasource<T> extends DataSource<T | undefined> {
     this.fetchCurrentRange();
   }
 
-  private fetchCurrentRange() {
-    const startPage = this._getPageForIndex(this._currentRange.start);
-    const endPage = this._getPageForIndex(this._currentRange.end - 1);
-    for (let i = startPage; i <= endPage; i++) {
-      this._fetchPage(i);
-    }
+  private fetchCurrentRange(): void {
+    this._fetchRange.next();
   }
 
   private _getPageForIndex(index: number): number {
     return Math.floor(index / this._pageSize);
   }
 
-  private _fetchPage(page: number) {
+  private _fetchPage(page: number): void {
     if (this._fetchedPages.has(page)) {
       return;
     }

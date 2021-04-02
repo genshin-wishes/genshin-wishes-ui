@@ -37,7 +37,7 @@
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["ngx-masonry"]
+            "allowedCommonJsDependencies": ["ng2-charts"]
           },
           "configurations": {
             "production": {

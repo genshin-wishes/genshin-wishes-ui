@@ -2,5 +2,5 @@
   [class]="'color-star-' + item.rankType"
   [matTooltip]="item | itemName"
   [alt]="item | itemName"
-  [src]="'/content' + item.image.url"
+  [src]="'/content' + item.image?.url"
 />

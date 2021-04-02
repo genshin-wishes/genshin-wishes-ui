@@ -7,7 +7,7 @@ export interface Banner {
   start: Date;
   end: Date;
   gachaType: BannerType;
-  image: {
+  image?: {
     url: string;
   };
 }

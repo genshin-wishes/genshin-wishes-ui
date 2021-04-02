@@ -11,7 +11,13 @@ import { User } from './user';
 import { MihoyoService } from '../mihoyo/mihoyo.service';
 import { BannerData } from './banner';
 import { Wish } from './wish';
-import { exhaustMap, map, startWith, switchMap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+} from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackService } from '../../shared/snack/snack.service';
@@ -41,6 +47,9 @@ import { ItemNamePipe } from '../../shared/item-name.pipe';
 })
 export class GenshinWishesService {
   private items$ = new BehaviorSubject<Item[]>([]);
+  private banners$ = this._http
+    .get<Banner[]>('/api/banners')
+    .pipe(shareReplay(1));
 
   private _updateWishes = new Subject();
   readonly onWishesUpdate$ = this._updateWishes.asObservable();
@@ -140,14 +149,22 @@ export class GenshinWishesService {
     filters: WishFilters
   ): Observable<Wish[]> {
     return combineLatest([
+      this.banners$,
       this.items$,
       this._http.get<Wish[]>(`/api/wishes/${banner}`, {
         params: this.buildParams(page, filters),
       }),
     ]).pipe(
-      map(([items, wishes]) =>
+      map(([banners, items, wishes]) =>
         wishes.map((wish) => ({
           ...wish,
+          // FIXME refactor duplicate
+          banner: banners.find(
+            (b) =>
+              BannerToId[b.gachaType] === wish.gachaType &&
+              ((!b.start && !b.end) ||
+                (b.start <= wish.time && wish.time) <= b.end)
+          ),
           item: wish.itemId
             ? items.find((i) => i.itemId === wish.itemId)
             : undefined,
@@ -357,10 +374,7 @@ export class GenshinWishesService {
       });
   }
 
-  private calculateGapFor(
-    wishes: (Wish & { pity: number })[],
-    rankType: 4 | 5
-  ): number {
+  private calculateGapFor(wishes: Wish[], rankType: 4 | 5): number {
     const wishesOfRank = wishes.filter((w) => w.item?.rankType === rankType);
 
     return (

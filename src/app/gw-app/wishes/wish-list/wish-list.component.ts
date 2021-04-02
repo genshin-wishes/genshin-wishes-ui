@@ -25,7 +25,7 @@ export class WishListComponent {
 
   itemSize$ = this._mediaObserver
     .asObservable()
-    .pipe(map(() => (this._mediaObserver.isActive('lt-sm') ? 86 : 65)));
+    .pipe(map(() => (this._mediaObserver.isActive('lt-sm') ? 136 : 65)));
 
   IdToBanner = IdToBanner;
 

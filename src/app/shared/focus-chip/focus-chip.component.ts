@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Wish } from '../../api/genshin-wishes/wish';
 
 @Component({
   selector: 'app-focus-chip',
@@ -7,5 +8,9 @@ import { Component, Input } from '@angular/core';
 })
 export class FocusChipComponent {
   @Input()
-  focused!: boolean;
+  wish!: Wish;
+
+  isFocused(wish: Wish): boolean {
+    return !!wish.banner?.items.find((i) => i.itemId === wish.item?.itemId);
+  }
 }

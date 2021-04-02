@@ -5,6 +5,7 @@ export interface BannerImportState {
   count: number;
   finished: boolean;
   saved: boolean;
+  error: string;
 }
 
 export type ImportResponse = Record<BannerType, BannerImportState>;

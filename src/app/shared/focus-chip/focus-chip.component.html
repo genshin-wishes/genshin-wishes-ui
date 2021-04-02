@@ -1,9 +1,11 @@
-<div
-  class="chip"
-  [class.focused]="focused"
-  [matTooltip]="
-    (focused ? 'wishes.exclusive' : 'wishes.notExclusive') | translate
-  "
->
-  {{ (focused ? "wishes.exclusive" : "wishes.notExclusive") | translate }}
-</div>
+<ng-container *ngIf="isFocused(wish); else unfocused">
+  <div class="chip focused" [matTooltip]="'wishes.exclusive' | translate">
+    {{ "wishes.exclusive" | translate }}
+  </div>
+</ng-container>
+
+<ng-template #unfocused>
+  <div class="chip" [matTooltip]="'wishes.notExclusive' | translate">
+    {{ "wishes.notExclusive" | translate }}
+  </div>
+</ng-template>

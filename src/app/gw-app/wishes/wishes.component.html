@@ -40,7 +40,7 @@
               #filtersComponent
               [route]="route"
               [banner]="bannerType"
-              [filters]="initialFilters"
+              [filters]="(filters$ | async) || initialFilters"
             ></app-wish-filters>
           </mat-card-content>
         </mat-card>

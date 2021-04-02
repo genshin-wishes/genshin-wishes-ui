@@ -1,10 +1,10 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  debounceTime,
   first,
   map,
   shareReplay,
-  startWith,
   switchMap,
   tap,
 } from 'rxjs/operators';
@@ -42,15 +42,11 @@ export class WishesComponent implements OnDestroy {
     map(
       (params) => params.banner.replace('-', '_').toUpperCase() as BannerType
     ),
-    tap(() => {
-      this.initialFilters = new WishFilters();
-
-      this.filters$.next(this.initialFilters);
-    }),
     shareReplay(1)
   );
 
   count$ = combineLatest([this.bannerType$, this.filters$]).pipe(
+    debounceTime(100),
     tap(() => {
       this._lastCount = undefined;
       if (this._datasource) this._datasource.reset();
@@ -77,8 +73,7 @@ export class WishesComponent implements OnDestroy {
           }
 
           this._lastCount = count;
-        }),
-        startWith(undefined)
+        })
       )
     ),
     shareReplay(1)

@@ -46,7 +46,7 @@ async function getItemImageAs64(item) {
   let itemImage =
     item &&
     (await rp({
-      uri: "https://genshin-wishes.com/content" + item.image.url,
+      uri: "https://genshin-wishes.com/content" + item.image?.url,
       encoding: null,
     }).catch(() => ""));
 

@@ -1,7 +1,7 @@
 {
   "name": "genshin-wishes",
   "private": true,
-  "version": "1.8.8d",
+  "version": "1.9.0",
   "scripts": {
     "ng": "ng",
     "start:local": "ng serve --proxy-config proxy/proxy.conf.js",
@@ -16,18 +16,18 @@
     }
   },
   "engines": {
-    "node": "10.x"
+    "node": "14.x"
   },
   "dependencies": {
     "@angular/animations": "11.2.4",
-    "@angular/cdk": "11.2.3",
+    "@angular/cdk": "11.2.4",
     "@angular/common": "11.2.4",
     "@angular/compiler": "11.2.4",
     "@angular/core": "11.2.4",
     "@angular/flex-layout": "11.0.0-beta.33",
     "@angular/forms": "11.2.4",
-    "@angular/material": "11.2.3",
-    "@angular/material-moment-adapter": "^11.2.3",
+    "@angular/material": "11.2.4",
+    "@angular/material-moment-adapter": "11.2.4",
     "@angular/platform-browser": "11.2.4",
     "@angular/platform-browser-dynamic": "11.2.4",
     "@angular/router": "11.2.4",
@@ -56,9 +56,9 @@
     "zone.js": "0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1102.3",
-    "@angular-devkit/build-angular": "0.1102.3",
-    "@angular/cli": "11.2.3",
+    "@angular-devkit/architect": "0.1102.4",
+    "@angular-devkit/build-angular": "0.1102.4",
+    "@angular/cli": "11.2.4",
     "@angular/compiler-cli": "11.2.4",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/jasmine": "~3.6.0",
