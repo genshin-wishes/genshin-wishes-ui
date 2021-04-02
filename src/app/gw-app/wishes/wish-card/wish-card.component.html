@@ -20,22 +20,35 @@
         fxLayoutGap="10px"
         fxLayoutAlign="start center"
         fxLayout.lt-sm="column"
-        fxLayoutGap.lt-sm
+        fxLayoutGap.lt-sm="6px"
         fxLayoutAlign.lt-sm
       >
         <h3 [matTooltip]="wish.item | itemName" [matTooltipShowDelay]="1000">
           {{ wish.item | itemName }}
         </h3>
 
-        <app-pity-chip
-          *ngIf="wish.item?.rankType != 3"
-          [pity]="wish.pity"
-          [rankType]="wish.item.rankType"
-        ></app-pity-chip>
+        <span fxFlex fxHide.lt-sm fxShow.gt-xs></span>
 
-        <span fxFlex></span>
+        <div
+          fxFlexOrder="1"
+          fxFlexOrder.lt-sm="2"
+          fxLayout="row"
+          *ngIf="wish.item?.rankType === 5"
+        >
+          <app-focus-chip [wish]="wish"></app-focus-chip>
+        </div>
+
+        <div
+          fxFlexOrder="2"
+          fxFlexOrder.lt-sm="1"
+          fxLayout="row"
+          *ngIf="wish.item?.rankType != 3"
+        >
+          <app-pity-chip [wish]="wish"></app-pity-chip>
+        </div>
 
         <p
+          fxFlexOrder="3"
           [class]="'stars color-star-' + wish.item.rankType"
           ngStyle.lt-sm="text-align: left"
         >
@@ -44,7 +57,7 @@
           >
         </p>
 
-        <span fxFlex="21px" fxHide.lt-sm></span>
+        <span fxFlex="21px" fxHide.lt-sm fxShow.gt-xs></span>
       </div>
 
       <p

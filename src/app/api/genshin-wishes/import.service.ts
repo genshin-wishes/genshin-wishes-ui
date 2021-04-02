@@ -108,6 +108,9 @@ export class ImportService {
             takeWhile(
               (res) =>
                 !!res &&
+                !BannerTypes.find(
+                  (b) => !!this._bannerCount[b] && !!this._bannerCount[b].error
+                ) &&
                 !!BannerTypes.find(
                   (b) => !this._bannerCount[b] || !this._bannerCount[b].saved
                 )
@@ -118,7 +121,26 @@ export class ImportService {
                 state: null,
                 setup: scan.setup,
               });
+              if (!Object.getOwnPropertyNames(this._bannerCount).length) return;
+
               this._http.delete('/api/wishes/importState').toPromise();
+
+              const errorBanner = BannerTypes.find(
+                (b) => !!this._bannerCount[b] && !!this._bannerCount[b].error
+              );
+
+              if (!!errorBanner) {
+                const errorCode = this._bannerCount[errorBanner].error;
+                const translationKeyFromError = getTranslationKeyFromError(
+                  errorCode
+                );
+                this.openErrorSnack(
+                  translationKeyFromError,
+                  errorCode,
+                  scan.setup
+                );
+                return;
+              }
 
               if (!scan.setup) {
                 if (this._hadWishes) {
@@ -142,9 +164,7 @@ export class ImportService {
                   );
 
                   this._gw.updateWishes();
-                } else if (
-                  Object.getOwnPropertyNames(this._bannerCount).length
-                ) {
+                } else {
                   this._snack
                     .open(
                       'wishes.import.noData$',
@@ -227,22 +247,32 @@ export class ImportService {
         const errorInfo = getTranslationKeyFromError(error.error);
 
         if (!setup) {
-          const snack = this._snack.open(
-            errorInfo.key,
-            'import_error_' + error.error,
-            'accent',
-            errorInfo.retry ? 'generics.retry' : undefined
-          );
+          const snack = this.openErrorSnack(errorInfo, error.error, setup);
 
-          if (errorInfo.retry)
-            return snack
-              .onAction()
-              .pipe(exhaustMap(() => from(this.import(setup))))
-              .toPromise();
+          if (snack) return snack;
         }
 
         return Promise.reject();
       });
+  }
+
+  private openErrorSnack(
+    errorInfo: { key: string; retry: boolean },
+    error: string,
+    setup: boolean
+  ): Promise<void> | void {
+    const snack = this._snack.open(
+      errorInfo.key,
+      'import_error_' + error,
+      'accent',
+      errorInfo.retry ? 'generics.retry' : undefined
+    );
+
+    if (errorInfo.retry)
+      return snack
+        .onAction()
+        .pipe(exhaustMap(() => from(this.import(setup))))
+        .toPromise();
   }
 
   private deleteAndImport(authkey: string): Promise<void> {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { StatsComponent } from './stats.component';
 import { SharedModule } from '../../shared/shared.module';
 import { WishesModule } from '../wishes/wishes.module';
-import { ItemNamePipe } from '../../shared/item-name.pipe';
 import { StatCardComponent } from './stat-card/stat-card.component';
 import { WishesRepartitionComponent } from './wishes-repartition/wishes-repartition.component';
 import { WishDistributionComponent } from './wish-distribution/wish-distribution.component';

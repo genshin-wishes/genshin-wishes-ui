@@ -3,20 +3,12 @@ import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.se
 import { Stats } from '../../api/genshin-wishes/stats';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ItemNamePipe } from '../../shared/item-name.pipe';
 import { Label } from 'ng2-charts';
-import * as Chart from 'chart.js';
-import { ChartColor, ChartDataSets, Scriptable } from 'chart.js';
+import { ChartDataSets } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { FiveStarDetail } from './five-stars-list/five-stars-list.component';
 import { FourStarDetail } from './four-stars-list/four-stars-list.component';
-
-const RANK_TO_RGB: { [key: number]: (opacity: number) => string } = {
-  5: (opacity) => `rgba(255, 138, 0, ${opacity})`,
-  4: (opacity) => `rgba(187, 134, 252, ${opacity})`,
-  3: (opacity) => `rgba(3, 218, 197, ${opacity})`,
-  1: (opacity) => `rgba(151, 151, 151, ${opacity})`,
-};
+import { ColorsUtils } from '../../shared/colors.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +16,7 @@ const RANK_TO_RGB: { [key: number]: (opacity: number) => string } = {
 export class StatsService {
   constructor(
     private _gw: GenshinWishesService,
-    private _translate: TranslateService,
-    private _itemName: ItemNamePipe
+    private _translate: TranslateService
   ) {}
 
   getFocusDistribution(
@@ -48,7 +39,7 @@ export class StatsService {
           ],
           datasets: [
             {
-              ...this.getColorsFor([5, 1]),
+              ...ColorsUtils.getColorsFor([5, 1]),
               borderWidth: 1,
               data: [focused, focusable - focused],
             },
@@ -74,7 +65,7 @@ export class StatsService {
           ],
           datasets: [
             {
-              ...this.getColorsFor([4, 1]),
+              ...ColorsUtils.getColorsFor([4, 1]),
               borderWidth: 1,
               data: [characters, stats.count4Stars - characters],
             },
@@ -92,7 +83,7 @@ export class StatsService {
         labels: ['★★★', '★★★★', '★★★★★'],
         datasets: [
           {
-            ...this.getColorsFor([1, 4, 5], true),
+            ...ColorsUtils.getColorsFor([1, 4, 5], true),
             borderWidth: 1,
             data: [
               stats.count - stats.count4Stars - stats.count5Stars,
@@ -203,7 +194,7 @@ export class StatsService {
             pointBorderWidth: 0,
             pointRadius: 1,
             borderWidth: 1,
-            ...this.getColorsFor([5, 4, 3], false, index),
+            ...ColorsUtils.getColorsFor([5, 4, 3], false, index),
             data: labels.map(
               (date) =>
                 countsPerDay.find(
@@ -214,79 +205,5 @@ export class StatsService {
         };
       })
     );
-  }
-
-  private getColorsFor(
-    ranks: number[],
-    radial?: boolean,
-    index?: number
-  ): {
-    pointHoverBackgroundColor: string | string[];
-    pointHoverBorderColor: string | string[];
-    pointBackgroundColor: string | string[];
-    pointBorderColor: string | string[];
-    hoverBorderColor: string | string[];
-    hoverBackgroundColor: string | string[];
-    borderColor: string | string[];
-    backgroundColor: ChartColor | ChartColor[] | Scriptable<ChartColor>;
-  } {
-    const fullOpacity =
-      index !== undefined
-        ? RANK_TO_RGB[ranks[index]](1)
-        : ranks.map((rank) => RANK_TO_RGB[rank](1));
-    return {
-      pointBackgroundColor: fullOpacity,
-      pointBorderColor: fullOpacity,
-      pointHoverBackgroundColor: fullOpacity,
-      pointHoverBorderColor: fullOpacity,
-      hoverBorderColor: fullOpacity,
-      hoverBackgroundColor:
-        index !== undefined
-          ? RANK_TO_RGB[ranks[index]](0.3)
-          : ranks.map((rank) => RANK_TO_RGB[rank](0.3)),
-      borderColor: fullOpacity,
-      backgroundColor: (args: {
-        chart?: Chart;
-        dataIndex?: number;
-        dataset?: ChartDataSets;
-        datasetIndex?: number;
-      }) => {
-        const canvas = args.chart?.canvas;
-        const ctx = canvas?.getContext('2d');
-
-        if (!ctx || !canvas) return '';
-
-        const gradient = radial
-          ? ctx.createRadialGradient(
-              (canvas.parentElement?.clientWidth || 0) / 2,
-              (canvas.parentElement?.clientHeight || 0) / 2,
-              0,
-              (canvas.parentElement?.clientWidth || 0) / 2,
-              (canvas.parentElement?.clientHeight || 0) / 2,
-              (canvas.parentElement?.clientHeight || 0) / 2 + 80
-            )
-          : ctx.createLinearGradient(
-              0,
-              0,
-              0,
-              (canvas.parentElement?.clientHeight || 0) * 1.6
-            );
-
-        gradient.addColorStop(
-          0,
-          RANK_TO_RGB[
-            ranks[(index !== undefined ? index : args.dataIndex) || 0]
-          ](0.3)
-        );
-        gradient.addColorStop(
-          0.5,
-          RANK_TO_RGB[
-            ranks[(index !== undefined ? index : args.dataIndex) || 0]
-          ](0)
-        );
-
-        return gradient;
-      },
-    };
   }
 }

@@ -9,6 +9,11 @@ export class ItemNamePipe implements PipeTransform {
   constructor(private _translate: TranslateService) {}
 
   transform(item?: Item): string {
-    return !item ? '' : this._translate.instant('items.' + item.itemId);
+    if (!item) return '';
+
+    const key = 'items.' + item.itemId;
+    const translation = this._translate.instant(key);
+
+    return !item ? '' : translation !== key ? translation : item.name;
   }
 }

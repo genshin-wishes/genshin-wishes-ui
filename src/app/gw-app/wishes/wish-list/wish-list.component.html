@@ -4,11 +4,12 @@
     fxFlex="1 1 auto"
     [itemSize]="itemSize"
   >
-    <div fxLayout="column" fxLayoutGap="10px" class="wishes-wrapper">
+    <div fxLayout="column" fxLayoutGap="8px" class="wishes-wrapper">
       <ng-container *ngIf="count > 0; else emptyState">
         <ng-container *ngIf="wishes$ | async as wishes">
           <ng-container *cdkVirtualFor="let wish of wishes; let index = index">
-            <ng-container
+            <div
+              class="header"
               *ngLet="
                 wish &&
                 (index === 0 ||
@@ -39,12 +40,12 @@
                     | translate
                 }}
               </h3>
-            </ng-container>
 
-            <app-wish-card
-              [wish]="wish"
-              [ngStyle]="{ height: itemSize - 10 + 'px' }"
-            ></app-wish-card>
+              <app-wish-card
+                [wish]="wish"
+                [ngStyle]="{ height: itemSize - 8 + 'px' }"
+              ></app-wish-card>
+            </div>
           </ng-container>
         </ng-container>
       </ng-container>
