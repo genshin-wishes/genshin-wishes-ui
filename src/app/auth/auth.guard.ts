@@ -6,7 +6,6 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
