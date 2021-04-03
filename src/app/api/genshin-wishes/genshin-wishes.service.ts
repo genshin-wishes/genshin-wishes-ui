@@ -24,7 +24,7 @@ import {
 import { AuthService } from '../../auth/auth.service';
 import { Params } from '@angular/router';
 import { WishFilters } from '../../wishes/wish-filters/wish-filters';
-import { LangService } from '../../shared/lang.service';
+import { Lang, LangService } from '../../shared/lang.service';
 import { Item } from '../item';
 import { Stats } from './stats';
 import { Banner } from '../banner';
@@ -246,35 +246,36 @@ export class GenshinWishesService {
     return this._http.get<{ [key: number]: Banner }>('/api/banners/latest');
   }
 
-  updateLang(lang: string): Promise<string> {
-    return this._http
-      .patch(`/api/user/lang`, undefined, {
-        params: {
-          lang,
-        },
-      })
-      .toPromise()
-      .then(() => {
-        this._snack.open('settings.lang.success$', 'settings_lang_success');
+  updateLang(lang: Lang): Promise<void> {
+    return this.callWithRetry(
+      () =>
+        this._http.patch<void>(`/api/user/lang`, undefined, {
+          params: {
+            lang,
+          },
+        }),
+      {
+        success: 'settings.lang.success$',
+        gaSuccess: 'settings_lang_success',
+        gaError: 'settings_lang_error',
+      }
+    );
+  }
 
-        return lang;
-      })
-      .catch((error) => {
-        if (!error) {
-          return Promise.reject();
-        }
-
-        return this._snack
-          .open(
-            'generics.error$',
-            'settings_lang_error',
-            'accent',
-            'generics.retry'
-          )
-          .onAction()
-          .pipe(exhaustMap(() => from(this.updateLang(lang))))
-          .toPromise();
-      });
+  updateTimeFormat(wholeClock: boolean): Promise<void> {
+    return this.callWithRetry(
+      () =>
+        this._http.patch<void>(`/api/user/wholeClock`, undefined, {
+          params: {
+            wholeClock: wholeClock + '',
+          },
+        }),
+      {
+        success: 'settings.wholeClock.success$',
+        gaSuccess: 'settings_wholeClock_success',
+        gaError: 'settings_wholeClock_error',
+      }
+    );
   }
 
   importWishes(hideToasts?: boolean): Promise<ImportResponse | null> {
@@ -436,6 +437,32 @@ export class GenshinWishesService {
         )
       )
     );
+  }
+
+  private callWithRetry(
+    fn: () => Observable<void>,
+    keys: {
+      success: string;
+      gaSuccess: string;
+      gaError: string;
+    }
+  ): Promise<void> {
+    return fn()
+      .toPromise()
+      .then(() => {
+        this._snack.open(keys.success, keys.gaSuccess);
+      })
+      .catch((error) => {
+        if (!error) {
+          return Promise.reject();
+        }
+
+        return this._snack
+          .open('generics.error$', keys.gaError, 'accent', 'generics.retry')
+          .onAction()
+          .pipe(exhaustMap(() => this.callWithRetry(fn, keys)))
+          .toPromise();
+      });
   }
 
   private calculateGapFor(

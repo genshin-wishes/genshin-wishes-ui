@@ -128,6 +128,18 @@
       },
       "action": "Sauvegarder la langue"
     },
+    "wholeClock": {
+      "title": "Format de l'heure",
+      "subTitle": "Changer le format de l'heure sur le site",
+      "true": "24h",
+      "false": "12h (AM/PM)",
+      "success$": {
+        "emoji": "",
+        "title": "",
+        "message": "Le format de l'heure a bien été mise à jour."
+      },
+      "action": "Sauvegarder le format"
+    },
     "deleteAccount": {
       "title": "Supprimer votre compte",
       "subTitle": "Supprimer toutes vos données sur Genshin Wishes",

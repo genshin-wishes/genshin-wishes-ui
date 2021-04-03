@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import { TopService } from '../shared/layout/top.service';
-import { first } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Lang, LangService } from '../shared/lang.service';
 import { MihoyoService } from '../api/mihoyo/mihoyo.service';
@@ -14,19 +14,26 @@ import {
   ConfirmDialogData,
 } from '../shared/confirm-dialog/confirm-dialog.component';
 import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnDestroy {
   authUrlData!: AuthUrlAndPersistInfo;
   deleteConfirmation = '';
+
   lang: Lang | '' = '';
-  userLang: Lang | '' = '';
+  currentLang: Lang | '' = '';
+
+  wholeClock: boolean | undefined;
+  currentWholeClock: boolean | undefined;
 
   importing = false;
+
+  private _destroy = new Subject();
 
   constructor(
     private _lang: LangService,
@@ -40,7 +47,15 @@ export class SettingsComponent {
     private _router: Router
   ) {
     this._top.setTitle('settings.label');
-    this._lang.lang$.pipe(first()).subscribe((lang) => (this.userLang = lang));
+
+    this._auth.user$.pipe(takeUntil(this._destroy)).subscribe((user) => {
+      this.currentLang = this._lang.getCurrentLang();
+
+      this.currentWholeClock =
+        user?.wholeClock != undefined
+          ? user?.wholeClock
+          : this.currentLang === 'fr';
+    });
   }
 
   updateAuthUrl(data: AuthUrlAndPersistInfo): void {
@@ -58,10 +73,16 @@ export class SettingsComponent {
         return;
       }
 
-      this.userLang = lang;
-      this._translate.use(lang);
       this._auth.setLang(lang);
+      this._translate.use(lang);
       this._top.setTitle('settings.label');
+    });
+  }
+
+  updateTimeFormat(wholeClock: boolean): void {
+    this._gw.updateTimeFormat(wholeClock).then(() => {
+      this._auth.setWholeClock(wholeClock);
+      this.wholeClock = wholeClock;
     });
   }
 
@@ -85,5 +106,10 @@ export class SettingsComponent {
       .afterClosed()
       .toPromise()
       .then((res) => !!res && window.open('/api/wishes/export'));
+  }
+
+  ngOnDestroy(): void {
+    this._destroy.next();
+    this._destroy.complete();
   }
 }

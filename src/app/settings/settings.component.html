@@ -54,7 +54,7 @@
         <mat-radio-group
           fxLayout="column"
           fxLayoutGap="16px"
-          [value]="userLang"
+          [value]="currentLang"
           (change)="lang = $event.value"
         >
           <mat-radio-button name="en" value="en" gaClick="settings_lang_en">
@@ -70,11 +70,63 @@
           <button
             mat-raised-button
             color="accent"
-            [disabled]="!lang || lang == userLang"
+            [disabled]="!lang || lang == currentLang"
             gaClick="settings_lang_save"
             (click)="lang && updateLang(lang)"
           >
             {{ "settings.lang.action" | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ "settings.wholeClock.title" | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ "settings.wholeClock.subTitle" | translate }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div fxLayout="column" fxLayoutGap="26px">
+        <mat-radio-group
+          fxLayout="column"
+          fxLayoutGap="16px"
+          [value]="currentWholeClock"
+          (change)="wholeClock = $event.value"
+        >
+          <mat-radio-button
+            name="wholeClockFalse"
+            [value]="false"
+            gaClick="settings_wholeClock_false"
+          >
+            {{ "settings.wholeClock.false" | translate }}
+          </mat-radio-button>
+
+          <mat-radio-button
+            name="wholeClockTrue"
+            [value]="true"
+            gaClick="settings_wholeClock_true"
+          >
+            {{ "settings.wholeClock.true" | translate }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="
+              wholeClock == undefined || wholeClock == currentWholeClock
+            "
+            gaClick="settings_wholeClock_save"
+            (click)="wholeClock != undefined && updateTimeFormat(wholeClock)"
+          >
+            {{ "settings.wholeClock.action" | translate }}
           </button>
         </div>
       </div>

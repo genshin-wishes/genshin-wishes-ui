@@ -115,18 +115,30 @@
     "label": "Settings",
     "authLink": {
       "title": "Authentication link",
-      "subTitle": "Edit your genshin authentication link",
+      "subTitle": "Edit your authentication link",
       "update": "Save and update"
     },
     "lang": {
       "title": "Language",
-      "subTitle": "Change site and items language",
+      "subTitle": "Change the site and items language",
       "success$": {
         "emoji": "",
         "title": "",
         "message": "Your language has been updated."
       },
       "action": "Save language"
+    },
+    "wholeClock": {
+      "title": "Time format",
+      "subTitle": "Change the site time format",
+      "true": "24h",
+      "false": "12h (AM/PM)",
+      "success$": {
+        "emoji": "",
+        "title": "",
+        "message": "The time format has been updated."
+      },
+      "action": "Save format"
     },
     "deleteAccount": {
       "title": "Delete your account",

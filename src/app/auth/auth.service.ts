@@ -31,17 +31,33 @@ export class AuthService {
   }
 
   register(user: User | null): void {
-    this._user$.next(user);
     this._currentUser = user;
+    this._user$.next(user);
   }
 
   logout(): void {
     this.register(null);
   }
 
-  setLang(lang: Lang): void {
+  setLang(lang: Lang): User | null {
     if (this._currentUser) {
-      this.register({ ...this._currentUser, lang });
+      this._currentUser = { ...this._currentUser, lang };
+      this.register(this._currentUser);
+
+      return this._currentUser;
     }
+
+    return null;
+  }
+
+  setWholeClock(wholeClock: boolean): User | null {
+    if (this._currentUser) {
+      this._currentUser = { ...this._currentUser, wholeClock };
+      this.register(this._currentUser);
+
+      return this._currentUser;
+    }
+
+    return null;
   }
 }
