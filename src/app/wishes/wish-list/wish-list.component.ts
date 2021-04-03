@@ -4,7 +4,7 @@ import { VirtualScrollDatasource } from '../virtual-scroll-datasource';
 import { map } from 'rxjs/operators';
 import { MediaObserver } from '@angular/flex-layout';
 import { Observable } from 'rxjs';
-import { IdToBanner } from '../../api/genshin-wishes/genshin-wishes.service';
+import { IdToBanner } from '../../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-wish-list',

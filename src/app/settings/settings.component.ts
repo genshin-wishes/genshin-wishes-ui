@@ -15,6 +15,7 @@ import {
 } from '../shared/confirm-dialog/confirm-dialog.component';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
+import { ImportService } from '../api/genshin-wishes/import.service';
 
 @Component({
   selector: 'app-settings',
@@ -31,13 +32,14 @@ export class SettingsComponent implements OnDestroy {
   wholeClock: boolean | undefined;
   currentWholeClock: boolean | undefined;
 
-  importing = false;
+  importState$ = this._import.importState$;
 
   private _destroy = new Subject();
 
   constructor(
     private _lang: LangService,
     private _gw: GenshinWishesService,
+    private _import: ImportService,
     private _location: Location,
     private _mihoyo: MihoyoService,
     private _dialog: MatDialog,
@@ -59,12 +61,8 @@ export class SettingsComponent implements OnDestroy {
   }
 
   updateAuthUrl(data: AuthUrlAndPersistInfo): void {
-    this.importing = true;
     this._mihoyo.auth(data);
-    this._gw
-      .importWishes()
-      .then(() => (this.importing = false))
-      .catch(() => (this.importing = false));
+    this._import.import();
   }
 
   updateLang(lang: Lang): void {

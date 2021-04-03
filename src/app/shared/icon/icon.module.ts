@@ -28,6 +28,7 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons/faExternalLinkAlt';
 import { faFlag } from '@fortawesome/free-solid-svg-icons/faFlag';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 
 @NgModule({
   exports: [FontAwesomeModule],
@@ -59,6 +60,7 @@ export class IconModule {
       faExternalLinkAlt,
       faFlag,
       faHeart,
+      faCheckCircle,
       faTimesCircle
     );
   }

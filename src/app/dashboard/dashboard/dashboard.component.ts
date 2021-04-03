@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  BannerToId,
-  GenshinWishesService,
-} from '../../api/genshin-wishes/genshin-wishes.service';
+import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 import { TopService } from '../../shared/layout/top.service';
+import { BannerToId } from '../../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-dashboard',

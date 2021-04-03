@@ -18,7 +18,7 @@
       "message": "Une erreur est survenue, merci de réessayer."
     },
     "mihoyoError$": {
-      "emoji": "⚠",
+      "emoji": "\uD83D\uDEA8",
       "title": "",
       "message": "Impossible de se connecter au serveur de Genshin."
     }
@@ -27,14 +27,14 @@
     "title": "Genshin Wishes — Sauvegardez votre historique de vœux simplement",
     "titleWithPage": "Genshin Wishes - {{ page }}",
     "menu": "Menu",
-    "persistLink": "Sauvegarder pendant 24h",
+    "persistLink": "Se souvenir du lien pendant 24h",
     "user": {
       "uid": "UID {{ uid }}"
     },
     "urlInput": {
       "dialog": {
         "title": "Votre lien a expiré",
-        "message": "⚠ Votre lien d'authentification n'est pas valide. Mettez le à jour SVP. <a href=\"/faq\" target=\"_blank\"> Comment ?</a>",
+        "message": "\uD83D\uDEA8 Votre lien d'authentification n'est pas valide. Mettez le à jour SVP. <a href=\"/faq\" target=\"_blank\"> Comment ?</a>",
         "ok": "Mettre à jour le lien"
       },
       "pasteInput": "Collez votre lien ici",
@@ -51,22 +51,14 @@
       },
       "steps$": {
         "1": {
-          "title": "Informations",
-          "description": "Pour récupérer vos vœux, il nous faut un lien temporaire du jeu.\n\nCe lien nous permet uniquement de récupérer des données de votre historique de vœux.\n<span class=\"text-accent\">Nous n'aurons jamais accès à votre compte Genshin Impact</span>.\nAllez à l'étape suivante pour voir comment obtenir votre lien."
+          "title": "Récupérez votre clé",
+          "description": "Pour récupérer vos vœux, il nous faut une clé temporaire du jeu.\n<span class=\"text-accent\">Ne vous inquiétez pas, nous n'aurons jamais accès à votre compte Genshin Impact.</span>",
+          "showVideo": "Voir une vidéo"
         },
         "2": {
-          "title": "Récupérez votre lien",
-          "description": "1. <b>Sur Windows</b>, ouvrez le jeu et connectez vous à votre compte\n\n2. Appuyez sur <b>Échap</b> pour afficher le menu de Paimon\n\n3. Cliquez sur le dernier menu <b>Commentaires</b>\n\n4. Dans la fenêtre de navigateur qui vient de s'ouvrir, <b>copiez le lien de la barre de navigation</b>",
-          "showVideo": "Voir en vidéo"
-        },
-        "3": {
-          "title": "Paramétrez votre premier import"
-        },
-        "4": {
-          "title": "Bravo {{ username }} \uD83D\uDC4F",
-          "description": "Vous aurez besoin de <span class=\"text-accent\"><b>répéter ces étapes chaque jour</b></span> où vous voudrez synchroniser vos vœux.",
-          "wishesFound": "<b>Nous avons trouvé <span class=\"text-primary\">{{ wishes }}</span> vœux !</b>",
-          "seeWishes": "Voir les vœux"
+          "title": "Patience! Nous sommes en train de récupérer vos vœux \uD83D\uDC0B \uD83D\uDE48",
+          "description": "<span class=\"text-success\"><b>Répétez ces étapes la prochaine fois</b></span> pour synchroniser de nouveaux vœux.",
+          "seeWishes": "Aller sur l'appli"
         }
       }
     },
@@ -228,10 +220,16 @@
     },
     "differentUidDialog": {
       "title": "Différence de compte",
-      "description": "⚠ Les vœux que vous allez ajouter ne sont pas liés au même compte Genshin.\n\nQue souhaitez-vous faire ?",
+      "description": "\uD83D\uDEA8 Les vœux que vous allez ajouter ne sont pas liés au même compte Genshin.\n\nQue souhaitez-vous faire ?",
       "delete": "Supprimer les anciens voeux"
     },
     "import": {
+      "saving": "Sauvegarde en cours...",
+      "recovery$": {
+        "emoji": "",
+        "title": "",
+        "message": "Reprise de votre import de vœux..."
+      },
       "success$": {
         "emoji": "\uD83E\uDD29",
         "title": "",
@@ -243,14 +241,19 @@
         "message": "Les vœux faits il y a moins d'une heure ne peuvent pas encore être ajoutés."
       },
       "invalidAuthkey$": {
-        "emoji": "⚠",
+        "emoji": "\uD83D\uDEA8",
         "title": "",
         "message": "Impossible de vous authentifier."
       },
       "newWishesDuringImport$": {
-        "emoji": "⚠",
+        "emoji": "\uD83D\uDEA8",
         "title": "",
         "message": "Désolé, votre historique de vœux à évolué durant l'importation. Merci de réessayer."
+      },
+      "alreadyImporting$": {
+        "emoji": "\uD83D\uDEA8",
+        "title": "",
+        "message": "Un import de vos vœux est déjà en cours, soyez patient svp!"
       }
     },
     "banners$": {
@@ -277,7 +280,7 @@
     }
   },
   "footer": {
-    "disclaimer": "Genshin Impact et miHoYo sont des marques commerciales ou marques déposées de miHoYo. Genshin Impact © miHoYo.",
-    "claim": "Pour toute demande, veuillez nous <a href=\"mailto:contact.genshin.wishes@gmail.com\">contacter</a>"
+    "disclaimer": "Genshin Wishes n'est pas affilié à miHoYo. Genshin Impact et miHoYo sont des marques commerciales ou marques déposées de miHoYo. Genshin Impact © miHoYo.",
+    "claim": "Pour toute demande, veuillez nous <a href=\"mailto:contact.genshin.wishes@gmail.com\">contacter</a>."
   }
 }

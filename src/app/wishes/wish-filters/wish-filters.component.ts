@@ -3,11 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { WishFilters } from './wish-filters';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  BannerType,
-  GenshinWishesService,
-} from '../../api/genshin-wishes/genshin-wishes.service';
+import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { BannerType } from '../../api/genshin-wishes/constants';
 
 export interface WishFiltersDialogData {
   route: ActivatedRoute;

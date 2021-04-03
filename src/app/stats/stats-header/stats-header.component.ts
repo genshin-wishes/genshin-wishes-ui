@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BannerType } from '../../api/genshin-wishes/genshin-wishes.service';
 import { Stats } from '../../api/genshin-wishes/stats';
 import { Banner } from '../../api/banner';
 import { WishFilters } from '../../wishes/wish-filters/wish-filters';
+import { BannerType } from '../../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-stats-header',

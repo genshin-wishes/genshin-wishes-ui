@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SidenavService } from '../../../core/sidenav.service';
-import { GenshinWishesService } from '../../../api/genshin-wishes/genshin-wishes.service';
 import { TopService } from '../top.service';
+import { ImportService } from '../../../api/genshin-wishes/import.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -16,26 +16,21 @@ export class TopBarComponent {
   @Input()
   withLogout = false;
 
-  loading = false;
-
   title$ = this._top.title$;
+
+  importState$ = this._import.importState$;
 
   constructor(
     private _sidenav: SidenavService,
     private _top: TopService,
-    private _gw: GenshinWishesService
+    private _import: ImportService
   ) {}
 
-  toggle() {
+  toggle(): void {
     this._sidenav.toggle();
   }
 
-  importWishes() {
-    this.loading = true;
-
-    this._gw
-      .importWishes()
-      .then(() => (this.loading = false))
-      .catch(() => (this.loading = false));
+  importWishes(): void {
+    this._import.import().catch(() => {});
   }
 }

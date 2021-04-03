@@ -18,7 +18,7 @@
       "message": "An error has occured. Please retry."
     },
     "mihoyoError$": {
-      "emoji": "⚠",
+      "emoji": "\uD83D\uDEA8",
       "title": "",
       "message": "Unable to connect to Genshin server."
     }
@@ -27,14 +27,14 @@
     "title": "Genshin Wishes - Backup your wish history easily",
     "titleWithPage": "Genshin Wishes - {{ page }}",
     "menu": "Menu",
-    "persistLink": "Save link for 24h",
+    "persistLink": "Remember the link for 24h",
     "user": {
       "uid": "UID {{ uid }}"
     },
     "urlInput": {
       "dialog": {
         "title": "Your link has expired",
-        "message": "⚠ The authentication link is not valid. Please update it. <a href=\"/faq\" target=\"_blank\"> How?</a>",
+        "message": "\uD83D\uDEA8 The authentication link is not valid. Please update it. <a href=\"/faq\" target=\"_blank\"> How?</a>",
         "ok": "Update link"
       },
       "pasteInput": "Paste your link here",
@@ -51,22 +51,14 @@
       },
       "steps$": {
         "1": {
-          "title": "Informations",
-          "description": "To get your wishes we need a temporary link from the game.\n\nThis link only allows us to fetch data from the wish history.\n<span class=\"text-accent\">We will never have access to your Genshin Impact account</span>.\nGo to the next step to know how to get your link."
-        },
-        "2": {
-          "title": "Get your link",
-          "description": "1. <b>On Windows</b>, open your game and log into your account\n\n2. Press <b>ESC</b> to display Paimon's menu\n\n3. Click on the last entry named <b>Feedback</b>\n\n4. In the opened browser window, <b>copy the link from the address bar</b>",
+          "title": "Get your key",
+          "description": "To get your wishes we need a temporary key from the game.\n<span class=\"text-accent\">Don't worry, we will never have access to your Genshin Impact account.</span>",
           "showVideo": "Show me a video"
         },
-        "3": {
-          "title": "Setup your first import"
-        },
-        "4": {
-          "title": "Well done {{ username }} \uD83D\uDC4F",
-          "description": "You will need to <span class=\"text-accent\"><b>repeat these steps on each day</b></span> you want to synchronize your wishes.",
-          "wishesFound": "<b>We found <span class=\"text-primary\">{{ wishes }}</span> wishes!</b>",
-          "seeWishes": "View wishes"
+        "2": {
+          "title": "Hold on! We are getting your wishes \uD83D\uDC0B \uD83D\uDE48",
+          "description": "<span class=\"text-success\"><b>Repeat these steps next time</b></span> to synchronize new wishes.",
+          "seeWishes": "Go to the app"
         }
       }
     },
@@ -228,10 +220,16 @@
     },
     "differentUidDialog": {
       "title": "Different account",
-      "description": "⚠ The wishes you are about to add are not linked to the same Genshin account.\n\nWhat do you want to do?",
+      "description": "\uD83D\uDEA8 The wishes you are about to add are not linked to the same Genshin account.\n\nWhat do you want to do?",
       "delete": "Delete old wishes"
     },
     "import": {
+      "saving": "Saving...",
+      "recovery$": {
+        "emoji": "",
+        "title": "",
+        "message": "Recovering your wishes import..."
+      },
       "success$": {
         "emoji": "\uD83E\uDD29",
         "title": "",
@@ -243,14 +241,19 @@
         "message": "Wishes made less than an hour ago cannot be added yet."
       },
       "invalidAuthkey$": {
-        "emoji": "⚠",
+        "emoji": "\uD83D\uDEA8",
         "title": "",
         "message": "Could not authenticate you."
       },
       "newWishesDuringImport$": {
-        "emoji": "⚠",
+        "emoji": "\uD83D\uDEA8",
         "title": "",
         "message": "Sorry, your wish history changed during the import. Please try again."
+      },
+      "alreadyImporting$": {
+        "emoji": "\uD83D\uDEA8",
+        "title": "",
+        "message": "An import of your wishes is already occurring, please be patient!"
       }
     },
     "banners$": {
@@ -277,7 +280,7 @@
     }
   },
   "footer": {
-    "disclaimer": "Genshin Impact and miHoYo are trademarks or registered trademarks of miHoYo. Genshin Impact © miHoYo.",
-    "claim": "For any claim, please <a href=\"mailto:contact.genshin.wishes@gmail.com\">contact us</a>"
+    "disclaimer": "Genshin Wishes is not affiliated to miHoYo. Genshin Impact and miHoYo are trademarks or registered trademarks of miHoYo. Genshin Impact © miHoYo.",
+    "claim": "For any claim, please <a href=\"mailto:contact.genshin.wishes@gmail.com\">contact us</a>."
   }
 }
