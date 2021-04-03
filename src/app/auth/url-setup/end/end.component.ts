@@ -1,5 +1,6 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { User } from '../../../api/genshin-wishes/user';
+import { ImportResponse } from '../../../api/genshin-wishes/import-response';
+import { BannerTypes } from '../../../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-end',
@@ -8,9 +9,9 @@ import { User } from '../../../api/genshin-wishes/user';
 })
 export class EndComponent {
   @Input()
-  importedWishes!: number;
+  importedWishes!: ImportResponse;
   @Input()
-  actions!: TemplateRef<any>;
-  @Input()
-  mihoyoUser!: User;
+  actions!: TemplateRef<unknown>;
+
+  banners = BannerTypes;
 }

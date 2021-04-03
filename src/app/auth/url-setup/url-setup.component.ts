@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import {
-  ApiErrors,
-  BannerTypes,
-  GenshinWishesService,
-} from '../../api/genshin-wishes/genshin-wishes.service';
+import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { MihoyoService } from '../../api/mihoyo/mihoyo.service';
 import { User } from '../../api/genshin-wishes/user';
 import { TopService } from '../../shared/layout/top.service';
-import { exhaustMap, tap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
 import { SnackService } from '../../shared/snack/snack.service';
 import { AuthUrlAndPersistInfo } from '../url-input/url-input.component';
+import { ImportResponse } from '../../api/genshin-wishes/import-response';
+import { ApiErrors } from '../../api/genshin-wishes/constants';
+import { ImportService } from '../../api/genshin-wishes/import.service';
 
 @Component({
   selector: 'app-url-setup',
@@ -21,10 +20,21 @@ import { AuthUrlAndPersistInfo } from '../url-input/url-input.component';
 })
 export class UrlSetupComponent {
   currentStep = 1;
-  readonly lastStep = 3;
+  readonly lastStep = 1;
 
   mihoyoUser!: User | null;
-  importedWishes = 0;
+  importedWishes: ImportResponse = {} as ImportResponse;
+  importedWishes$: Observable<ImportResponse> = this._import.importState$.pipe(
+    map(
+      (importedWishes) =>
+        (this.importedWishes = importedWishes || this.importedWishes)
+    ),
+    catchError((err) => {
+      this.currentStep = 1;
+
+      throw err;
+    })
+  );
   error = '';
   loading = false;
 
@@ -32,6 +42,7 @@ export class UrlSetupComponent {
     private _auth: AuthService,
     private _mihoyo: MihoyoService,
     private _gw: GenshinWishesService,
+    private _import: ImportService,
     private _snack: SnackService,
     private _top: TopService,
     private _router: Router
@@ -43,8 +54,9 @@ export class UrlSetupComponent {
     if (this._mihoyo.auth(data)) {
       this.loading = true;
 
-      this.callLinkMihoyoUser(data);
+      this.callLinkMihoyoUser(data).then(() => ++this.currentStep);
     } else {
+      alert('??');
       this.error = 'app.urlInput.incorrectLink';
     }
   }
@@ -56,23 +68,18 @@ export class UrlSetupComponent {
         this.mihoyoUser = user;
         this._auth.register(user);
         this._mihoyo.auth(data); // updates mihoyoUid in cookie if revelant
-        this._gw.importWishes(true).then((res) => {
-          this.loading = false;
 
-          if (res) {
-            this.importedWishes = BannerTypes.reduce(
-              (prev, curr) => prev + res[curr],
-              0
-            );
-            this.currentStep++;
-          } else {
-            this.error = 'app.urlInput.incorrectLink';
-          }
-        });
+        this._import
+          .import(true)
+          .catch((err) => {
+            this.currentStep = 1;
+
+            if (err?.error === ApiErrors.AUTHKEY_INVALID)
+              this.error = 'app.urlInput.incorrectLink';
+          })
+          .finally(() => (this.loading = false));
       })
       .catch((error) => {
-        this.loading = false;
-
         if (error.error === ApiErrors.MIHOYO_UNREACHABLE)
           return this._snack
             .open(
@@ -88,9 +95,11 @@ export class UrlSetupComponent {
             )
             .toPromise();
 
-        this.error = 'app.urlInput.incorrectLink';
+        if (error?.error === ApiErrors.AUTHKEY_INVALID)
+          this.error = 'app.urlInput.incorrectLink';
 
         return Promise.reject();
-      });
+      })
+      .finally(() => (this.loading = false));
   }
 }

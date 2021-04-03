@@ -12,12 +12,12 @@ import {
 } from 'rxjs/operators';
 import { TopService } from '../shared/layout/top.service';
 import { ActivatedRoute } from '@angular/router';
+import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import {
   BannerToId,
   BannerType,
-  GenshinWishesService,
   IdToBanner,
-} from '../api/genshin-wishes/genshin-wishes.service';
+} from '../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-stats',

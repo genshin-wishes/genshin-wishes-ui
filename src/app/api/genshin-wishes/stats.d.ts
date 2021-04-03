@@ -1,5 +1,5 @@
 import { Wish } from './wish';
-import { BannerType } from './genshin-wishes.service';
+import { BannerType } from './constants';
 
 export interface Stats {
   bannerType: BannerType;

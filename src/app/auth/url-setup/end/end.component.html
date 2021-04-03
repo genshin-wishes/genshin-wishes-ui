@@ -1,20 +1,18 @@
 <app-step
-  [stepTitle]="
-    'app.urlSetup.steps$.4.title'
-      | translate: { username: mihoyoUser.mihoyoUsername }
-  "
+  [stepTitle]="'app.urlSetup.steps$.2.title' | translate"
   [actions]="endActions"
   fxFlex
 >
   <div>
     <p
-      [innerHTML]="
-        'app.urlSetup.steps$.4.wishesFound'
-          | translate: { wishes: importedWishes }
-      "
+      class="description border-success"
+      [innerHTML]="'app.urlSetup.steps$.2.description' | translate"
     ></p>
 
-    <p [innerHTML]="'app.urlSetup.steps$.4.description' | translate"></p>
+    <app-wish-import-progress
+      [importedWishes]="importedWishes"
+      #progress
+    ></app-wish-import-progress>
   </div>
 </app-step>
 
@@ -24,7 +22,8 @@
     color="accent"
     [routerLink]="['/']"
     gaClick="see_wishes"
+    [disabled]="!progress.isSaved(importedWishes)"
   >
-    {{ "app.urlSetup.steps$.4.seeWishes" | translate }}
+    {{ "app.urlSetup.steps$.2.seeWishes" | translate }}
   </button>
 </ng-template>

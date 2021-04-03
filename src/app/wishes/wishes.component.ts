@@ -9,10 +9,7 @@ import {
   tap,
 } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import {
-  BannerType,
-  GenshinWishesService,
-} from '../api/genshin-wishes/genshin-wishes.service';
+import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import { MediaObserver } from '@angular/flex-layout';
 import { Wish } from '../api/genshin-wishes/wish';
 import { TopService } from '../shared/layout/top.service';
@@ -26,6 +23,7 @@ import { LangService } from '../shared/lang.service';
 import { MatDialog } from '@angular/material/dialog';
 import { VirtualScrollDatasource } from './virtual-scroll-datasource';
 import { WishFilters } from './wish-filters/wish-filters';
+import { BannerType } from '../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-wishes',

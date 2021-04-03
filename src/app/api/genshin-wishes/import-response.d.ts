@@ -1,3 +1,10 @@
-import { BannerType } from './genshin-wishes.service';
+import { BannerType } from './constants';
 
-export type ImportResponse = Record<BannerType, number>;
+export interface BannerImportState {
+  bannerType: BannerType;
+  count: number;
+  finished: boolean;
+  saved: boolean;
+}
+
+export type ImportResponse = Record<BannerType, BannerImportState>;

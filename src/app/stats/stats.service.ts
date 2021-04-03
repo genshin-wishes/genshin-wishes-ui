@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  BannerType,
-  GenshinWishesService,
-} from '../api/genshin-wishes/genshin-wishes.service';
+import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.service';
 import { Stats } from '../api/genshin-wishes/stats';
 import { Observable } from 'rxjs';
 import { WishFilters } from '../wishes/wish-filters/wish-filters';
@@ -14,6 +11,7 @@ import { ChartColor, ChartDataSets, Scriptable } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { FiveStarDetail } from './five-stars-list/five-stars-list.component';
 import { FourStarDetail } from './four-stars-list/four-stars-list.component';
+import { BannerType } from '../api/genshin-wishes/constants';
 
 const RANK_TO_RGB: { [key: number]: (opacity: number) => string } = {
   5: (opacity) => `rgba(255, 138, 0, ${opacity})`,
@@ -46,7 +44,7 @@ export class StatsService {
             w.banner?.items && w.banner.items.find((i) => i.itemId === w.itemId)
         ).length;
         const focusable = stats.wishes.filter(
-          (w) => !!w.banner?.items?.length && w.item?.rankType === 5
+          (w) => w.banner?.items?.length && w.item?.rankType === 5
         ).length;
 
         return {
@@ -206,6 +204,7 @@ export class StatsService {
               .fill(0)
               .map(() => '★')
               .join(''),
+            pointHitRadius: 15,
             pointStyle: 'circle',
             pointBorderWidth: 0,
             pointRadius: 1,

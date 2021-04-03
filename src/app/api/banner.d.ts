@@ -1,5 +1,5 @@
 import { Item } from './item';
-import { BannerType } from './genshin-wishes/genshin-wishes.service';
+import { BannerType } from './genshin-wishes/constants';
 
 export interface Banner {
   id: number;

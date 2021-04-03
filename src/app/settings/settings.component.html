@@ -47,7 +47,7 @@
       <div fxLayout="column" fxLayoutGap="26px">
         <app-url-input [(urlData)]="authUrlData"></app-url-input>
 
-        <ng-container *ngIf="!importing; else loadingButton">
+        <ng-container *ngIf="!(importState$ | async); else loadingButton">
           <button
             mat-raised-button
             class="save-url-button"

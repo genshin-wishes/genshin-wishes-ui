@@ -1,5 +1,5 @@
 import { Item } from '../item';
-import { BannerType } from './genshin-wishes.service';
+import { BannerType } from './constants';
 
 export interface BannerData {
   key: BannerType;

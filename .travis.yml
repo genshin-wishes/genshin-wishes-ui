@@ -1,6 +1,5 @@
 language: node_js
-sudo: true
-dist: trusty
+os: linux
 node_js:
   - 14
 
@@ -21,4 +20,3 @@ before_deploy:
 
 deploy:
   provider: releases
-  skip_cleanup: true

@@ -535,6 +535,10 @@ $genshin-wishes-theme: mat-dark-theme(
     color: #000;
   }
 
+  // TODO use loop
+  .border-success {
+    border-color: mat-color($foreground, success-text) !important;
+  }
   .text-primary {
     color: mat-color($primary);
   }
@@ -623,6 +627,12 @@ $genshin-wishes-theme: mat-dark-theme(
       .mat-card-subtitle {
         color: mat-color($accent);
       }
+    }
+
+    app-wish-import-progress {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
     }
   }
 }

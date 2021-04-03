@@ -28,7 +28,7 @@
   <span fxFlex></span>
 
   <ng-container *ngIf="withActions">
-    <ng-container *ngIf="!loading; else loadingButton">
+    <ng-container *ngIf="!(importState$ | async); else loadingButton">
       <a
         mat-icon-button
         [matTooltip]="'wishes.update.label' | translate"

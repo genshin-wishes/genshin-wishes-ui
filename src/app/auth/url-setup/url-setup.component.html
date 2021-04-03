@@ -1,24 +1,24 @@
 <app-landing [withLogout]="true">
   <div [ngSwitch]="currentStep" fxLayoutAlign="center">
     <ng-container *ngIf="!loading; else loader">
-      <app-step1 *ngSwitchCase="1" [actions]="actions" fxFlex> </app-step1>
-      <app-step2 *ngSwitchCase="2" [actions]="actions" fxFlex> </app-step2>
-      <app-step3
-        *ngSwitchCase="3"
+      <app-step1
+        *ngSwitchCase="1"
         [actions]="actions"
         [feedback]="error"
         (finish)="$event && finish($event)"
         fxFlex
       >
-      </app-step3>
-      <app-end
-        *ngSwitchCase="4"
-        [actions]="actions"
-        [mihoyoUser]="mihoyoUser!"
-        [importedWishes]="importedWishes"
-        fxFlex
-      >
-      </app-end>
+      </app-step1>
+
+      <ng-container *ngIf="importedWishes$ | async as importedWishes">
+        <app-end
+          *ngSwitchCase="2"
+          [actions]="actions"
+          [importedWishes]="importedWishes"
+          fxFlex
+        >
+        </app-end>
+      </ng-container>
     </ng-container>
   </div>
 

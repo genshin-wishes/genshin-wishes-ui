@@ -25,7 +25,10 @@
 
         <app-pity-chip [pity]="wish.pity"></app-pity-chip>
 
-        <app-focus-chip [focused]="isFocused(wish)"></app-focus-chip>
+        <app-focus-chip
+          *ngIf="wish.banner?.items?.length"
+          [focused]="isFocused(wish)"
+        ></app-focus-chip>
       </div>
     </li>
   </ol>

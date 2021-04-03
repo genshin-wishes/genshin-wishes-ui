@@ -1,0 +1,28 @@
+<div fxLayout="column" fxLayoutGap="16px">
+  <div *ngFor="let banner of banners" fxLayout="row" fxLayoutGap="16px">
+    <div class="progress-icon">
+      <mat-spinner
+        [diameter]="20"
+        *ngIf="!importedWishes[banner]?.finished; else done"
+      ></mat-spinner>
+    </div>
+
+    <span>{{ "wishes.banners$." + banner + ".title" | translate }}</span>
+
+    <span fxFlex></span>
+
+    <span class="text-primary">
+      {{ importedWishes[banner]?.count || 0 }}
+    </span>
+  </div>
+
+  <p *ngIf="isFinished(importedWishes) && !isSaved(importedWishes)">
+    {{ "wishes.import.saving" | translate }}
+  </p>
+</div>
+
+<ng-template #done>
+  <span class="text-success">
+    <fa-icon icon="check-circle"></fa-icon>
+  </span>
+</ng-template>

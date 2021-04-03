@@ -6,8 +6,8 @@ import {
   EventEmitter,
   OnInit,
 } from '@angular/core';
-import { BannerTypes } from '../../api/genshin-wishes/genshin-wishes.service';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { BannerTypes } from '../../api/genshin-wishes/constants';
 
 @Component({
   selector: 'app-banner-nav',

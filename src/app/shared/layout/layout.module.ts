@@ -15,6 +15,7 @@ import { ItemNamePipe } from './item-name.pipe';
 import { BannerSelectComponent } from './banner-select/banner-select.component';
 import { GwDatePipe } from './gw-date.pipe';
 import { FormsModule } from '@angular/forms';
+import { WishImportProgressComponent } from './wish-import-progress/wish-import-progress.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     GwDatePipe,
     GaClickDirective,
     BannerSelectComponent,
+    WishImportProgressComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +49,7 @@ import { FormsModule } from '@angular/forms';
     GwDatePipe,
     GaClickDirective,
     BannerSelectComponent,
+    WishImportProgressComponent,
   ],
   providers: [SlugifyPipe],
 })
