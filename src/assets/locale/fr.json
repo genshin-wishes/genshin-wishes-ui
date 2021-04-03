@@ -267,8 +267,8 @@
         "titleWithCount": "Bannière permanente ({{ wishes }} vœux)"
       },
       "CHARACTER_EVENT": {
-        "title": "Bannière d'évènement",
-        "titleWithCount": "Bannière d'évènement ({{ wishes }} vœux)"
+        "title": "Bannière personnages",
+        "titleWithCount": "Bannière personnages ({{ wishes }} vœux)"
       },
       "WEAPON_EVENT": {
         "title": "Bannière d'armes",
