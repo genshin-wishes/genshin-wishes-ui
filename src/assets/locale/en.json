@@ -267,8 +267,8 @@
         "titleWithCount": "Permanent banner ({{ wishes }} wishes)"
       },
       "CHARACTER_EVENT": {
-        "title": "Event banner",
-        "titleWithCount": "Event banner ({{ wishes }} wishes)"
+        "title": "Character banner",
+        "titleWithCount": "Character banner ({{ wishes }} wishes)"
       },
       "WEAPON_EVENT": {
         "title": "Weapon banner",
