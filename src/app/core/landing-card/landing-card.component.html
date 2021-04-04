@@ -81,27 +81,35 @@
             </div>
 
             <div fxLayoutAlign="center" class="button-wrapper">
-              <div fxLayout="column" fxLayoutGap="12px">
-                <a
-                  mat-raised-button
-                  color="accent"
-                  gaClick="sign_in"
-                  [routerLink]="['/login']"
-                >
-                  {{ "app.signIn" | translate }}
-                </a>
+              <div
+                fxLayout="column"
+                fxLayoutGap="12px"
+                fxLayoutAlign="center center"
+              >
+                <div>
+                  <a
+                    mat-raised-button
+                    color="accent"
+                    gaClick="sign_in"
+                    [routerLink]="['/login']"
+                  >
+                    {{ "app.signIn" | translate }}
+                  </a>
+                </div>
 
-                <a
-                  mat-button
-                  color="primary"
-                  [href]="discordUrl"
-                  target="_blank"
-                  gaClick="discord_discord"
-                >
-                  <fa-icon [icon]="['fab', 'discord']"></fa-icon>
-                  &nbsp;
-                  {{ "nav.discord.label" | translate }}
-                </a>
+                <div>
+                  <a
+                    mat-button
+                    color="primary"
+                    [href]="discordUrl"
+                    target="_blank"
+                    gaClick="discord_discord"
+                  >
+                    <fa-icon [icon]="['fab', 'discord']"></fa-icon>
+                    &nbsp;
+                    {{ "nav.discord.label" | translate }}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
