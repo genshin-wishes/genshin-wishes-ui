@@ -21,7 +21,7 @@ import {
 } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { AuthService } from '../../auth/auth.service';
 import { Params } from '@angular/router';
-import { WishFilters } from '../../wishes/wish-filters/wish-filters';
+import { WishFilters } from '../../gw-app/wishes/wish-filters/wish-filters';
 import { Lang, LangService } from '../../shared/lang.service';
 import { Item } from '../item';
 import { Stats } from './stats';

@@ -5,7 +5,7 @@ import { AuthService } from '../auth.service';
 import { filter, tap } from 'rxjs/operators';
 import { User } from '../../api/genshin-wishes/user';
 import { combineLatest } from 'rxjs';
-import { TopService } from '../../shared/layout/top.service';
+import { TopService } from '../../core/top.service';
 
 @Component({
   selector: 'app-auth',

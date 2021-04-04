@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { IconModule } from './icon/icon.module';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { RouterModule } from '@angular/router';
-import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogModule } from './confirm-dialog/confirm-dialog.module';
 import { SnackModule } from './snack/snack.module';
@@ -16,9 +15,23 @@ import { NgLetDirective } from './ng-let.directive';
 import { StarIconComponent } from './star-icon/star-icon.component';
 import { PityChipComponent } from './pity-chip/pity-chip.component';
 import { FocusChipComponent } from './focus-chip/focus-chip.component';
+import { ItemNamePipe } from './item-name.pipe';
+import { ItemImgComponent } from './item-img/item-img.component';
+import { SlugifyPipe } from './slugify.pipe';
+import { GwDatePipe } from './gw-date.pipe';
+import { GaClickDirective } from './ga-click.directive';
+import { WishImportProgressComponent } from './wish-import-progress/wish-import-progress.component';
+import { BannerSelectComponent } from './banner-select/banner-select.component';
 
 @NgModule({
-  imports: [TranslateModule],
+  imports: [
+    CommonModule,
+    MatModule,
+    FormsModule,
+    FlexLayoutModule,
+    IconModule,
+    TranslateModule,
+  ],
   exports: [
     // Angular & 3rd party
     CommonModule,
@@ -33,19 +46,32 @@ import { FocusChipComponent } from './focus-chip/focus-chip.component';
     MatModule,
     IconModule,
     ConfirmDialogModule,
-    LayoutModule,
     SnackModule,
     // Declarations
     NgLetDirective,
     StarIconComponent,
     PityChipComponent,
     FocusChipComponent,
+    ItemNamePipe,
+    ItemImgComponent,
+    SlugifyPipe,
+    GwDatePipe,
+    GaClickDirective,
+    WishImportProgressComponent,
+    BannerSelectComponent,
   ],
   declarations: [
     NgLetDirective,
     StarIconComponent,
     PityChipComponent,
     FocusChipComponent,
+    ItemNamePipe,
+    ItemImgComponent,
+    SlugifyPipe,
+    GwDatePipe,
+    GaClickDirective,
+    WishImportProgressComponent,
+    BannerSelectComponent,
   ],
 })
 export class SharedModule {}

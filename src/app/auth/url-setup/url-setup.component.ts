@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { MihoyoService } from '../../api/mihoyo/mihoyo.service';
 import { User } from '../../api/genshin-wishes/user';
-import { TopService } from '../../shared/layout/top.service';
+import { TopService } from '../../core/top.service';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { from, Observable } from 'rxjs';
 import { SnackService } from '../../shared/snack/snack.service';

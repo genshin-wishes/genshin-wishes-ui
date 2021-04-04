@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   CanActivate,
   CanActivateChild,
+  CanLoad,
   Router,
   UrlTree,
 } from '@angular/router';
@@ -12,8 +13,12 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private _auth: AuthService, private _router: Router) {}
+
+  canLoad(): Observable<boolean | UrlTree> {
+    return this.getActivate();
+  }
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.getActivate();

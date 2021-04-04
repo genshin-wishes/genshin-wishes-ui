@@ -8,7 +8,7 @@ import { AuthService } from '../../auth/auth.service';
 import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { WishesComponent } from '../../wishes/wishes.component';
+import { WishesComponent } from '../../gw-app/wishes/wishes.component';
 
 @Component({
   selector: 'app-base',

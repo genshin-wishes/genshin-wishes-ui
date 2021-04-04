@@ -1,0 +1,34 @@
+<mat-card fxLayoutAlign="center center">
+  <mat-card-content
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="32px"
+  >
+    <img src="../../../../assets/status/sad.svg" />
+
+    <div fxLayout="column" fxLayoutGap="32px">
+      <div>
+        <h3
+          class="text-primary"
+          [ngStyle.gt-xs]="{ 'font-size': '34px', 'line-height': '36px' }"
+        >
+          {{ "wishes.noWishes.title" | translate }}
+        </h3>
+        <p [innerHTML]="'wishes.noWishes.message' | translate"></p>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <a
+          mat-stroked-button
+          color="accent"
+          [routerLink]="['/banners']"
+          gaClick="wishes_empty_back"
+        >
+          <fa-icon icon="th"></fa-icon>
+          &nbsp;
+          {{ "wishes.backToList" | translate }}
+        </a>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

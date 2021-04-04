@@ -3,17 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthComponent } from './auth/auth/auth.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { BaseComponent } from './core/base/base.component';
-import { LandingCardComponent } from './core/landing-card/landing-card.component';
+import { LandingCardComponent } from './core/landing/landing-card/landing-card.component';
 import { NotAuthGuard } from './auth/not-auth.guard';
 import { UrlSetupComponent } from './auth/url-setup/url-setup.component';
 import { MihoyoLinkGuard } from './auth/mihoyo-link.guard';
-import { WishesComponent } from './wishes/wishes.component';
-import { SettingsComponent } from './settings/settings.component';
-import { FaqComponent } from './faq/faq.component';
 import { LandingComponent } from './core/landing/landing.component';
-import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   {
@@ -47,42 +42,9 @@ const routes: Routes = [
     component: BaseComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    children: [
-      {
-        path: 'banners',
-        component: DashboardComponent,
-      },
-      {
-        path: 'banners/:banner',
-        component: WishesComponent,
-      },
-      {
-        path: 'faq',
-        component: FaqComponent,
-      },
-      {
-        path: 'stats',
-        children: [
-          {
-            path: ':banner',
-            component: StatsComponent,
-          },
-          {
-            path: '',
-            redirectTo: 'all',
-            pathMatch: 'full',
-          },
-        ],
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-      },
-      {
-        path: '**',
-        redirectTo: '',
-      },
-    ],
+    canLoad: [AuthGuard],
+    loadChildren: () =>
+      import('./gw-app/gw-app.module').then((m) => m.GwAppModule),
   },
   {
     path: '**',

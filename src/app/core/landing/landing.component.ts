@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TopService } from '../../shared/layout/top.service';
+import { TopService } from '../top.service';
 
 @Component({
   selector: 'app-landing',
