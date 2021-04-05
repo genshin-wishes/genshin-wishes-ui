@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SidenavService } from '../sidenav.service';
 import { TopService } from '../top.service';
 import { ImportService } from '../../api/genshin-wishes/import.service';
-import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, shareReplay, startWith, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileShareDialogComponent } from '../../profile/profile-share-dialog/profile-share-dialog.component';

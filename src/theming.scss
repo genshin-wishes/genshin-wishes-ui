@@ -53,8 +53,10 @@ $primary: (
 );
 
 $accent: (
+  100: transparent,
   200: #ff8a00,
   contrast: (
+    100: $dark-primary-text,
     200: $light-primary-text,
   ),
 );
@@ -70,7 +72,7 @@ $warn: (
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $genshin-wishes-primary: mat-palette($primary, 200, 100, 900, A100);
-$genshin-wishes-accent: mat-palette($accent, 200, 200, 200);
+$genshin-wishes-accent: mat-palette($accent, 200, 100, 200);
 $genshin-wishes-warn: mat-palette($warn, 200, 200, 200);
 
 $mat-dark-theme-foreground: map-merge(
@@ -144,6 +146,10 @@ $genshin-wishes-theme: mat-dark-theme(
   $foreground: map-get($config, foreground);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
+
+  .flickity-page-dots .dot {
+    background: #fff;
+  }
 
   .emphasis-bg {
     border-radius: 4px;
@@ -331,12 +337,147 @@ $genshin-wishes-theme: mat-dark-theme(
   $background: map-get($config, background);
   $foreground: map-get($config, foreground);
   $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
 
-  app-landing-card-element {
-    .wrapper {
-      background: mat-color($primary, 0.08);
+  app-landing-layout {
+    mat-card.mat-card {
+      background: #27193b;
     }
 
+    app-landing-hero {
+      background: linear-gradient(
+        0,
+        #1a0f2a 8.89%,
+        #1d142a 24.02%,
+        #2d1e42 50.42%,
+        #3c2957 67.51%,
+        #492c73 118.07%,
+        #492c73 134.64%
+      );
+    }
+
+    .header-bg-scroll {
+      background: #442b68;
+      box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+        0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+    }
+
+    .header-bg {
+      background: #442b68;
+    }
+
+    & > div > .wrapper {
+      background: #1a0f2b;
+    }
+  }
+
+  app-landing-menu {
+    a.mat-button {
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .wrapper {
+      background: #382652;
+    }
+  }
+
+  app-landing-top {
+    color: white;
+
+    .title {
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 24px;
+      letter-spacing: 0.15px;
+    }
+
+    .subtitle {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 19px;
+      color: #bbbbbb;
+    }
+  }
+
+  app-landing-hero {
+    .title {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 40px;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 24px;
+      color: #bbbbbb;
+    }
+
+    .advice {
+      font-size: 16px;
+      line-height: 24px;
+      color: #bbbbbb;
+    }
+  }
+
+  app-landing-counters {
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    color: #ffffff;
+
+    mat-divider.mat-divider {
+      border-top-color: #382652;
+    }
+
+    .content {
+      background: #1a0f2a;
+    }
+  }
+
+  app-landing-feature-tour {
+    h2 {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 36px;
+      color: #ffffff;
+    }
+
+    .relative-wrapper > .wrapper {
+      background: #2d1d43;
+    }
+
+    .feature-description {
+      font-size: 16px;
+      line-height: 24px;
+      color: #ffffff;
+    }
+
+    .wide-feature-description {
+      background: #27193b;
+      font-size: 18px;
+      line-height: 24px;
+      color: rgba(255, 255, 255, 0.87);
+    }
+  }
+
+  app-landing-security {
+    h2 {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 32px;
+      color: #ffffff;
+    }
+  }
+  app-landing-security-card {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  app-landing-icon {
     .icon-wrapper {
       background: mat-color($primary, 0.12);
     }
@@ -345,8 +486,47 @@ $genshin-wishes-theme: mat-dark-theme(
       color: mat-color($primary);
     }
 
-    .text {
+    &.active {
+      .icon {
+        color: mat-color($accent);
+      }
+    }
+  }
+
+  app-landing-footer-banner {
+    font-size: 32px;
+    line-height: 40px;
+    color: #ffffff;
+
+    .background-wrapper {
+      background: #27193b;
+    }
+  }
+
+  app-landing-comments .wrapper {
+    background: #27193b;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+  }
+
+  app-landing-footer {
+    background: rgba(0, 0, 0, 0.74);
+
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+
+    .title {
+      font-size: 24px;
       line-height: 24px;
+      letter-spacing: 0.15px;
+    }
+
+    .disclaimer {
+      font-size: 14px;
+      line-height: 20px;
+      color: rgba(255, 255, 255, 0.38);
     }
   }
 }

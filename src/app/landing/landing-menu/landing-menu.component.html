@@ -1,0 +1,70 @@
+<div class="wrapper" fxLayout="column">
+  <div fxLayout="row">
+    <app-logo></app-logo>
+
+    <span fxFlex></span>
+
+    <button
+      type="button"
+      mat-icon-button
+      class="close-button"
+      (click)="close()"
+    >
+      <fa-icon icon="times"></fa-icon>
+    </button>
+  </div>
+
+  <div
+    fxLayoutGap="32px"
+    fxLayout="column"
+    fxFlex
+    fxLayoutAlign="center center"
+  >
+    <a
+      mat-button
+      [routerLink]="['/']"
+      gaClick="nav_landing_home"
+      (click)="close()"
+    >
+      {{ "landing.title" | translate }}
+    </a>
+
+    <a
+      mat-button
+      [routerLink]="['/faq']"
+      gaClick="nav_landing_faq"
+      (click)="close()"
+    >
+      {{ "faq.title" | translate }}
+    </a>
+  </div>
+
+  <div>
+    <a
+      *ngIf="!(user$ | async); else logoutButton"
+      mat-raised-button
+      color="accent"
+      fxFlex
+      gaClick="menu_sign_in"
+      [routerLink]="['/login']"
+      (click)="close()"
+    >
+      {{ "app.signIn" | translate }}
+    </a>
+
+    <ng-template #logoutButton>
+      <a
+        mat-stroked-button
+        color="accent"
+        fxFlex
+        gaClick="menu_logout"
+        [routerLink]="['/logout']"
+        (click)="close()"
+      >
+        <fa-icon icon="power-off"></fa-icon>
+        &nbsp;
+        {{ "auth.logout.label" | translate }}
+      </a>
+    </ng-template>
+  </div>
+</div>

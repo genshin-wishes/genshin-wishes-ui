@@ -1,0 +1,68 @@
+<div fxLayout="column" ngClass.gt-md="wide">
+  <div fxLayout="row">
+    <div
+      fxFlexOffset.gt-md="calc(4 / 12 * 100% - 20px)"
+      fxFlex.gt-md="0 1 calc(7 / 12 * 100% - 20px)"
+    >
+      <div class="image-wrapper">
+        <img class="quote" src="assets/landing/quote.svg" />
+        <img class="bennet" src="assets/landing/bennet.png" />
+      </div>
+
+      <div class="wrapper" fxLayout="column">
+        <h2>{{ "landing.comments.title" | translate }}</h2>
+
+        <div
+          fxLayout="column"
+          fxLayoutGap="32px"
+          fxFlex
+          *ngIf="numberPerPage$ | async as numberPerPage"
+        >
+          <div fxLayout="row wrap" class="comments-wrapper">
+            <app-landing-comment
+              fxFlex="100%"
+              fxFlex.gt-xs="calc(50% - 32px)"
+              *ngFor="
+                let comment of comments.slice(
+                  page * numberPerPage,
+                  (page + 1) * numberPerPage
+                )
+              "
+              [comment]="comment.comment"
+              [username]="comment.username"
+              [link]="comment.link"
+            ></app-landing-comment>
+          </div>
+
+          <span fxFlex style="margin: 0"></span>
+
+          <div>
+            <button
+              *ngIf="page > 0"
+              type="button"
+              mat-button
+              color="accent"
+              (click)="page = page - 1"
+            >
+              <fa-icon icon="chevron-left"></fa-icon>
+              &nbsp; Back
+            </button>
+
+            <span fxFlex></span>
+
+            <button
+              *ngIf="(page + 1) * numberPerPage < comments.length"
+              type="button"
+              mat-button
+              color="accent"
+              (click)="page = page + 1"
+            >
+              Next &nbsp;
+              <fa-icon icon="chevron-right"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

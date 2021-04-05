@@ -1,52 +1,50 @@
-<app-landing [withLogout]="true">
-  <div [ngSwitch]="currentStep" fxLayoutAlign="center">
-    <ng-container *ngIf="!loading; else loader">
-      <app-step1
-        *ngSwitchCase="1"
+<div class="wrapper" [ngSwitch]="currentStep" fxLayoutAlign="center">
+  <ng-container *ngIf="!loading; else loader">
+    <app-step1
+      *ngSwitchCase="1"
+      [actions]="actions"
+      [feedback]="error"
+      (finish)="$event && finish($event)"
+      fxFlex
+    >
+    </app-step1>
+
+    <ng-container *ngIf="importedWishes$ | async as importedWishes">
+      <app-end
+        *ngSwitchCase="2"
         [actions]="actions"
-        [feedback]="error"
-        (finish)="$event && finish($event)"
+        [importedWishes]="importedWishes"
         fxFlex
       >
-      </app-step1>
-
-      <ng-container *ngIf="importedWishes$ | async as importedWishes">
-        <app-end
-          *ngSwitchCase="2"
-          [actions]="actions"
-          [importedWishes]="importedWishes"
-          fxFlex
-        >
-        </app-end>
-      </ng-container>
+      </app-end>
     </ng-container>
-  </div>
+  </ng-container>
+</div>
 
-  <ng-template #actions>
-    <button
-      mat-stroked-button
-      *ngIf="currentStep > 1"
-      [gaClick]="'setup_back_' + currentStep"
-      (click)="currentStep = currentStep - 1"
-    >
-      <fa-icon icon="chevron-left"></fa-icon>
-      &nbsp;
-      {{ "generics.previous" | translate }}
-    </button>
+<ng-template #actions>
+  <button
+    mat-stroked-button
+    *ngIf="currentStep > 1"
+    [gaClick]="'setup_back_' + currentStep"
+    (click)="currentStep = currentStep - 1"
+  >
+    <fa-icon icon="chevron-left"></fa-icon>
+    &nbsp;
+    {{ "generics.previous" | translate }}
+  </button>
 
-    <button
-      *ngIf="currentStep < lastStep"
-      [gaClick]="'setup_next_' + currentStep"
-      (click)="currentStep = currentStep + 1"
-      mat-raised-button
-      color="accent"
-    >
-      {{ "generics.next" | translate }}
-      &nbsp;
-      <fa-icon icon="chevron-right"></fa-icon>
-    </button>
-  </ng-template>
-</app-landing>
+  <button
+    *ngIf="currentStep < lastStep"
+    [gaClick]="'setup_next_' + currentStep"
+    (click)="currentStep = currentStep + 1"
+    mat-raised-button
+    color="accent"
+  >
+    {{ "generics.next" | translate }}
+    &nbsp;
+    <fa-icon icon="chevron-right"></fa-icon>
+  </button>
+</ng-template>
 
 <ng-template #loader>
   <div fxFlex fxLayoutAlign="center center">

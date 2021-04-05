@@ -16,7 +16,7 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
   }
 
   data = data.replace(
-    /@@LANG_TAGS@@/g,
+    /<!-- @@LANG_TAGS@@ -->/g,
     i18n
       .map(
         (locale) =>
@@ -50,7 +50,7 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
       "{{ page }}",
       translations.app.description
     );
-    const description = translations.landing.welcome.description;
+    const description = translations.landing.hero.subtitle;
     const lowerCaseLocale = locale.toLowerCase();
 
     fs.writeFileSync(

@@ -1,6 +1,7 @@
 @import "~normalize.css";
 @import "~ngx-toastr/toastr.css";
 @import "~flag-icon-css/css/flag-icon.min.css";
+@import "~flickity/dist/flickity.min.css";
 @import "theming";
 
 /* You can add global styles to this file, and also import other style files */
@@ -19,6 +20,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #57525c;
+}
+
+.wide-screen-center {
+  max-width: 1980px;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 markdown {
@@ -55,6 +62,10 @@ app-root {
   .cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper {
     width: 100%;
   }
+}
+
+.no-radius-dialog .mat-dialog-container {
+  border-radius: 0;
 }
 
 router-outlet + * {

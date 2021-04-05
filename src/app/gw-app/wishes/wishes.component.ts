@@ -129,6 +129,7 @@ export class WishesComponent implements OnDestroy {
         position: {
           top: '0',
         },
+        panelClass: 'no-radius-dialog',
         data: {
           route: this.route,
           banner,

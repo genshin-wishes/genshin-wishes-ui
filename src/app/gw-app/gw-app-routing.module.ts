@@ -17,10 +17,6 @@ const routes: Routes = [
     component: WishesComponent,
   },
   {
-    path: 'faq',
-    component: FaqComponent,
-  },
-  {
     path: 'stats',
     children: [
       {

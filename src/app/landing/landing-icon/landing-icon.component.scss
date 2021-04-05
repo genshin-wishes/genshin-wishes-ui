@@ -1,0 +1,27 @@
+.icon-wrapper {
+  width: inherit;
+  height: inherit;
+  border-radius: 6px;
+}
+
+.icon {
+  width: 50%;
+  height: 50%;
+  font-size: 50%;
+}
+
+.sub-icon {
+  padding: 2px;
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  font-size: 22px;
+
+  position: relative;
+  right: -12px;
+  top: -28px;
+
+  background: #392653;
+  border-radius: 50%;
+  display: inline-block;
+}

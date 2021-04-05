@@ -1,5 +1,9 @@
 mat-toolbar.toggler {
   cursor: pointer;
+  min-height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .mat-list-base {

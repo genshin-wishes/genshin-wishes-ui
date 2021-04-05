@@ -1,0 +1,62 @@
+<div
+  class="wrapper wide-screen-center"
+  fxLayout="row"
+  fxFlex
+  fxFlex.gt-md
+  fxFlex.md="0 1 calc(9 / 12 * 100% - 20px)"
+>
+  <div
+    fxFlex
+    fxLayout="column"
+    fxLayout.gt-md="row"
+    fxLayoutAlign="start center"
+    fxLayoutGap="48px"
+  >
+    <div
+      fxLayout="row"
+      class="content-wrapper"
+      fxFlexOffset.gt-xs="calc(1 / 12 * 100% - 20px)"
+      fxFlex.gt-xs="0 1 calc(4 / 12 * 100% - 20px)"
+      fxFlexOffset
+      fxFlex
+      fxFlexOrder.lt-lg="2"
+      fxFlexOrder
+    >
+      <div>
+        <h2 class="title">{{ "landing.hero.title" | translate }}</h2>
+        <h3 class="subtitle">{{ "landing.hero.subtitle" | translate }}</h3>
+
+        <div
+          fxLayout="row"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="24px"
+          class="actions"
+        >
+          <a
+            mat-raised-button
+            color="accent"
+            gaClick="landing_hero_getStarted"
+            [routerLink]="['/login']"
+          >
+            {{ "app.getStarted" | translate }}
+          </a>
+        </div>
+
+        <span
+          class="advice"
+          [innerHTML]="'landing.hero.advice' | translate"
+        ></span>
+      </div>
+    </div>
+
+    <div
+      fxFlexOffset.gt-md="calc(0.75 / 12 * 100% - 20px)"
+      fxFlex.gt-md="0 1 calc(6 / 12 * 100% - 20px)"
+      fxFlexOrder.lt-lg="1"
+      fxFlexOrder
+      fxHide.lt-md
+    >
+      <img src="assets/landing/hero-banner.png" />
+    </div>
+  </div>
+</div>

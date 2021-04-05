@@ -1,0 +1,13 @@
+<div class="wrapper" fxLayout="column" fxLayoutGap="24px">
+  <div fxLayoutAlign.gt-md fxLayoutAlign="center">
+    <img
+      [src]="
+        'assets/landing/features/' + ((device$ | async) || 'pc') + '/' + img
+      "
+    />
+  </div>
+
+  <p *ngIf="description" class="feature-description">
+    {{ description | translate }}
+  </p>
+</div>

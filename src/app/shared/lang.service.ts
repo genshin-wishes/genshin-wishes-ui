@@ -8,8 +8,11 @@ import { Observable, Subject } from 'rxjs';
 import { LocaleToLanguageName } from '../api/genshin-wishes/constants';
 import { DOCUMENT } from '@angular/common';
 import i18n from 'genshin-wishes-i18n/i18n/i18n.json';
+import { CookieService } from 'ngx-cookie-service';
 
 export type Lang = string;
+
+const COOKIE_LANG = 'lang';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +27,7 @@ export class LangService {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
+    private _cookie: CookieService,
     private _auth: AuthService,
     private _http: HttpClient,
     private _translate: TranslateService
@@ -37,6 +41,14 @@ export class LangService {
       .subscribe((lang) => {
         this._lang$.next(lang);
       });
+  }
+
+  setLocale(locale: string, persist?: boolean): void {
+    this._lang$.next(locale);
+
+    if (persist) {
+      this._cookie.set(COOKIE_LANG, locale, { path: '/' });
+    }
   }
 
   getCurrentLang(): Lang {
@@ -53,7 +65,7 @@ export class LangService {
 
   private _getLangFromUser(user: User | null): string {
     const wanted = this._formatLocale(
-      user?.lang ||
+      (user && user.mihoyoUid ? user.lang : this._cookie.get(COOKIE_LANG)) ||
         this.document.documentElement.lang ||
         this._translate.getBrowserCultureLang()
     );

@@ -1,0 +1,16 @@
+<div class="icon-wrapper" fxLayoutAlign="center center">
+  <ng-container *ngIf="icon; else star">
+    <fa-stack class="icon" *ngIf="subIcon; else soloIcon">
+      <fa-icon [icon]="icon"></fa-icon>
+      <fa-icon class="sub-icon" [icon]="subIcon"></fa-icon>
+    </fa-stack>
+
+    <ng-template #soloIcon>
+      <fa-icon class="icon" [icon]="icon"></fa-icon>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #star>
+    <app-star-icon class="icon"></app-star-icon>
+  </ng-template>
+</div>

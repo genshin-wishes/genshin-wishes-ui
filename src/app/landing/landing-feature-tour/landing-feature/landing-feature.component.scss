@@ -1,0 +1,18 @@
+img {
+  max-width: 100%;
+  max-height: calc(80vh - 200px);
+  border-radius: 4px;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-description {
+  text-align: center;
+}
+
+p {
+  min-height: 48px;
+}

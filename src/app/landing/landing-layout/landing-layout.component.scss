@@ -1,0 +1,67 @@
+.mobile {
+  .header-bg {
+    position: sticky;
+    z-index: 3;
+    height: 74px;
+  }
+
+  .header-bg-scroll {
+    height: 64px;
+  }
+
+  .wrapper {
+    min-height: 100%;
+    margin-top: -64px;
+  }
+
+  .content,
+  .top-bar {
+    padding: 16px;
+  }
+
+  .top-bar {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    height: 64px;
+  }
+}
+
+.header-bg {
+  position: sticky;
+  z-index: 3;
+  height: 124px;
+}
+
+.header-bg-scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 84px;
+}
+
+.header-bg-scroll,
+.header-bg {
+  width: 100%;
+}
+
+.wrapper {
+  min-height: calc(100% - 40px);
+  margin-top: -84px;
+}
+
+.content,
+.top-bar {
+  z-index: 1;
+  padding: 40px;
+}
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  height: 84px;
+  box-sizing: border-box;
+  z-index: 5;
+}
