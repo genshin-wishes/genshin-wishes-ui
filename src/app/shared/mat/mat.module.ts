@@ -22,6 +22,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   exports: [
@@ -47,6 +49,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatProgressBarModule,
     MatExpansionModule,
     MatBadgeModule,
+    MatSlideToggleModule,
+    ClipboardModule,
     ScrollingModule,
   ],
 })

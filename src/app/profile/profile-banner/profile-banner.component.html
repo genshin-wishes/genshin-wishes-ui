@@ -1,0 +1,26 @@
+<mat-toolbar fxLayoutGap="12px">
+  <div
+    fxFlex
+    fxLayoutAlign="start center"
+    fxLayoutGap="12px"
+    class="title-wrapper"
+  >
+    <a [routerLink]="['/']" fxLayoutAlign="center center" class="logo">
+      <app-logo></app-logo>
+    </a>
+
+    <span
+      class="username"
+      [matTooltip]="
+        (!username ? 'app.titleShort' : 'app.titleWithPage')
+          | translate: { page: username }
+      "
+      [matTooltipShowDelay]="1000"
+    >
+      {{
+        (!username ? "app.titleShort" : "app.titleWithPage")
+          | translate: { page: username }
+      }}
+    </span>
+  </div>
+</mat-toolbar>

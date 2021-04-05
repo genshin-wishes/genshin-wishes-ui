@@ -145,6 +145,17 @@ $genshin-wishes-theme: mat-dark-theme(
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
 
+  .emphasis-bg {
+    border-radius: 4px;
+    padding: 8px 12px;
+    background: mat-color($primary, 0.08);
+  }
+
+  .mat-stroked-button.mat-success {
+    border-color: #03dac5;
+    color: #03dac5;
+  }
+
   .mat-tooltip-trigger {
     touch-action: auto !important;
   }
@@ -660,6 +671,7 @@ $genshin-wishes-theme: mat-dark-theme(
 @mixin stats-theme($config-or-theme) {
   $config: mat-get-color-config($config-or-theme);
   $foreground: map-get($config, foreground);
+  $background: map-get($config, background);
   $primary: map-get($config, primary);
   $accent: map-get($config, accent);
 
@@ -677,6 +689,28 @@ $genshin-wishes-theme: mat-dark-theme(
     .mat-card {
       padding: 12px;
     }
+  }
+
+  app-profile-share-dialog {
+    .share-toggle {
+      .title {
+        color: mat-color($foreground, high-emphasis);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      .subtitle.enabled {
+        color: mat-color($primary);
+      }
+
+      .subtitle.disabled {
+        color: mat-color($foreground, medium-emphasis);
+      }
+    }
+  }
+
+  app-profile-footer {
+    background: mat-color($background, card);
   }
 
   app-stats-header {

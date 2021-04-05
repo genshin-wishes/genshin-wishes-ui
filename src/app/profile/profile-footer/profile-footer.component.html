@@ -1,0 +1,11 @@
+<div class="wrapper" fxLayout="column" fxLayoutGap="12px">
+  <span [innerHTML]="'profile.footer' | translate"></span>
+
+  <div fxLayoutAlign="center">
+    <a mat-raised-button color="accent" [routerLink]="'/'">
+      {{ "app.getStarted" | translate }}
+    </a>
+  </div>
+</div>
+
+<app-footer></app-footer>

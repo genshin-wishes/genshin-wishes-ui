@@ -5,6 +5,7 @@ import { WishesComponent } from './wishes/wishes.component';
 import { FaqComponent } from '../core/faq/faq.component';
 import { StatsComponent } from './stats/stats.component';
 import { SettingsComponent } from './settings/settings.component';
+import { StatsResolver } from '../stats/stats.resolver';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     children: [
       {
         path: ':banner',
+        resolve: { statsEndpoint: StatsResolver },
         component: StatsComponent,
       },
       {

@@ -12,23 +12,18 @@ export class TopService {
 
   constructor(private _title: Title, private _translate: TranslateService) {}
 
-  setTitle(title: string | null, pageTitle?: string | null) {
+  setTitle(title: string | null, pageTitle?: string | null): void {
     title = title || 'app.title';
     pageTitle = pageTitle || title;
 
     this._title$.next(title);
 
-    if (pageTitle != 'app.title')
-      this._translate
-        .get(pageTitle)
-        .subscribe((pageTrad) =>
-          this._translate
-            .get('app.titleWithPage', { page: pageTrad })
-            .subscribe((titleTrad) => this._title.setTitle(titleTrad))
-        );
-    else
-      this._translate
-        .get(title)
-        .subscribe((titleTrad) => this._title.setTitle(titleTrad));
+    if (pageTitle !== 'app.title')
+      this._title.setTitle(
+        this._translate.instant('app.titleWithPage', {
+          page: this._translate.instant(pageTitle),
+        })
+      );
+    else this._title.setTitle(this._translate.instant(title));
   }
 }

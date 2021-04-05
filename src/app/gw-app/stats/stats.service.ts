@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { GenshinWishesService } from '../../api/genshin-wishes/genshin-wishes.service';
 import { Stats } from '../../api/genshin-wishes/stats';
 import { Observable } from 'rxjs';
-import { WishFilters } from '../wishes/wish-filters/wish-filters';
 import { map } from 'rxjs/operators';
 import { ItemNamePipe } from '../../shared/item-name.pipe';
 import { Label } from 'ng2-charts';
@@ -11,7 +10,6 @@ import { ChartColor, ChartDataSets, Scriptable } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { FiveStarDetail } from './five-stars-list/five-stars-list.component';
 import { FourStarDetail } from './four-stars-list/four-stars-list.component';
-import { BannerType } from '../../api/genshin-wishes/constants';
 
 const RANK_TO_RGB: { [key: number]: (opacity: number) => string } = {
   5: (opacity) => `rgba(255, 138, 0, ${opacity})`,
@@ -29,10 +27,6 @@ export class StatsService {
     private _translate: TranslateService,
     private _itemName: ItemNamePipe
   ) {}
-
-  getStats(banner: BannerType, filters: WishFilters): Observable<Stats> {
-    return this._gw.getStats(banner, filters);
-  }
 
   getFocusDistribution(
     stats$: Observable<Stats>

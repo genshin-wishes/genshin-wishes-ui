@@ -1,5 +1,7 @@
 {
   "generics": {
+    "share": "Partager",
+    "copy": "Copier",
     "filter": "Filtrer",
     "cancel": "Annuler",
     "ok": "OK",
@@ -26,7 +28,9 @@
   "app": {
     "title": "Genshin Wishes — Sauvegardez votre historique de vœux simplement",
     "titleWithPage": "Genshin Wishes - {{ page }}",
+    "titleShort": "Genshin Wishes",
     "menu": "Menu",
+    "getStarted": "C'est parti",
     "persistLink": "Se souvenir du lien pendant 24h",
     "user": {
       "uid": "UID {{ uid }}"
@@ -102,6 +106,27 @@
   "lang": {
     "en": "English",
     "fr": "Français"
+  },
+  "profile": {
+    "notFound": {
+      "title": "Ce profil n'a pas pu être trouvé!",
+      "description": "Vérifiez l'URL, il est sinon possible que la personne qui l'a partagée avec vous a rendu son profil privé."
+    },
+    "footer": "Importez automatiquement vos vœux depuis PC/Mobile/Console et obtenez vos propres stats !",
+    "share": {
+      "title": "Partagez votre page de statistiques",
+      "label": "Partagez vos stats",
+      "sharing": {
+        "title": "Partage de la page de stats",
+        "enabled": "Visible uniquement avec le lien",
+        "disabled": "Visible uniquement pour vous"
+      },
+      "success$": {
+        "emoji": "\uD83D\uDCCB",
+        "title": "",
+        "message": "Votre permalien a été copié dans votre presse-papier !"
+      }
+    }
   },
   "settings": {
     "label": "Paramètres",

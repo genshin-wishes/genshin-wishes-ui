@@ -21,4 +21,6 @@ export class StatsHeaderComponent {
   events!: Banner[];
   @Input()
   filters!: WishFilters;
+  @Input()
+  hideShare!: boolean;
 }

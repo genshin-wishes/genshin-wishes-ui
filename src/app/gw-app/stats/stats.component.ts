@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { StatsService } from './stats.service';
 import { WishFilters } from '../wishes/wish-filters/wish-filters';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import {
   debounceTime,
   finalize,
+  first,
   map,
   shareReplay,
   switchMap,
@@ -25,6 +26,15 @@ import {
   styleUrls: ['./stats.component.scss'],
 })
 export class StatsComponent {
+  statsEndpoint$: Observable<string> = this._route.data.pipe(
+    map((data) => data.statsEndpoint),
+    shareReplay(1)
+  );
+  profileMode$: Observable<boolean> = this._route.data.pipe(
+    map((data) => data.profileMode),
+    shareReplay(1)
+  );
+
   filters$ = new BehaviorSubject<WishFilters>(new WishFilters());
   loading$ = new BehaviorSubject(true);
 
@@ -39,10 +49,16 @@ export class StatsComponent {
     shareReplay(1)
   );
 
-  stats$ = combineLatest([this.banner$, this.filters$]).pipe(
+  stats$ = combineLatest([
+    this.banner$,
+    this.filters$,
+    this.statsEndpoint$,
+  ]).pipe(
     tap(() => this.loading$.next(true)),
     debounceTime(150),
-    switchMap(([banner, filters]) => this._stats.getStats(banner, filters)),
+    switchMap(([banner, filters, statsEndpoint]) =>
+      this._gw.getStats(banner, statsEndpoint, filters)
+    ),
     tap(() => this.loading$.next(false)),
     finalize(() => this.loading$.next(false)),
     shareReplay(1)
@@ -55,8 +71,8 @@ export class StatsComponent {
   fourStarsList$ = this._stats.getFourStarsList(this.stats$);
   bannerActivity$ = this._stats.getBannerActivity(this.stats$);
 
-  characterEvents$ = this._gw.getCharacterEvents();
-  weaponEvents$ = this._gw.getWeaponEvents();
+  characterEvents$ = this._gw.getStatsCharacterEvents(this.statsEndpoint$);
+  weaponEvents$ = this._gw.getStatsWeaponEvents(this.statsEndpoint$);
 
   BannerType = BannerType;
 
@@ -66,7 +82,11 @@ export class StatsComponent {
     private _stats: StatsService,
     private _top: TopService
   ) {
-    this._top.setTitle('stats.label');
+    this.profileMode$
+      .pipe(first())
+      .subscribe(
+        (profileMode) => !profileMode && this._top.setTitle('stats.label')
+      );
   }
 
   resetFilters(): void {
