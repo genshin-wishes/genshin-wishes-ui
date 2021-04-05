@@ -9,6 +9,7 @@ import { BannerType } from '../../../api/genshin-wishes/constants';
 
 export interface WishFiltersDialogData {
   route: ActivatedRoute;
+  banner: BannerType;
   filters: WishFilters;
   filtersChange: Subject<WishFilters>;
 }
@@ -46,8 +47,11 @@ export class WishFiltersComponent implements OnDestroy {
     private _router: Router,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: WishFiltersDialogData
   ) {
-    if (data) this.filters = data.filters;
-    if (data) this.route = data.route;
+    if (data) {
+      this.banner = data.banner;
+      this.filters = data.filters;
+      this.route = data.route;
+    }
 
     this.freeTextChanges
       .pipe(debounceTime(400), takeUntil(this.destroy))

@@ -124,19 +124,22 @@ export class WishesComponent implements OnDestroy {
   }
 
   openFilters(): void {
-    this._dialog.open(WishFiltersComponent, {
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      width: '100%',
-      position: {
-        top: '0',
-      },
-      data: {
-        route: this.route,
-        filters: this.filters$.value,
-        filtersChange: this.filters$,
-      } as WishFiltersDialogData,
-    });
+    this.bannerType$.pipe(first()).subscribe((banner) =>
+      this._dialog.open(WishFiltersComponent, {
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        width: '100%',
+        position: {
+          top: '0',
+        },
+        data: {
+          route: this.route,
+          banner,
+          filters: this.filters$.value,
+          filtersChange: this.filters$,
+        } as WishFiltersDialogData,
+      })
+    );
   }
 
   private fetchPage(page: number): Observable<Wish[]> {
