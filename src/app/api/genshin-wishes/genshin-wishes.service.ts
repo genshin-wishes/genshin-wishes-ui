@@ -24,7 +24,6 @@ import { Params } from '@angular/router';
 import { WishFilters } from '../../gw-app/wishes/wish-filters/wish-filters';
 import { Lang, LangService } from '../../shared/lang.service';
 import { Item } from '../item';
-import { Stats } from './stats';
 import { Banner } from '../banner';
 import {
   ApiErrors,
@@ -34,6 +33,7 @@ import {
   PITY_4,
   PITY_5_BY_TYPE,
 } from './constants';
+import { Stats } from './stats';
 
 @Injectable({
   providedIn: 'root',
@@ -50,9 +50,6 @@ export class GenshinWishesService {
   ) {}
 
   private items$ = this._http.get<Item[]>('/api/items').pipe(shareReplay(1));
-  private banners$ = this._http
-    .get<Banner[]>('/api/banners')
-    .pipe(shareReplay(1));
 
   private _updateWishes = new Subject();
   readonly onWishesUpdate$ = this._updateWishes.asObservable();
@@ -188,6 +185,22 @@ export class GenshinWishesService {
     return this._http.get<Banner[]>('/api/banners/weapon');
   }
 
+  getStatsCharacterEvents(endpoint$: Observable<string>): Observable<Banner[]> {
+    return endpoint$.pipe(
+      exhaustMap((endpoint) =>
+        this._http.get<Banner[]>(endpoint + '/banners/character')
+      )
+    );
+  }
+
+  getStatsWeaponEvents(endpoint$: Observable<string>): Observable<Banner[]> {
+    return endpoint$.pipe(
+      exhaustMap((endpoint) =>
+        this._http.get<Banner[]>(endpoint + '/banners/weapon')
+      )
+    );
+  }
+
   getLatestEvent(): Observable<{ [key: number]: Banner }> {
     return this._http.get<{ [key: number]: Banner }>('/api/banners/latest');
   }
@@ -224,14 +237,18 @@ export class GenshinWishesService {
     );
   }
 
-  getStats(banner: BannerType, filters: WishFilters): Observable<Stats> {
+  getStats(
+    banner: BannerType,
+    endpoint: string,
+    filters: WishFilters
+  ): Observable<Stats> {
     return this.onWishesUpdate$.pipe(
       startWith(null),
       switchMap(() =>
         combineLatest([
           this.items$,
-          this.banners$,
-          this._http.get<Stats>('/api/stats/' + banner, {
+          this._http.get<Banner[]>(endpoint + '/banners'),
+          this._http.get<Stats>(endpoint + `/stats/${banner}`, {
             params: this.buildParams(undefined, filters),
           }),
         ]).pipe(
@@ -323,17 +340,6 @@ export class GenshinWishesService {
       });
   }
 
-  private calculateGapFor(
-    wishes: (Wish & { pity: number })[],
-    rankType: 4 | 5
-  ): number {
-    const wishesOfRank = wishes.filter((w) => w.item?.rankType === rankType);
-
-    return (
-      wishesOfRank.reduce((total, w) => total + w.pity, 0) / wishesOfRank.length
-    );
-  }
-
   logout(): Promise<void> {
     return this._http.post<void>('/api/logout', null).toPromise();
   }
@@ -370,6 +376,17 @@ export class GenshinWishesService {
           .pipe(exhaustMap(() => from(this.deleteAccount())))
           .toPromise();
       });
+  }
+
+  private calculateGapFor(
+    wishes: (Wish & { pity: number })[],
+    rankType: 4 | 5
+  ): number {
+    const wishesOfRank = wishes.filter((w) => w.item?.rankType === rankType);
+
+    return (
+      wishesOfRank.reduce((total, w) => total + w.pity, 0) / wishesOfRank.length
+    );
   }
 
   private buildParams(page?: number, filters?: WishFilters): Params {

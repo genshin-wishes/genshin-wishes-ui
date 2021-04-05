@@ -44,6 +44,7 @@
           >
             <app-stats-header
               fxFlex
+              [hideShare]="!!(profileMode$ | async)"
               [events]="
                 data.banner === BannerType.CHARACTER_EVENT
                   ? data.characterEvents

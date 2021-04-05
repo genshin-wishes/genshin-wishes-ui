@@ -8,12 +8,7 @@
     <fa-icon icon="bars"></fa-icon>
   </button>
 
-  <a
-    mat-icon-button
-    [routerLink]="['/']"
-    [disableRipple]="true"
-    *ngIf="!sidenavToggle"
-  >
+  <a *ngIf="!sidenavToggle" [routerLink]="['/']" class="logo">
     <app-logo></app-logo>
   </a>
 
@@ -27,18 +22,18 @@
 
   <span fxFlex></span>
 
-  <ng-container *ngIf="withActions">
-    <ng-container *ngIf="!(importState$ | async); else loadingButton">
+  <ng-container *ngIf="withActions && !(isSettings$ | async)">
+    <ng-container *ngIf="isStats$ | async; else importButton">
       <a
         mat-icon-button
-        [matTooltip]="'wishes.update.label' | translate"
+        [matTooltip]="'profile.share.label' | translate"
         color="accent"
         fxShow.lt-sm
         fxHide
-        gaClick="import_wishes"
-        (click)="importWishes()"
+        gaClick="profile_share"
+        (click)="share()"
       >
-        <fa-icon icon="sync"></fa-icon>
+        <fa-icon icon="share-alt"></fa-icon>
       </a>
 
       <a
@@ -46,13 +41,43 @@
         color="accent"
         fxHide.lt-sm
         fxShow
-        (click)="importWishes()"
+        gaClick="profile_share"
+        (click)="share()"
       >
-        <fa-icon icon="sync"></fa-icon>
+        <fa-icon icon="share-alt"></fa-icon>
         &nbsp;
-        {{ "wishes.update.label" | translate }}
+        {{ "profile.share.label" | translate }}
       </a>
     </ng-container>
+
+    <ng-template #importButton>
+      <ng-container *ngIf="!(importState$ | async); else loadingButton">
+        <a
+          mat-icon-button
+          [matTooltip]="'wishes.update.label' | translate"
+          color="accent"
+          fxShow.lt-sm
+          fxHide
+          gaClick="import_wishes"
+          (click)="importWishes()"
+        >
+          <fa-icon icon="sync"></fa-icon>
+        </a>
+
+        <a
+          mat-stroked-button
+          color="accent"
+          fxHide.lt-sm
+          fxShow
+          gaClick="import_wishes"
+          (click)="importWishes()"
+        >
+          <fa-icon icon="sync"></fa-icon>
+          &nbsp;
+          {{ "wishes.update.label" | translate }}
+        </a>
+      </ng-container>
+    </ng-template>
 
     <ng-template #loadingButton>
       <a mat-icon-button color="accent" fxShow.lt-sm fxHide [disabled]="true">

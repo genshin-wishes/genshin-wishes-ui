@@ -37,5 +37,6 @@ import { EmptyComponent } from './empty/empty.component';
     EmptyComponent,
   ],
   imports: [SharedModule, WishesModule, ChartsModule],
+  exports: [StatsComponent],
 })
 export class StatsModule {}

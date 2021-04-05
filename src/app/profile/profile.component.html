@@ -1,0 +1,45 @@
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav-content fxFlexFill fxLayout="column">
+    <ng-container *ngIf="{ username: username$ | async } as data">
+      <app-profile-banner [username]="data.username"></app-profile-banner>
+
+      <div fxLayout="column" fxFlex>
+        <ng-container
+          *ngIf="
+            data.username == undefined || data.username;
+            else profileNotFound
+          "
+        >
+          <router-outlet></router-outlet>
+        </ng-container>
+      </div>
+
+      <app-profile-footer></app-profile-footer>
+    </ng-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #profileNotFound>
+  <div class="empty-wrapper">
+    <mat-card
+      fxFlexOffset="25%"
+      fxFlex="50%"
+      fxFlexOffset.lt-md
+      fxFlex.lt-md
+      fxLayout="column"
+      fxLayoutGap="20px"
+    >
+      <mat-card-title fxLayoutAlign="center">
+        {{ "profile.notFound.title" | translate }}
+      </mat-card-title>
+
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+        <img src="../../../../assets/status/sad.svg" />
+
+        <mat-card-content>
+          <p>{{ "profile.notFound.description" | translate }}</p>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+</ng-template>

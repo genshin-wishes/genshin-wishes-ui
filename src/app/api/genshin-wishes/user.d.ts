@@ -6,4 +6,6 @@ export interface User {
   wholeClock: boolean;
   mihoyoUid: string;
   mihoyoUsername: string;
+  profileId: string;
+  sharing: boolean;
 }

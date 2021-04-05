@@ -1,5 +1,7 @@
 {
   "generics": {
+    "share": "Share",
+    "copy": "Copy",
     "filter": "Filter",
     "cancel": "Cancel",
     "ok": "OK",
@@ -26,7 +28,9 @@
   "app": {
     "title": "Genshin Wishes - Backup your wish history easily",
     "titleWithPage": "Genshin Wishes - {{ page }}",
+    "titleShort": "Genshin Wishes",
     "menu": "Menu",
+    "getStarted": "Get started",
     "persistLink": "Remember the link for 24h",
     "user": {
       "uid": "UID {{ uid }}"
@@ -103,6 +107,27 @@
     "en": "English",
     "fr": "Français"
   },
+  "profile": {
+    "notFound": {
+      "title": "This profile could not be found!",
+      "description": "Please verify the URL, otherwise the person that shared it to you might have made their profile private."
+    },
+    "footer": "Automatically import your own wishes from PC/Mobile/Console and get your own stats!",
+    "share": {
+      "title": "Share your statistics page",
+      "label": "Share your stats",
+      "sharing": {
+        "title": "Stats page sharing",
+        "enabled": "Visible only with the link",
+        "disabled": "Visible only for you"
+      },
+      "success$": {
+        "emoji": "\uD83D\uDCCB",
+        "title": "",
+        "message": "Your permalink has been copied to your clipboard!"
+      }
+    }
+  },
   "settings": {
     "label": "Settings",
     "authLink": {
@@ -134,7 +159,7 @@
     },
     "deleteAccount": {
       "title": "Delete your account",
-      "subTitle": "Delete all your data on genshin wishes",
+      "subTitle": "Delete all your data on Genshin Wishes",
       "hint": "Type <b>{{ confirmation }}</b> before clicking on the delete button.",
       "label": "Type here",
       "action": "Delete my account",

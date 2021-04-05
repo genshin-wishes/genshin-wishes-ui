@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>
+  {{ "profile.share.title" | translate }}
+</h2>
+
+<mat-dialog-content class="mat-typography" fxLayout="column" fxLayoutGap="18px">
+  <div
+    fxLayout="row"
+    fxLayoutGap="12px"
+    fxLayoutAlign="start center"
+    class="emphasis-bg share-toggle"
+  >
+    <fa-icon icon="link" class="text-accent link-icon"></fa-icon>
+
+    <div fxLayout="column">
+      <span class="title">{{ "profile.share.sharing.title" | translate }}</span>
+      <span
+        class="subtitle"
+        [class.enabled]="sharing"
+        [class.disabled]="!sharing"
+      >
+        {{
+          (sharing
+            ? "profile.share.sharing.enabled"
+            : "profile.share.sharing.disabled"
+          ) | translate
+        }}
+      </span>
+    </div>
+
+    <span fxFlex></span>
+
+    <mat-slide-toggle
+      color="primary"
+      [ngModel]="sharing"
+      (change)="share($event.checked)"
+    ></mat-slide-toggle>
+  </div>
+
+  <div
+    *ngIf="sharing && profileUrl"
+    fxLayout="row"
+    fxLayoutGap="12px"
+    fxLayoutAlign="center center"
+  >
+    <mat-form-field>
+      <mat-label></mat-label>
+      <input matInput [value]="profileUrl" readonly />
+    </mat-form-field>
+
+    <div>
+      <button
+        mat-stroked-button
+        color="accent"
+        [cdkCopyToClipboard]="profileUrl"
+        (cdkCopyToClipboardCopied)="copied()"
+        cdkFocusInitial
+      >
+        {{ "generics.copy" | translate }}
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions
+  align="center"
+  fxLayout="column"
+  fxLayout.gt-sm="row-reverse"
+  fxLayoutGap="16px"
+>
+  <button mat-button mat-dialog-close>
+    {{ "generics.close" | translate }}
+  </button>
+</mat-dialog-actions>
