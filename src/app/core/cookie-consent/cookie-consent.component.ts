@@ -14,7 +14,7 @@ export class CookieConsentComponent {
   constructor(private _cookie: CookieService) {}
 
   consent(): void {
-    this._cookie.set(COOKIE_CONSENT, '');
+    this._cookie.set(COOKIE_CONSENT, '', { path: '/' });
     this.consented = true;
   }
 }

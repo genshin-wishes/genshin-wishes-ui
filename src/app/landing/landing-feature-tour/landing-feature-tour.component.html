@@ -1,0 +1,100 @@
+<div class="relative-wrapper" ngClass.gt-md="wide">
+  <div class="wrapper" fxFlex fxFlex.gt-md="0 1 calc(7/12 * 100% - 20px)">
+    <div class="image-wrapper">
+      <img src="assets/landing/barbara.png" />
+    </div>
+
+    <div
+      class="feature-wrapper"
+      fxHide.gt-md
+      fxShow.lt-lg
+      fxLayout="column"
+      fxLayoutGap="16px"
+    >
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div
+          fxLayoutAlign="center"
+          fxFlex.lt-sm
+          fxFlex.lt-lg="0 1 calc(8/12 * 100% - 20px)"
+        >
+          <app-landing-feature
+            [img]="features[current].img"
+            [description]="features[current].description"
+          ></app-landing-feature>
+        </div>
+      </div>
+
+      <span fxFlex style="margin: 0"></span>
+
+      <div
+        class="feature-list"
+        fxLayout="row"
+        fxLayoutAlign="center"
+        fxLayoutGap="16px"
+      >
+        <app-landing-icon
+          *ngFor="let feature of features; let index = index"
+          [icon]="feature.icon"
+          [active]="current === index"
+          (click)="current = index; reset$.next()"
+        ></app-landing-icon>
+      </div>
+
+      <div class="feature-progress">
+        <mat-progress-bar
+          color="accent"
+          mode="determinate"
+          [value]="progress"
+        ></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide-feature" fxShow.gt-md fxHide.lt-lg>
+    <div fxLayout="column" fxLayoutGap="32px">
+      <h2>{{ "landing.feature.title" | translate }}</h2>
+
+      <div fxLayout="row">
+        <app-landing-feature
+          fxFlex="0 1 calc(5.75/9 * 100% - 20px)"
+          [img]="features[current].img"
+        ></app-landing-feature>
+
+        <div
+          fxFlexAlign="start"
+          fxFlexOffset="calc(0.5/12 * 100% - 20px)"
+          fxFlex="0 1 calc(3/9 * 100% - 20px)"
+          class="feature-list"
+          fxLayout="column"
+          fxLayoutAlign="center"
+          fxLayoutGap="16px"
+        >
+          <div
+            *ngFor="let feature of features; let index = index"
+            class="wide-feature-description"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            (click)="current = index; reset$.next()"
+          >
+            <app-landing-icon
+              [icon]="feature.icon"
+              [active]="current === index"
+            ></app-landing-icon>
+
+            <div>
+              {{ feature.description | translate }}
+            </div>
+
+            <div class="feature-progress" *ngIf="current === index">
+              <mat-progress-bar
+                color="accent"
+                mode="determinate"
+                [value]="progress"
+              ></mat-progress-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

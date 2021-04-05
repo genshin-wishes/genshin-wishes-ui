@@ -1,0 +1,36 @@
+.wrapper {
+  position: relative;
+}
+
+.content {
+  display: block;
+  padding: 0 18px;
+  margin: auto;
+  z-index: 1;
+}
+
+.users-counter,
+.wishes-counter {
+  white-space: pre-line;
+}
+
+.star {
+  height: 24px;
+  z-index: 1;
+
+  app-star-icon {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+mat-divider {
+  border-top-width: 2px;
+  width: calc(100% + 20px);
+  margin: 0 -20px;
+
+  position: absolute;
+  top: calc(50% - 1px);
+
+  z-index: 0;
+}

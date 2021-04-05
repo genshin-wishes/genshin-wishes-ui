@@ -1,0 +1,84 @@
+<div
+  ngClass.lt-md="mobile"
+  fxLayout="row"
+  fxLayoutGap="12px"
+  fxLayoutAlign="start center"
+  class="wrapper wide-screen-center"
+>
+  <a [routerLink]="['/']" class="title" fxLayout="row" fxLayoutGap="12px">
+    <app-logo></app-logo>
+
+    <h1 fxLayout="column" class="title-wrapper">
+      <span class="title">{{ "app.title" | translate }}</span>
+      <span class="subtitle">{{ "app.description" | translate }}</span>
+    </h1>
+  </a>
+
+  <span fxFlex></span>
+
+  <div
+    fxLayoutAlign="start center"
+    fxLayoutGap="32px"
+    fxShow.gt-xs
+    fxHide.lt-sm
+  >
+    <a mat-button [routerLink]="['/']" gaClick="nav_landing_home">
+      {{ "landing.title" | translate }}
+    </a>
+
+    <a mat-button [routerLink]="['/faq']" gaClick="nav_landing_faq">
+      {{ "faq.title" | translate }}
+    </a>
+
+    <ng-container *ngIf="user$ | async as user; else loginButton">
+      <app-locale-select
+        *ngIf="!user.mihoyoUid"
+        [(value)]="locale"
+        (valueChange)="changeLocale($event)"
+        [namesOnlyForWide]="true"
+      ></app-locale-select>
+
+      <a
+        mat-stroked-button
+        color="accent"
+        gaClick="landing_logout"
+        [routerLink]="['/logout']"
+      >
+        <fa-icon icon="power-off"></fa-icon>
+        &nbsp;
+        {{ "auth.logout.label" | translate }}
+      </a>
+    </ng-container>
+
+    <ng-template #loginButton>
+      <app-locale-select
+        [(value)]="locale"
+        (valueChange)="changeLocale($event)"
+        [namesOnlyForWide]="true"
+      ></app-locale-select>
+
+      <a
+        mat-raised-button
+        color="accent"
+        gaClick="top_sign_in"
+        [routerLink]="['/login']"
+      >
+        {{ "app.signIn" | translate }}
+      </a>
+    </ng-template>
+  </div>
+
+  <app-locale-select
+    fxHide.gt-xs
+    fxShow.lt-sm
+    [(value)]="locale"
+    (valueChange)="changeLocale($event)"
+    [namesOnlyForWide]="true"
+  ></app-locale-select>
+
+  <div fxHide.gt-xs fxShow.lt-sm>
+    <a mat-button (click)="openMenu()">
+      {{ "app.menu" | translate }}
+    </a>
+  </div>
+</div>

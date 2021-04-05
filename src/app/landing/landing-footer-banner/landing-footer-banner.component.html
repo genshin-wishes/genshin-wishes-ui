@@ -1,0 +1,61 @@
+<div class="background-wrapper">
+  <div
+    fxLayout="column"
+    fxLayoutGap="48px"
+    ngClass.gt-md="wide"
+    class="wrapper wide-screen-center"
+  >
+    <div class="img-container">
+      <img src="../../../assets/landing/keqing.png" />
+    </div>
+
+    <div fxLayout="row">
+      <div
+        fxFlexOffset.gt-md="calc(1/12 * 100% - 20px)"
+        fxFlex.gt-md="0 1 calc(3/12 * 100% - 20px)"
+        [ngStyle.gt-md]="{ 'text-align': 'left' }"
+        fxFlexOffset
+        fxFlex
+        [ngStyle]="{ 'text-align': 'center' }"
+      >
+        {{ "landing.footerBanner.joinUs" | translate }}
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <div
+        fxLayout.gt-md="row"
+        fxFlexOffset.gt-md="calc(1/12 * 100% - 20px)"
+        fxFlex.gt-md="0 1 calc(4/12 * 100% - 20px)"
+        fxLayoutGap="20px"
+        fxLayoutAlign.gt-md
+        fxLayout.lt-sm="column"
+        fxFlexOffset
+        fxFlex
+        fxLayoutAlign="center"
+      >
+        <a
+          mat-raised-button
+          color="accent"
+          fxFlex.lt-sm
+          [routerLink]="['/login']"
+          gaClick="landing_footer_getStarted"
+        >
+          {{ "app.getStarted" | translate }}
+        </a>
+
+        <a
+          mat-stroked-button
+          color="primary"
+          [href]="discordUrl"
+          target="_blank"
+          gaClick="discord_discord"
+        >
+          <fa-icon [icon]="['fab', 'discord']"></fa-icon>
+          &nbsp;
+          {{ "nav.discord.label" | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

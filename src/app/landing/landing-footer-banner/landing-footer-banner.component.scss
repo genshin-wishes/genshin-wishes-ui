@@ -1,0 +1,38 @@
+.wide {
+  &.wrapper {
+    margin-top: 300px;
+  }
+
+  .img-container {
+    position: unset;
+    margin-bottom: 0 !important;
+  }
+
+  img {
+    right: 0;
+    bottom: 0;
+    left: unset;
+    width: calc(6 / 12 * 100% - 20px);
+  }
+}
+
+.wrapper {
+  position: relative;
+  margin-top: 100px;
+  padding: 104px 20px 64px 20px;
+}
+
+.img-container {
+  position: relative;
+}
+
+img {
+  position: absolute;
+  width: 320px;
+  bottom: -36px;
+  left: calc(50% - 160px);
+}
+
+a {
+  min-width: 270px;
+}

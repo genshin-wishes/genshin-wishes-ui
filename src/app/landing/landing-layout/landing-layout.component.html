@@ -1,0 +1,15 @@
+<div ngClass.lt-lg="mobile" fxFill>
+  <div class="header-bg">&nbsp;</div>
+  <div class="header-bg-scroll">&nbsp;</div>
+
+  <div class="wrapper" fxLayout="column">
+    <div class="top-bar">
+      <app-landing-top></app-landing-top>
+    </div>
+
+    <router-outlet></router-outlet>
+    <ng-content></ng-content>
+
+    <app-landing-footer></app-landing-footer>
+  </div>
+</div>

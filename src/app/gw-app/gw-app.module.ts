@@ -7,7 +7,6 @@ import { StatsModule } from './stats/stats.module';
 import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     DashboardModule,
     WishesModule,

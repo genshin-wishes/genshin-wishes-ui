@@ -2,7 +2,12 @@
   <span [innerHTML]="'profile.footer' | translate"></span>
 
   <div fxLayoutAlign="center">
-    <a mat-raised-button color="accent" [routerLink]="'/'">
+    <a
+      mat-raised-button
+      color="accent"
+      [routerLink]="'/'"
+      gaClick="profile_footer_getStarted"
+    >
       {{ "app.getStarted" | translate }}
     </a>
   </div>

@@ -1,0 +1,52 @@
+<div class="wrapper wide-screen-center" fxLayout="column" fxLayoutGap="64px">
+  <div fxLayout="row">
+    <div
+      fxLayout="column"
+      fxFlex.lt-md
+      fxFlex="0 1 calc(4/12 * 100% - 20px)"
+      fxFlex.md="0 1 calc(6/12 * 100% - 20px)"
+      fxLayoutGap="8px"
+    >
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+        <app-logo></app-logo>
+        <span class="title"> {{ "app.title" | translate }}</span>
+      </div>
+
+      <div [innerHTML]="'landing.footer.content' | translate"></div>
+
+      <div fxLayout="row" fxLayoutGap="16px" class="socials">
+        <a
+          href="https://twitter.com/genshin_wishes?ref_src=twsrc%5Etfw"
+          class="twitter-follow-button"
+          data-size="large"
+          data-show-screen-name="false"
+          data-show-count="false"
+        >
+          Follow @genshin_wishes
+        </a>
+
+        <a
+          class="github-button"
+          href="https://github.com/genshin-wishes"
+          data-size="large"
+          aria-label="Follow @genshin-wishes on GitHub"
+        >
+          Follow
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div
+    fxLayout="row"
+    fxLayout.lt-lg="column"
+    fxLayoutGap="4px"
+    class="disclaimer"
+  >
+    <span [innerHTML]="'footer.disclaimer' | translate"></span>
+
+    <span fxFlex></span>
+
+    <span [innerHTML]="'footer.claim' | translate"></span>
+  </div>
+</div>

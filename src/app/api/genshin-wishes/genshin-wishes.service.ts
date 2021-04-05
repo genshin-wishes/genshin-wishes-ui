@@ -374,6 +374,14 @@ export class GenshinWishesService {
       });
   }
 
+  getUsersCount(): Observable<number> {
+    return this._http.get<number>('/api/public/users/count');
+  }
+
+  getWishesCount(): Observable<number> {
+    return this._http.get<number>('/api/public/wishes/count');
+  }
+
   private calculateGapFor(wishes: Wish[], rankType: 4 | 5): number {
     const wishesOfRank = wishes.filter((w) => w.item?.rankType === rankType);
 

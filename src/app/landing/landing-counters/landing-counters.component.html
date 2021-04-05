@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <mat-divider></mat-divider>
+
+  <div
+    fxLayout="column"
+    fxLayoutGap="12px"
+    fxLayoutAlign="center center"
+    fxFlex="0 1 256px"
+    fxLayout.gt-md="row"
+    fxFlex.gt-md="0 1 calc(6 / 12 * 100% - 20px)"
+    fxLayoutGap.gt-md="48px"
+    class="content"
+  >
+    <div
+      class="users-counter"
+      [innerHTML]="
+        'landing.counters.users'
+          | translate
+            : { users: ((usersCount$ | async) || 10000 | gwNumber | async) }
+      "
+    ></div>
+
+    <div class="text-primary star" fxLayoutAlign="center">
+      <app-star-icon></app-star-icon>
+    </div>
+
+    <div
+      class="wishes-counter"
+      [innerHTML]="
+        'landing.counters.wishes'
+          | translate
+            : { wishes: ((wishesCount$ | async) || 5500000 | gwNumber | async) }
+      "
+    ></div>
+  </div>
+</div>

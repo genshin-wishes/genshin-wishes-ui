@@ -23,6 +23,8 @@ import { WishImportProgressComponent } from './wish-import-progress/wish-import-
 import { BannerSelectComponent } from './banner-select/banner-select.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { CountryFlagComponent } from './country-flag/country-flag.component';
+import { LogoComponent } from './logo/logo.component';
+import { GwNumberPipe } from './gw-number.pipe';
 
 @NgModule({
   imports: [
@@ -62,6 +64,8 @@ import { CountryFlagComponent } from './country-flag/country-flag.component';
     EmptyStateComponent,
     BannerSelectComponent,
     CountryFlagComponent,
+    LogoComponent,
+    GwNumberPipe,
   ],
   declarations: [
     NgLetDirective,
@@ -77,6 +81,8 @@ import { CountryFlagComponent } from './country-flag/country-flag.component';
     EmptyStateComponent,
     BannerSelectComponent,
     CountryFlagComponent,
+    LogoComponent,
+    GwNumberPipe,
   ],
   providers: [GwDatePipe],
 })
