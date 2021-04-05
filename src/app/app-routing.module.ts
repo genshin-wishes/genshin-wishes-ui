@@ -33,6 +33,11 @@ const routes: Routes = [
       import('./gw-app/gw-app.module').then((m) => m.GwAppModule),
   },
   {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
