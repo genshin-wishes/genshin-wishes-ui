@@ -105,6 +105,9 @@ export class MihoyoService {
 
     const authkeyParam = new URLSearchParams(authUrl).get('authkey');
 
-    return authkeyParam && encodeURIComponent(authkeyParam.replace(/\s/g, '+'));
+    return (
+      authkeyParam &&
+      encodeURIComponent(authkeyParam.replace(/\s/g, '+').replace('#/', ''))
+    );
   }
 }
