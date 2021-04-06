@@ -23,7 +23,13 @@
       <div class="row" fxFlex fxLayoutGap="8px" fxLayoutAlign="start center">
         <span fxFlex="65px">{{ wish.time | gwDate: "YYYY-MM-dd" }}</span>
 
-        <app-pity-chip [pity]="wish.pity"></app-pity-chip>
+        <app-pity-chip
+          [harmonizedPity]="
+            wish.pity +
+            (permanentPity - PITY_5_BY_TYPE[IdToBanner[wish.gachaType]])
+          "
+          [pity]="wish.pity"
+        ></app-pity-chip>
 
         <app-focus-chip
           *ngIf="wish.banner?.items?.length"

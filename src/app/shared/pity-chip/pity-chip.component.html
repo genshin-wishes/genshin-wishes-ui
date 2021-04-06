@@ -1,9 +1,9 @@
 <div
   class="chip"
-  [class.lucky]="pity < 45"
-  [class.early]="pity >= 45 && pity < 74"
-  [class.soft]="pity >= 74 && pity < 80"
-  [class.hard]="pity >= 80"
+  [class.lucky]="harmonizedPity < 45"
+  [class.early]="harmonizedPity >= 45 && harmonizedPity < 74"
+  [class.soft]="harmonizedPity >= 74 && harmonizedPity < 80"
+  [class.hard]="harmonizedPity >= 80"
 >
   {{ "banners.wishes" | translate: { count: pity } }}
 </div>

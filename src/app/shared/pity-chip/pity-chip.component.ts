@@ -7,5 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PityChipComponent {
   @Input()
+  harmonizedPity!: number;
+  @Input()
   pity!: number;
 }
