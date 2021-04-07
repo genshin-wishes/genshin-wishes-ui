@@ -1,0 +1,55 @@
+<mat-card fxLayoutAlign="center center">
+  <mat-card-content
+    fxLayout.lg="column"
+    fxLayout.lt-md="column"
+    fxLayout.lt-lg="row"
+    fxLayout.gt-lg="row"
+    [ngStyle.lt-lg]="{ height: '368px' }"
+    [ngStyle.gt-lg]="{ height: '368px' }"
+    fxLayoutAlign="center center"
+    fxLayoutGap="32px"
+  >
+    <img
+      ngStyle.lg
+      ngStyle.lt-md
+      [ngStyle.lt-lg]="{ width: '220px', height: '220px' }"
+      [ngStyle.gt-lg]="{ width: '220px', height: '220px' }"
+      src="../../../assets/status/sad.svg"
+    />
+
+    <div
+      fxLayout="column"
+      fxLayoutGap="32px"
+      fxLayoutAlign.lt-md="center center"
+      fxLayoutAlign.lg="center center"
+      [ngStyle.lt-md]="{ 'text-align': 'center' }"
+      [ngStyle.lg]="{ 'text-align': 'center' }"
+    >
+      <div>
+        <h3
+          class="text-primary"
+          [ngStyle.gt-xs]="{ 'font-size': '34px', 'line-height': '36px' }"
+        >
+          {{ header }}
+        </h3>
+
+        <p [innerHTML]="description"></p>
+      </div>
+
+      <div fxLayout="row">
+        <a
+          mat-stroked-button
+          color="accent"
+          [routerLink]="buttonLink"
+          gaClick="wishes_empty_back"
+        >
+          <ng-container *ngIf="buttonIcon">
+            <fa-icon [icon]="buttonIcon"></fa-icon>
+            &nbsp;
+          </ng-container>
+          {{ buttonLabel }}
+        </a>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

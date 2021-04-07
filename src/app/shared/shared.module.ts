@@ -22,10 +22,12 @@ import { GwDatePipe } from './gw-date.pipe';
 import { GaClickDirective } from './ga-click.directive';
 import { WishImportProgressComponent } from './wish-import-progress/wish-import-progress.component';
 import { BannerSelectComponent } from './banner-select/banner-select.component';
+import { EmptyStateComponent } from './empty-state/empty-state.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MatModule,
     FormsModule,
     FlexLayoutModule,
@@ -58,6 +60,7 @@ import { BannerSelectComponent } from './banner-select/banner-select.component';
     GwDatePipe,
     GaClickDirective,
     WishImportProgressComponent,
+    EmptyStateComponent,
     BannerSelectComponent,
   ],
   declarations: [
@@ -71,6 +74,7 @@ import { BannerSelectComponent } from './banner-select/banner-select.component';
     GwDatePipe,
     GaClickDirective,
     WishImportProgressComponent,
+    EmptyStateComponent,
     BannerSelectComponent,
   ],
 })

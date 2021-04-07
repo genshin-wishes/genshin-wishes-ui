@@ -391,7 +391,7 @@ $genshin-wishes-theme: mat-dark-theme(
     color: mat-color($foreground, high-emphasis);
   }
 
-  app-wish-empty {
+  app-empty-state {
     h3 {
       font-size: 20px;
     }

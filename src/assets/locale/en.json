@@ -110,7 +110,8 @@
   "profile": {
     "notFound": {
       "title": "This profile could not be found!",
-      "description": "Please verify the URL, otherwise the person that shared it to you might have made their profile private."
+      "description": "This profile is private or the URL is incorrect <span class=\"text-emoji\">\uD83D\uDE05</span>",
+      "goToApp": "Go to Genshin Wishes"
     },
     "footer": "Automatically import your wishes from PC/Mobile/Console and get your own stats!",
     "share": {

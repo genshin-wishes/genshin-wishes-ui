@@ -63,10 +63,15 @@
 
   <ng-template #emptyState>
     <div fxFlex="1 1 auto" fxLayoutAlign="center">
-      <app-wish-empty
+      <app-empty-state
         *ngIf="!filtering; else noResultState"
+        [header]="'wishes.noWishes.title' | translate"
+        [description]="'wishes.noWishes.message' | translate"
+        [buttonLink]="['/banners']"
+        buttonIcon="th"
+        [buttonLabel]="'wishes.backToList' | translate"
         fxFlexFill
-      ></app-wish-empty>
+      ></app-empty-state>
 
       <ng-template #noResultState>
         <app-wish-no-result

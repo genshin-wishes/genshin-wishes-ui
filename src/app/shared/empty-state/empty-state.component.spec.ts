@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WishEmptyComponent } from './wish-empty.component';
+import { EmptyStateComponent } from './empty-state.component';
 
 describe('WishEmptyComponent', () => {
-  let component: WishEmptyComponent;
-  let fixture: ComponentFixture<WishEmptyComponent>;
+  let component: EmptyStateComponent;
+  let fixture: ComponentFixture<EmptyStateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WishEmptyComponent],
+      declarations: [EmptyStateComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WishEmptyComponent);
+    fixture = TestBed.createComponent(EmptyStateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
