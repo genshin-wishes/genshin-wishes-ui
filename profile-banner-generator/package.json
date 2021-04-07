@@ -1,0 +1,17 @@
+{
+  "name": "profile-banner-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "profile-index-generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "*",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "sharp": "0.23.0"
+  }
+}
