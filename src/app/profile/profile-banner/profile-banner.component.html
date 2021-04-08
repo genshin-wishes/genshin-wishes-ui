@@ -22,5 +22,13 @@
           | translate: { page: username }
       }}
     </span>
+
+    <span fxFlex></span>
+
+    <div>
+      <a mat-raised-button color="accent" [routerLink]="'/'">
+        {{ "app.getStarted" | translate }}
+      </a>
+    </div>
   </div>
 </mat-toolbar>
