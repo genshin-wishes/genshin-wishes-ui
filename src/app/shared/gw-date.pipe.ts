@@ -14,9 +14,7 @@ export class GwDatePipe implements PipeTransform {
     format?: string,
     timezone?: string
   ): string | null {
-    const datePipe = new DatePipe(
-      this._lang.getCurrentLang() === 'fr' ? 'fr-FR' : 'en-US'
-    );
+    const datePipe = new DatePipe(this._lang.getCurrentLang());
 
     format =
       format === 'shortTime'

@@ -1,5 +1,6 @@
 .wrapper {
   padding: 20px;
+  overflow: hidden;
 }
 
 .mat-card-header {
@@ -12,4 +13,8 @@
 
 .auth-link-subtitle {
   margin: 0;
+}
+
+app-locale-select {
+  width: 250px;
 }

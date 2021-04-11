@@ -551,16 +551,16 @@ $genshin-wishes-theme: mat-dark-theme(
     border-color: mat-color($foreground, success-text) !important;
   }
   .text-primary {
-    color: mat-color($primary);
+    color: mat-color($primary) !important;
   }
   .text-success {
-    color: mat-color($foreground, success-text);
+    color: mat-color($foreground, success-text) !important;
   }
   .text-accent {
-    color: mat-color($accent);
+    color: mat-color($accent) !important;
   }
   .text-warn {
-    color: mat-color($warn);
+    color: mat-color($warn) !important;
   }
 
   .beta-badge:before {
@@ -788,6 +788,7 @@ $genshin-wishes-theme: mat-dark-theme(
     font-size: 12px;
     letter-spacing: 0.25px;
     color: mat-color($foreground, disabled-text);
+    overflow: hidden;
 
     .focused {
       color: mat-color($foreground, text);

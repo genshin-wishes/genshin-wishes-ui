@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./faq.component.scss'],
 })
 export class FaqComponent {
-  file$ = this._lang.lang$.pipe(map((lang) => `assets/faq/faq-${lang}.md`));
+  file$ = this._lang.lang$.pipe(map((lang) => `i18n/${lang}/faq.md`));
 
   ready = false;
 

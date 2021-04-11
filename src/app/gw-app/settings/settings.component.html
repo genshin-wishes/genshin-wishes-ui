@@ -75,20 +75,10 @@
 
     <mat-card-content>
       <div fxLayout="column" fxLayoutGap="26px">
-        <mat-radio-group
-          fxLayout="column"
-          fxLayoutGap="16px"
-          [value]="currentLang"
-          (change)="lang = $event.value"
-        >
-          <mat-radio-button name="en" value="en" gaClick="settings_lang_en">
-            {{ "lang.en" | translate }}
-          </mat-radio-button>
-
-          <mat-radio-button name="fr" value="fr" gaClick="settings_lang_fr">
-            {{ "lang.fr" | translate }}
-          </mat-radio-button>
-        </mat-radio-group>
+        <app-locale-select
+          [value]="lang || currentLang"
+          (valueChange)="lang = $event"
+        ></app-locale-select>
 
         <div>
           <button

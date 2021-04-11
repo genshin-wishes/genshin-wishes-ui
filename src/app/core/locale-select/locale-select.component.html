@@ -1,0 +1,25 @@
+<mat-form-field *ngIf="localeToLanguage$ | async as localeToLanguage">
+  <mat-select [value]="value" (valueChange)="valueChange.next($event)">
+    <mat-select-trigger>
+      <app-country-flag
+        *ngIf="value"
+        [country]="value.split('-')[1]"
+      ></app-country-flag>
+
+      <span [fxHide.lt-md]="namesOnlyForWide" fxShow.gt-sm>
+        {{ (localeToLanguage[value] | titlecase) || value }}
+      </span>
+    </mat-select-trigger>
+
+    <mat-option
+      *ngFor="let locale of locales$ | async"
+      [id]="locale"
+      [value]="locale"
+      [gaClick]="'lang_' + locale"
+    >
+      <app-country-flag [country]="locale.split('-')[1]"></app-country-flag>
+
+      {{ localeToLanguage[locale] | titlecase }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

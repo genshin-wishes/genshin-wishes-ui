@@ -11,6 +11,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { FaqComponent } from './faq/faq.component';
 import { ItemNamePipe } from '../shared/item-name.pipe';
 import { LogoComponent } from './logo/logo.component';
+import { LocaleSelectComponent } from './locale-select/locale-select.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LogoComponent } from './logo/logo.component';
     LandingCardComponent,
     LandingCardElementComponent,
     LogoComponent,
+    LocaleSelectComponent,
   ],
   imports: [SharedModule],
   providers: [ItemNamePipe],
@@ -38,6 +40,7 @@ import { LogoComponent } from './logo/logo.component';
     LandingCardComponent,
     LandingCardElementComponent,
     LogoComponent,
+    LocaleSelectComponent,
   ],
 })
 export class CoreModule {}

@@ -6,6 +6,9 @@ node_js:
 services:
   - docker
 
+before_install:
+  - npm i -g npm
+
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - VERSION=$(node -p "require('./package.json').version")

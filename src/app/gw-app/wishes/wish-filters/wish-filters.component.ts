@@ -59,7 +59,7 @@ export class WishFiltersComponent implements OnDestroy {
 
     this.changes.pipe(takeUntil(this.destroy)).subscribe(() => {
       this._router.navigate(['.'], {
-        queryParams: this.filters.addToParams({}),
+        queryParams: this.filters.addToRouteParams({}),
         relativeTo: this.route,
       });
     });

@@ -1,7 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { LangService } from '../../shared/lang.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -13,12 +11,7 @@ export class NavComponent {
   nav = new EventEmitter();
 
   discordUrl = environment.discord;
-  typeformUrl$ = this._lang.lang$.pipe(
-    map((lang) =>
-      lang === 'fr' ? environment.typeform.fr : environment.typeform.en
-    )
-  );
+  typeformUrl = environment.typeform;
   coffeeUrl = environment.coffee;
-
-  constructor(private _lang: LangService) {}
+  i18nUrl = environment.i18n;
 }

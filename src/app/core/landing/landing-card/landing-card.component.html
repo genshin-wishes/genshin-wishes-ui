@@ -31,11 +31,7 @@
               <p [innerHTML]="'landing.welcome.description' | translate"></p>
             </div>
 
-            <div
-              *ngIf="youtubeLink$ | async as youtubeLink"
-              class="video-wrapper"
-              fxLayoutAlign="center center"
-            >
+            <div class="video-wrapper" fxLayoutAlign="center center">
               <iframe
                 [src]="youtubeLink"
                 width="100%"
@@ -103,6 +99,7 @@
                     color="primary"
                     [href]="discordUrl"
                     target="_blank"
+                    rel="noopener"
                     gaClick="discord_discord"
                   >
                     <fa-icon [icon]="['fab', 'discord']"></fa-icon>

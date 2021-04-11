@@ -35,44 +35,30 @@ export class Step1Component {
       title: 'PC',
       expanded: this.platform.isBrowser,
       mdFile$: this._lang.lang$.pipe(
-        map((lang) => 'assets/faq/link/pc-' + lang + '.md')
+        map((lang) => `i18n/${lang}/instructions/pc.md`)
       ),
-      videoUrl$: this._lang.lang$.pipe(
-        map((lang) =>
-          lang === 'fr' ? environment.howTo.pc.fr : environment.howTo.pc.en
-        )
-      ),
+      videoUrl: environment.howTo.pc,
     },
     {
       title: 'Android',
       expanded: this.platform.ANDROID,
       mdFile$: this._lang.lang$.pipe(
-        map((lang) => 'assets/faq/link/android-' + lang + '.md')
+        map((lang) => `i18n/${lang}/instructions/android.md`)
       ),
-      videoUrl$: this._lang.lang$.pipe(
-        map((lang) =>
-          lang === 'fr'
-            ? environment.howTo.android.fr
-            : environment.howTo.android.en
-        )
-      ),
+      videoUrl: environment.howTo.android,
     },
     {
       title: 'iOS',
       expanded: this.platform.IOS,
       mdFile$: this._lang.lang$.pipe(
-        map((lang) => 'assets/faq/link/ios-' + lang + '.md')
+        map((lang) => `i18n/${lang}/instructions/ios.md`)
       ),
-      videoUrl$: this._lang.lang$.pipe(
-        map((lang) =>
-          lang === 'fr' ? environment.howTo.ios.fr : environment.howTo.ios.en
-        )
-      ),
+      videoUrl: environment.howTo.ios,
     },
     {
       title: 'Console',
       mdFile$: this._lang.lang$.pipe(
-        map((lang) => 'assets/faq/link/console-' + lang + '.md')
+        map((lang) => `i18n/${lang}/instructions/console.md`)
       ),
     },
   ];

@@ -1,3 +1,9 @@
-<div class="chip" [class.focused]="focused">
+<div
+  class="chip"
+  [class.focused]="focused"
+  [matTooltip]="
+    (focused ? 'wishes.exclusive' : 'wishes.notExclusive') | translate
+  "
+>
   {{ (focused ? "wishes.exclusive" : "wishes.notExclusive") | translate }}
 </div>

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { combineLatest, from, Observable, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  from,
+  Observable,
+  Subject,
+} from 'rxjs';
 import { User } from './user';
 import { MihoyoService } from '../mihoyo/mihoyo.service';
 import { BannerData } from './banner';
 import { Wish } from './wish';
-import {
-  exhaustMap,
-  map,
-  shareReplay,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
+import { exhaustMap, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackService } from '../../shared/snack/snack.service';
@@ -34,11 +34,17 @@ import {
   PITY_5_BY_TYPE,
 } from './constants';
 import { Stats } from './stats';
+import { ItemNamePipe } from '../../shared/item-name.pipe';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GenshinWishesService {
+  private items$ = new BehaviorSubject<Item[]>([]);
+
+  private _updateWishes = new Subject();
+  readonly onWishesUpdate$ = this._updateWishes.asObservable();
+
   constructor(
     private _http: HttpClient,
     private _dialog: MatDialog,
@@ -46,13 +52,11 @@ export class GenshinWishesService {
     private _auth: AuthService,
     private _translate: TranslateService,
     private _snack: SnackService,
+    private _itemName: ItemNamePipe,
     private _lang: LangService
-  ) {}
-
-  private items$ = this._http.get<Item[]>('/api/items').pipe(shareReplay(1));
-
-  private _updateWishes = new Subject();
-  readonly onWishesUpdate$ = this._updateWishes.asObservable();
+  ) {
+    this._http.get<Item[]>('/api/items').subscribe((i) => this.items$.next(i));
+  }
 
   linkMihoyoUser(): Promise<User> {
     return this._mihoyo
@@ -394,9 +398,15 @@ export class GenshinWishesService {
 
     if (page !== undefined) params.page = page + '';
 
-    if (filters !== undefined) filters.addToParams(params);
-
-    if (this._lang.getCurrentLang() === 'fr') params.fr = 'true';
+    if (filters !== undefined) {
+      filters.addToQueryParams(
+        this.items$.value.map((i) => ({
+          ...i,
+          name: this._itemName.transform(i),
+        })),
+        params
+      );
+    }
 
     return params;
   }

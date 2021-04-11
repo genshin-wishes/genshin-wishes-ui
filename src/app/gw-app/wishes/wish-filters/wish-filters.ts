@@ -1,4 +1,5 @@
 import { Params } from '@angular/router';
+import { Item } from '../../../api/item';
 
 export class WishFilters {
   freeText?: string;
@@ -43,7 +44,7 @@ export class WishFilters {
     this.itemType = undefined;
   }
 
-  addToParams(params: Params): Params {
+  addToRouteParams(params: Params): Params {
     if (this.freeText) params.freeText = this.freeText;
 
     if (this.ranks.length) params.ranks = this.ranks.map((one) => one + '');
@@ -55,6 +56,21 @@ export class WishFilters {
       params.weaponEvents = this.weaponEvents.map((one) => one + '');
 
     if (this.itemType) params.itemType = this.itemType;
+
+    return params;
+  }
+
+  addToQueryParams(translatedItems: Item[], params: Params): Params {
+    this.addToRouteParams(params);
+    delete params.freeText;
+
+    const freeText = this.freeText || '';
+
+    if (this.freeText) {
+      params.items = translatedItems
+        .filter((i) => i.name.toLowerCase().includes(freeText.toLowerCase()))
+        .map((i) => i.itemId + '');
+    }
 
     return params;
   }

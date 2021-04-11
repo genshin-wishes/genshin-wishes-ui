@@ -4,14 +4,18 @@ import { NgModule, SecurityContext } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+  TranslateLoader,
+  TranslateModule,
+} from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   HTTP_INTERCEPTORS,
   HttpClient,
   HttpClientModule,
 } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,9 +31,35 @@ import { CookieService } from 'ngx-cookie-service';
 
 import '@angular/common/locales/global/fr';
 import { CoreModule } from './core/core.module';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './i18n/', '/site.json?v=' + Date.now());
+import '@angular/common/locales/global/pl';
+import '@angular/common/locales/global/ru';
+
+export function createTranslateLoader(http: HttpClient): TranslateLoader {
+  return {
+    getTranslation(lang: string): Observable<unknown> {
+      return combineLatest([
+        http.get(`/i18n/${lang}/site.json`),
+        http.get(`/i18n/${lang}/items.json`),
+      ]).pipe(map(([site, items]) => ({ ...site, items })));
+    },
+  };
+}
+
+export function createMissingTranslationHandler(): MissingTranslationHandler {
+  return {
+    handle(params: MissingTranslationHandlerParams): Observable<string> {
+      return params.translateService.getTranslation('en-US').pipe(
+        map((english) => {
+          return (
+            english?.instant(params.key, params.interpolateParams) || params.key
+          );
+        })
+      );
+    },
+  };
 }
 
 @NgModule({
@@ -47,11 +77,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MarkdownModule.forRoot({ sanitize: SecurityContext.STYLE }),
     ToastrModule.forRoot({ newestOnTop: false, enableHtml: true }),
     TranslateModule.forRoot({
-      defaultLanguage: 'fr',
+      defaultLanguage: 'en-US',
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient],
+      },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useFactory: createMissingTranslationHandler,
       },
     }),
     FontAwesomeModule,

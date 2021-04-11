@@ -3,9 +3,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { SettingsComponent } from './settings.component';
 import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
 import { AuthModule } from '../../auth/auth.module';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [SettingsComponent, DeleteAccountDialogComponent],
-  imports: [SharedModule, AuthModule],
+  imports: [SharedModule, AuthModule, CoreModule],
 })
 export class SettingsModule {}

@@ -69,22 +69,51 @@
 
   <a
     mat-list-item
-    [href]="typeformUrl$ | async"
+    [href]="typeformUrl"
     target="_blank"
+    rel="noopener"
     gaClick="nav_request"
+    [matTooltip]="'nav.request.label' | translate"
   >
     <fa-icon matListIcon icon="flag"></fa-icon>
     <h3 mat-line>{{ "nav.request.label" | translate }}</h3>
   </a>
 
-  <a mat-list-item [href]="discordUrl" target="_blank" gaClick="nav_discord">
+  <a
+    mat-list-item
+    [href]="discordUrl"
+    target="_blank"
+    rel="noopener"
+    gaClick="nav_discord"
+    [matTooltip]="'nav.discord.label' | translate"
+  >
     <fa-icon matListIcon [icon]="['fab', 'discord']"></fa-icon>
     <h3 mat-line>{{ "nav.discord.label" | translate }}</h3>
   </a>
 
-  <a mat-list-item [href]="coffeeUrl" target="_blank" gaClick="nav_coffee">
+  <a
+    mat-list-item
+    [href]="coffeeUrl"
+    target="_blank"
+    rel="noopener"
+    gaClick="nav_coffee"
+    [matTooltip]="'nav.coffee.label' | translate"
+  >
     <fa-icon matListIcon icon="heart"></fa-icon>
     <h3 mat-line>{{ "nav.coffee.label" | translate }}</h3>
+  </a>
+
+  <a
+    mat-list-item
+    [href]="i18nUrl"
+    target="_blank"
+    rel="noopener"
+    gaClick="nav_i18n"
+    class="text-accent"
+    [matTooltip]="'nav.i18n.label' | translate"
+  >
+    <fa-icon matListIcon icon="language"></fa-icon>
+    <h3 mat-line>{{ "nav.i18n.label" | translate }}</h3>
   </a>
 
   <span fxFlex></span>

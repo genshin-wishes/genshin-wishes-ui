@@ -1,16 +1,17 @@
 {
     "name": "Genshin Wishes",
     "short_name": "Genshin Wishes",
+    "start_url": "https://genshin-wishes.com",
     "icons": [
         {
             "src": "/android-chrome-192x192.png?v=vMgzEnKK6x",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
         },
         {
             "src": "/android-chrome-512x512.png?v=vMgzEnKK6x",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
         }
     ],
     "theme_color": "#57525c",

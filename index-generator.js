@@ -31,29 +31,6 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
 
   // now write that file back
   fs.writeFile(
-    indexFileFrPath,
-    data
-      .replace(/@@LANG@@/g, "fr")
-      .replace(/@@URL@@/g, "https://genshin-wishes.com")
-      .replace(
-        /@@TITLE@@/g,
-        "Genshin Wishes — Sauvegardez votre historique de vœux facilement"
-      )
-      .replace(
-        /@@DESCRIPTION@@/g,
-        "Sauvegardez vos vœux Genshin Impact rapidement et conservez les autant de temps que vous le souhaitez. Consultez vos statistiques de vœux, calculez votre pity pour chaque bannière et parcourez vos anciens vœux en toute simplicité."
-      )
-      .replace(
-        /@@IMAGE@@/g,
-        "https://genshin-wishes.com/assets/landing-landscape.jpg"
-      ),
-    function (err) {
-      if (err) return console.log(err);
-      console.log("Successfully rewrote index fr html");
-    }
-  );
-
-  fs.writeFile(
     indexFileEnPath,
     data
       .replace(/@@LANG@@/g, "en")

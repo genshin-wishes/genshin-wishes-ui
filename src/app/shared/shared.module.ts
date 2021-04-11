@@ -23,6 +23,7 @@ import { GaClickDirective } from './ga-click.directive';
 import { WishImportProgressComponent } from './wish-import-progress/wish-import-progress.component';
 import { BannerSelectComponent } from './banner-select/banner-select.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
+import { CountryFlagComponent } from './country-flag/country-flag.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
     WishImportProgressComponent,
     EmptyStateComponent,
     BannerSelectComponent,
+    CountryFlagComponent,
   ],
   declarations: [
     NgLetDirective,
@@ -76,6 +78,7 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
     WishImportProgressComponent,
     EmptyStateComponent,
     BannerSelectComponent,
+    CountryFlagComponent,
   ],
 })
 export class SharedModule {}

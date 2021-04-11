@@ -6,6 +6,11 @@ mat-toolbar.toggler {
   padding-top: 0;
 }
 
+.sidenav-wrapper,
+app-nav {
+  overflow: hidden auto;
+}
+
 mat-sidenav-content,
 .mat-drawer-over {
   width: 100%;

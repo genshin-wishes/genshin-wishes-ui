@@ -126,17 +126,7 @@
       </mat-chip-list>
     </div>
 
-    <div fxLayoutAlign="center" fxLayoutGap="24px">
-      <button
-        *ngIf="!!data"
-        mat-stroked-button
-        [cdkTrapFocus]="false"
-        [cdkTrapFocusAutoCapture]="true"
-        mat-dialog-close
-      >
-        {{ "generics.close" | translate }}
-      </button>
-
+    <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="24px">
       <button
         mat-raised-button
         color="accent"
@@ -146,6 +136,16 @@
         <fa-icon icon="times"></fa-icon>
         &nbsp;
         {{ "wishes.filters.reset" | translate }}
+      </button>
+
+      <button
+        *ngIf="!!data"
+        mat-stroked-button
+        [cdkTrapFocus]="false"
+        [cdkTrapFocusAutoCapture]="true"
+        mat-dialog-close
+      >
+        {{ "generics.close" | translate }}
       </button>
     </div>
   </div>

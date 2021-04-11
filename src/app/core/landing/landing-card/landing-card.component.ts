@@ -18,12 +18,8 @@ export class LandingCardComponent {
       map(() => (this._mediaObserver.isActive('gt-md') ? 'gt-md' : 'lt-lg'))
     );
 
-  youtubeLink$ = this._lang.lang$.pipe(
-    map((lang) =>
-      this._sanitizer.bypassSecurityTrustResourceUrl(
-        environment.demo + '&autoplay=1&controls=0&modestbranding=1&loop=1'
-      )
-    )
+  youtubeLink = this._sanitizer.bypassSecurityTrustResourceUrl(
+    environment.demo + '&autoplay=1&controls=0&modestbranding=1&loop=1'
   );
 
   discordUrl = environment.discord;

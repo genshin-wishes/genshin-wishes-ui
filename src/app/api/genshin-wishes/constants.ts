@@ -1,3 +1,5 @@
+export type LocaleToLanguageName = Record<string, string>;
+
 export enum ApiErrors {
   AUTHKEY_INVALID = 'AUTHKEY_INVALID',
   MIHOYO_UID_DIFFERENT = 'MIHOYO_UID_DIFFERENT',

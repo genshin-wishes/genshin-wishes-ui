@@ -23,12 +23,13 @@
           [src]="mdFile"
         ></markdown>
 
-        <div *ngIf="device.videoUrl$ | async as videoUrl">
+        <div *ngIf="device.videoUrl">
           <a
             mat-button
             color="primary"
-            [href]="videoUrl"
+            [href]="device.videoUrl"
             target="_blank"
+            rel="noopener"
             gaClick="see_video"
           >
             {{ "app.urlSetup.steps$.1.showVideo" | translate }}

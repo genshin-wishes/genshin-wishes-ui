@@ -10,7 +10,7 @@
       [fixedTopGap]="sidenav.mode == 'side' ? 64 : undefined"
       [disableClose]="sidenav.mode == 'side'"
     >
-      <div fxLayout="column" fxFlex>
+      <div fxLayout="column" fxFlex class="sidenav-wrapper">
         <mat-toolbar
           *ngIf="sidenav.mode != 'side'"
           class="toggler"
