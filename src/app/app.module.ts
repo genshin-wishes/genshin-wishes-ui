@@ -29,11 +29,7 @@ import '@angular/common/locales/global/fr';
 import { CoreModule } from './core/core.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(
-    http,
-    './assets/locale/',
-    '.json?v=' + Date.now()
-  );
+  return new TranslateHttpLoader(http, './i18n/', '/site.json?v=' + Date.now());
 }
 
 @NgModule({

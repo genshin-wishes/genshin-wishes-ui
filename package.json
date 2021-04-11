@@ -40,6 +40,7 @@
     "@ngx-translate/http-loader": "6.0.0",
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
+    "genshin-wishes-i18n": "~0.0.2",
     "http-status-codes": "2.1.4",
     "masonry-layout": "4.2.2",
     "moment": "^2.29.1",

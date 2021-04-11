@@ -9,10 +9,6 @@ export class ItemNamePipe implements PipeTransform {
   constructor(private _lang: LangService) {}
 
   transform(item?: Item): string {
-    return !item
-      ? ''
-      : this._lang.getCurrentLang() === 'fr'
-      ? item.nameFr
-      : item.name;
+    return !item ? '' : item.name;
   }
 }

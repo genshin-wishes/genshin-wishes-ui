@@ -26,7 +26,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon", "src/assets"],
+            "assets": [
+              "src/favicon",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/genshin-wishes-i18n/i18n/",
+                "output": "./i18n/"
+              }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "allowedCommonJsDependencies": ["ngx-masonry"]
@@ -85,7 +93,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon", "src/assets"],
+            "assets": [
+              "src/favicon",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/genshin-wishes-i18n/i18n/",
+                "output": "./i18n/"
+              }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": []
           }
