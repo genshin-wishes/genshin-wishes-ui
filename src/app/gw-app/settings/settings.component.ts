@@ -53,10 +53,7 @@ export class SettingsComponent implements OnDestroy {
     this._auth.user$.pipe(takeUntil(this._destroy)).subscribe((user) => {
       this.currentLang = this._lang.getCurrentLang();
 
-      this.currentWholeClock =
-        user?.wholeClock != undefined
-          ? user?.wholeClock
-          : this.currentLang === 'fr';
+      this.currentWholeClock = user?.wholeClock;
     });
   }
 
