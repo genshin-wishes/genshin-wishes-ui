@@ -34,6 +34,9 @@ import { CoreModule } from './core/core.module';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import '@angular/common/locales/global/de';
+import '@angular/common/locales/global/en';
+import '@angular/common/locales/global/fr';
 import '@angular/common/locales/global/pl';
 import '@angular/common/locales/global/ru';
 
