@@ -57,7 +57,13 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
       return params.translateService.getTranslation('en-US').pipe(
         map((english) => {
           return (
-            english?.instant(params.key, params.interpolateParams) || params.key
+            (english &&
+              params.translateService.getParsedResult(
+                english,
+                params.key,
+                params.interpolateParams
+              )) ||
+            params.key
           );
         })
       );

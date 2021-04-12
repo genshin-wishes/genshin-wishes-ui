@@ -6,6 +6,7 @@ import { User } from '../api/genshin-wishes/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { LocaleToLanguageName } from '../api/genshin-wishes/constants';
+import { environment } from '../../environments/environment';
 
 export type Lang = string;
 
@@ -15,7 +16,7 @@ export type Lang = string;
 export class LangService {
   private _locales: string[] = [];
 
-  readonly locales$ = this._http.get<string[]>('/i18n/i18n.json').pipe(
+  readonly locales$ = this._http.get<string[]>(`/i18n/i18n.json`).pipe(
     catchError(() => of(['en-US'])),
     map((locales) => {
       locales.sort((l1, l2) => l1.localeCompare(l2));

@@ -1,12 +1,10 @@
 {
   "name": "genshin-wishes",
   "private": true,
-  "version": "1.8.1",
   "scripts": {
     "ng": "ng",
     "start:local": "ng serve --proxy-config proxy/proxy.conf.js",
     "build": "ng build --prod && node index-generator.js",
-    "buildProfileProxy": "ng build --prod && docker build -f profile-banner-generator/Dockerfile -t genshinwishes/profile-proxy .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
