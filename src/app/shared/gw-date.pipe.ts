@@ -17,7 +17,8 @@ export class GwDatePipe implements PipeTransform {
     const datePipe = new DatePipe(this._lang.getCurrentLang());
 
     format =
-      format === 'shortTime'
+      format === 'shortTime' &&
+      this._auth.getCurrentUser()?.wholeClock != undefined
         ? this._auth.getCurrentUser()?.wholeClock
           ? 'HH:mm'
           : 'h:mm a'
