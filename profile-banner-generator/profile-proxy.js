@@ -78,6 +78,9 @@ app.get("/:profileId.png", async (req, res, next) => {
     item: items.find((i) => i.itemId === w.itemId),
   }));
   const wishes5Star = wishes.filter((w) => w.item.rankType === 5);
+  wishes5Star.sort(
+    (w1, w2) => new Date(w1.time).getTime() - new Date(w2.time).getTime()
+  );
   const last5StarA =
     wishes5Star.length >= 1 && wishes5Star[wishes5Star.length - 1].item;
   const last5StarB =
