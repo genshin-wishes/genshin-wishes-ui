@@ -42,8 +42,7 @@ export class WishesComponent implements OnDestroy {
     map(
       (params) => params.banner.replace('-', '_').toUpperCase() as BannerType
     ),
-    tap((bannerType) => {
-      this._top.setTitle('wishes.banners$.' + bannerType + '.title');
+    tap(() => {
       this.initialFilters = new WishFilters();
 
       this.filters$.next(this.initialFilters);
@@ -113,6 +112,8 @@ export class WishesComponent implements OnDestroy {
     private _mediaObserver: MediaObserver,
     private _dialog: MatDialog
   ) {
+    this._top.setTitle('wishes.label');
+
     this.route.queryParams.subscribe((params) => {
       this.initialFilters = new WishFilters(params);
 

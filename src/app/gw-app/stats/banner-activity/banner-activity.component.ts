@@ -41,6 +41,8 @@ export class BannerActivityComponent implements OnChanges {
       scales: {
         xAxes: [
           {
+            type: 'time',
+            time: { unit: 'month' },
             ticks: {
               callback: (date) => this._date.transform(date, 'MMM yyyy'),
             },
