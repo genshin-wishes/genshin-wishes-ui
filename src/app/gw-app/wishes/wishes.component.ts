@@ -42,7 +42,8 @@ export class WishesComponent implements OnDestroy {
     map(
       (params) => params.banner.replace('-', '_').toUpperCase() as BannerType
     ),
-    tap(() => {
+    tap((bannerType) => {
+      this._top.setTitle('wishes.banners$.' + bannerType + '.title');
       this.initialFilters = new WishFilters();
 
       this.filters$.next(this.initialFilters);
@@ -65,7 +66,8 @@ export class WishesComponent implements OnDestroy {
                   { wishes: count }
                 )
               : 'wishes.banners$.' + bannerType + '.title',
-            'wishes.banners$.' + bannerType + '.title'
+            'wishes.banners$.' + bannerType + '.title',
+            count > 0
           );
 
           // tslint:disable-next-line:triple-equals double equals for null & undefined

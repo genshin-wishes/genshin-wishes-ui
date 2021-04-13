@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { BaseChartDirective, Label } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
+import { GwDatePipe } from '../../../shared/gw-date.pipe';
 
 @Component({
   selector: 'app-banner-activity',
@@ -26,6 +27,8 @@ export class BannerActivityComponent implements OnChanges {
 
   options: ChartOptions = {};
 
+  constructor(private _date: GwDatePipe) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.bannerActivity?.currentValue) return;
 
@@ -38,9 +41,8 @@ export class BannerActivityComponent implements OnChanges {
       scales: {
         xAxes: [
           {
-            type: 'time',
-            time: {
-              unit: 'month',
+            ticks: {
+              callback: (date) => this._date.transform(date, 'MMM yyyy'),
             },
             stacked: true,
           },

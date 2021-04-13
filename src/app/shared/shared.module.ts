@@ -80,5 +80,6 @@ import { CountryFlagComponent } from './country-flag/country-flag.component';
     BannerSelectComponent,
     CountryFlagComponent,
   ],
+  providers: [GwDatePipe],
 })
 export class SharedModule {}

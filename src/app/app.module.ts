@@ -31,8 +31,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import '@angular/common/locales/global/fr';
 import { CoreModule } from './core/core.module';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { exhaustMap, map, tap } from 'rxjs/operators';
 
 import '@angular/common/locales/global/de';
 import '@angular/common/locales/global/en';
@@ -55,15 +55,15 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   return {
     handle(params: MissingTranslationHandlerParams): Observable<string> {
       return params.translateService.getTranslation('en-US').pipe(
-        map((english) => {
+        exhaustMap((english) => {
           return (
             (english &&
-              params.translateService.getParsedResult(
+              (params.translateService.getParsedResult(
                 english,
                 params.key,
                 params.interpolateParams
-              )) ||
-            params.key
+              ) as Observable<string>)) ||
+            of(params.key)
           );
         })
       );

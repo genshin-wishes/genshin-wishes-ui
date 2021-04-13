@@ -27,7 +27,6 @@ export class TopBarComponent {
   routing$ = this._router.events.pipe(
     startWith(new NavigationEnd(0, this._router.url, '')),
     filter((e) => e instanceof NavigationEnd),
-    tap(console.log),
     shareReplay(1)
   );
 

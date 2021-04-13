@@ -14,10 +14,10 @@
 
   <h1
     class="title"
-    [matTooltip]="(title$ | async) || 'app.title' | translate"
+    [matTooltip]="(title$ | async) || ('app.title' | translate)"
     [matTooltipShowDelay]="1000"
   >
-    {{ (title$ | async) || "app.title" | translate }}
+    {{ (title$ | async) || ("app.title" | translate) }}
   </h1>
 
   <span fxFlex></span>
