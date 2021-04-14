@@ -42,7 +42,12 @@ export class BannerActivityComponent implements OnChanges {
         xAxes: [
           {
             type: 'time',
-            time: { unit: 'month' },
+            time: {
+              unit: 'month',
+              displayFormats: {
+                month: 'yyyy-MM',
+              },
+            },
             ticks: {
               callback: (date) => this._date.transform(date, 'MMM yyyy'),
             },
