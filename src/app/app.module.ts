@@ -39,6 +39,7 @@ import '@angular/common/locales/global/en';
 import '@angular/common/locales/global/fr';
 import '@angular/common/locales/global/pl';
 import '@angular/common/locales/global/ru';
+import '@angular/common/locales/global/th';
 
 export function createTranslateLoader(http: HttpClient): TranslateLoader {
   return {
