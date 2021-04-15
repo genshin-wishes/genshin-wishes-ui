@@ -126,6 +126,7 @@ export class ImportService {
                     BannerTypes.filter(
                       (banner) => this._bannerCount[banner].count > 0
                     ).map((banner) => ({
+                      translated: true,
                       message: this._translate.instant(
                         'wishes.import.success$.message',
                         {

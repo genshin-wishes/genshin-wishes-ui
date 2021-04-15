@@ -11,7 +11,7 @@ import { User } from './user';
 import { MihoyoService } from '../mihoyo/mihoyo.service';
 import { BannerData } from './banner';
 import { Wish } from './wish';
-import { exhaustMap, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { exhaustMap, map, startWith, switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackService } from '../../shared/snack/snack.service';

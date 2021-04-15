@@ -29,10 +29,9 @@ import {
 import { environment } from '../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 
-import '@angular/common/locales/global/fr';
 import { CoreModule } from './core/core.module';
 import { combineLatest, Observable, of } from 'rxjs';
-import { exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 
 import '@angular/common/locales/global/de';
 import '@angular/common/locales/global/en';
@@ -45,8 +44,8 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
   return {
     getTranslation(lang: string): Observable<unknown> {
       return combineLatest([
-        http.get(`/i18n/${lang}/site.json`),
-        http.get(`/i18n/${lang}/items.json`),
+        http.get(`/i18n/${lang}/site.json`).pipe(catchError(() => of({}))),
+        http.get(`/i18n/${lang}/items.json`).pipe(catchError(() => of({}))),
       ]).pipe(map(([site, items]) => ({ ...site, items })));
     },
   };
@@ -59,6 +58,8 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
         exhaustMap((english) => {
           return (
             (english &&
+              params.translateService.parser.getValue(english, params.key) !=
+                undefined &&
               (params.translateService.getParsedResult(
                 english,
                 params.key,

@@ -7,6 +7,7 @@ export interface SnackData {
   messages: {
     message: string;
     title?: string;
+    translated?: boolean;
   }[];
   ga: string;
   emoji?: string;

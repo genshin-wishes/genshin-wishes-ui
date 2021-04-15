@@ -11,8 +11,13 @@
     </div>
 
     <div>
-      <h3 *ngIf="one.title" [innerHTML]="one.title | translate"></h3>
-      <p [innerHTML]="one.message | translate"></p>
+      <h3
+        *ngIf="one.title"
+        [innerHTML]="one.translated ? one.title : (one.title | translate)"
+      ></h3>
+      <p
+        [innerHTML]="one.translated ? one.message : (one.message | translate)"
+      ></p>
     </div>
   </div>
 
