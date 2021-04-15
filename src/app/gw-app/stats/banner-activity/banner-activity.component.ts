@@ -49,7 +49,7 @@ export class BannerActivityComponent implements OnChanges {
               },
             },
             ticks: {
-              callback: (date) => this._date.transform(date, 'MMM yyyy'),
+              callback: (date) => this._date.transform(date, 'mediumDate'),
             },
             stacked: true,
           },
