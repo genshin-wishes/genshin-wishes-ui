@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { LocaleToLanguageName } from '../api/genshin-wishes/constants';
 import { environment } from '../../environments/environment';
+import { TopService } from '../core/top.service';
 
 export type Lang = string;
 
@@ -35,10 +36,12 @@ export class LangService {
   constructor(
     private _auth: AuthService,
     private _http: HttpClient,
+    private _top: TopService,
     private _translate: TranslateService
   ) {
     this.lang$.subscribe((lang) => {
       this._translate.use(lang);
+      this._top.refreshTitle();
     });
 
     this.locales$

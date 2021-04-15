@@ -69,8 +69,6 @@ export class SettingsComponent implements OnDestroy {
       }
 
       this._auth.setLang(lang);
-      this._translate.use(lang);
-      this._top.setTitle('settings.label');
     });
   }
 
