@@ -40,7 +40,7 @@
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
     "flag-icon-css": "^3.5.0",
-    "genshin-wishes-i18n": "0.0.21",
+    "genshin-wishes-i18n": "0.0.22",
     "http-status-codes": "2.1.4",
     "masonry-layout": "4.2.2",
     "moment": "^2.29.1",

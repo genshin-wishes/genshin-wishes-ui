@@ -120,4 +120,16 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    // Locale overrides
+    ((window as unknown) as {
+      ng: { common: { locales: { ja: string[][] } } };
+    }).ng.common.locales.ja[11] = [
+      'a h:mm',
+      'a h:mm:ss',
+      'a h:mm:ss z',
+      'a h時mm分ss秒 zzzz',
+    ];
+  }
+}
