@@ -1,8 +1,9 @@
 const fs = require("fs");
+const indexFilePrefix = "dist/genshin-wishes/";
+const indexFilePath = "dist/genshin-wishes/index.template";
 const indexFileProfilePath = "dist/genshin-wishes/index_profile.html";
-const indexFileFrPath = "dist/genshin-wishes/index_fr.html";
-const indexFileEnPath = "dist/genshin-wishes/index_en.html";
-const indexFilePath = "dist/genshin-wishes/index.html";
+
+const i18n = require("genshin-wishes-i18n/i18n/i18n.json");
 
 console.log("After build script started...");
 
@@ -13,6 +14,16 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
   if (err) {
     return console.log(err);
   }
+
+  data = data.replace(
+    /@@LANG_TAGS@@/g,
+    i18n
+      .map(
+        (locale) =>
+          `    <link rel="alternate" href="https://genshin-wishes.com/${locale.toLowerCase()}" hreflang="${locale.toLowerCase()}" />`
+      )
+      .join("\n")
+  );
 
   // now write that file back
   fs.writeFile(
@@ -29,24 +40,28 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     }
   );
 
-  // now write that file back
-  fs.writeFile(
-    indexFileEnPath,
-    data
-      .replace(/@@LANG@@/g, "en")
-      .replace(/@@URL@@/g, "https://genshin-wishes.com")
-      .replace(/@@TITLE@@/g, "Genshin Wishes - Backup your wish history easily")
-      .replace(
-        /@@DESCRIPTION@@/g,
-        "Backup your Genshin Impact wishes quickly and keep them for as long as you want. Check your wish statistics, calculate your pity for each banner and browse your old wishes easily."
-      )
-      .replace(
-        /@@IMAGE@@/g,
-        "https://genshin-wishes.com/assets/landing-landscape.jpg"
-      ),
-    function (err) {
-      if (err) return console.log(err);
-      console.log("Successfully rewrote index en html");
-    }
-  );
+  i18n.forEach((locale) => {
+    const translations = require("genshin-wishes-i18n/i18n/" +
+      locale +
+      "/site.json");
+    const title = translations.app.title;
+    const description = translations.landing.welcome.description;
+
+    fs.writeFile(
+      indexFilePrefix + "index_" + locale.toLowerCase() + ".html",
+      data
+        .replace(/@@LANG@@/g, locale)
+        .replace(/@@URL@@/g, "https://genshin-wishes.com")
+        .replace(/@@TITLE@@/g, title)
+        .replace(/@@DESCRIPTION@@/g, description)
+        .replace(
+          /@@IMAGE@@/g,
+          "https://genshin-wishes.com/assets/landing-landscape.jpg"
+        ),
+      function (err) {
+        if (err) return console.log(err);
+        console.log("Successfully rewrote index_" + locale + ".html");
+      }
+    );
+  });
 });

@@ -11,13 +11,7 @@
       href="https://genshin-wishes.com/"
       hreflang="x-default"
     />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="de" />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="en" />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="fr" />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="ja" />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="ru" />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="th" />
-    <link rel="alternate" href="https://genshin-wishes.com/" hreflang="zh" />
+@@LANG_TAGS@@
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="@@TITLE@@" />
