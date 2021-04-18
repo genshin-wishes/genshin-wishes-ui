@@ -20,7 +20,9 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     i18n
       .map(
         (locale) =>
-          `    <link rel="alternate" href="https://genshin-wishes.com/${locale.toLowerCase()}" hreflang="${locale.toLowerCase()}" />`
+          `    <link rel="alternate" href="https://genshin-wishes.com/${locale.toLowerCase()}" hreflang="${locale.toLowerCase()}" />\n    <link rel="alternate" href="https://genshin-wishes.com/${locale.toLowerCase()}" hreflang="${
+            locale.toLowerCase().split("-")[0]
+          }" />`
       )
       .join("\n")
   );
@@ -50,7 +52,7 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     fs.writeFile(
       indexFilePrefix + "index_" + locale.toLowerCase() + ".html",
       data
-        .replace(/@@LANG@@/g, locale)
+        .replace(/@@LANG@@/g, locale.split("-")[0])
         .replace(/@@URL@@/g, "https://genshin-wishes.com")
         .replace(/@@TITLE@@/g, title)
         .replace(/@@DESCRIPTION@@/g, description)

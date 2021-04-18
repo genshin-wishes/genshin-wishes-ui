@@ -1,7 +1,7 @@
 {
   "name": "genshin-wishes",
   "private": true,
-  "version": "1.8.8",
+  "version": "1.8.8a",
   "scripts": {
     "ng": "ng",
     "start:local": "ng serve --proxy-config proxy/proxy.conf.js",
