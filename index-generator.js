@@ -50,7 +50,7 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     const description = translations.landing.welcome.description;
     const lowerCaseLocale = locale.toLowerCase();
 
-    fs.writeFile(
+    fs.writeFileSync(
       indexFilePrefix + "index_" + lowerCaseLocale + ".html",
       data
         .replace(/@@LANG@@/g, lowerCaseLocale)
@@ -67,4 +67,13 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
       }
     );
   });
+
+  const enUs = Buffer.from(
+    fs.readFileSync(indexFilePrefix + "index_en-us.html")
+  ).toString();
+
+  fs.writeFileSync(
+    indexFilePrefix + "index.html",
+    enUs.replace('lang="en-us"', 'lang=""')
+  );
 });
