@@ -4,12 +4,7 @@ import { NgModule, SecurityContext } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MissingTranslationHandler,
-  MissingTranslationHandlerParams,
-  TranslateLoader,
-  TranslateModule,
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   HTTP_INTERCEPTORS,
@@ -31,7 +26,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { CoreModule } from './core/core.module';
 import { combineLatest, Observable, of } from 'rxjs';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import '@angular/common/locales/global/de';
 import '@angular/common/locales/global/en';
@@ -50,28 +45,6 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
         http.get(`/i18n/${lang}/site.json`).pipe(catchError(() => of({}))),
         http.get(`/i18n/${lang}/items.json`).pipe(catchError(() => of({}))),
       ]).pipe(map(([site, items]) => ({ ...site, items })));
-    },
-  };
-}
-
-export function createMissingTranslationHandler(): MissingTranslationHandler {
-  return {
-    handle(params: MissingTranslationHandlerParams): Observable<string> {
-      return params.translateService.getTranslation('en-US').pipe(
-        exhaustMap((english) => {
-          return (
-            (english &&
-              params.translateService.parser.getValue(english, params.key) !=
-                undefined &&
-              (params.translateService.getParsedResult(
-                english,
-                params.key,
-                params.interpolateParams
-              ) as Observable<string>)) ||
-            of(params.key)
-          );
-        })
-      );
     },
   };
 }
@@ -96,10 +69,6 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient],
-      },
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useFactory: createMissingTranslationHandler,
       },
     }),
     FontAwesomeModule,

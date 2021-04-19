@@ -38,7 +38,7 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
       .replace(/@@IMAGE@@/g, "__host__/og/__profileId__.png"),
     function (err) {
       if (err) return console.log(err);
-      console.log("Successfully rewrote index profile html");
+      console.log("Successfully rewrote index_profile.html");
     }
   );
 
@@ -48,11 +48,12 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
       "/site.json");
     const title = translations.app.title;
     const description = translations.landing.welcome.description;
+    const lowerCaseLocale = locale.toLowerCase();
 
     fs.writeFile(
-      indexFilePrefix + "index_" + locale.toLowerCase() + ".html",
+      indexFilePrefix + "index_" + lowerCaseLocale + ".html",
       data
-        .replace(/@@LANG@@/g, locale.split("-")[0])
+        .replace(/@@LANG@@/g, lowerCaseLocale)
         .replace(/@@URL@@/g, "https://genshin-wishes.com")
         .replace(/@@TITLE@@/g, title)
         .replace(/@@DESCRIPTION@@/g, description)
@@ -62,7 +63,7 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
         ),
       function (err) {
         if (err) return console.log(err);
-        console.log("Successfully rewrote index_" + locale + ".html");
+        console.log("Successfully rewrote index_" + lowerCaseLocale + ".html");
       }
     );
   });

@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { catchError, exhaustMap, map, shareReplay, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../api/genshin-wishes/user';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { LocaleToLanguageName } from '../api/genshin-wishes/constants';
-import { environment } from '../../environments/environment';
 import { TopService } from '../core/top.service';
+import { DOCUMENT } from '@angular/common';
+import i18n from 'genshin-wishes-i18n/i18n/i18n.json';
 
 export type Lang = string;
 
@@ -15,25 +16,12 @@ export type Lang = string;
   providedIn: 'root',
 })
 export class LangService {
-  private _locales: string[] = [];
-
-  readonly locales$ = this._http.get<string[]>(`/i18n/i18n.json`).pipe(
-    catchError(() => of(['en-US'])),
-    map((locales) => {
-      locales.sort((l1, l2) => l1.localeCompare(l2));
-
-      return locales;
-    }),
-    tap((locales) => (this._locales = locales)),
-    shareReplay(1)
-  );
+  readonly locales: string[] = i18n;
   private _lang$ = new Subject<string>();
-  readonly lang$ = this.locales$.pipe(
-    exhaustMap(() => this._lang$),
-    shareReplay(1)
-  );
+  readonly lang$ = this._lang$.asObservable();
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private _auth: AuthService,
     private _http: HttpClient,
     private _top: TopService,
@@ -44,13 +32,11 @@ export class LangService {
       this._top.refreshTitle();
     });
 
-    this.locales$
-      .pipe(
-        exhaustMap(() =>
-          this._auth.user$.pipe(map(this._getLangFromUser.bind(this)))
-        )
-      )
-      .subscribe((lang) => this._lang$.next(lang));
+    this._auth.user$
+      .pipe(map(this._getLangFromUser.bind(this)))
+      .subscribe((lang) => {
+        this._lang$.next(lang);
+      });
   }
 
   getCurrentLang(): Lang {
@@ -58,26 +44,35 @@ export class LangService {
   }
 
   getLanguages(): Observable<LocaleToLanguageName> {
-    return this.locales$.pipe(
-      exhaustMap((locales) =>
-        this._http.get<LocaleToLanguageName>('/api/public/languages', {
-          params: {
-            locales,
-          },
-        })
-      )
-    );
+    return this._http.get<LocaleToLanguageName>('/api/public/languages', {
+      params: {
+        locales: this.locales,
+      },
+    });
   }
 
   private _getLangFromUser(user: User | null): string {
-    const wanted = user?.lang || this._translate.getBrowserCultureLang();
+    const wanted = this._formatLocale(
+      user?.lang ||
+        this.document.documentElement.lang ||
+        this._translate.getBrowserCultureLang()
+    );
     const fallBack = this._translate.getBrowserLang();
 
     return (
-      this._locales.find((l) => l === wanted) ||
-      this._locales.find((l) => l === fallBack) ||
-      this._locales.find((l) => l.startsWith(fallBack)) ||
+      this.locales.find((l) => l === wanted) ||
+      this.locales.find((l) => l === fallBack) ||
+      this.locales.find((l) => l.startsWith(fallBack)) ||
       'en-US'
     );
+  }
+
+  private _formatLocale(locale: string): string {
+    if (!locale) return '';
+
+    if (locale.indexOf('-') !== -1)
+      locale = locale.split('-')[0] + '-' + locale.split('-')[1].toUpperCase();
+
+    return locale;
   }
 }

@@ -12,7 +12,7 @@
     </mat-select-trigger>
 
     <mat-option
-      *ngFor="let locale of locales$ | async"
+      *ngFor="let locale of locales"
       [id]="locale"
       [value]="locale"
       [gaClick]="'lang_' + locale"

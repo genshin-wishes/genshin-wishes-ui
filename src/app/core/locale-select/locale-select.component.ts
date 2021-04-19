@@ -15,7 +15,7 @@ export class LocaleSelectComponent {
   @Input()
   namesOnlyForWide!: boolean;
 
-  locales$ = this._lang.locales$;
+  locales = this._lang.locales;
   localeToLanguage$ = this._lang.getLanguages().pipe(shareReplay(1));
 
   constructor(private _lang: LangService) {}
