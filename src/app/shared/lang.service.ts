@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../api/genshin-wishes/user';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +18,7 @@ export type Lang = string;
 export class LangService {
   readonly locales: string[] = i18n;
   private _lang$ = new Subject<string>();
-  readonly lang$ = this._lang$.asObservable();
+  readonly lang$ = this._lang$.asObservable().pipe(shareReplay(1));
 
   constructor(
     @Inject(DOCUMENT) private document: Document,

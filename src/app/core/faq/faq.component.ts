@@ -3,7 +3,6 @@ import { LangService } from '../../shared/lang.service';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
 import { TopService } from '../top.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-faq',
