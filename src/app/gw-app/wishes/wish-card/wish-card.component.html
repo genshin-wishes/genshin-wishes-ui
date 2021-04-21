@@ -35,7 +35,10 @@
           fxLayout="row"
           *ngIf="wish.item?.rankType === 5"
         >
-          <app-focus-chip [wish]="wish"></app-focus-chip>
+          <app-focus-chip
+            *ngIf="wish.banner?.items?.length"
+            [wish]="wish"
+          ></app-focus-chip>
         </div>
 
         <div
