@@ -47,7 +47,9 @@ export class WishesComponent implements OnDestroy {
 
   count$ = combineLatest([this.bannerType$, this.filters$]).pipe(
     debounceTime(100),
-    tap(() => {
+    tap(([bannerType]) => {
+      this._top.setTitle('wishes.banners$.' + bannerType + '.title');
+
       this._lastCount = undefined;
       if (this._datasource) this._datasource.reset();
     }),
@@ -61,7 +63,6 @@ export class WishesComponent implements OnDestroy {
                   { wishes: count }
                 )
               : 'wishes.banners$.' + bannerType + '.title',
-            'wishes.banners$.' + bannerType + '.title',
             count > 0
           );
 
@@ -107,8 +108,6 @@ export class WishesComponent implements OnDestroy {
     private _mediaObserver: MediaObserver,
     private _dialog: MatDialog
   ) {
-    this._top.setTitle('wishes.label');
-
     this.route.queryParams.subscribe((params) => {
       this.initialFilters = new WishFilters(params);
 

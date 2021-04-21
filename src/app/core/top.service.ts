@@ -10,50 +10,46 @@ export class TopService {
   private _title$ = new ReplaySubject<string>(1);
   title$ = this._title$.asObservable();
 
-  private _currentTitle = 'app.title';
-  private _currentPageTitle: string = 'app.title';
+  private _currentTitle = '';
   private _currentIsTranslated = false;
 
   constructor(private _title: Title, private _translate: TranslateService) {}
 
-  setTitle(
-    title: string | null,
-    pageTitle?: string | null,
-    titleTranslated?: boolean
-  ): void {
+  setTitle(title: string | null, titleTranslated?: boolean): void {
     this._currentTitle = title || 'app.title';
-    this._currentPageTitle = pageTitle || this._currentTitle;
     this._currentIsTranslated = titleTranslated || false;
 
-    if (pageTitle !== 'app.title') {
-      if (titleTranslated)
-        this._translate
-          .get('app.titleWithPage', { page: title })
-          .subscribe((titleTrad) => this._applyTitle(titleTrad, title));
-      else
-        this._translate
-          .get(this._currentPageTitle)
-          .subscribe((pageTrad) =>
-            this._translate
-              .get('app.titleWithPage', { page: pageTrad })
-              .subscribe((titleTrad) => this._applyTitle(titleTrad, pageTrad))
-          );
-    } else
+    if (titleTranslated)
+      this._translate
+        .get('app.titleWithPage', { page: this._currentTitle })
+        .subscribe((titleTrad) =>
+          this._applyTitle(titleTrad, this._currentTitle)
+        );
+    else
       this._translate
         .get(this._currentTitle)
-        .subscribe((titleTrad) => this._applyTitle(titleTrad));
+        .subscribe((pageTrad) =>
+          this._currentTitle === 'app.title'
+            ? this._applyTitle(pageTrad, pageTrad)
+            : this._translate
+                .get('app.titleWithPage', { page: pageTrad })
+                .subscribe((titleTrad) =>
+                  this._applyTitle(
+                    titleTrad,
+                    this._currentTitle !== 'app.description'
+                      ? pageTrad
+                      : titleTrad
+                  )
+                )
+        );
   }
 
-  private _applyTitle(title: string, pageTitle?: string | null): void {
-    this._title$.next(pageTitle || title);
+  private _applyTitle(title: string, titleWithoutPage: string): void {
+    this._title$.next(titleWithoutPage);
     this._title.setTitle(title);
   }
 
   refreshTitle(): void {
-    this.setTitle(
-      this._currentTitle,
-      this._currentPageTitle,
-      this._currentIsTranslated
-    );
+    this.setTitle(this._currentTitle, this._currentIsTranslated);
   }
 }

@@ -12,13 +12,11 @@
     <app-logo></app-logo>
   </a>
 
-  <h1
-    class="title"
-    [matTooltip]="(title$ | async) || ('app.title' | translate)"
-    [matTooltipShowDelay]="1000"
-  >
-    {{ (title$ | async) || ("app.title" | translate) }}
-  </h1>
+  <ng-container *ngIf="title$ | async as title">
+    <h1 class="title" [matTooltip]="title" [matTooltipShowDelay]="1000">
+      {{ title }}
+    </h1>
+  </ng-container>
 
   <span fxFlex></span>
 

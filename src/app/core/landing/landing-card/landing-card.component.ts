@@ -30,6 +30,6 @@ export class LandingCardComponent {
     private _lang: LangService,
     private _top: TopService
   ) {
-    this._top.setTitle(null);
+    this._top.setTitle('app.description');
   }
 }

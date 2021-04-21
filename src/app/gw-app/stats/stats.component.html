@@ -119,12 +119,22 @@
         </div>
       </div>
     </div>
+
+    <ng-template #emptyTemplate>
+      <app-empty-state
+        *ngIf="data.filters?.isEmpty(); else noResultTemplate"
+        [header]="'wishes.noWishes.title' | translate"
+        [description]="'wishes.noWishes.message' | translate"
+      ></app-empty-state>
+
+      <ng-template #noResultTemplate>
+        <app-wish-no-result
+          (removeFilters)="resetFilters()"
+        ></app-wish-no-result>
+      </ng-template>
+    </ng-template>
   </ng-container>
 </div>
-
-<ng-template #emptyTemplate>
-  <app-wish-no-result (removeFilters)="resetFilters()"></app-wish-no-result>
-</ng-template>
 
 <ng-template #loadingTemplate>
   <div fxLayoutAlign="center center" fxFlex>

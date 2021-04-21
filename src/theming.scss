@@ -549,14 +549,46 @@ $genshin-wishes-theme: mat-dark-theme(
   }
 
   // TODO use loop
+  .alert {
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: left;
+
+    &-primary {
+      @extend .alert;
+      @extend .border-primary;
+      @extend .bg-primary;
+      @extend .text-primary;
+    }
+
+    &-success {
+      @extend .alert;
+      @extend .border-success;
+      @extend .bg-success;
+      @extend .text-success;
+    }
+  }
+  .border-primary {
+    border-color: mat-color($primary) !important;
+  }
   .border-success {
     border-color: mat-color($foreground, success-text) !important;
+  }
+  .bg-primary {
+    background: mat-color($primary, 0.04) !important;
+  }
+  .bg-success {
+    background: mat-color($foreground, success-text, 0.04) !important;
   }
   .text-primary {
     color: mat-color($primary) !important;
   }
   .text-success {
     color: mat-color($foreground, success-text) !important;
+  }
+  .text-low {
+    color: mat-color($foreground, low-emphasis) !important;
   }
   .text-accent {
     color: mat-color($accent) !important;
@@ -567,6 +599,20 @@ $genshin-wishes-theme: mat-dark-theme(
 
   .beta-badge:before {
     background: mat-color($accent);
+  }
+}
+
+@mixin auth-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+
+  app-auth {
+    .title {
+      text-transform: uppercase;
+    }
+
+    .main-hint {
+      font-weight: 700;
+    }
   }
 }
 
@@ -861,6 +907,7 @@ $genshin-wishes-theme: mat-dark-theme(
 
 @include material-override-theme($genshin-wishes-theme);
 @include app-theme($genshin-wishes-theme);
+@include auth-theme($genshin-wishes-theme);
 @include base-theme($genshin-wishes-theme);
 @include markdown-theme($genshin-wishes-theme);
 @include snack-theme($genshin-wishes-theme);

@@ -46,7 +46,10 @@ fs.readFile(indexFilePath, "utf8", function (err, data) {
     const translations = require("genshin-wishes-i18n/i18n/" +
       locale +
       "/site.json");
-    const title = translations.app.title;
+    const title = translations.app.titleWithPage.replace(
+      "{{ page }}",
+      translations.app.description
+    );
     const description = translations.landing.welcome.description;
     const lowerCaseLocale = locale.toLowerCase();
 

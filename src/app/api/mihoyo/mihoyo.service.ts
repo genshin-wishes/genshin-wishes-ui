@@ -77,7 +77,9 @@ export class MihoyoService {
 
   private askForUrl(): Promise<string> {
     return this._dialog
-      .open(UrlDialogComponent)
+      .open(UrlDialogComponent, {
+        maxWidth: '100vw',
+      })
       .afterClosed()
       .toPromise()
       .then((data: AuthUrlAndPersistInfo) => {

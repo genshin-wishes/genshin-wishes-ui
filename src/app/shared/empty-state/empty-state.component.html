@@ -4,8 +4,8 @@
     fxLayout.lt-md="column"
     fxLayout.lt-lg="row"
     fxLayout.gt-lg="row"
-    [ngStyle.lt-lg]="{ height: '368px' }"
-    [ngStyle.gt-lg]="{ height: '368px' }"
+    [ngStyle.lt-lg]="{ 'min-height': '368px' }"
+    [ngStyle.gt-lg]="{ 'min-height': '368px' }"
     fxLayoutAlign="center center"
     fxLayoutGap="32px"
   >
@@ -18,37 +18,46 @@
     />
 
     <div
-      fxLayout="column"
-      fxLayoutGap="32px"
+      fxLayout="row"
       fxLayoutAlign.lt-md="center center"
       fxLayoutAlign.lg="center center"
-      [ngStyle.lt-md]="{ 'text-align': 'center' }"
-      [ngStyle.lg]="{ 'text-align': 'center' }"
     >
-      <div>
-        <h3
-          class="text-primary"
-          [ngStyle.gt-xs]="{ 'font-size': '34px', 'line-height': '36px' }"
-        >
-          {{ header }}
-        </h3>
+      <div
+        fxLayout="column"
+        fxLayoutGap="16px"
+        [ngStyle.lt-md]="{ 'text-align': 'center' }"
+        [ngStyle.lg]="{ 'text-align': 'center' }"
+      >
+        <div>
+          <h3
+            class="text-primary"
+            [ngStyle.gt-xs]="{ 'font-size': '34px', 'line-height': '36px' }"
+          >
+            {{ header }}
+          </h3>
 
-        <p [innerHTML]="description"></p>
-      </div>
+          <p [innerHTML]="description"></p>
+        </div>
 
-      <div fxLayout="row">
-        <a
-          mat-stroked-button
-          color="accent"
-          [routerLink]="buttonLink"
-          gaClick="wishes_empty_back"
-        >
-          <ng-container *ngIf="buttonIcon">
-            <fa-icon [icon]="buttonIcon"></fa-icon>
-            &nbsp;
-          </ng-container>
-          {{ buttonLabel }}
-        </a>
+        <p
+          class="alert-success"
+          [innerHTML]="'generics.archiveWarning' | translate"
+        ></p>
+
+        <div fxLayout="row" *ngIf="buttonLink">
+          <a
+            mat-stroked-button
+            color="accent"
+            [routerLink]="buttonLink"
+            gaClick="wishes_empty_back"
+          >
+            <ng-container *ngIf="buttonIcon">
+              <fa-icon [icon]="buttonIcon"></fa-icon>
+              &nbsp;
+            </ng-container>
+            {{ buttonLabel }}
+          </a>
+        </div>
       </div>
     </div>
   </mat-card-content>

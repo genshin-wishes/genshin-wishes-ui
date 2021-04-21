@@ -17,8 +17,17 @@
           </div>
 
           <h3 class="title">
-            {{ "landing.signInMethod" | translate }}
+            {{ "auth.signInMethod" | translate }}
           </h3>
+
+          <div class="hint" fxLayout="row" fxLayoutAlign="center">
+            <div fxFlex="0 1 calc(2/3 * 100%)" fxFlex.lt-sm>
+              <p class="main-hint text-success">
+                {{ "auth.hint" | translate }}
+              </p>
+              <p class="text-low">{{ "auth.subHint" | translate }}</p>
+            </div>
+          </div>
 
           <div
             fxLayout="column"

@@ -12,13 +12,13 @@
     <span
       class="username"
       [matTooltip]="
-        (!username ? 'app.titleShort' : 'app.titleWithPage')
+        (!username ? 'app.title' : 'app.titleWithPage')
           | translate: { page: username }
       "
       [matTooltipShowDelay]="1000"
     >
       {{
-        (!username ? "app.titleShort" : "app.titleWithPage")
+        (!username ? "app.title" : "app.titleWithPage")
           | translate: { page: username }
       }}
     </span>

@@ -22,7 +22,7 @@ export class UrlInputComponent implements OnInit {
 
   urlData: AuthUrlAndPersistInfo = {
     authUrl: '',
-    persist: true,
+    persist: false,
     valid: false,
   };
   positiveFeedback = 'app.urlInput.correctLink';

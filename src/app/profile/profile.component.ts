@@ -24,6 +24,6 @@ export class ProfileComponent {
   ) {
     this.username$
       .pipe(first())
-      .subscribe((username) => this._top.setTitle(username, undefined, true));
+      .subscribe((username) => this._top.setTitle(username, true));
   }
 }
