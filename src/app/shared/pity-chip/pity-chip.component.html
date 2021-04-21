@@ -1,25 +1,3 @@
-<div
-  class="chip"
-  [class.lucky]="
-    wish.pity + (wish.gachaType === 302 ? 10 : 0) <
-    thresholds[wish.item?.rankType || 3].lucky
-  "
-  [class.early]="
-    wish.pity + (wish.gachaType === 302 ? 10 : 0) >=
-      thresholds[wish.item?.rankType || 3].lucky &&
-    wish.pity + (wish.gachaType === 302 ? 10 : 0) <
-      thresholds[wish.item?.rankType || 3].soft
-  "
-  [class.soft]="
-    wish.pity + (wish.gachaType === 302 ? 10 : 0) >=
-      thresholds[wish.item?.rankType || 3].soft &&
-    wish.pity + (wish.gachaType === 302 ? 10 : 0) <
-      thresholds[wish.item?.rankType || 3].hard
-  "
-  [class.hard]="
-    wish.pity + (wish.gachaType === 302 ? 10 : 0) >=
-    thresholds[wish.item?.rankType || 3].hard
-  "
->
+<div [class]="'chip' + this.computeClass()">
   {{ "banners.wishes" | translate: { count: wish.pity } }}
 </div>
