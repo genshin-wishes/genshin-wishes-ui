@@ -6,7 +6,6 @@ import { User } from '../api/genshin-wishes/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { LocaleToLanguageName } from '../api/genshin-wishes/constants';
-import { TopService } from '../core/top.service';
 import { DOCUMENT } from '@angular/common';
 import i18n from 'genshin-wishes-i18n/i18n/i18n.json';
 
@@ -24,12 +23,10 @@ export class LangService {
     @Inject(DOCUMENT) private document: Document,
     private _auth: AuthService,
     private _http: HttpClient,
-    private _top: TopService,
     private _translate: TranslateService
   ) {
     this.lang$.subscribe((lang) => {
       this._translate.use(lang);
-      this._top.refreshTitle();
     });
 
     this._auth.user$

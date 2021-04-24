@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { LangService } from '../shared/lang.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,15 @@ export class TopService {
   private _currentTitle = '';
   private _currentIsTranslated = false;
 
-  constructor(private _title: Title, private _translate: TranslateService) {}
+  constructor(
+    private _title: Title,
+    private _translate: TranslateService,
+    private _lang: LangService
+  ) {
+    this._lang.lang$.subscribe(() => {
+      this.refreshTitle();
+    });
+  }
 
   setTitle(title: string | null, titleTranslated?: boolean): void {
     this._currentTitle = title || 'app.title';

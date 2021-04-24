@@ -12,7 +12,13 @@
     <app-logo></app-logo>
   </a>
 
-  <ng-container *ngIf="title$ | async as title">
+  <ng-container
+    *ngIf="
+      (title$ | async) ||
+      ('app.titleWithPage'
+        | translate: { page: ('app.description' | translate) }) as title
+    "
+  >
     <h1 class="title" [matTooltip]="title" [matTooltipShowDelay]="1000">
       {{ title }}
     </h1>
