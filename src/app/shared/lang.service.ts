@@ -15,7 +15,10 @@ export type Lang = string;
   providedIn: 'root',
 })
 export class LangService {
-  readonly locales: string[] = i18n;
+  readonly locales: string[] = (() => {
+    i18n.sort();
+    return i18n;
+  })();
   private _lang$ = new Subject<string>();
   readonly lang$ = this._lang$.asObservable().pipe(shareReplay(1));
 
