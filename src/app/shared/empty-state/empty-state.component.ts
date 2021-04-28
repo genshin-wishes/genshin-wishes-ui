@@ -17,4 +17,6 @@ export class EmptyStateComponent {
   buttonIcon!: IconProp;
   @Input()
   buttonLabel!: string;
+  @Input()
+  hideWarning!: boolean;
 }

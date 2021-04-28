@@ -40,6 +40,7 @@
         </div>
 
         <p
+          *ngIf="!hideWarning"
           class="alert-success"
           [innerHTML]="'generics.archiveWarning' | translate"
         ></p>
