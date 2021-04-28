@@ -24,6 +24,9 @@ export class FocusDistributionComponent implements OnChanges {
     datasets: ChartDataSets[];
   };
 
+  @Input()
+  rankType!: number;
+
   options: ChartOptions = {};
 
   ngOnChanges(changes: SimpleChanges): void {

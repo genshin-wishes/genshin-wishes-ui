@@ -20,16 +20,20 @@ export class StatsService {
   ) {}
 
   getFocusDistribution(
-    stats$: Observable<Stats>
+    stats$: Observable<Stats>,
+    rankType: 4 | 5
   ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
     return stats$.pipe(
       map((stats) => {
         const focused = stats.wishes.filter(
           (w) =>
-            w.banner?.items && w.banner.items.find((i) => i.itemId === w.itemId)
+            w.banner?.items &&
+            w.banner.items.find(
+              (i) => w.item?.rankType === rankType && i.itemId === w.itemId
+            )
         ).length;
         const focusable = stats.wishes.filter(
-          (w) => w.banner?.items?.length && w.item?.rankType === 5
+          (w) => w.banner?.items?.length && w.item?.rankType === rankType
         ).length;
 
         return {
@@ -39,7 +43,7 @@ export class StatsService {
           ],
           datasets: [
             {
-              ...ColorsUtils.getColorsFor([5, 1]),
+              ...ColorsUtils.getColorsFor([rankType, 1]),
               borderWidth: 1,
               data: [focused, focusable - focused],
             },

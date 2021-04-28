@@ -65,7 +65,8 @@ export class StatsComponent {
   );
 
   rankDistribution$ = this._stats.getRankDistribution(this.stats$);
-  focusDistribution$ = this._stats.getFocusDistribution(this.stats$);
+  focusDistribution5Stars$ = this._stats.getFocusDistribution(this.stats$, 5);
+  focusDistribution4Stars$ = this._stats.getFocusDistribution(this.stats$, 4);
   fourStarsDetails$ = this._stats.getFourStarsDetails(this.stats$);
   fiveStarsList$ = this._stats.getFiveStarsList(this.stats$);
   fourStarsList$ = this._stats.getFourStarsList(this.stats$);

@@ -3,6 +3,7 @@ import { BannerType } from './genshin-wishes/constants';
 
 export interface Banner {
   id: number;
+  version: string;
   items: Item[];
   start: Date;
   end: Date;

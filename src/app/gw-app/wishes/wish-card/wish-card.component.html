@@ -33,7 +33,7 @@
           fxFlexOrder="1"
           fxFlexOrder.lt-sm="2"
           fxLayout="row"
-          *ngIf="wish.item?.rankType === 5"
+          *ngIf="(wish.item?.rankType || 3) > 3"
         >
           <app-focus-chip
             *ngIf="wish.banner?.items?.length"

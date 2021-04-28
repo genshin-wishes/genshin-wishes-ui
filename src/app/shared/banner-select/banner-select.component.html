@@ -19,11 +19,14 @@
       [value]="banner.id"
     >
       <div class="event-option" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <app-item-img [item]="banner.items[0]" size="32px"></app-item-img>
-        <span>
-          {{ banner.items[0] | itemName }} ({{ banner.start | gwDate }} -
-          {{ banner.end | gwDate }})
-        </span>
+        <ng-container *ngFor="let item of banner.items">
+          <app-item-img
+            *ngIf="item.rankType === 5"
+            [item]="item"
+            size="32px"
+          ></app-item-img>
+        </ng-container>
+        <span>{{ banner.version }}</span>
       </div>
     </mat-option>
   </mat-select>

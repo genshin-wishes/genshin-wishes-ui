@@ -10,7 +10,8 @@
       characterEvents: characterEvents$ | async,
       weaponEvents: weaponEvents$ | async,
       rankDistribution: rankDistribution$ | async,
-      focusDistribution: focusDistribution$ | async,
+      focusDistribution5Stars: focusDistribution5Stars$ | async,
+      focusDistribution4Stars: focusDistribution4Stars$ | async,
       fourStarsDetails: fourStarsDetails$ | async,
       fiveStarsList: fiveStarsList$ | async,
       fourStarsList: fourStarsList$ | async,
@@ -35,7 +36,8 @@
               data.characterEvents &&
               data.weaponEvents &&
               data.rankDistribution &&
-              data.focusDistribution &&
+              data.focusDistribution5Stars &&
+              data.focusDistribution4Stars &&
               data.fourStarsDetails &&
               data.fiveStarsList &&
               data.fourStarsList &&
@@ -91,7 +93,17 @@
                       data.banner !== BannerType.NOVICE &&
                       data.banner !== BannerType.PERMANENT
                     "
-                    [focusDistribution]="data.focusDistribution"
+                    [rankType]="5"
+                    [focusDistribution]="data.focusDistribution5Stars"
+                  ></app-focus-distribution>
+
+                  <app-focus-distribution
+                    *ngIf="
+                      data.banner !== BannerType.NOVICE &&
+                      data.banner !== BannerType.PERMANENT
+                    "
+                    [rankType]="4"
+                    [focusDistribution]="data.focusDistribution4Stars"
                   ></app-focus-distribution>
 
                   <app-four-stars-details

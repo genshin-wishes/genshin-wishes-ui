@@ -56,7 +56,6 @@ export class BannerActivityComponent implements OnChanges {
         ],
         yAxes: [
           {
-            stacked: true,
             ticks: {
               suggestedMax:
                 Math.max(
