@@ -59,7 +59,7 @@ export class StatsService {
     return stats$.pipe(
       map((stats) => {
         const characters = stats.wishes.filter(
-          (w) => w.item?.itemType === 'Character'
+          (w) => w.item?.rankType === 4 && w.item?.itemType === 'Character'
         ).length;
 
         return {
