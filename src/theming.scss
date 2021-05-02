@@ -438,7 +438,7 @@ $genshin-wishes-theme: mat-dark-theme(
     }
   }
 
-  app-landing-feature-tour {
+  .mat-typography app-landing-feature-tour {
     h2 {
       font-weight: bold;
       font-size: 32px;
@@ -464,7 +464,7 @@ $genshin-wishes-theme: mat-dark-theme(
     }
   }
 
-  app-landing-security {
+  .mat-typography app-landing-security {
     h2 {
       font-weight: bold;
       font-size: 24px;
