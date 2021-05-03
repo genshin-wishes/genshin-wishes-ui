@@ -14,6 +14,11 @@ import { LandingLayoutComponent } from './landing/landing-layout/landing-layout.
 const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   {
+    path: 'profile',
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfileModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./landing/landing.module').then((m) => m.LandingModule),
@@ -26,11 +31,6 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () =>
       import('./gw-app/gw-app.module').then((m) => m.GwAppModule),
-  },
-  {
-    path: 'profile',
-    loadChildren: () =>
-      import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: '**',
