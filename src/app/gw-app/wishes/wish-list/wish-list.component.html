@@ -14,13 +14,13 @@
                 wish &&
                 (index === 0 ||
                   (wishes._cachedData[index - 1] &&
-                    (wish.time | gwDate: 'dd/MM/yyyy':'UTC') !==
+                    (wish.time | gwDate: 'dd/MM/yyyy') !==
                       (wishes._cachedData[index - 1].time
-                        | gwDate: 'dd/MM/yyyy':'UTC'))) as differentDate
+                        | gwDate: 'dd/MM/yyyy'))) as differentDate
               "
             >
               <h2 class="date-title" *ngIf="differentDate">
-                {{ wish.time | gwDate: "fullDate":"UTC" }}
+                {{ wish.time | gwDate: "fullDate" }}
               </h2>
 
               <h3
