@@ -25,6 +25,9 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { CountryFlagComponent } from './country-flag/country-flag.component';
 import { LogoComponent } from './logo/logo.component';
 import { GwNumberPipe } from './gw-number.pipe';
+import { EventNamePipe } from './event-name.pipe';
+import { RankTypePipe } from './rank-type.pipe';
+import { BarComponent } from './bar/bar.component';
 
 @NgModule({
   imports: [
@@ -66,6 +69,9 @@ import { GwNumberPipe } from './gw-number.pipe';
     CountryFlagComponent,
     LogoComponent,
     GwNumberPipe,
+    EventNamePipe,
+    RankTypePipe,
+    BarComponent,
   ],
   declarations: [
     NgLetDirective,
@@ -83,6 +89,9 @@ import { GwNumberPipe } from './gw-number.pipe';
     CountryFlagComponent,
     LogoComponent,
     GwNumberPipe,
+    EventNamePipe,
+    RankTypePipe,
+    BarComponent,
   ],
   providers: [GwDatePipe],
 })

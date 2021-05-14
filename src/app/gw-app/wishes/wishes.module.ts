@@ -6,6 +6,7 @@ import { BannerNavComponent } from './banner-nav/banner-nav.component';
 import { WishFiltersComponent } from './wish-filters/wish-filters.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { WishNoResultComponent } from './wish-no-result/wish-no-result.component';
+import { LandingModule } from '../../landing/landing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { WishNoResultComponent } from './wish-no-result/wish-no-result.component
     WishListComponent,
     WishNoResultComponent,
   ],
-  imports: [SharedModule],
+  imports: [SharedModule, LandingModule],
   exports: [WishFiltersComponent, BannerNavComponent, WishNoResultComponent],
 })
 export class WishesModule {}

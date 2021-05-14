@@ -1,6 +1,6 @@
 <mat-form-field
   *ngIf="localeToLanguage$ | async as localeToLanguage"
-  [ngStyle.lt-md]="{ width: namesOnlyForWide ? '40px' : '100%' }"
+  [ngStyle.lt-lg]="{ width: namesOnlyForWide ? '40px' : '100%' }"
 >
   <mat-select [value]="value" (valueChange)="valueChange.next($event)">
     <mat-select-trigger>
@@ -9,7 +9,7 @@
         [country]="value.split('-')[1]"
       ></app-country-flag>
 
-      <span [fxHide.lt-md]="namesOnlyForWide" fxShow.gt-sm>
+      <span [fxHide.lt-lg]="namesOnlyForWide" fxShow.gt-sm>
         {{ (localeToLanguage[value] | titlecase) || value }}
       </span>
     </mat-select-trigger>

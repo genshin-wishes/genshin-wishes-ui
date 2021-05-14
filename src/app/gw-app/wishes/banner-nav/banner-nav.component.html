@@ -1,46 +1,70 @@
-<nav mat-tab-nav-bar backgroundColor="primary" fxShow fxHide.lt-md>
-  <a
-    mat-tab-link
-    *ngFor="let banner of banners"
-    [gaClick]="'see_wishes_tab_' + banner"
-    [routerLink]="['../', banner | slugify]"
-    routerLinkActive
-    [active]="rla.isActive"
-    #rla="routerLinkActive"
-  >
-    {{ "wishes.banners$." + banner + ".title" | translate }}
-  </a>
-</nav>
+<ng-container [ngSwitch]="mode">
+  <ng-container *ngSwitchCase="'normal'">
+    <nav mat-tab-nav-bar backgroundColor="primary" fxShow fxHide.lt-md>
+      <a
+        mat-tab-link
+        *ngFor="let banner of banners"
+        [gaClick]="'see_wishes_tab_' + banner"
+        [routerLink]="['../', banner | slugify]"
+        routerLinkActive
+        [active]="rla.isActive"
+        #rla="routerLinkActive"
+      >
+        {{ "wishes.banners$." + banner + ".title" | translate }}
+      </a>
+    </nav>
 
-<mat-toolbar color="primary" fxHide fxShow.lt-md>
-  <button
-    mat-button
-    [matMenuTriggerFor]="menu"
-    #menuTrigger="matMenuTrigger"
-    gaClick="see_wishes_nav_dropdown"
-  >
-    {{ "wishes.bannersNav" | translate }}
-    &nbsp;
-    <fa-icon icon="chevron-down"></fa-icon>
-  </button>
+    <mat-toolbar color="primary" fxHide fxShow.lt-md>
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        #menuTrigger="matMenuTrigger"
+        gaClick="see_wishes_nav_dropdown"
+      >
+        {{ "wishes.bannersNav" | translate }}
+        &nbsp;
+        <fa-icon icon="chevron-down"></fa-icon>
+      </button>
 
-  <span fxFlex></span>
+      <span fxFlex></span>
 
-  <button mat-button (click)="filter.emit()" *ngIf="withFilters">
-    <fa-icon icon="filter"></fa-icon>
-    &nbsp;
-    {{ "generics.filter" | translate }}
-  </button>
+      <button mat-button (click)="filter.emit()" *ngIf="withFilters">
+        <fa-icon icon="filter"></fa-icon>
+        &nbsp;
+        {{ "generics.filter" | translate }}
+      </button>
 
-  <mat-menu #menu="matMenu">
-    <a
-      mat-menu-item
-      [gaClick]="'see_wishes_dropdown_' + banner"
-      [routerLink]="['../', banner | slugify]"
-      queryParamsHandling="merge"
-      *ngFor="let banner of banners"
-    >
-      {{ "wishes.banners$." + banner + ".title" | translate }}
-    </a>
-  </mat-menu>
-</mat-toolbar>
+      <mat-menu #menu="matMenu">
+        <a
+          mat-menu-item
+          [gaClick]="'see_wishes_dropdown_' + banner"
+          [routerLink]="['../', banner | slugify]"
+          queryParamsHandling="merge"
+          *ngFor="let banner of banners"
+        >
+          {{ "wishes.banners$." + banner + ".title" | translate }}
+        </a>
+      </mat-menu>
+    </mat-toolbar>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'card'">
+    <div class="banners-nav">
+      <div *ngFor="let banner of banners" class="banner">
+        <a
+          fxLayout="row"
+          fxLayoutGap="16px"
+          fxLayoutAlign="start center"
+          [gaClick]="'see_wishes_tab_' + banner"
+          [routerLink]="['../', banner | slugify]"
+        >
+          <img [src]="'/assets/banners/' + banner + '.svg'" />
+
+          <span class="banner-title">
+            {{ "globalStats.banners$." + banner | translate }}
+          </span>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

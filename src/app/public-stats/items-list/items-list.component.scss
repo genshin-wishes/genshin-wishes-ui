@@ -1,0 +1,26 @@
+mat-card {
+  overflow: hidden;
+
+  padding: 8px;
+}
+
+mat-tab-group {
+  overflow: hidden;
+}
+
+.items-wrapper {
+  margin-top: 20px;
+  padding-right: 20px;
+
+  overflow: hidden auto;
+}
+
+.item-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-wrapper {
+  overflow: hidden;
+}

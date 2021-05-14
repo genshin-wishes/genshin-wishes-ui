@@ -1,0 +1,224 @@
+<div class="landing-gradient"></div>
+
+<div
+  fxLayout="column"
+  fxLayoutGap="48px"
+  class="wrapper"
+  [ngStyle]="{ width: '100%' }"
+  [ngStyle.gt-lg]="{ width: '80%' }"
+>
+  <ng-container *ngIf="data$ | async as data">
+    <ng-container *ngIf="!data.loading; else loadingTemplate">
+      <h1>
+        {{ "globalStats.banners$." + data.banner | translate }}
+        <small>{{
+          "globalStats.gwUsersOnly" | translate: { minutes: minutes }
+        }}</small>
+      </h1>
+
+      <app-latest-events-banner
+        *ngIf="data.banner === BannerType.ALL"
+        [latestEvents]="data.latestEventsCounts"
+      ></app-latest-events-banner>
+
+      <div fxLayout="column">
+        <app-banner-select
+          *ngIf="
+            data.banner === BannerType.CHARACTER_EVENT ||
+            data.banner === BannerType.WEAPON_EVENT
+          "
+          [banners]="data.events"
+          [selectedBanners]="[data.event.id]"
+          (selectedBannersChange)="goToEvent($event)"
+        ></app-banner-select>
+
+        <app-event-banner
+          *ngIf="data.banner !== BannerType.ALL"
+          [banner]="data.banner"
+          [event]="data.event"
+          [stats]="data.stats"
+        ></app-event-banner>
+      </div>
+
+      <app-banner-nav
+        mode="card"
+        [allFirst]="true"
+        [current]="data.banner"
+      ></app-banner-nav>
+
+      <div *ngIf="data.banner === BannerType.ALL">
+        <app-learn-more></app-learn-more>
+      </div>
+
+      <ng-container *ngIf="data.stats.count > 0; else emptyState">
+        <h2>{{ "globalStats.allStats.label" | translate }}</h2>
+
+        <div
+          fxLayout="row"
+          fxLayout.lt-lg="column"
+          fxLayoutGap="20px"
+          class="content-wrapper"
+        >
+          <div
+            fxFlex="calc(3/8 * 100% - 20px)"
+            fxLayout="column"
+            fxLayoutGap="20px"
+          >
+            <div
+              fxLayout="column"
+              fxLayout.md="row"
+              fxLayoutGap="20px"
+              fxFlex.lt-lg
+            >
+              <ng-container *ngIf="usersPerRegion$ | async as usersPerRegion">
+                <div fxFlex>
+                  <app-users-per-region
+                    [count]="data.stats.usersCount"
+                    [usersPerRegion]="usersPerRegion"
+                  ></app-users-per-region>
+                </div>
+              </ng-container>
+
+              <div fxFlex>
+                <ng-container
+                  *ngIf="wishesPerRegion$ | async as wishesPerRegion"
+                >
+                  <app-wishes-per-region
+                    [count]="data.stats.count"
+                    [wishesPerRegion]="wishesPerRegion"
+                  ></app-wishes-per-region>
+                </ng-container>
+              </div>
+            </div>
+
+            <div fxLayout="column" fxLayoutGap="20px">
+              <div fxLayout="column" fxLayout.md="row" fxLayoutGap="20px">
+                <app-count-card
+                  fxFlex
+                  [countPerRank]="data.countPerRank"
+                  [count]="data.stats.count"
+                  [count5]="data.stats.count5Stars"
+                  [count4]="data.stats.count4Stars"
+                ></app-count-card>
+
+                <!--                <app-exclusivity-rate-card-->
+                <!--                  *ngIf="-->
+                <!--                    data.banner === BannerType.CHARACTER_EVENT ||-->
+                <!--                    data.banner === BannerType.WEAPON_EVENT-->
+                <!--                  "-->
+                <!--                  fxFlex-->
+                <!--                  fxFlex.md="0 0 0"-->
+                <!--                  [banner]="data.banner"-->
+                <!--                  [rate5]="data.stats.exclusiveRate5Stars"-->
+                <!--                  [rate4]="data.stats.exclusiveRate4Stars"-->
+                <!--                ></app-exclusivity-rate-card>-->
+              </div>
+
+              <div fxFlex fxHide.gt-md fxShow.lt-lg>
+                <ng-container *ngTemplateOutlet="bannerActivity"></ng-container>
+              </div>
+            </div>
+
+            <app-count-per-banner
+              *ngIf="data.banner === BannerType.ALL"
+              [count]="data.stats.count"
+              [countPerBanner]="data.countPerBanner"
+            ></app-count-per-banner>
+
+            <ng-template #bannerActivity>
+              <div
+                fxLayout="column"
+                fxLayout.md="row"
+                fxLayoutGap="20px"
+                class="banner-activity-wrapper"
+              >
+                <app-pity-distribution-card
+                  fxFlex
+                  *ngIf="data.banner !== BannerType.ALL"
+                  [distribution5]="data.pityDistribution5Stars"
+                  [distribution4]="data.pityDistribution4Stars"
+                ></app-pity-distribution-card>
+
+                <ng-container *ngIf="bannerActivity$ | async as bannerActivity">
+                  <app-banner-activity
+                    fxFlex
+                    [bannerActivity]="bannerActivity"
+                    [pointRadius]="data.event.items?.length ? 1 : 0"
+                    [pointHitRadius]="5"
+                  ></app-banner-activity>
+                </ng-container>
+              </div>
+            </ng-template>
+
+            <ng-template #itemsLists>
+              <app-items-list
+                [rankType]="5"
+                [currentTab]="data.banner === BannerType.WEAPON_EVENT ? 1 : 0"
+                [onlyCurrentTab]="
+                  data.banner === BannerType.CHARACTER_EVENT ||
+                  data.banner === BannerType.WEAPON_EVENT ||
+                  data.banner === BannerType.NOVICE
+                "
+                [total]="data.stats.count5Stars"
+                [list]="data.stats.countPerItemId"
+              ></app-items-list>
+
+              <app-items-list
+                [rankType]="4"
+                [currentTab]="data.banner === BannerType.WEAPON_EVENT ? 1 : 0"
+                [onlyCurrentTab]="data.banner === BannerType.NOVICE"
+                [total]="data.stats.count4Stars"
+                [list]="data.stats.countPerItemId"
+              ></app-items-list>
+            </ng-template>
+          </div>
+
+          <div
+            fxFlex="calc(5/8 * 100% - 20px)"
+            fxLayout="column"
+            fxLayoutGap="20px"
+            class="content-wrapper"
+          >
+            <div fxShow.gt-md fxHide.lt-lg>
+              <ng-container *ngTemplateOutlet="bannerActivity"></ng-container>
+            </div>
+
+            <h2 id="items-list">
+              {{ "globalStats.itemsList.title" | translate }}
+            </h2>
+
+            <div class="items-lists" fxHide.gt-sm fxShow.lt-md>
+              <ng-container *ngTemplateOutlet="itemsLists"></ng-container>
+            </div>
+
+            <div
+              class="items-lists--wide"
+              fxFlex
+              fxLayout="row"
+              fxLayoutGap="20px"
+              fxShow.gt-sm
+              fxHide.lt-md
+            >
+              <ng-container *ngTemplateOutlet="itemsLists"></ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #emptyState>
+  <app-wish-no-result
+    titleKey="globalStats.noResult.title"
+    descriptionKey="globalStats.noResult.description"
+    resetKey="globalStats.noResult.reset"
+    (removeFilters)="goToEvent([])"
+  ></app-wish-no-result>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div fxLayoutAlign="center center" fxFlex>
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

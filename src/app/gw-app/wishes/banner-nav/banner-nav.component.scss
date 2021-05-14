@@ -1,0 +1,23 @@
+.banners-nav {
+  margin: 0 -20px;
+}
+
+.banner {
+  height: 88px;
+  width: 192px;
+
+  padding-left: 20px;
+  margin-right: -4px;
+
+  a {
+    height: 100%;
+    padding: 20px 16px;
+    border-radius: 4px;
+  }
+}
+
+app-landing-icon {
+  height: 40px;
+  width: 40px;
+  font-size: 40px;
+}

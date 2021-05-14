@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   BehaviorSubject,
   combineLatest,
@@ -41,6 +41,7 @@ import {
 } from './constants';
 import { Stats } from './stats';
 import { ItemNamePipe } from '../../shared/item-name.pipe';
+import { PublicStats } from '../../public-stats/public-stats';
 
 @Injectable({
   providedIn: 'root',
@@ -198,12 +199,16 @@ export class GenshinWishesService {
     return this.items$;
   }
 
+  getBanners(): Observable<Banner[]> {
+    return this._http.get<Banner[]>('/api/public/banners');
+  }
+
   getCharacterEvents(): Observable<Banner[]> {
-    return this._http.get<Banner[]>('/api/banners/character');
+    return this._http.get<Banner[]>('/api/public/banners/character');
   }
 
   getWeaponEvents(): Observable<Banner[]> {
-    return this._http.get<Banner[]>('/api/banners/weapon');
+    return this._http.get<Banner[]>('/api/public/banners/weapon');
   }
 
   getStatsCharacterEvents(endpoint$: Observable<string>): Observable<Banner[]> {
@@ -223,7 +228,9 @@ export class GenshinWishesService {
   }
 
   getLatestEvent(): Observable<{ [key: number]: Banner }> {
-    return this._http.get<{ [key: number]: Banner }>('/api/banners/latest');
+    return this._http.get<{ [key: number]: Banner }>(
+      '/api/public/banners/latest'
+    );
   }
 
   updateLang(lang: Lang): Promise<void> {
@@ -256,6 +263,29 @@ export class GenshinWishesService {
         gaError: 'settings_wholeClock_error',
       }
     );
+  }
+
+  getPublicStats(
+    banner: BannerType,
+    eventId?: number
+  ): Observable<PublicStats> {
+    const params: Record<string, string> = {};
+
+    if (eventId !== null && eventId !== undefined) {
+      params.event = eventId + '';
+    }
+
+    return this._http
+      .get<PublicStats>(`/api/public/stats/${banner}`, {
+        params,
+      })
+      .pipe(
+        map((stats) => ({
+          ...stats,
+          usersCount: stats.usersPerRegion.reduce((a, b) => a + b.count, 0),
+        })),
+        shareReplay(1)
+      );
   }
 
   getStats(

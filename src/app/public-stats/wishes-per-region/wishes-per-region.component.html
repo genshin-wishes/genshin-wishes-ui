@@ -1,0 +1,18 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{
+      "globalStats.wishesPerRegion.title"
+        | translate: { count: (count | gwNumber | async) }
+    }}
+  </mat-card-title>
+
+  <div fxFlex>
+    <canvas
+      baseChart
+      chartType="doughnut"
+      [labels]="wishesPerRegion.labels"
+      [datasets]="wishesPerRegion.datasets"
+      [options]="options"
+    ></canvas>
+  </div>
+</mat-card>

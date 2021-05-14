@@ -24,6 +24,10 @@ export class BannerActivityComponent implements OnChanges {
     labels: Label[];
     datasets: ChartDataSets[];
   };
+  @Input()
+  pointRadius = 1;
+  @Input()
+  pointHitRadius = 15;
 
   options: ChartOptions = {};
 
@@ -31,6 +35,11 @@ export class BannerActivityComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.bannerActivity?.currentValue) return;
+
+    this.bannerActivity.datasets.forEach((ds) => {
+      ds.pointRadius = this.pointRadius;
+      ds.pointHitRadius = this.pointHitRadius;
+    });
 
     this.options = {
       responsive: true,
@@ -57,6 +66,13 @@ export class BannerActivityComponent implements OnChanges {
         yAxes: [
           {
             ticks: {
+              callback: (value) =>
+                +value >= 1000000
+                  ? +value / 1000000 + 'M'
+                  : +value >= 1000
+                  ? +value / 1000 + 'K'
+                  : +value,
+              precision: 0,
               suggestedMax:
                 Math.max(
                   ...(this.bannerActivity.datasets[0].data as number[]).map(

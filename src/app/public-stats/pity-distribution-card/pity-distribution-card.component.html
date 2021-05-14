@@ -1,0 +1,33 @@
+<mat-card fxLayout="column" fxLayoutGap="24px">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-card-title>
+      {{ "globalStats.pityDistribution.title" | translate: { rank: rank } }}
+    </mat-card-title>
+
+    <span fxFlex></span>
+
+    <mat-button-toggle-group>
+      <mat-button-toggle
+        class="text-accent"
+        [class.active]="rank === 5"
+        (click)="rank = 5"
+      >
+        {{ "generics.rank" | translate: { rank: 5 } }}
+        <div class="ink bg-accent"></div>
+      </mat-button-toggle>
+
+      <mat-button-toggle
+        class="text-primary"
+        [class.active]="rank === 4"
+        (click)="rank = 4"
+      >
+        {{ "generics.rank" | translate: { rank: 4 } }}
+        <div class="ink bg-primary"></div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <app-pity-distribution
+    [distribution]="rank === 5 ? distribution5 : distribution4"
+  ></app-pity-distribution>
+</mat-card>

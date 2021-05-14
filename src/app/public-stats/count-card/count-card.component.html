@@ -1,0 +1,53 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{ "stats.rankDistribution.title" | translate }}
+  </mat-card-title>
+
+  <div fxLayoutAlign="center">
+    <div [ngStyle.lt-md]="{ width: '200px' }" [ngStyle.lg]="{ width: '300px' }">
+      <canvas
+        baseChart
+        chartType="doughnut"
+        [labels]="countPerRank.labels"
+        [datasets]="countPerRank.datasets"
+        [options]="options"
+      ></canvas>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <div fxLayout="column">
+      <span class="count-title">
+        {{ "globalStats.countPerRank.title" | translate: { rank: 5 } }}
+      </span>
+
+      <span class="count text-5">{{ count5 | gwNumber | async }}</span>
+    </div>
+
+    <div fxLayout="column">
+      <span class="count-title">
+        {{ "globalStats.countPerRank.title" | translate: { rank: 4 } }}
+      </span>
+
+      <span class="count text-4">{{ count4 | gwNumber | async }}</span>
+    </div>
+
+    <div fxLayout="column" fxHide.xs fxShow.gt-xs>
+      <span class="count-title">
+        {{ "globalStats.countPerRank.title" | translate: { rank: 3 } }}
+      </span>
+
+      <span class="count text-3">{{
+        count - count5 - count4 | gwNumber | async
+      }}</span>
+    </div>
+
+    <div fxLayout="column">
+      <span class="count-title">
+        {{ "globalStats.countPerRank.total" | translate }}
+      </span>
+
+      <span class="count text-1">{{ count | gwNumber | async }}</span>
+    </div>
+  </div>
+</mat-card>

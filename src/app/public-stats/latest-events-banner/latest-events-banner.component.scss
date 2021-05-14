@@ -1,0 +1,25 @@
+.latest-events {
+  margin: 0 -20px;
+}
+
+app-event-card {
+  display: block;
+
+  width: 292px;
+
+  padding-left: 20px;
+  margin-right: -4px;
+}
+
+.latest-events--wide {
+  .character-event {
+    margin-top: -200px;
+  }
+}
+
+.banner-image {
+  img {
+    border-radius: 4px;
+    height: 420px;
+  }
+}

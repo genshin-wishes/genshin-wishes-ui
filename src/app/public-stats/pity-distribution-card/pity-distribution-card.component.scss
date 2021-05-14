@@ -1,0 +1,12 @@
+app-pity-distribution {
+  overflow: auto;
+}
+
+.active .ink {
+  display: block;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}

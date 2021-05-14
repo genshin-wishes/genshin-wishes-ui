@@ -1,0 +1,89 @@
+<mat-card
+  *ngLet="event.items | rankType: 5 as eventItems"
+  fxLayout="column"
+  [class]="'mat-elevation-z' + elevation + ' mode-' + mode"
+  [ngStyle.gt-sm]="{ 'max-width': '800px' }"
+  [ngStyle.lt-md]="{ 'max-width': '500px' }"
+>
+  <div
+    fxLayout.lt-md="column"
+    [fxLayout.gt-sm]="mode === 'nav' ? 'column' : 'row'"
+    [fxLayoutGap]="mode === 'nav' ? '12px' : '24px'"
+  >
+    <span fxFlex></span>
+    <div
+      *ngFor="
+        let eventItem of item != undefined ? [eventItems[item]] : eventItems
+      "
+      fxLayout="column"
+      fxLayoutAlign="center"
+    >
+      <img
+        matCardImageMedium
+        [alt]="eventItem | itemName"
+        [src]="'/content' + eventItem.image?.url"
+      />
+
+      <mat-card-content>
+        <div class="item-name">{{ eventItem | itemName }}</div>
+        <div class="item-count">
+          {{ ItemCountFinder(eventItem) | gwNumber | async }}
+        </div>
+        <div class="out-of-count">
+          {{
+            "globalStats.eventCard.outOf"
+              | translate: { count: (total | gwNumber | async) }
+          }}
+        </div>
+      </mat-card-content>
+    </div>
+    <span fxFlex></span>
+
+    <ng-container *ngIf="mode === 'detailed'">
+      <mat-divider fxShow.lt-md fxHide.gt-sm></mat-divider>
+      <mat-divider fxHide.lt-md fxShow.gt-sm [vertical]="true"></mat-divider>
+
+      <div fxLayout="column" fxLayoutGap="12px" class="four-stars-list">
+        <mat-list>
+          <mat-list-item
+            *ngFor="let item of (event.items | rankType: 4).slice(0, 3)"
+          >
+            <app-item-img [item]="item" matListAvatar></app-item-img>
+            <h3 matLine class="text-primary">{{ item | itemName }}</h3>
+            <p matLine class="text-low" *ngLet="ItemCountFinder(item) as count">
+              {{
+                total4
+                  ? ("globalStats.eventCard.itemCount"
+                    | translate
+                      : {
+                          count: (count | gwNumber | async),
+                          percent: (count / total4 | gwNumber: "1.2-2" | async),
+                          rank: 4
+                        })
+                  : "-"
+              }}
+            </p>
+          </mat-list-item>
+        </mat-list>
+
+        <a class="see-non-exclusive text-accent" (click)="scrollToBottom()">
+          {{ "globalStats.itemsList.title" | translate }}
+          &nbsp;
+          <fa-icon icon="chevron-down"></fa-icon>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+
+  <mat-card-actions *ngIf="mode === 'nav'">
+    <a
+      mat-raised-button
+      color="primary"
+      fxFlex
+      [routerLink]="['..', event.gachaType | slugify]"
+      [queryParams]="{ event: event.id }"
+    >
+      {{ "globalStats.allEventStats.label" | translate }}
+    </a>
+  </mat-card-actions>
+</mat-card>

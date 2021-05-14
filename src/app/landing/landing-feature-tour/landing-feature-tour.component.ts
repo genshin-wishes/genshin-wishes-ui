@@ -20,6 +20,11 @@ export class LandingFeatureTourComponent implements OnInit, OnDestroy {
       description: 'landing.feature.personalStats',
     },
     {
+      icon: 'chart-bar',
+      img: 'global-stats.png',
+      description: 'landing.feature.globalStats',
+    },
+    {
       img: 'pity.png',
       description: 'landing.feature.dashboard',
     },

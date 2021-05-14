@@ -26,17 +26,31 @@
     routerLinkActive="active"
     gaClick="nav_stats"
   >
-    <fa-icon matListIcon icon="chart-bar"></fa-icon>
-    <h3 mat-line fxLayout="row" fxLayoutGap="14px">
+    <fa-icon matListIcon icon="chart-pie"></fa-icon>
+    <h3 mat-line>
       <span>{{ "stats.label" | translate }}</span>
+    </h3>
+  </a>
+
+  <a
+    mat-list-item
+    [routerLink]="['/global-stats']"
+    routerLinkActive="active"
+    gaClick="nav_global_stats"
+    target="_blank"
+  >
+    <fa-icon matListIcon icon="chart-bar"></fa-icon>
+
+    <h3 mat-line fxLayout="row" fxLayoutGap="14px">
+      <span>{{ "globalStats.label" | translate }}</span>
       <mat-chip-list fxLayout="row">
         <mat-chip
           (click)="$event.preventDefault()"
-          color="accent"
+          color="new"
           [selected]="true"
           [disableRipple]="true"
         >
-          {{ "generics.beta" | translate }}
+          {{ "generics.new" | translate }}
         </mat-chip>
       </mat-chip-list>
     </h3>

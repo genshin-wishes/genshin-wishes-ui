@@ -24,6 +24,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   exports: [
@@ -51,6 +52,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatBadgeModule,
     MatSlideToggleModule,
     ClipboardModule,
+    MatButtonToggleModule,
     ScrollingModule,
   ],
 })

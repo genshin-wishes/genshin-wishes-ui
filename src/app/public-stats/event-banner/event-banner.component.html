@@ -1,0 +1,27 @@
+<div fxLayout="column">
+  <img
+    [ngStyle.lt-lg]="{ width: '100%' }"
+    [ngStyle.gt-md]="{ height: '436px' }"
+    [src]="
+      (!event &&
+        ((banner === BannerType.CHARACTER_EVENT &&
+          '/assets/banners/ALL_CHARACTER_EVENT.png') ||
+          (banner === BannerType.WEAPON_EVENT &&
+            '/assets/banners/ALL_WEAPON_EVENT.png'))) ||
+      '/content/' + event.image?.url
+    "
+  />
+
+  <app-event-card
+    *ngIf="event?.items?.length"
+    [ngStyle.lt-lg]="{ 'margin-top': '12px' }"
+    [ngStyle.gt-md]="{ 'margin-top': '-128px' }"
+    [event]="event"
+    [elevation]="4"
+    [itemCounts]="stats.countPerItemId"
+    [total]="stats.count"
+    [total5]="stats.count5Stars"
+    [total4]="stats.count4Stars"
+    mode="detailed"
+  ></app-event-card>
+</div>

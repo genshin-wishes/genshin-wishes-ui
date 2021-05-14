@@ -1,0 +1,39 @@
+<mat-card class="stat-card" fxLayoutGap="24px" fxLayout="column">
+  <mat-card-title>
+    {{
+      (banner === BannerType.CHARACTER_EVENT
+        ? "globalStats.exclusivityRate.fiftyFifty"
+        : "globalStats.exclusivityRate.threeFour"
+      ) | translate
+    }}
+  </mat-card-title>
+
+  <mat-card-content
+    class="number"
+    fxFlex
+    fxLayout="row"
+    fxLayoutGap="48px"
+    fxLayout.md="column"
+    fxLayoutGap.md="16px"
+  >
+    <div fxLayoutAlign="start center" fxLayoutGap="12px">
+      <span class="stars">
+        {{ "generics.rank" | translate: { rank: 5 } }}
+      </span>
+
+      <span class="count text-accent"
+        >{{ rate5 * 100 | gwNumber: "1.2-2" | async }} %</span
+      >
+    </div>
+
+    <div fxLayoutAlign="start center" fxLayoutGap="12px">
+      <span class="stars">
+        {{ "generics.rank" | translate: { rank: 4 } }}
+      </span>
+
+      <span class="count text-primary"
+        >{{ rate4 * 100 | gwNumber: "1.2-2" | async }} %</span
+      >
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -37,6 +37,6 @@ import { LandingRoutingModule } from './landing-routing.module';
     LandingLayoutComponent,
   ],
   imports: [SharedModule, CoreModule, LandingRoutingModule],
-  exports: [LandingComponent, LandingLayoutComponent],
+  exports: [LandingComponent, LandingLayoutComponent, LandingIconComponent],
 })
 export class LandingModule {}

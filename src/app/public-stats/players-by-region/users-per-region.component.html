@@ -1,0 +1,36 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{
+      "globalStats.usersPerRegion.title"
+        | translate: { count: (count | gwNumber | async) }
+    }}
+  </mat-card-title>
+
+  <div fxLayout="column" fxLayoutGap="12px" fxLayoutAlign="center" fxFlex>
+    <ng-container
+      *ngFor="let region of usersPerRegion.labels; let index = index"
+    >
+      <div>
+        <div [class]="'text-' + colors[index]">
+          {{ region }} -
+          {{
+            +((usersPerRegion.datasets[0].data || [])[index] + "") || 0
+              | gwNumber
+              | async
+          }}
+        </div>
+        <div>
+          <app-bar
+            [color]="colors[index]"
+            [value]="
+              ((+((usersPerRegion.datasets[0].data || [])[index] + '') || 0) /
+                count) *
+              100 *
+              (count / maxCount)
+            "
+          ></app-bar>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</mat-card>

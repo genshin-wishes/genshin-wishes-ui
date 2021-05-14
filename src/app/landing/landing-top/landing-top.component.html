@@ -1,5 +1,5 @@
 <div
-  ngClass.lt-md="mobile"
+  ngClass.lt-lg="mobile"
   fxLayout="row"
   fxLayoutGap="12px"
   fxLayoutAlign="start center"
@@ -19,11 +19,19 @@
   <div
     fxLayoutAlign="start center"
     fxLayoutGap="32px"
-    fxShow.gt-xs
-    fxHide.lt-sm
+    fxShow.gt-sm
+    fxHide.lt-md
   >
     <a mat-button [routerLink]="['/']" gaClick="nav_landing_home">
       {{ "landing.title" | translate }}
+    </a>
+
+    <a
+      mat-button
+      [routerLink]="['/global-stats']"
+      gaClick="nav_landing_global_stats"
+    >
+      {{ "globalStats.label" | translate }}
     </a>
 
     <a mat-button [routerLink]="['/faq']" gaClick="nav_landing_faq">
@@ -69,14 +77,14 @@
   </div>
 
   <app-locale-select
-    fxHide.gt-xs
-    fxShow.lt-sm
+    fxHide.gt-sm
+    fxShow.lt-md
     [(value)]="locale"
     (valueChange)="changeLocale($event)"
     [namesOnlyForWide]="true"
   ></app-locale-select>
 
-  <div fxHide.gt-xs fxShow.lt-sm>
+  <div fxHide.gt-sm fxShow.lt-md>
     <a mat-button (click)="openMenu()">
       {{ "app.menu" | translate }}
     </a>

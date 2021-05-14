@@ -1,0 +1,67 @@
+<div class="latest-events" fxShow.lt-lg fxHide.gt-md>
+  <app-event-card
+    [event]="latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].event"
+    [total]="latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].count"
+    [itemCounts]="
+      latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].itemIdToCount
+    "
+  >
+  </app-event-card>
+
+  <app-event-card
+    [event]="latestEvents[BannerToId[BannerType.WEAPON_EVENT]].event"
+    [total]="latestEvents[BannerToId[BannerType.WEAPON_EVENT]].count"
+    [item]="0"
+    [itemCounts]="
+      latestEvents[BannerToId[BannerType.WEAPON_EVENT]].itemIdToCount
+    "
+  >
+  </app-event-card>
+
+  <app-event-card
+    [event]="latestEvents[BannerToId[BannerType.WEAPON_EVENT]].event"
+    [total]="latestEvents[BannerToId[BannerType.WEAPON_EVENT]].count"
+    [item]="1"
+    [itemCounts]="
+      latestEvents[BannerToId[BannerType.WEAPON_EVENT]].itemIdToCount
+    "
+  >
+  </app-event-card>
+</div>
+
+<div fxHide.lt-lg fxShow.gt-md fxLayout="column" class="latest-events--wide">
+  <div fxLayout="row">
+    <div class="banner-image" fxFlex="0 1 calc(5.5/8 * 100%)">
+      <img
+        [src]="
+          '/content' +
+          latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].event.image?.url
+        "
+        class="mat-elevation-z2"
+      />
+    </div>
+
+    <span fxFlex></span>
+
+    <app-event-card
+      fxFlex="0 1 calc(2.5/8 * 100%)"
+      [event]="latestEvents[BannerToId[BannerType.WEAPON_EVENT]].event"
+      [total]="latestEvents[BannerToId[BannerType.WEAPON_EVENT]].count"
+      [itemCounts]="
+        latestEvents[BannerToId[BannerType.WEAPON_EVENT]].itemIdToCount
+      "
+    >
+    </app-event-card>
+  </div>
+
+  <app-event-card
+    class="character-event"
+    [elevation]="4"
+    [event]="latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].event"
+    [total]="latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].count"
+    [itemCounts]="
+      latestEvents[BannerToId[BannerType.CHARACTER_EVENT]].itemIdToCount
+    "
+  >
+  </app-event-card>
+</div>

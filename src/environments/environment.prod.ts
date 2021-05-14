@@ -3,6 +3,10 @@ export const environment = {
   ga: 'G-4YDYEGPQ7G',
   discord: 'https://discord.gg/fCnypTYxkf',
   typeform: 'https://form.typeform.com/to/EnUdbLpV',
+  globalStats: {
+    post: '',
+    refreshRate: 15,
+  },
   coffee: 'https://ko-fi.com/genshinwishes',
   i18n: 'https://github.com/genshin-wishes/genshin-wishes-i18n',
   howTo: {

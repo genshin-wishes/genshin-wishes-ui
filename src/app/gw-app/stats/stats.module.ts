@@ -4,7 +4,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { WishesModule } from '../wishes/wishes.module';
 import { StatCardComponent } from './stat-card/stat-card.component';
 import { WishesRepartitionComponent } from './wishes-repartition/wishes-repartition.component';
-import { WishDistributionComponent } from './wish-distribution/wish-distribution.component';
 import { RankDistributionComponent } from './rank-distribution/rank-distribution.component';
 import { ChartsModule } from 'ng2-charts';
 import 'chartjs-plugin-labels';
@@ -23,7 +22,6 @@ import { EmptyComponent } from './empty/empty.component';
     StatsComponent,
     StatCardComponent,
     WishesRepartitionComponent,
-    WishDistributionComponent,
     RankDistributionComponent,
     FocusDistributionComponent,
     FourStarsDetailsComponent,
@@ -36,6 +34,6 @@ import { EmptyComponent } from './empty/empty.component';
     EmptyComponent,
   ],
   imports: [SharedModule, WishesModule, ChartsModule],
-  exports: [StatsComponent],
+  exports: [StatsComponent, ChartsModule, BannerActivityComponent],
 })
 export class StatsModule {}

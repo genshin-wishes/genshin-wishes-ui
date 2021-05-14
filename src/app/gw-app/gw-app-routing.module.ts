@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { WishesComponent } from './wishes/wishes.component';
-import { FaqComponent } from '../core/faq/faq.component';
 import { StatsComponent } from './stats/stats.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StatsResolver } from '../stats/stats.resolver';

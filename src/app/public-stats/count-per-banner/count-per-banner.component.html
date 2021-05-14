@@ -1,0 +1,43 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{ "globalStats.wishesPerBanner.title" | translate }}
+  </mat-card-title>
+
+  <div fxLayout="row" fxLayoutGap="24px" fxLayoutAlign="start center">
+    <div [ngStyle.lt-md]="{ width: '100px' }" [ngStyle]="{ width: '200px' }">
+      <canvas
+        baseChart
+        chartType="doughnut"
+        [labels]="countPerBanner.labels"
+        [datasets]="countPerBanner.datasets"
+        [options]="options"
+      ></canvas>
+    </div>
+
+    <div
+      class="banner-wrapper"
+      fxLayout.lt-sm="column"
+      fxLayoutGap.lt-sm="16px"
+      fxLayout="row wrap"
+    >
+      <div
+        *ngFor="let banner of countPerBanner.labels; let index = index"
+        fxLayout="column"
+        [class]="'banner text-' + (5 - index)"
+      >
+        <ng-container
+          *ngLet="
+            (countPerBanner.datasets[0].data || [])[index] || 0 as bannerCount
+          "
+        >
+          <span class="banner-name">{{ banner }}</span>
+          <span class="banner-count">
+            {{ (bannerCount / count) * 100 | gwNumber: "1.0-0" | async }}% ({{
+              bannerCount | gwNumber | async
+            }})
+          </span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</mat-card>

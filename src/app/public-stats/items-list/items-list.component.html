@@ -1,0 +1,71 @@
+<mat-card fxLayout="column">
+  <mat-card-title>
+    {{ "globalStats.itemsList.cardTitle" | translate: { rank: rankType } }}
+  </mat-card-title>
+
+  <mat-tab-group
+    *ngIf="!onlyCurrentTab; else onlyContent"
+    [color]="rankType === 5 ? 'accent' : 'primary'"
+    [selectedIndex]="currentTab"
+    mat-stretch-tabs
+    fxFlex
+  >
+    <mat-tab
+      *ngFor="let type of types"
+      [label]="'wishes.itemType$.' + type | translate"
+    >
+      <ng-container
+        *ngTemplateOutlet="tabContent; context: { $implicit: type }"
+      ></ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+<ng-template #onlyContent>
+  <ng-container
+    *ngTemplateOutlet="tabContent; context: { $implicit: types[currentTab] }"
+  ></ng-container>
+</ng-template>
+
+<ng-template #tabContent let-type>
+  <div fxLayout="column" fxLayoutGap="16px" class="items-wrapper">
+    <ng-container
+      *ngFor="
+        let item of list
+          .filter(RankFilter(rankType))
+          .filter(TypeFilter(type)) as items
+      "
+    >
+      <div
+        *ngIf="!!item.item"
+        fxLayout="row"
+        fxLayoutGap="8px"
+        fxLayoutAlign="start center"
+      >
+        <app-item-img [item]="item.item"></app-item-img>
+
+        <div fxLayout="column" fxFlex class="item-wrapper">
+          <span
+            *ngLet="
+              (item.item | itemName) +
+              ' - ' +
+              (item.count | gwNumber | async) +
+              ' (' +
+              ((item.count / total) * 100 | gwNumber: '1.2-2' | async) +
+              ' %)' as label
+            "
+            class="item-name"
+            [matTooltip]="label"
+          >
+            {{ label }}
+          </span>
+
+          <app-bar
+            [color]="rankType === 5 ? 'accent' : 'primary'"
+            [value]="(item.count / total) * 100 * (total / items[0].count)"
+          ></app-bar>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

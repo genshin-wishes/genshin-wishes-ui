@@ -1,0 +1,66 @@
+.mat-card .mat-divider-horizontal {
+  position: unset;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 728px;
+
+  padding: 20px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  & > mat-card-actions,
+  & > mat-card-actions:last-child {
+    margin: 0;
+  }
+
+  mat-card-content {
+    margin-top: -32px;
+    margin-bottom: 10px;
+
+    width: 204px;
+
+    z-index: 1;
+  }
+
+  &.mode-detailed {
+    img {
+      margin-bottom: 0;
+    }
+  }
+
+  .four-stars-list {
+    overflow: hidden;
+  }
+
+  img {
+    align-self: flex-end;
+
+    width: 128px;
+    height: 128px;
+
+    margin-bottom: -64px;
+
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8) 40%,
+      rgba(0, 0, 0, 0)
+    );
+  }
+
+  .item-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  mat-list {
+    margin: 0 -16px;
+  }
+
+  .see-non-exclusive {
+    cursor: pointer;
+  }
+}

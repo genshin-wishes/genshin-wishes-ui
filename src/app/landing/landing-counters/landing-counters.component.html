@@ -16,7 +16,7 @@
       [innerHTML]="
         'landing.counters.users'
           | translate
-            : { users: ((usersCount$ | async) || 10000 | gwNumber | async) }
+            : { users: ((usersCount$ | async) || 25000 | gwNumber | async) }
       "
     ></div>
 
@@ -29,7 +29,9 @@
       [innerHTML]="
         'landing.counters.wishes'
           | translate
-            : { wishes: ((wishesCount$ | async) || 5500000 | gwNumber | async) }
+            : {
+                wishes: ((wishesCount$ | async) || 12000000 | gwNumber | async)
+              }
       "
     ></div>
   </div>

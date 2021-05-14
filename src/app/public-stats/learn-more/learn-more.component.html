@@ -1,0 +1,26 @@
+<div fxLayout="column" *ngIf="!!redditPost">
+  <h2>{{ "globalStats.learnMore.title" | translate }}</h2>
+
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-card
+      class="border-accent"
+      fxFlex
+      fxFlex.gt-xs="0 1 calc(60% - 20px)"
+      fxFlex.gt-md="0 1 calc(50% - 20px)"
+    >
+      <mat-card-content fxLayout="row">
+        <div fxLayout="column" fxFlex fxLayoutGap="12px">
+          <p>{{ "globalStats.learnMore.description" | translate }}</p>
+
+          <div>
+            <a mat-button color="accent" [href]="redditPost">
+              {{ "globalStats.learnMore.headToPost" | translate }}
+            </a>
+          </div>
+        </div>
+
+        <img src="/assets/status/lisa.png" />
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

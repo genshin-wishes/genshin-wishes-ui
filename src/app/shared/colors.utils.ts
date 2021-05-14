@@ -5,6 +5,7 @@ const RANK_TO_RGB: { [key: number]: (opacity: number) => string } = {
   5: (opacity) => `rgba(255, 138, 0, ${opacity})`,
   4: (opacity) => `rgba(187, 134, 252, ${opacity})`,
   3: (opacity) => `rgba(3, 218, 197, ${opacity})`,
+  2: (opacity) => `rgba(241, 213, 63, ${opacity})`,
   1: (opacity) => `rgba(151, 151, 151, ${opacity})`,
 };
 

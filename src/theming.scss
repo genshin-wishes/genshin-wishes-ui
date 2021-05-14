@@ -61,6 +61,15 @@ $accent: (
   ),
 );
 
+$success: (
+  100: transparent,
+  200: #03dac5,
+  contrast: (
+    100: $dark-primary-text,
+    200: $light-primary-text,
+  ),
+);
+
 $warn: (
   200: #cf6679,
   contrast: (
@@ -73,6 +82,7 @@ $warn: (
 // hue. Available color palettes: https://material.io/design/color/
 $genshin-wishes-primary: mat-palette($primary, 200, 100, 900, A100);
 $genshin-wishes-accent: mat-palette($accent, 200, 100, 200);
+$genshin-wishes-success: mat-palette($success, 200, 100, 200);
 $genshin-wishes-warn: mat-palette($warn, 200, 200, 200);
 
 $mat-dark-theme-foreground: map-merge(
@@ -198,7 +208,7 @@ $genshin-wishes-theme: mat-dark-theme(
     }
   }
 
-  .mat-chip.mat-beta {
+  .mat-chip.mat-new {
     color: #03dac5;
     background: transparent;
     border: 1px solid #03dac5;
@@ -236,7 +246,9 @@ $genshin-wishes-theme: mat-dark-theme(
   }
 
   cdk-virtual-scroll-viewport,
-  .mat-card-content {
+  .mat-card-content,
+  .mat-tab-body-content,
+  app-public-stats .items-wrapper {
     &::-webkit-scrollbar-track {
       margin: 20px 0;
       border-radius: 4px;
@@ -344,7 +356,8 @@ $genshin-wishes-theme: mat-dark-theme(
       background: #27193b;
     }
 
-    app-landing-hero {
+    app-landing-hero,
+    .landing-gradient {
       background: linear-gradient(
         0,
         #1a0f2a 8.89%,
@@ -460,7 +473,7 @@ $genshin-wishes-theme: mat-dark-theme(
       background: #27193b;
       font-size: 18px;
       line-height: 24px;
-      color: rgba(255, 255, 255, 0.87);
+      color: mat-color($foreground, high-emphasis);
     }
   }
 
@@ -738,28 +751,31 @@ $genshin-wishes-theme: mat-dark-theme(
     &-primary {
       @extend .alert;
       @extend .border-primary;
-      @extend .bg-primary;
+      background: mat-color($primary, 0.04) !important;
       @extend .text-primary;
     }
 
     &-success {
       @extend .alert;
       @extend .border-success;
-      @extend .bg-success;
+      background: mat-color($foreground, success-text, 0.04) !important;
       @extend .text-success;
     }
   }
   .border-primary {
     border-color: mat-color($primary) !important;
   }
+  .border-accent {
+    border-color: mat-color($accent) !important;
+  }
   .border-success {
     border-color: mat-color($foreground, success-text) !important;
   }
   .bg-primary {
-    background: mat-color($primary, 0.04) !important;
+    background: mat-color($primary) !important;
   }
-  .bg-success {
-    background: mat-color($foreground, success-text, 0.04) !important;
+  .bg-accent {
+    background: mat-color($accent) !important;
   }
   .text-primary {
     color: mat-color($primary) !important;
@@ -776,9 +792,24 @@ $genshin-wishes-theme: mat-dark-theme(
   .text-warn {
     color: mat-color($warn) !important;
   }
+  .text-5 {
+    @extend .text-accent;
+  }
+  .text-4 {
+    @extend .text-primary;
+  }
+  .text-3 {
+    @extend .text-success;
+  }
+  .text-2 {
+    color: #f1d53f;
+  }
+  .text-1 {
+    @extend .text-low;
+  }
 
-  .beta-badge:before {
-    background: mat-color($accent);
+  .new-badge:before {
+    background: mat-color($success);
   }
 }
 
@@ -1085,6 +1116,176 @@ $genshin-wishes-theme: mat-dark-theme(
   }
 }
 
+@mixin public-stats-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $background: map-get($config, background);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  .mat-typography app-public-stats {
+    h1 {
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 56px;
+      color: #ffffff;
+
+      small {
+        font-size: 16px;
+        line-height: 24px;
+        color: #a2a2a2;
+      }
+    }
+
+    h2 {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 32px;
+      color: #ffffff;
+    }
+
+    app-event-card {
+      mat-card .mat-card-title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+      }
+    }
+
+    mat-card .mat-card-title {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    app-count-card {
+      .count-title {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .count {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    app-exclusivity-rate-card {
+      .stars {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .count {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+      }
+    }
+
+    app-event-card {
+      .item-name {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+      }
+
+      .item-count {
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 56px;
+        color: mat-color($accent);
+      }
+
+      .out-of-count {
+        font-size: 18px;
+        line-height: 24px;
+        color: mat-color($foreground, medium-emphasis);
+      }
+
+      .see-non-exclusive {
+        font-size: 16px;
+        line-height: 19px;
+      }
+
+      mat-card {
+        background: linear-gradient(
+            147deg,
+            rgba(187, 134, 252, 0.38) 7.52%,
+            rgba(255, 255, 255, 0) 54.74%
+          ),
+          #2d1d42;
+      }
+    }
+  }
+}
+
+@mixin banners-nav-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $background: map-get($config, background);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+
+  .mat-typography app-banner-nav {
+    .banner {
+      a {
+        background: #27193b;
+
+        font-size: 18px;
+        line-height: 24px;
+
+        color: mat-color($foreground, high-emphasis);
+      }
+
+      .banner-title {
+        color: mat-color($primary, 100);
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@mixin bar-theme($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $foreground: map-get($config, foreground);
+  $background: map-get($config, background);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $success: $genshin-wishes-success;
+
+  app-bar .bar {
+    &-primary {
+      background: linear-gradient(
+        270deg,
+        rgba(187, 134, 252, 0) 0%,
+        rgba(187, 134, 252, 0.3) 100%
+      );
+      border-color: mat-color($primary) !important;
+    }
+    &-accent {
+      background: linear-gradient(
+        270deg,
+        rgba(255, 138, 0, 0) 0%,
+        rgba(255, 138, 0, 0.3) 100%
+      );
+      border-color: mat-color($accent) !important;
+    }
+    &-success {
+      background: linear-gradient(
+        270deg,
+        rgba(3, 218, 197, 0) 0%,
+        rgba(3, 218, 197, 0.3) 100%
+      );
+      border-color: mat-color($success) !important;
+    }
+  }
+}
+
 @include material-override-theme($genshin-wishes-theme);
 @include app-theme($genshin-wishes-theme);
 @include auth-theme($genshin-wishes-theme);
@@ -1100,6 +1301,9 @@ $genshin-wishes-theme: mat-dark-theme(
 @include url-setup-theme($genshin-wishes-theme);
 @include footer-theme($genshin-wishes-theme);
 @include stats-theme($genshin-wishes-theme);
+@include public-stats-theme($genshin-wishes-theme);
+@include banners-nav-theme($genshin-wishes-theme);
+@include bar-theme($genshin-wishes-theme);
 
 @for $i from 1 through 5 {
   .color-star-#{$i} {

@@ -1,0 +1,55 @@
+:host {
+  min-height: 600px;
+}
+
+.landing-gradient {
+  position: absolute;
+  height: 600px;
+  width: 100%;
+}
+
+.wrapper {
+  padding: 20px 20px 48px 20px;
+  overflow: hidden;
+  position: relative;
+  margin: 24px auto 0 auto;
+  max-width: 1188px;
+}
+
+.content-wrapper {
+  overflow: hidden;
+}
+
+small {
+  display: block;
+  margin-top: 8px;
+}
+
+.items-lists {
+  margin: 0 -20px;
+}
+
+.items-lists--wide app-items-list {
+  flex: 1;
+  overflow: hidden;
+}
+
+//.banner-activity-wrapper,
+//app-banner-activity {
+//  height: 100%;
+//}
+
+.items-lists app-items-list {
+  display: block;
+
+  width: 80vw;
+
+  padding-left: 20px;
+  margin-right: -4px;
+}
+
+app-banner-select {
+  width: 100%;
+  max-width: 728px;
+  margin: auto;
+}
