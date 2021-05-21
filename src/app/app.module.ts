@@ -29,6 +29,7 @@ import { CoreModule } from './core/core.module';
 import { combineLatest, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+import '@angular/common/locales/global/pt';
 import '@angular/common/locales/global/de';
 import '@angular/common/locales/global/en';
 import '@angular/common/locales/global/es';
