@@ -12,16 +12,16 @@ const routes: Routes = [
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
-    path: '',
-    loadChildren: () =>
-      import('./landing/landing.module').then((m) => m.LandingModule),
-  },
-  {
     path: 'global-stats',
     loadChildren: () =>
       import('./public-stats/public-stats.module').then(
         (m) => m.PublicStatsModule
       ),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./landing/landing.module').then((m) => m.LandingModule),
   },
   {
     path: '',
@@ -31,11 +31,6 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () =>
       import('./gw-app/gw-app.module').then((m) => m.GwAppModule),
-  },
-  {
-    path: 'profile',
-    loadChildren: () =>
-      import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: '**',
