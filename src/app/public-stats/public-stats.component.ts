@@ -123,8 +123,9 @@ export class PublicStatsComponent {
               ((banner === BannerType.CHARACTER_EVENT
                 ? characterEvents
                 : weaponEvents) as Banner[]).find((b) => b.id === eventId)) ||
-            banner === BannerType.PERMANENT ||
-            (banner === BannerType.NOVICE && latestEvents[BannerToId[banner]]),
+            ((banner === BannerType.PERMANENT ||
+              banner === BannerType.NOVICE) &&
+              latestEvents[BannerToId[banner]]),
           stats,
           latestEventsCounts,
           usersPerRegion,
