@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   ga: 'G-4YDYEGPQ7G',
   discord: 'https://discord.gg/fCnypTYxkf',
-  typeform: 'https://form.typeform.com/to/EnUdbLpV',
+  typeform: 'https://hello.genshin-wishes.com',
   globalStats: {
     post: '',
     refreshRate: 15,
