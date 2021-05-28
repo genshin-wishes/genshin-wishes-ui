@@ -7,15 +7,18 @@
   [ngStyle]="{ width: '100%' }"
   [ngStyle.gt-lg]="{ width: '80%' }"
 >
+  <h1>
+    {{
+      "globalStats.banners$." + ((banner$ | async) || BannerType.ALL)
+        | translate
+    }}
+    <small>{{
+      "globalStats.gwUsersOnly" | translate: { minutes: minutes }
+    }}</small>
+  </h1>
+
   <ng-container *ngIf="data$ | async as data">
     <ng-container *ngIf="!data.loading; else loadingTemplate">
-      <h1>
-        {{ "globalStats.banners$." + data.banner | translate }}
-        <small>{{
-          "globalStats.gwUsersOnly" | translate: { minutes: minutes }
-        }}</small>
-      </h1>
-
       <app-latest-events-banner
         *ngIf="data.banner === BannerType.ALL"
         [latestEvents]="data.latestEventsCounts"
