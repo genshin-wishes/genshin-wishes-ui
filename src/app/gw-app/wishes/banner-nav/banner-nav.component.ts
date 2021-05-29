@@ -29,7 +29,7 @@ export class BannerNavComponent implements OnInit, AfterViewInit {
   @Input()
   withFilters = true;
   @Input()
-  mode!: 'normal' | 'card';
+  mode: 'normal' | 'card' = 'normal';
   @Input()
   current!: BannerType;
 
