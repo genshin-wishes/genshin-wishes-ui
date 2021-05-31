@@ -13,12 +13,16 @@ import {
 } from '../api/genshin-wishes/constants';
 import { TranslateService } from '@ngx-translate/core';
 import { Banner } from '../api/banner';
+import { LangService } from '../shared/lang.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PublicStatsService {
+  private lang$ = this._lang.lang$;
+
   constructor(
+    private _lang: LangService,
     private _gw: GenshinWishesService,
     private _translate: TranslateService
   ) {}
@@ -30,6 +34,7 @@ export class PublicStatsService {
     return combineLatest([
       this._gw.getItems(),
       this._gw.getPublicStats(banner, eventId),
+      this.lang$,
     ]).pipe(
       map(([items, stats]) => ({
         ...stats,

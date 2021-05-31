@@ -4,7 +4,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../api/genshin-wishes/user';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { LocaleToLanguageName } from '../api/genshin-wishes/constants';
 import { DOCUMENT } from '@angular/common';
 import i18n from 'genshin-wishes-i18n/i18n/i18n.json';
@@ -22,7 +22,7 @@ export class LangService {
     i18n.sort();
     return i18n;
   })();
-  private _lang$ = new Subject<string>();
+  private _lang$ = new BehaviorSubject<string>('en-US');
   readonly lang$ = this._lang$.asObservable().pipe(shareReplay(1));
 
   constructor(
@@ -32,23 +32,23 @@ export class LangService {
     private _http: HttpClient,
     private _translate: TranslateService
   ) {
-    this.lang$.subscribe((lang) => {
-      this._translate.use(lang);
-    });
-
     this._auth.user$
       .pipe(map(this._getLangFromUser.bind(this)))
       .subscribe((lang) => {
-        this._lang$.next(lang);
+        this.changeLocale(lang);
       });
   }
 
   setLocale(locale: string, persist?: boolean): void {
-    this._lang$.next(locale);
+    this.changeLocale(locale);
 
     if (persist) {
       this._cookie.set(COOKIE_LANG, locale, { path: '/' });
     }
+  }
+
+  private changeLocale(locale: string): void {
+    this._translate.use(locale).subscribe(() => this._lang$.next(locale));
   }
 
   getCurrentLang(): Lang {
