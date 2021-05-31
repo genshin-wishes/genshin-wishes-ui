@@ -47,7 +47,7 @@
         <div fxLayout="column" fxFlex class="item-wrapper">
           <span
             *ngLet="
-              (item.item | itemName) +
+              (item.item | itemName | async) +
               ' - ' +
               (item.count | gwNumber | async) +
               ' (' +

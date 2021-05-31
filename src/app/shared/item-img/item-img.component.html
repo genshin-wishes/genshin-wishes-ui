@@ -1,6 +1,6 @@
 <img
   [class]="'color-star-' + item.rankType"
-  [matTooltip]="item | itemName"
-  [alt]="item | itemName"
+  [matTooltip]="(item | itemName | async) || ''"
+  [alt]="item | itemName | async"
   [src]="'/content' + item.image?.url"
 />

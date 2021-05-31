@@ -3,7 +3,7 @@
     <app-item-img [item]="detail.item" size="28px"></app-item-img>
 
     <div>
-      {{ detail.item | itemName }}
+      {{ detail.item | itemName | async }}
     </div>
 
     <div class="wishes-counter">

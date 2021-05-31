@@ -429,7 +429,7 @@ export class GenshinWishesService {
       filters.addToQueryParams(
         this.items$.value.map((i) => ({
           ...i,
-          name: this._itemName.transform(i),
+          name: this._itemName.transformSync(i),
         })),
         params
       );

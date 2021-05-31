@@ -7,7 +7,7 @@
 >
   <app-item-img [item]="detail.item" size="28px"></app-item-img>
 
-  <span>{{ detail.item | itemName }}</span>
+  <span>{{ detail.item | itemName | async }}</span>
 
   <span fxFlex></span>
 

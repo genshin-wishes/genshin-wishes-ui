@@ -23,8 +23,11 @@
         fxLayoutGap.lt-sm="6px"
         fxLayoutAlign.lt-sm
       >
-        <h3 [matTooltip]="wish.item | itemName" [matTooltipShowDelay]="1000">
-          {{ wish.item | itemName }}
+        <h3
+          [matTooltip]="(wish.item | itemName | async) || ''"
+          [matTooltipShowDelay]="1000"
+        >
+          {{ wish.item | itemName | async }}
         </h3>
 
         <span fxFlex fxHide.lt-sm fxShow.gt-xs></span>

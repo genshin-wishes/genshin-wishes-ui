@@ -20,12 +20,12 @@
     >
       <img
         matCardImageMedium
-        [alt]="eventItem | itemName"
+        [alt]="eventItem | itemName | async"
         [src]="'/content' + eventItem.image?.url"
       />
 
       <mat-card-content>
-        <div class="item-name">{{ eventItem | itemName }}</div>
+        <div class="item-name">{{ eventItem | itemName | async }}</div>
         <div class="item-count">
           {{ ItemCountFinder(eventItem) | gwNumber | async }}
         </div>
@@ -49,7 +49,7 @@
             *ngFor="let item of (event.items | rankType: 4).slice(0, 3)"
           >
             <app-item-img [item]="item" matListAvatar></app-item-img>
-            <h3 matLine class="text-primary">{{ item | itemName }}</h3>
+            <h3 matLine class="text-primary">{{ item | itemName | async }}</h3>
             <p matLine class="text-low" *ngLet="ItemCountFinder(item) as count">
               {{
                 total4

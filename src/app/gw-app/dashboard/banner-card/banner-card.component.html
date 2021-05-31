@@ -79,7 +79,10 @@
             [item]="bannerData.last5"
           ></app-item-img>
           <span class="value color-star-5" [class.none]="!bannerData.last5">
-            {{ (bannerData.last5 | itemName) || ("banners.none" | translate) }}
+            {{
+              (bannerData.last5 | itemName | async) ||
+                ("banners.none" | translate)
+            }}
           </span>
         </span>
       </span>
@@ -93,7 +96,10 @@
             [item]="bannerData.last4"
           ></app-item-img>
           <span class="value color-star-4" [class.none]="!bannerData.last4">
-            {{ (bannerData.last4 | itemName) || ("banners.none" | translate) }}
+            {{
+              (bannerData.last4 | itemName | async) ||
+                ("banners.none" | translate)
+            }}
           </span>
         </span>
       </span>
