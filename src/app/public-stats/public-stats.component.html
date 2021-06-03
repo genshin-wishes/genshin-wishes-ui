@@ -17,7 +17,7 @@
     }}</small>
   </h1>
 
-  <ng-container *ngIf="data$ | async as data">
+  <ng-container *ngIf="data$ | async as data; else loadingTemplate">
     <ng-container *ngIf="!data.loading; else loadingTemplate">
       <app-latest-events-banner
         *ngIf="data.banner === BannerType.ALL"

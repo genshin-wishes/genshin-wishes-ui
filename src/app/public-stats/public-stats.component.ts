@@ -4,7 +4,7 @@ import { GenshinWishesService } from '../api/genshin-wishes/genshin-wishes.servi
 import { BannerToId, BannerType } from '../api/genshin-wishes/constants';
 import { finalize, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import * as Flickity from 'flickity';
-import { combineLatest, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { CountPerItemId, PublicStats } from './public-stats';
 import { Banner } from '../api/banner';
 import { Label } from 'ng2-charts';
@@ -51,7 +51,7 @@ export class PublicStatsComponent {
     )
   );
 
-  loading$ = new Subject<boolean>();
+  loading$ = new BehaviorSubject<boolean>(true);
 
   stats$ = combineLatest([this.banner$, this.eventId$]).pipe(
     tap(() => this.loading$.next(true)),
