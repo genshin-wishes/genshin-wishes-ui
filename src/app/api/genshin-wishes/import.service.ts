@@ -278,7 +278,11 @@ export class ImportService {
 
   private deleteAndImport(authInfo: AuthInfo): Promise<void> {
     return this._http
-      .post<User>('/api/user/linkNew', authInfo)
+      .post<User>('/api/user/linkNew', authInfo.authkey, {
+        params: {
+          gameBiz: authInfo.game_biz,
+        },
+      })
       .toPromise()
       .then((user) => {
         // Remove for last user

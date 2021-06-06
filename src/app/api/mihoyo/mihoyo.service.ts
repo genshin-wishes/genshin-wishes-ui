@@ -123,7 +123,7 @@ export class MihoyoService {
     return authkeyParam && gameBizParam
       ? {
           authkey: encodeURIComponent(authkeyParam.replace(/\s/g, '+')),
-          game_biz: gameBizParam,
+          game_biz: gameBizParam.split(' ')[0],
         }
       : null;
   }
