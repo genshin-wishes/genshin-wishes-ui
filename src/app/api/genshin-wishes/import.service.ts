@@ -15,7 +15,7 @@ import {
   tap,
 } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { MihoyoService } from '../mihoyo/mihoyo.service';
+import { AuthInfo, MihoyoService } from '../mihoyo/mihoyo.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SnackService } from '../../shared/snack/snack.service';
 import { User } from './user';
@@ -194,19 +194,20 @@ export class ImportService {
   ) {}
 
   import(setup: boolean = false): Promise<void> {
-    let usedAuthKey: string | null = null;
+    let usedAuthInfo: AuthInfo | null = null;
 
     this._scanStates$.next({ scan: false, state: {} as ImportResponse, setup });
 
     return this._mihoyo
       .getAuthkey()
-      .then((authKey) => {
-        usedAuthKey = authKey;
+      .then((authInfo) => {
+        usedAuthInfo = authInfo;
 
         return this._http
           .get<void>('/api/wishes/import', {
             params: {
-              authkey: authKey,
+              authkey: authInfo.authkey,
+              game_biz: authInfo.game_biz,
             },
           })
           .toPromise();
@@ -238,7 +239,7 @@ export class ImportService {
             .toPromise()
             .then((res) => {
               // tslint:disable-next-line:no-non-null-assertion
-              if (!!res) return this.deleteAndImport(usedAuthKey!);
+              if (!!res) return this.deleteAndImport(usedAuthInfo!);
 
               return Promise.reject();
             });
@@ -275,16 +276,16 @@ export class ImportService {
         .toPromise();
   }
 
-  private deleteAndImport(authkey: string): Promise<void> {
+  private deleteAndImport(authInfo: AuthInfo): Promise<void> {
     return this._http
-      .post<User>('/api/user/linkNew', authkey)
+      .post<User>('/api/user/linkNew', authInfo)
       .toPromise()
       .then((user) => {
         // Remove for last user
         const hadCookie = this._mihoyo.invalidateKey();
         this._auth.register(user);
         // New linked user
-        this._mihoyo.registerKey(authkey, hadCookie);
+        this._mihoyo.registerKey(authInfo, hadCookie);
       })
       .then(() => this.import())
       .then(() => {

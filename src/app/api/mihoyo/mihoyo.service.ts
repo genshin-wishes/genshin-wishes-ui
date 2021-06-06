@@ -5,77 +5,87 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthUrlAndPersistInfo } from '../../auth/url-input/url-input.component';
 import { AuthService } from '../../auth/auth.service';
 
-const MIHOYO_AUTHKEY_KEY = 'mihoyoAuthkey';
+export interface AuthInfo {
+  authkey: string;
+  game_biz: string;
+}
+
+const MIHOYO_AUTH_INFO = 'mihoyoAuthInfo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MihoyoService {
-  private authkey: string | null = null;
+  private authInfo: AuthInfo | null = null;
 
   constructor(
     private _dialog: MatDialog,
     private _cookie: CookieService,
     private _auth: AuthService
   ) {
-    this._auth.user$.subscribe(
-      (user) =>
-        (this.authkey =
-          (!user
-            ? ''
-            : this._cookie.get(user?.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY)) ||
-          this.authkey)
-    );
+    this._auth.user$.subscribe((user) => {
+      const cookieName = user?.mihoyoUid + ':' + MIHOYO_AUTH_INFO;
+
+      this.authInfo =
+        (!user && !this._cookie.check(cookieName)
+          ? ''
+          : JSON.parse(this._cookie.get(cookieName))) || this.authInfo;
+    });
   }
 
   auth(data: AuthUrlAndPersistInfo): boolean {
-    const authkey = this.getAuthkeyFromUrl(data.authUrl);
+    const authInfo = this.getAuthInfoFromUrl(data.authUrl);
 
-    if (authkey) {
-      this.authkey = authkey;
-      this._persistKey(this.authkey, data.persist);
+    if (authInfo) {
+      this.authInfo = authInfo;
+      this._persistKey(this.authInfo, data.persist);
       return true;
     }
 
     return false;
   }
 
-  getAuthkey(): Promise<string> {
-    if (!this.authkey) {
+  getAuthkey(): Promise<AuthInfo> {
+    if (!this.authInfo) {
       return this.askForUrl();
     }
 
-    return Promise.resolve(this.authkey);
+    return Promise.resolve(this.authInfo);
   }
 
   invalidateKey(): boolean {
     const cookieKey =
-      this._auth.getCurrentUser()?.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY;
+      this._auth.getCurrentUser()?.mihoyoUid + ':' + MIHOYO_AUTH_INFO;
     const hadCookie = !!this._cookie.get(cookieKey);
-    this.authkey = null;
+    this.authInfo = null;
     this._cookie.delete(cookieKey, '/');
 
     return hadCookie;
   }
 
-  registerKey(authkey: string, hadCookie: boolean): void {
-    this.authkey = authkey;
-    this._persistKey(authkey, hadCookie);
+  registerKey(authInfo: AuthInfo, hadCookie: boolean): void {
+    this.authInfo = authInfo;
+    this._persistKey(authInfo, hadCookie);
   }
 
-  private _persistKey(key: string, persist: boolean): void {
+  private _persistKey(authInfo: AuthInfo, persist: boolean): void {
     const user = this._auth.getCurrentUser();
 
     if (!user || !user.mihoyoUid) return;
 
     if (persist) {
-      this._cookie.set(user.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY, key, 1, '/');
+      this._cookie.set(
+        user.mihoyoUid + ':' + MIHOYO_AUTH_INFO,
+        JSON.stringify(authInfo),
+        1,
+        '/'
+      );
     } else {
-      this._cookie.delete(user.mihoyoUid + ':' + MIHOYO_AUTHKEY_KEY, '/');
+      this._cookie.delete(user.mihoyoUid + ':' + MIHOYO_AUTH_INFO, '/');
     }
   }
 
-  private askForUrl(): Promise<string> {
+  private askForUrl(): Promise<AuthInfo> {
     return this._dialog
       .open(UrlDialogComponent, {
         maxWidth: '100vw',
@@ -87,29 +97,34 @@ export class MihoyoService {
           return Promise.reject();
         }
 
-        const authkeyFromUrl = this.getAuthkeyFromUrl(data.authUrl);
+        const authInfoFromUrl = this.getAuthInfoFromUrl(data.authUrl);
 
-        if (!authkeyFromUrl) {
+        if (!authInfoFromUrl) {
           return Promise.reject();
         }
 
-        this.authkey = authkeyFromUrl;
-        this._persistKey(this.authkey, data.persist);
+        this.authInfo = authInfoFromUrl;
+        this._persistKey(this.authInfo, data.persist);
 
-        return authkeyFromUrl;
+        return authInfoFromUrl;
       });
   }
 
-  private getAuthkeyFromUrl(authUrl: string): string | null {
+  private getAuthInfoFromUrl(authUrl: string): AuthInfo | null {
     if (!authUrl) {
       return null;
     }
 
-    const authkeyParam = new URLSearchParams(authUrl).get('authkey');
+    authUrl = authUrl.replace('#/', '');
 
-    return (
-      authkeyParam &&
-      encodeURIComponent(authkeyParam.replace(/\s/g, '+').replace('#/', ''))
-    );
+    const authkeyParam = new URLSearchParams(authUrl).get('authkey');
+    const gameBizParam = new URLSearchParams(authUrl).get('game_biz');
+
+    return authkeyParam && gameBizParam
+      ? {
+          authkey: encodeURIComponent(authkeyParam.replace(/\s/g, '+')),
+          game_biz: gameBizParam,
+        }
+      : null;
   }
 }

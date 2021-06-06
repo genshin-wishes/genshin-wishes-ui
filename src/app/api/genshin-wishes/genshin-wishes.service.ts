@@ -71,11 +71,12 @@ export class GenshinWishesService {
   linkMihoyoUser(): Promise<User> {
     return this._mihoyo
       .getAuthkey()
-      .then((authkey) => {
+      .then((authInfo) => {
         return this._http
           .get<User>('/api/user/link', {
             params: {
-              authkey,
+              authkey: authInfo.authkey,
+              game_biz: authInfo.game_biz,
             },
           })
           .toPromise();
