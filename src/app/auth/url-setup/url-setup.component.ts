@@ -56,7 +56,6 @@ export class UrlSetupComponent {
 
       this.callLinkMihoyoUser(data).then(() => ++this.currentStep);
     } else {
-      alert('??');
       this.error = 'app.urlInput.incorrectLink';
     }
   }

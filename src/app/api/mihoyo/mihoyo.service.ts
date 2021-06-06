@@ -27,8 +27,8 @@ export class MihoyoService {
       const cookieName = user?.mihoyoUid + ':' + MIHOYO_AUTH_INFO;
 
       this.authInfo =
-        (!user && !this._cookie.check(cookieName)
-          ? ''
+        (!user || !this._cookie.check(cookieName)
+          ? null
           : JSON.parse(this._cookie.get(cookieName))) || this.authInfo;
     });
   }
@@ -115,7 +115,7 @@ export class MihoyoService {
       return null;
     }
 
-    authUrl = authUrl.replace('#/', '');
+    authUrl = authUrl.replace('#/', '&');
 
     const authkeyParam = new URLSearchParams(authUrl).get('authkey');
     const gameBizParam = new URLSearchParams(authUrl).get('game_biz');
