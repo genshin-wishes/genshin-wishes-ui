@@ -38,6 +38,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload';
 import { faBan } from '@fortawesome/free-solid-svg-icons/faBan';
 import { faChartPie } from '@fortawesome/free-solid-svg-icons/faChartPie';
 import { faLaptopHouse } from '@fortawesome/free-solid-svg-icons/faLaptopHouse';
+import { faPaw } from '@fortawesome/free-solid-svg-icons/faPaw';
 
 @NgModule({
   exports: [FontAwesomeModule],
@@ -79,7 +80,8 @@ export class IconModule {
       faBan,
       faChartPie,
       faLaptopHouse,
-      faTimesCircle
+      faTimesCircle,
+      faPaw
     );
   }
 }
