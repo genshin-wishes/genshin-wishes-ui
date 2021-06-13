@@ -57,7 +57,10 @@
                     | translate
                       : {
                           count: (count | gwNumber | async),
-                          percent: (count / total4 | gwNumber: "1.2-2" | async),
+                          percent:
+                            ((count / total4) * 100
+                            | gwNumber: "1.2-2"
+                            | async),
                           rank: 4
                         })
                   : "-"

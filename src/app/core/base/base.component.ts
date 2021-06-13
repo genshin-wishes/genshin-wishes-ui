@@ -62,7 +62,7 @@ export class BaseComponent implements AfterViewInit, OnDestroy {
           return;
         }
 
-        if (this._mediaObserver.isActive('gt-md')) {
+        if (this._mediaObserver.isActive('gt-lg')) {
           this.sidenav.mode = 'side';
           this.sidenav.opened = true;
         } else {
