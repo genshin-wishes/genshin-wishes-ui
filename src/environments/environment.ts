@@ -4,7 +4,8 @@ export const environment = {
   discord: 'https://discord.gg/fCnypTYxkf',
   typeform: 'https://hello.genshin-wishes.com',
   globalStats: {
-    post: '',
+    post:
+      'https://www.reddit.com/r/Genshin_Impact/comments/o9v0c0/soft_and_hard_pity_explained_based_on_24m_wishes/',
     refreshRate: 15,
   },
   coffee: 'https://ko-fi.com/genshinwishes',
