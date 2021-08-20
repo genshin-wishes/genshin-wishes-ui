@@ -38,6 +38,7 @@ import '@angular/common/locales/global/id';
 import '@angular/common/locales/global/it';
 import '@angular/common/locales/global/ja';
 import '@angular/common/locales/global/pl';
+import '@angular/common/locales/global/ro';
 import '@angular/common/locales/global/ru';
 import '@angular/common/locales/global/th';
 import '@angular/common/locales/global/vi';
