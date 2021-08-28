@@ -31,6 +31,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import '@angular/common/locales/global/pt';
 import '@angular/common/locales/global/de';
+import '@angular/common/locales/global/el';
 import '@angular/common/locales/global/en';
 import '@angular/common/locales/global/es';
 import '@angular/common/locales/global/fr';
