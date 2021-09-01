@@ -31,6 +31,15 @@
 
     <a
       mat-button
+      [routerLink]="['/global-stats']"
+      gaClick="nav_landing_global_stats"
+      (click)="close()"
+    >
+      {{ "globalStats.label" | translate }}
+    </a>
+
+    <a
+      mat-button
       [routerLink]="['/faq']"
       gaClick="nav_landing_faq"
       (click)="close()"

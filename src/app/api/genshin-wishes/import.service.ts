@@ -64,7 +64,7 @@ export class ImportService {
     exhaustMap((scan) =>
       !scan.scan
         ? of(scan.state)
-        : interval(2000).pipe(
+        : interval(1000).pipe(
             exhaustMap(() =>
               this._http.get<ImportResponse>('/api/wishes/importState')
             ),
