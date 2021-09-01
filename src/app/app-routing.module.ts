@@ -12,13 +12,6 @@ const routes: Routes = [
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
-    path: 'global-stats',
-    loadChildren: () =>
-      import('./public-stats/public-stats.module').then(
-        (m) => m.PublicStatsModule
-      ),
-  },
-  {
     path: '',
     loadChildren: () =>
       import('./landing/landing.module').then((m) => m.LandingModule),
