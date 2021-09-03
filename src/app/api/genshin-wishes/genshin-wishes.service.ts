@@ -269,7 +269,7 @@ export class GenshinWishesService {
   getPublicStats(
     banner: BannerType,
     eventId?: number
-  ): Observable<PublicStats> {
+  ): Observable<PublicStats | null> {
     const params: Record<string, string> = {};
 
     if (eventId !== null && eventId !== undefined) {
@@ -277,14 +277,17 @@ export class GenshinWishesService {
     }
 
     return this._http
-      .get<PublicStats>(`/api/public/stats/${banner}`, {
+      .get<PublicStats | null>(`/api/public/stats/${banner}`, {
         params,
       })
       .pipe(
-        map((stats) => ({
-          ...stats,
-          usersCount: stats.usersPerRegion.reduce((a, b) => a + b.count, 0),
-        })),
+        map(
+          (stats) =>
+            stats && {
+              ...stats,
+              usersCount: stats.usersPerRegion.reduce((a, b) => a + b.count, 0),
+            }
+        ),
         shareReplay(1)
       );
   }

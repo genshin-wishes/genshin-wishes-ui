@@ -30,29 +30,34 @@ export class PublicStatsService {
   getPublicStats(
     banner: BannerType,
     eventId?: number
-  ): Observable<PublicStats> {
+  ): Observable<PublicStats | null> {
     return combineLatest([
       this._gw.getItems(),
       this._gw.getPublicStats(banner, eventId),
       this.lang$,
     ]).pipe(
-      map(([items, stats]) => ({
-        ...stats,
-        countPerItemId: stats.countPerItemId.map((count) => ({
-          ...count,
-          item: count.itemId
-            ? items.find((i) => i.itemId === count.itemId)
-            : undefined,
-        })),
-      }))
+      map(
+        ([items, stats]) =>
+          stats && {
+            ...stats,
+            countPerItemId: stats.countPerItemId.map((count) => ({
+              ...count,
+              item: count.itemId
+                ? items.find((i) => i.itemId === count.itemId)
+                : undefined,
+            })),
+          }
+      )
     );
   }
 
   getPublicBannerActivity(
-    publicStats$: Observable<PublicStats>
-  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
+    publicStats$: Observable<PublicStats | null>
+  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] } | null> {
     return publicStats$.pipe(
       map((stats) => {
+        if (!stats) return null;
+
         const countsPerDay = stats.countPerDay;
         countsPerDay.sort((d1, d2) => d2.date.localeCompare(d1.date));
 
@@ -86,10 +91,12 @@ export class PublicStatsService {
 
   getPityDistribution(
     rankType: 5 | 4,
-    publicStats$: Observable<PublicStats>
-  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
+    publicStats$: Observable<PublicStats | null>
+  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] } | null> {
     return publicStats$.pipe(
       switchMap((stats) => {
+        if (!stats) return of(null);
+
         if (!stats.countPerPity5Stars && !stats.countPerPity4Stars)
           return of({
             labels: [],
@@ -127,10 +134,12 @@ export class PublicStatsService {
   }
 
   getCountPerBanner(
-    stats$: Observable<PublicStats>
-  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
+    stats$: Observable<PublicStats | null>
+  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] } | null> {
     return stats$.pipe(
       map((stats) => {
+        if (!stats) return null;
+
         if (!stats.countPerBanner?.length) return { labels: [], datasets: [] };
 
         const countPerBanner: Record<number, number> = {} as Record<
@@ -165,10 +174,12 @@ export class PublicStatsService {
   }
 
   getCountPerRank(
-    stats$: Observable<PublicStats>
-  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
+    stats$: Observable<PublicStats | null>
+  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] } | null> {
     return stats$.pipe(
       map((stats) => {
+        if (!stats) return null;
+
         return {
           labels: ['★★★', '★★★★', '★★★★★'],
           datasets: [
@@ -193,10 +204,12 @@ export class PublicStatsService {
   }
 
   getWishesPerRegion(
-    stats$: Observable<PublicStats>
-  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
+    stats$: Observable<PublicStats | null>
+  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] } | null> {
     return stats$.pipe(
       map((stats) => {
+        if (!stats) return null;
+
         const countPerRegion: Record<string, number> = {} as Record<
           string,
           number
@@ -231,10 +244,12 @@ export class PublicStatsService {
   }
 
   getUsersPerRegion(
-    stats$: Observable<PublicStats>
-  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] }> {
+    stats$: Observable<PublicStats | null>
+  ): Observable<{ labels: Label[]; datasets: ChartDataSets[] } | null> {
     return stats$.pipe(
       map((stats) => {
+        if (!stats) return null;
+
         const usersPerRegion: Record<string, number> = {} as Record<
           string,
           number
@@ -274,13 +289,14 @@ export class PublicStatsService {
   }
 
   getLatestEventsCounts(
-    stats$: Observable<PublicStats>
+    stats$: Observable<PublicStats | null>
   ): Observable<{
     [key: number]: EventStats;
-  }> {
+  } | null> {
     return combineLatest([this._gw.getLatestEvent(), stats$]).pipe(
       map(
         ([latestEvents, stats]) =>
+          stats &&
           stats.latestEventsCounts &&
           Object.getOwnPropertyNames(stats.latestEventsCounts).reduce(
             (total, bannerType) => {

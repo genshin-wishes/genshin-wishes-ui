@@ -6,7 +6,7 @@ export const environment = {
   globalStats: {
     post:
       'https://www.reddit.com/r/Genshin_Impact/comments/o9v0c0/soft_and_hard_pity_explained_based_on_24m_wishes/',
-    refreshRate: 15,
+    refreshRate: 30,
   },
   coffee: 'https://ko-fi.com/genshinwishes',
   i18n: 'https://github.com/genshin-wishes/genshin-wishes-i18n',
