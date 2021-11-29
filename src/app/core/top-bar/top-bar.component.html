@@ -63,7 +63,8 @@
           fxShow.lt-sm
           fxHide
           gaClick="import_wishes"
-          (click)="importWishes()"
+          (click)="false && importWishes()"
+          [disabled]="true"
         >
           <fa-icon icon="sync"></fa-icon>
         </a>
@@ -74,7 +75,8 @@
           fxHide.lt-sm
           fxShow
           gaClick="import_wishes"
-          (click)="importWishes()"
+          (click)="false && importWishes()"
+          [disabled]="true"
         >
           <fa-icon icon="sync"></fa-icon>
           &nbsp;

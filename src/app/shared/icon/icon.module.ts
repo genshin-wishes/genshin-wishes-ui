@@ -39,6 +39,7 @@ import { faBan } from '@fortawesome/free-solid-svg-icons/faBan';
 import { faChartPie } from '@fortawesome/free-solid-svg-icons/faChartPie';
 import { faLaptopHouse } from '@fortawesome/free-solid-svg-icons/faLaptopHouse';
 import { faPaw } from '@fortawesome/free-solid-svg-icons/faPaw';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 
 @NgModule({
   exports: [FontAwesomeModule],
@@ -81,7 +82,8 @@ export class IconModule {
       faChartPie,
       faLaptopHouse,
       faTimesCircle,
-      faPaw
+      faPaw,
+      faExclamationTriangle
     );
   }
 }
