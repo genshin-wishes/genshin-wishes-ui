@@ -8,7 +8,6 @@ import {
   Subject,
 } from 'rxjs';
 import { User } from './user';
-import { MihoyoService } from '../mihoyo/mihoyo.service';
 import { BannerData } from './banner';
 import { Wish } from './wish';
 import {
@@ -58,7 +57,6 @@ export class GenshinWishesService {
   constructor(
     private _http: HttpClient,
     private _dialog: MatDialog,
-    private _mihoyo: MihoyoService,
     private _auth: AuthService,
     private _translate: TranslateService,
     private _snack: SnackService,
@@ -66,28 +64,6 @@ export class GenshinWishesService {
     private _lang: LangService
   ) {
     this._http.get<Item[]>('/api/items').subscribe((i) => this.items$.next(i));
-  }
-
-  linkMihoyoUser(): Promise<User> {
-    return this._mihoyo
-      .getAuthkey()
-      .then((authInfo) => {
-        return this._http
-          .get<User>('/api/user/link', {
-            params: {
-              authkey: authInfo.authkey,
-              game_biz: authInfo.game_biz,
-            },
-          })
-          .toPromise();
-      })
-      .catch((error) => {
-        if (error.error !== ApiErrors.MIHOYO_UNREACHABLE) {
-          this._mihoyo.invalidateKey();
-        }
-
-        return Promise.reject(error);
-      });
   }
 
   getBannersData(): Observable<BannerData[]> {

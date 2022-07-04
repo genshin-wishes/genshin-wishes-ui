@@ -4,9 +4,7 @@ import { TopService } from '../../core/top.service';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Lang, LangService } from '../../shared/lang.service';
-import { MihoyoService } from '../../api/mihoyo/mihoyo.service';
 import { Router } from '@angular/router';
-import { AuthUrlAndPersistInfo } from '../../auth/url-input/url-input.component';
 import { AuthService } from '../../auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -15,7 +13,6 @@ import {
 } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
-import { ImportService } from '../../api/genshin-wishes/import.service';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +20,6 @@ import { ImportService } from '../../api/genshin-wishes/import.service';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnDestroy {
-  authUrlData!: AuthUrlAndPersistInfo;
   deleteConfirmation = '';
 
   lang: Lang | '' = '';
@@ -32,16 +28,12 @@ export class SettingsComponent implements OnDestroy {
   wholeClock: boolean | undefined;
   currentWholeClock: boolean | undefined;
 
-  importState$ = this._import.importState$;
-
   private _destroy = new Subject();
 
   constructor(
     private _lang: LangService,
     private _gw: GenshinWishesService,
-    private _import: ImportService,
     private _location: Location,
-    private _mihoyo: MihoyoService,
     private _dialog: MatDialog,
     private _auth: AuthService,
     private _translate: TranslateService,
@@ -55,11 +47,6 @@ export class SettingsComponent implements OnDestroy {
 
       this.currentWholeClock = user?.wholeClock;
     });
-  }
-
-  updateAuthUrl(data: AuthUrlAndPersistInfo): void {
-    this._mihoyo.auth(data);
-    this._import.import();
   }
 
   updateLang(lang: Lang): void {

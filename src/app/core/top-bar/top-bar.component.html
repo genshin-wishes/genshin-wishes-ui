@@ -1,3 +1,14 @@
+<mat-toolbar color="accent" class="end-warning">
+  <span
+    >Genshin Wishes is definitely closed, more information
+    <a href="https://tiny.one/ythjv5sm" target="_blank"
+      >here <fa-icon icon="external-link-alt"></fa-icon></a
+    >. The website will stay up for some time, you may
+    <a (click)="exportWishes()">export your wishes</a> but no longer create an
+    account or import wishes.</span
+  >
+</mat-toolbar>
+
 <mat-toolbar fxLayout="row" fxLayoutGap="12px" class="mat-elevation-z4">
   <button
     mat-icon-button
@@ -55,37 +66,15 @@
     </ng-container>
 
     <ng-template #importButton>
-      <ng-container *ngIf="!(importState$ | async); else loadingButton">
-        <a
-          mat-icon-button
-          [matTooltip]="'wishes.update.label' | translate"
-          color="accent"
-          fxShow.lt-sm
-          fxHide
-          gaClick="import_wishes"
-          (click)="importWishes()"
-        >
-          <fa-icon icon="sync"></fa-icon>
-        </a>
-
-        <a
-          mat-stroked-button
-          color="accent"
-          fxHide.lt-sm
-          fxShow
-          gaClick="import_wishes"
-          (click)="importWishes()"
-        >
-          <fa-icon icon="sync"></fa-icon>
-          &nbsp;
-          {{ "wishes.update.label" | translate }}
-        </a>
-      </ng-container>
-    </ng-template>
-
-    <ng-template #loadingButton>
-      <a mat-icon-button color="accent" fxShow.lt-sm fxHide [disabled]="true">
-        <fa-icon icon="circle-notch" [spin]="true"></fa-icon>
+      <a
+        mat-icon-button
+        [matTooltip]="'wishes.update.label' | translate"
+        color="accent"
+        fxShow.lt-sm
+        fxHide
+        [disabled]="true"
+      >
+        <fa-icon icon="sync"></fa-icon>
       </a>
 
       <a
@@ -95,7 +84,9 @@
         fxShow
         [disabled]="true"
       >
-        <fa-icon icon="circle-notch" [spin]="true"></fa-icon>
+        <fa-icon icon="sync"></fa-icon>
+        &nbsp;
+        {{ "wishes.update.label" | translate }}
       </a>
     </ng-template>
   </ng-container>

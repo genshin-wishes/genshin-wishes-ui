@@ -1,11 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { SidenavService } from '../sidenav.service';
 import { TopService } from '../top.service';
-import { ImportService } from '../../api/genshin-wishes/import.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map, shareReplay, startWith, tap } from 'rxjs/operators';
+import { filter, map, shareReplay, startWith } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileShareDialogComponent } from '../../profile/profile-share-dialog/profile-share-dialog.component';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogData,
+} from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-top-bar',
@@ -21,8 +24,6 @@ export class TopBarComponent {
   withLogout = false;
 
   title$ = this._top.title$;
-
-  importState$ = this._import.importState$;
 
   routing$ = this._router.events.pipe(
     startWith(new NavigationEnd(0, this._router.url, '')),
@@ -46,19 +47,29 @@ export class TopBarComponent {
     private _router: Router,
     private _sidenav: SidenavService,
     private _top: TopService,
-    private _dialog: MatDialog,
-    private _import: ImportService
+    private _dialog: MatDialog
   ) {}
 
   toggle(): void {
     this._sidenav.toggle();
   }
 
-  importWishes(): void {
-    this._import.import().catch(() => {});
-  }
-
   share(): void {
     this._dialog.open(ProfileShareDialogComponent);
+  }
+
+  exportWishes(): void {
+    this._dialog
+      .open(ConfirmDialogComponent, {
+        data: {
+          title: 'settings.export.confirm.title',
+          description: 'settings.export.confirm.description',
+          confirm: 'settings.export.action',
+          color: 'accent',
+        } as ConfirmDialogData,
+      })
+      .afterClosed()
+      .toPromise()
+      .then((res) => !!res && window.open('/api/wishes/export'));
   }
 }

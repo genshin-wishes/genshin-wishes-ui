@@ -39,7 +39,7 @@ export class NotAuthGuard implements CanActivate, CanActivateChild, CanLoad {
         if (!!user)
           return !!user.mihoyoUid
             ? this._router.createUrlTree(['/banners'])
-            : this._router.createUrlTree(['/setup']);
+            : this._router.createUrlTree(['/logout']);
 
         return true;
       })

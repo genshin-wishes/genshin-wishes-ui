@@ -1,7 +1,7 @@
 {
   "name": "genshin-wishes",
   "private": true,
-  "version": "1.17.4",
+  "version": "1.18.0",
   "scripts": {
     "ng": "ng",
     "start:local": "ng serve --proxy-config proxy/proxy.conf.js",
@@ -41,7 +41,7 @@
     "chartjs-plugin-labels": "^1.1.0",
     "flag-icon-css": "^3.5.0",
     "flickity": "^2.2.2",
-    "genshin-wishes-i18n": "0.3.11",
+    "genshin-wishes-i18n": "0.3.12",
     "http-status-codes": "2.1.4",
     "moment": "^2.29.1",
     "ng2-charts": "^2.4.2",

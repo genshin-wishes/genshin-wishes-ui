@@ -4,8 +4,6 @@ import { FaqComponent } from '../core/faq/faq.component';
 import { NotAuthGuard } from '../auth/not-auth.guard';
 import { LandingComponent } from './landing.component';
 import { AuthComponent } from '../auth/auth/auth.component';
-import { MihoyoLinkGuard } from '../auth/mihoyo-link.guard';
-import { UrlSetupComponent } from '../auth/url-setup/url-setup.component';
 import { LandingLayoutComponent } from './landing-layout/landing-layout.component';
 
 const routes: Routes = [
@@ -23,11 +21,6 @@ const routes: Routes = [
         path: 'login/oauth2/callback/:registrationId',
         canActivate: [NotAuthGuard],
         component: AuthComponent,
-      },
-      {
-        path: 'setup',
-        canActivate: [MihoyoLinkGuard],
-        component: UrlSetupComponent,
       },
       {
         path: 'faq',

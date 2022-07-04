@@ -3,13 +3,19 @@ mat-toolbar {
   z-index: 10;
 }
 
+.end-warning {
+  font-size: 11px;
+  white-space: pre-wrap;
+  line-height: 11px;
+}
+
+a {
+  cursor: pointer;
+}
+
 .logo {
   width: 24px;
   height: 24px;
-}
-
-.mat-stroked-button.mat-button-disabled {
-  width: 136.75px;
 }
 
 .title {

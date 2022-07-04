@@ -46,7 +46,7 @@ export class AuthComponent implements OnInit {
             const user = await this._auth.getUser().toPromise();
 
             if (!!user.mihoyoUid) this._router.navigate(['/banners']);
-            else this._router.navigate(['/setup']);
+            else this._router.navigate(['/logout']);
           })
           .catch(() => this._router.navigate(['/login']));
       });

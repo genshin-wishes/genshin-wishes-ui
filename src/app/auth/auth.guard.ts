@@ -9,12 +9,17 @@ import {
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private _auth: AuthService, private _router: Router) {}
+  constructor(
+    private _auth: AuthService,
+    private _router: Router,
+    private _dialog: MatDialog
+  ) {}
 
   canLoad(): Observable<boolean | UrlTree> {
     return this.getActivate();
@@ -36,7 +41,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
         if (!!user.mihoyoUid) return true;
 
-        return this._router.createUrlTree(['/setup']);
+        return this._router.createUrlTree(['/logout']);
       })
     );
   }
